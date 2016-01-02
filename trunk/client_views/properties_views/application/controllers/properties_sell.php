@@ -19,6 +19,7 @@ class properties_sell extends properties_base {
        $user_id =  $this->session->userdata('user_id');
        if ($user_id !== FALSE)
        {
+           // limit only 2 listing
            if(properties_upload::get_number_of_listings() <= 2)
            {
                 parent::index();

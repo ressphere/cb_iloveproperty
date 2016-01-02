@@ -378,7 +378,7 @@ class properties_upload extends properties_base
         */
         return $status;
     }
-    
+    /*Get number of listing to disallow more than expected listing can be uploaded*/
     public function get_number_of_listings()
        {           
            $user_id = $this->session->userdata('user_id');
