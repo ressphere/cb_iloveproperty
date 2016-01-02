@@ -1,5 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require_once 'properties_base.php';
+require_once '_utils/properties_upload.php';
 class properties_sell extends properties_base {
    
    function __construct()
@@ -18,15 +19,22 @@ class properties_sell extends properties_base {
        $user_id =  $this->session->userdata('user_id');
        if ($user_id !== FALSE)
        {
-           parent::index();
-           // Preload js and CSS script that not cover by base
-           $this->page_js_css();
-           //fake the value here will link with db in the future to get the uique
-           $reference = md5(uniqid($user_id, true));
-           $this->session->set_userdata('Reference', $reference);
-           //initial current action
-           $this->session->set_userdata("action", $this->get_action());
-           $this->load_view();
+           if(properties_upload::get_number_of_listings() <= 2)
+           {
+                parent::index();
+                // Preload js and CSS script that not cover by base
+                $this->page_js_css();
+                //fake the value here will link with db in the future to get the uique
+                $reference = md5(uniqid($user_id, true));
+                $this->session->set_userdata('Reference', $reference);
+                //initial current action
+                $this->session->set_userdata("action", $this->get_action());
+                $this->load_view();
+           }
+           else
+           {
+             show_error($this->get_upload_limit_reached("Listing limits(max:3) exceeded !!!. Please remove existing listings from your profile if you would like to create a new listing."));
+           }
       }
       else
       {

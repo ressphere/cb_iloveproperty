@@ -378,6 +378,30 @@ class properties_upload extends properties_base
         */
         return $status;
     }
+    
+    public function get_number_of_listings()
+       {           
+           $user_id = $this->session->userdata('user_id');
+           
+           if($user_id)
+           {              
+                //setup the listing filter by user id
+                $filter_struct["filter"]["user_id"] = $user_id;
+
+                //get the filtered listing details
+                $val_return_listing = GeneralFunc::CB_SendReceive_Service_Request("CB_Property:filter_listing",
+                        json_encode($filter_struct));
+
+                $listings = json_decode($val_return_listing, TRUE)["data"]["listing"];
+
+                return sizeof($listings);
+                               
+           }
+           else
+           {
+               $this->set_error("function:get_number_of_listings failed with invalid user id: (" . $user_id .")");
+           }
+       }
 }
 
 ?>
