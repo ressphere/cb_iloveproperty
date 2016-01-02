@@ -1,0 +1,10 @@
+INSERT INTO `zone` (`state_code`, `state_id`, `country_id`) VALUES ("(0)10", NULL, 1);
+INSERT INTO `zone` (`state_code`, `state_id`, `country_id`) VALUES ("(0)11", NULL, 1);
+INSERT INTO `zone` (`state_code`, `state_id`, `country_id`) VALUES ("(0)12", NULL, 1);
+INSERT INTO `zone` (`state_code`, `state_id`, `country_id`) VALUES ("(0)13", NULL, 1);
+INSERT INTO `zone` (`state_code`, `state_id`, `country_id`) VALUES ("(0)14", NULL, 1);
+INSERT INTO `zone` (`state_code`, `state_id`, `country_id`) VALUES ("(0)15", NULL, 1);
+INSERT INTO `zone` (`state_code`, `state_id`, `country_id`) VALUES ("(0)16", NULL, 1);
+INSERT INTO `zone` (`state_code`, `state_id`, `country_id`) VALUES ("(0)17", NULL, 1);
+INSERT INTO `zone` (`state_code`, `state_id`, `country_id`) VALUES ("(0)18", NULL, 1);
+INSERT INTO `zone` (`state_code`, `state_id`, `country_id`) VALUES ("(0)19", NULL, 1);

@@ -1,0 +1,293 @@
+@media (min-width: 768px) {
+  .navbar-nav {
+    float: left;
+    margin: 15px -15px
+  }
+}
+@font-face {
+    font-family: 'Century Gothic Bold';
+    src: url('../../fonts/GOTHICB.TTF');
+}
+@font-face {
+    font-family: 'Century Gothic Bold Italic';
+    src: url('../../fonts/GOTHICBI.TTF');
+}
+@font-face {
+    font-family: 'Century Gothic';
+    src: url('../../fonts/GOTHIC.TTF');
+}
+
+@font-face {
+    font-family: 'Century Gothic Italic';
+    src: url('../../fonts/GOTHICI.TTF');
+}
+.navbar-nav {
+  margin: 15px 25px;
+}
+
+.navbar-form {
+  margin-top: 25px;
+}
+label {
+    color: #666;
+    font-weight: 100;
+    font: 12px/18px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+    font-size: 18px
+}
+
+body {
+  opacity: 0
+}
+
+.push {
+    background-color: transparent;
+}
+
+.jumbotron {
+    background-color: transparent;
+}
+
+body
+{
+    background-color: white
+}
+#after_login_menu, #system_login_parent {
+    display: none
+}
+
+
+
+input, .form-control, textarea, select
+{
+   background: #FFFFFF;
+    border: 1px solid #EEEEEE;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #EDEDED inset;
+    color: #666;
+    padding: 5px 10px;
+    outline: none;
+    line-height: normal;
+     font: 12px/18px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+    font-size: 18px
+}
+.form-control {
+    max-width: 250px
+}
+.error {
+    color: red;
+}
+.popup {
+    background-color: #FFFFFF;
+    outline: none;
+   border: 1px solid #EEEEEE;
+    border-radius: 5px;
+    
+    -moz-box-shadow:0px 0px 10px 7px #C2C2C2;
+-webkit-box-shadow:0px 0px 10px 7px #C2C2C2;
+box-shadow:0px 0px 10px 7px #C2C2C2;
+
+background-color: #E9E9E9;
+}
+
+.popup .modal-footer {
+    border-top: 0 solid #FFFFFF
+}
+
+.popup .modal-header {
+    border-bottom: 0 solid #FFFFFF
+}
+#login_forgotten_pwd {
+    font-size: 11px;
+}
+
+#area_code {
+    width: 100px;
+   
+}
+#phone {
+    width:250px
+
+}
+#phonegroup .input-group-addon, #captchagroup .input-group-addon{
+    padding: 0px 0px;
+    width: auto;
+    background:none;
+    border-width: 0px
+}
+
+.logo {
+    max-width: 100%;
+    width:auto;
+    max-height:100px
+}
+
+.header_logo {
+    max-width: 100%;
+    width:auto;
+    max-height:50px
+}
+
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -100px;
+}
+html, body {
+    height: 100%
+}
+
+#system_login_parent {
+    background-color: #463cad;
+    border-radius: 20px;
+    font-size: 10.77px
+}
+
+#system_login {
+color: #e7e3ff;
+}
+
+.navbar-nav>li>a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.register_username-feedback,
+.register_display_name-feedback,
+.register_phone-feedback,
+.register_password-feedback, 
+.register_confirmed_password-feedback {
+    background-color: transparent;
+    border-color: transparent;
+    color: gray
+}
+
+#username
+{
+    display:inline-block;
+    max-width:180px;
+    overflow:hidden !important;
+}
+
+#scrollable-dropdown-menu .tt-dropdown-menu {
+    max-height: 100px;
+    width: 100px;
+    overflow-y: auto;
+    background-color: white;
+     border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.typeahead,
+.tt-query,
+.tt-hint{
+  padding: 8px 12px;
+  line-height: 30px;
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  outline: none;
+}
+
+.typeahead {
+    background-color: #fff
+}
+.typeahead:focus {
+  border: 2px solid #0097cf;
+}
+.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #0097cf;
+
+}
+.tt-suggestion {
+  padding: 3px 20px;
+  font-size: 18px;
+  line-height: 24px;
+}
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+  color: #999
+}
+
+#register_area_code {
+    max-width: 120px;
+}
+
+.select-div {
+    width:200px; height:auto;
+    float:left;
+    overflow:hidden;
+    background:url(images/upload_lsting_dropdown.png) 0 0 no-repeat;
+    background-color: white;
+    background-position: center right;
+    /*background-size: auto 100%;*/
+    border-radius: 20px;
+    
+}
+.select-div select {
+    width:220px;
+    border:none;
+    background-color: transparent;
+}
+
+.number-div {
+    width:200px; height:auto;
+    float:left;
+    overflow:hidden;
+    background-color: white;
+    /*background-size: auto 100%;*/
+    border-radius: 20px;
+    
+}
+
+.number-div input[type="number"]{
+    width:230px;
+    border:none;
+    background-color: transparent;
+}
+/*standard all disabled input to grey put */
+input:disabled {
+    background: #dddddd;
+}
+
+#main_content {
+    position: fixed;
+    width: 98.8%;
+    z-index: 3;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+@media(max-width:1210px) {
+    #main_content { width: 98.8%; }
+}
+
+@media(max-width:960px) {
+    #main_content { width: 98%; }
+}
+
+.unfixed_content {
+   padding-top: 85px;
+}
+
+#main_content > div {
+    padding-right: 0px
+}
+
+#system_logout_btn {
+    margin-left: 18px
+}
+

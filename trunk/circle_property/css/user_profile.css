@@ -1,0 +1,60 @@
+
+#user_id
+{
+    font-size: 21pt;
+    font-family: Century Gothic Bold;
+    
+}
+
+#country, #phone
+{
+    font-size: 14pt;
+    font-family: Century Gothic
+}
+
+#password_change {
+    font-size: 12pt;
+    font-family: Century Gothic Italic 
+}
+
+.panel-title {
+    font-size: 14pt;
+    font-family: Century Gothic Bold;
+}
+
+.panel-transparent {
+  border-color: #f2f3f7;
+  border-width: 15.453px
+}
+
+.panel-transparent > .panel-heading > a{
+  color: #7d5a82;
+  background-color: transparent;
+  border-color: #bce8f1;
+  font-family: Century Gothic Bold Italic
+}
+
+.panel-transparent > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #f2f3f7;
+  border-width: 5px
+}
+
+.panel-transparent > .panel-heading > .dropdown .caret {
+  border-color: #f2f3f7;
+  border-width: 5px
+}
+
+.panel-transparent > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #bce8f1;
+}
+
+.section-content
+{
+    text-align: left;
+    margin-left: 5px
+}
+
+#bottom_footer{
+    width: 100%;
+    position: relative
+}

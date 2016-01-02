@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+body {
+    background-color: #f2f3f7;
+}
+
+.align-center {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.contend {
+    text-align: center;
+    margin-top: 10%;
+}
+
+
+
+
+
+

@@ -1,0 +1,112 @@
+<definitions name='cb_main' targetNamespace="http://example.com/cb_main.wsdl" 
+xmlns:tns="http://example.com/cb_main.wsdl" 
+xmlns:xsd1="http://example.com/cb_main.xsd" 
+xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+ 
+  <!-- Abstract definition of the data being transmitted  == Start == -->
+  <!-- For gateway test purpose-->
+  <message name="_CB_Test_Gateway_Request">
+    <part name="html_syntext" type="xsd:string" />
+  </message>
+  <message name="_CB_Test_Gateway_Response">
+    <part name="return" type="xsd:string" />
+  </message>
+  
+  
+  <!-- CB send service -->
+  <message name="_CB_Service_Send_Request">
+    <part name="html_syntext" type="xsd:string" />
+  </message>
+  <message name="_CB_Service_Send_Response">
+    <part name="return" type="xsd:string" />
+  </message>
+  
+  <!-- CB service receive -->
+  <message name="_CB_Service_Receive_Request">
+    <part name="html_syntext" type="xsd:string" />
+  </message>
+  <message name="_CB_Service_Receive_Response">
+    <part name="return" type="xsd:string" />
+  </message>
+  
+  <!-- CB service send and receive -->
+  <message name="_CB_Service_SendReceive_Request">
+    <part name="html_syntext" type="xsd:string" />
+  </message>
+  <message name="_CB_Service_SendReceive_Response">
+    <part name="return" type="xsd:string" />
+  </message>
+  
+  <!-- Abstract definition of the data being transmitted  == End == -->
+  
+  <portType name="cb_main_Port">
+  <!-- a set of abstract operations referring to input and output messages == Start == -->
+    <operation name="_CB_Test_Gateway">
+      <input message="tns:_CB_Test_Gateway_Request" />
+      <output message="tns:_CB_Test_Gateway_Response" />
+    </operation>
+    <operation name="_CB_Service_Send">
+      <input message="tns:_CB_Service_Send_Request" />
+      <output message="tns:_CB_Service_Send_Response" />
+    </operation>
+    <operation name="_CB_Service_Receive">
+      <input message="tns:_CB_Service_Receive_Request" />
+      <output message="tns:_CB_Service_Receive_Response" />
+    </operation>
+    <operation name="_CB_Service_SendReceive">
+      <input message="tns:_CB_Service_SendReceive_Request" />
+      <output message="tns:_CB_Service_SendReceive_Response" />
+    </operation>
+  <!-- a set of abstract operations referring to input and output messages == End == -->
+  </portType>
+  
+  <binding name="cb_main_Binding" type="tns:cb_main_Port">
+  <!-- concrete protocol and data format specs == Start == -->
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="_CB_Test_Gateway">
+      <soap:operation soapAction="urn:cb_main#CB_Test_Gateway" />
+      <input>
+        <soap:body use="encoded" namespace="urn:cb_main" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:cb_main" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="_CB_Service_Send">
+      <soap:operation soapAction="urn:cb_main#CB_Service_Send" />
+      <input>
+        <soap:body use="encoded" namespace="urn:cb_main" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:cb_main" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="_CB_Service_Receive">
+      <soap:operation soapAction="urn:cb_main#cb_Service_Receive" />
+      <input>
+        <soap:body use="encoded" namespace="urn:cb_main" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:cb_main" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="_CB_Service_SendReceive">
+      <soap:operation soapAction="urn:cb_main#CB_Service_SendReceive" />
+      <input>
+        <soap:body use="encoded" namespace="urn:cb_main" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:cb_main" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+  <!-- concrete protocol and data format specs == End == -->
+  </binding>
+
+  <service name='cbService'>
+    <!-- specifies locations and bindings for a service == Start == -->
+    <port name="cb_main_Port" binding="tns:cb_main_Binding">
+      <soap:address location='http://localhost/cb_iloveproperty/trunk/circle_property/index.php/main?wsdl'/>
+    </port>
+    <!-- specifies locations and bindings for a service == End == -->
+  </service>
+</definitions>

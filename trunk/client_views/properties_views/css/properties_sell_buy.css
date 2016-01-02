@@ -1,0 +1,236 @@
+.angular-google-map-container { height: 300px; max-width: 100% }
+#map_canvas { height: 300px; max-width: 100% }
+.drop:target {
+    border-color: greenyellow;
+    border-style: dotted;
+    border-radius: 5px;
+    border-width: thin;
+}
+.container {
+    padding-left: 35px
+}
+
+ @media (max-width: 940px) {
+.validation_input_group_default
+{
+    width:100%
+}
+.validation_input_group_small
+{
+    width:200px
+    
+}
+ }
+ @media (min-width: 940px) {
+.validation_input_group_default
+{
+    width:400px;
+}
+.validation_input_group_small
+{
+    width:200px;
+}
+ }
+ .validation_input_group_default >input,
+ .validation_input_group_small >input
+ {
+     width: 100%;
+     max-width: none
+ }
+.feedback{
+   background-color: transparent;
+    border-color: transparent;
+    color: gray
+ }
+#address {
+    width: 200px
+}
+#remark
+{
+    width: 100%
+}
+.property_info_location > div {
+    margin-bottom: 5px
+}
+.title > span
+{
+    font-family: 'Century Gothic Bold';
+    font-size: 12pt;
+    color: white;
+    padding-left: 10px;
+    
+}
+
+.title
+{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #790184;
+    overflow:visible;
+    width: 200px 
+}
+.oceanblue {
+    background-color: #f2f3f7;
+    width: 100%;
+}
+
+.oceanblue > div {
+    padding-top: 10px;
+}
+
+#ng-app {
+    padding-left: 12px
+}
+
+.properties_details {
+    padding-left: 12px
+}
+
+input, select, textArea {
+    border-radius: 20px;
+    resize: none;
+    
+}
+
+.userprofile input {
+    width: 240px
+}
+
+span {
+    font-family: 'Century Gothic';
+}
+
+#listing_preview {
+   margin-right: 15px;
+   
+}
+
+#submit_listing 
+{
+    margin-right: 10px;
+}
+#listing_preview, #submit_listing
+{
+   font-family: 'Century Gothic Bold';
+   color: white;
+    font-size: 10pt;
+    /*background-color: #86127d;*/
+    /* IE10 Consumer Preview */ 
+    background-image: -ms-linear-gradient(top, #9c1794 0%, #86127d 100%);
+    /* Mozilla Firefox */ 
+    background-image: -moz-linear-gradient(top, #9c1794 0%, #86127d 100%);
+    /* Opera */ 
+    background-image: -o-linear-gradient(top, #9c1794 0%, #86127d 100%);
+    /* Webkit (Safari/Chrome 10) */ 
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #9c1794), color-stop(1, #86127d));
+    /* Webkit (Chrome 11+) */ 
+    background-image: -webkit-linear-gradient(top, #9c1794 0%, #86127d 100%);
+    /* W3C Markup, IE10 Release Preview */ 
+    background-image: linear-gradient(to bottom, #9c1794 0%, #86127d 100%);
+    border-radius: 15px;
+    /*c0c1c5*/
+    border-color: #c0c1c5;
+    border-width: 2px
+    
+}
+.nearest_details
+{
+    margin-bottom: 10px
+}
+
+#remark {
+   border-radius: 0px;
+   border-bottom-left-radius: 20px;
+   border-bottom-right-radius: 20px
+}
+#popup_property_preview .popup{
+    width: 100%; /* Max Width of the popover (depending on the container!) */
+}
+#popup_property_preview center {
+    height: 100%
+}
+
+#property_preview {
+    height: 100%
+}
+
+#property_preview_content {
+    height: 100%
+}
+
+.fuelux .input-group-addon {
+  padding: 0px 0px;
+}
+
+.blink {
+    animation-duration: 3s;
+    animation-name: blink;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+@keyframes blink {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+#upload_status {
+    color:red;
+}
+
+#popup_property_preview .modal-dialog {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+#popup_property_preview .modal-content {
+  height: 100%;
+  border-radius: 0;
+}
+
+#popup_property_preview .modal-body {
+    padding: 0;
+    height: 98%
+}
+
+
+#popup_property_preview .modal-header {
+    padding: 0;
+    position: fixed;
+    z-index: 2
+}
+
+label {
+    font-family: "Century Gothic";
+}
+
+/*****************************************************
+    General type  
+*******************************************************/
+/* Font Type Specified */
+.gothic_font {
+    font-family: "Century Gothic";
+}
+
+.gothic_bold_font {
+    font-family: "Century Gothic Bold";
+    
+}
+
+.gothic_bool_italic_font {
+    font-family: "Century Gothic Bold Italic";
+}
+
+.gothic_italic_font {
+    font-family: "Century Gothic Italic";
+}
+
+.currency_group {
+    display:none
+}
+/*86127d*/

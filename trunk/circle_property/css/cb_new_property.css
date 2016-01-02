@@ -1,0 +1,206 @@
+
+#form-text-box
+{
+    width : auto;
+    margin-top : 10px;
+}
+
+#nwp-input-form .input-group-addon
+{
+    background: none;
+    border: 0px solid #ccc;
+}
+
+#nwp-currency-input
+{
+    margin-left: 14px;
+}
+
+#files
+{
+    width : auto;
+    margin-top : 10px;
+}
+
+.thumb {
+    height: 75px;
+    weight: 75px;
+    border: 1px solid #000;
+    margin: 10px 5px 0 0;
+  }
+  
+#form_container
+{
+	margin:0 auto;
+	text-align:left;
+}
+
+form.nwp_form_input
+{
+	margin:2px 20px 0;
+	padding:0 0 2px;
+}
+
+form ul
+{
+	font-size:100%;
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	width:100%;
+}
+
+form li
+{
+	display:block;
+	margin:0;
+	heigh:50px;
+	position:relative;
+}
+
+form li:after
+{
+	clear:both;
+	content:".";
+	display:block;
+	height:0;
+	visibility:hidden;
+}
+
+* html form li
+{
+	height:1%;
+}
+
+* html form li div
+{
+	display:inline-block;
+}
+
+form li div
+{
+	color:#444;
+	margin:0 4px 0 0;
+	padding:0 0 8px;
+}
+
+form li span
+{
+	color:#444;
+	float:left;
+	margin:0 4px 0 0;
+	padding:0 0 8px;
+}
+
+form li div.left
+{
+	display:inline;
+	float:left;
+	width:48%;
+}
+
+form li div.right
+{
+	display:inline;
+	float:right;
+	width:48%;
+}
+
+form li div label
+{
+	clear:both;
+	color:#444;
+	display:block;
+	margin:0;
+	padding-top:3px;
+}
+
+form li span label
+{
+	clear:both;
+	color:#444;
+	display:block;
+	margin:0;
+	padding-top:3px;
+}
+
+
+/**** Inputs and Labels ****/
+label.nwp_description
+{
+	border:none;
+	color:#222;
+	display:block;
+	font-weight:700;
+	line-height:150%;
+	padding:0 0 1px;
+}
+
+input.nwp_text
+{
+	background:#fff;
+	margin:0;
+	padding:2px 0;
+        width : auto;
+}
+
+input.file
+{
+	color:#333;
+	font-size:100%;
+	margin:0;
+	padding:2px 0;
+}
+
+textarea.nwp_textarea
+{
+	background:#fff;
+	color:#333;
+	margin:0;
+        width: 70%;
+}
+
+select.nwp_select
+{
+	color:#333;
+	font-size:100%;
+	margin:1px 5px;
+	padding:1px 0 0;
+	background:#fff;
+}
+
+input.nwp_checkbox
+{
+	display:block;
+	height:13px;
+	line-height:1.4em;
+	margin:6px 0 0 3px;
+}
+
+input.nwp_radio
+{
+	display:block;
+	height:13px;
+	line-height:1.4em;
+	margin:6px 0 0 3px;
+}
+
+label.nwp_choice
+{
+	color:#444;
+	display:block;
+	line-height:1.4em;
+	margin:-1.55em 0 0 25px;
+	padding:4px 0 5px;
+}
+
+select.nwp_select[class]
+{
+	margin:0;
+	padding:1px 0;
+}
+
+*:first-child+html select.nwp_select[class]
+{
+	margin:1px 0;
+}

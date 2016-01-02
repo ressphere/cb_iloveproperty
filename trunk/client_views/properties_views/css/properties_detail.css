@@ -1,0 +1,219 @@
+.InsideContent {
+    color: #722f77
+}
+
+.InsideContent img {
+    height: 18px
+}
+
+.row {
+    margin-left: 0px;
+    margin-right: 0px
+}
+
+.PricePer {
+    color: green;
+    font-family: "Century Gothic";
+}
+
+.oceanblue {
+    background-color: #f2f3f7;
+    width: 100%;
+}
+#map_canvas, .map_canvas_group { height: 300px; max-width: 100% }
+.angular-google-map-container { height: 300px; max-width: 100% }
+#contact, #send_contact
+{
+   font-family: 'Century Gothic Bold';
+   color: white;
+    font-size: 10pt;
+    /*background-color: #86127d;*/
+    /* IE10 Consumer Preview */ 
+    background-image: -ms-linear-gradient(top, #9c1794 0%, #86127d 100%);
+    /* Mozilla Firefox */ 
+    background-image: -moz-linear-gradient(top, #9c1794 0%, #86127d 100%);
+    /* Opera */ 
+    background-image: -o-linear-gradient(top, #9c1794 0%, #86127d 100%);
+    /* Webkit (Safari/Chrome 10) */ 
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #9c1794), color-stop(1, #86127d));
+    /* Webkit (Chrome 11+) */ 
+    background-image: -webkit-linear-gradient(top, #9c1794 0%, #86127d 100%);
+    /* W3C Markup, IE10 Release Preview */ 
+    background-image: linear-gradient(to bottom, #9c1794 0%, #86127d 100%);
+    border-radius: 15px;
+    /*c0c1c5*/
+    border-color: #c0c1c5;
+    border-width: 2px
+    
+}
+
+
+.title
+{
+    background-color: white;
+    border: solid 1px #D1D3D4;
+    overflow:visible;
+    width: 100%;
+    color: #550060;
+    padding-left: 20px;
+}
+
+.purple {
+    color: #54005f
+}
+
+
+
+.information {
+    background-color: white;
+    border-left: solid 1px #D1D3D4;
+    border-right: solid 1px #D1D3D4;
+    border-bottom: solid 1px #D1D3D4;
+    width: 100%;
+    padding-left: 12px;
+    color: black
+}
+
+
+#books{
+	width:100%
+}
+.property_photo{
+	background-color:whitesmoke;
+	background-size:auto 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+}
+
+/*****************************************************
+    General type  
+*******************************************************/
+/* Font Type Specified */
+.gothic_font {
+    font-family: "Century Gothic";
+}
+
+.gothic_bold_font {
+    font-family: "Century Gothic Bold";
+    
+}
+
+.gothic_bool_italic_font {
+    font-family: "Century Gothic Bold Italic";
+}
+
+.gothic_italic_font {
+    font-family: "Century Gothic Italic";
+}
+
+.description {
+    position: absolute;
+    bottom: 0px;
+    border: solid 1px black;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    opacity: 0.5
+}
+
+#popup_google_map_preview .popup{
+    width: 100%; /* Max Width of the popover (depending on the container!) */
+}
+#popup_google_map_preview center {
+    height: 100%
+}
+
+#google_map_preview {
+    height: 100%
+}
+
+ body{
+   background-color: #F2F3F7
+ }
+ 
+ .text-align-left {
+     text-align: right
+ }
+ 
+ .profile {
+     padding-right: 20px
+ }
+ #remark {
+    min-height: 395px;
+    white-space: pre-wrap;      /* CSS3 */   
+    white-space: -moz-pre-wrap; /* Firefox */    
+    white-space: -pre-wrap;     /* Opera <7 */   
+    white-space: -o-pre-wrap;   /* Opera 7 */    
+    word-wrap: break-word; 
+ }
+ 
+ 
+.left_nav
+{
+    left:6%;
+    top:50%;
+    z-index:2;
+    /*width: 10px;*/
+    position: absolute
+}
+
+.left_nav img, .right_nav img
+{
+    width: 30px;
+}
+
+.right_nav
+{
+    left:90%;
+    top:50%;
+    z-index:2;
+    position: absolute
+}
+
+@media (max-width: 571px) {
+    .right_nav
+    {
+        left:80%
+    }
+}
+
+@media (max-width: 990px) {
+    .text-align-left {
+        text-align: left
+    }
+}
+
+#nearest_place .information {
+    min-height: 400px
+}
+
+#main_content > div {
+    padding-left: 0px;
+    padding-right: 0px
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+#send_contact_comment {
+    width: 100%;
+    height: 183px;
+    resize: none;
+}
+
+/*#txtEmail {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}*/
+/*#E1D2BF*/
+
+.measurement_type_group
+{
+   display: none;
+}
+

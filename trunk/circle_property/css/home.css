@@ -1,0 +1,272 @@
+.navbar-default {
+    background-color: transparent;
+    border-color: transparent;
+}
+/* title */
+.navbar-default .navbar-brand {
+    color: #777;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #5E5E5E;
+}
+/* link */
+.navbar-default .navbar-nav > li > a {
+    color: #777;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #333;
+}
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #555;
+    background-color: #E7E7E7;
+}
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #555;
+    background-color: #D5D5D5;
+}
+/* caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: #777;
+    border-bottom-color: #777;
+}
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #333;
+    border-bottom-color: #333;
+}
+.navbar-default .navbar-nav > .open > a .caret, 
+.navbar-default .navbar-nav > .open > a:hover .caret, 
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    border-top-color: #555;
+    border-bottom-color: #555;
+}
+/* mobile version */
+.navbar-default .navbar-toggle {
+    border-color: #DDD;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #DDD;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #CCC;
+}
+
+#ads .bx-wrapper {
+    box-shadow: 0px 10px 20px #888888;
+}
+#ads {
+    margin-bottom: 15px;
+}
+
+#features {
+    margin-bottom: 5px;
+}
+.header_menu li a:hover {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+	-webkit-background-size: 100% 100%;
+}
+#features .bx-wrapper .bx-viewport {
+    -moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border:  none;
+	left: -5px;
+	background-color: transparent;
+}
+#features {
+    background-image: url("../images/bottom_wave.png");
+   background-size: 100% auto;
+	-moz-background-size: 100% auto;
+	-webkit-background-size: 100% auto;
+    background-repeat: no-repeat;
+    
+}
+#features img {
+    cursor: pointer
+}
+.push {
+    height: 0px;
+}
+#bottom_footer {
+    background-image: url("../images/footer-bg.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+	-webkit-background-size: 100% 100%;
+    position: relative;
+    min-height: 50px;
+    clear:both;
+    padding-top:20px;
+}
+
+#bottom_footer div {
+    font-family: century gothic regular;
+    font-size: 9pt;
+    color: white
+    
+}
+
+#footer_link ul
+{
+    list-style-type:none;
+    padding:0;
+    margin: 0
+}
+#footer_link li
+{
+    display:inline;
+    color: white
+}
+#footer_link li a:link
+{
+    color: white
+}
+#footer_link li a:visited
+{
+    color: white
+}
+#footer_link li a:active
+{
+    color: white
+}
+#footer_link li a:hover
+{
+    color: white
+}
+#footer_link .divider
+{
+    font-weight: bolder;
+}
+
+/*************** supported media size *****************/
+@media (max-width: 768px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #777;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #333;
+    }
+    #ads {
+        max-height: 455px;
+         background-image: url("../images/upper_wave.png");
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+	-moz-background-size: 100% auto;
+	-webkit-background-size: 100% auto;
+        background-position: top;
+		
+    }
+     .wrapper{
+        background-repeat: no-repeat;
+        background-size: auto 100%;
+	-moz-background-size: auto 100%;
+	-webkit-background-size: auto 100%;
+        background-position:center; 
+    }
+    
+ 
+}
+@media (max-width: 767px) {
+ .header_menu li a:hover {
+        background-image: none;
+        background-color: white;
+    }
+}
+
+@media (min-width: 767px) {
+     .wrapper{
+        background-repeat: no-repeat;
+        background-size: auto 100%;
+	-moz-background-size: auto 100%;
+	-webkit-background-size: auto 100%;
+        background-position: center;
+    }
+    #ads {
+         background-image: url("../images/upper_wave.png");
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+	-moz-background-size: 100% auto;
+	-webkit-background-size: 100% auto;
+        background-position:top;
+        max-height: 455px;
+    }
+   
+}
+
+@media (min-width: 992px) {
+     .wrapper{
+         background-repeat: no-repeat;
+        background-size: auto 100%;
+	-moz-background-size: auto 100%;
+	-webkit-background-size: auto 100%;
+        background-position: center;
+    }
+    #ads {
+     background-image: url("../images/upper_wave.png");
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+	-moz-background-size: 100% auto;
+	-webkit-background-size: 100% auto;
+        background-position:top;
+        max-height: 455px;
+    }
+}
+
+
+@media (min-width: 1200px) {
+    .wrapper{
+        background-repeat: no-repeat;
+        background-size: auto 100%;
+	-moz-background-size: auto 100%;
+	-webkit-background-size: auto 100%;
+        background-position:center; 
+    }
+    #ads {
+         background-image: url("../images/upper_wave.png");
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+	-moz-background-size: 100% auto;
+	-webkit-background-size: 100% auto;
+        background-position:top;   
+        max-height: 477px;
+    }
+}
+.navbar-collapse .navbar-nav.navbar-right:last-child {
+    margin-right: auto;
+}
+
+.navbar {
+    background-color: white;
+}
+
+#main_content > div {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%
+}
+
+
+hr { 
+    display: block;
+    border-style: inset;
+    border-width: 1px;
+    color: gray
+}
+

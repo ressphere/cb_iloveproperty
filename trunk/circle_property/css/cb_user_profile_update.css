@@ -1,0 +1,86 @@
+input, .form-control, textarea, select {
+    color: #666;
+    font-family: 'Century Gothic';
+    font-size: 10pt;
+    border-radius: 20px;
+    resize: none;
+    
+}
+input {
+    width: 240px
+}
+span {
+    color: #666;
+    /*font-family: 'Century Gothic';*/
+    font-size: 10pt;
+}
+
+.gothic_bold_font {
+    font-family: "Century Gothic Bold";
+    font-size: 14pt;
+    
+}
+#page-content-wrapper.toggled {
+    padding-left: 250px;
+}
+#page-content-wrapper {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+     width: 230px;
+}
+@media(max-width:768px) {
+    .sidebar_toggle.toggled {
+        left:245px;
+    }
+    #sidebar-wrapper.toggled {
+        width: 240px;
+    }
+    #page-content-wrapper.toggled {
+        padding-left: 0px;
+    }
+    #page-content-wrapper {
+        padding-left: 0px;
+    }
+}
+
+
+@media(min-width:768px) {
+  .sidebar_toggle {
+        left: 230px;
+   }
+   #sidebar-wrapper {
+        width: 230px;
+   }
+   #sidebar-wrapper, .sidebar_content {
+       left:250px
+   }
+}
+
+#menu-toggled {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#sidebar-wrapper {
+    border-radius: 0px 0px 0px 0px;
+    border: solid #DDD 1px;
+    background: white;
+}
+
+#pwd_change_fields {
+    width: 100px;
+}
+
+#change_pwd_req {
+    border-radius: 10px;
+}
+
+#change_pwd_req_group {
+    left: -25px
+}
+
+#wrapper {
+    padding-left: 0px;
+}

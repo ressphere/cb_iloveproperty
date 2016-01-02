@@ -1,0 +1,142 @@
+/* 
+    Document   : background
+    Created on : Feb 9, 2014, 5:27:04 PM
+    Author     : ksuren
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/**
+* Body, Wrappers, and Containers #######################################
+*/
+
+html {
+	margin: 0;
+	padding: 0;
+}
+
+div.container {
+	width: 940px;
+	margin: 0 auto;
+	padding: 0;
+	background-color: #fff;
+}
+body {
+	margin: 0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 10pt;
+	background-image: url(../../images/i_property/body_back.jpg);
+	background-repeat: repeat-x;
+	background-color: #a0a3a3;
+}
+
+div#wrapper {
+	width: 960px;
+	margin: 0 auto;
+	background-image: url(../../images/i_property/wrapper_back.gif);
+	background-repeat: no-repeat;
+}
+
+
+/**
+* Header ###############################################################
+*/
+
+div#header {
+	position: relative;
+	height: 166px;
+	background-image: url(../../images/i_property/header_back.jpg);
+}
+
+div#header a.logo {
+	display: block;
+	position: absolute;
+	top: 50px;
+	left: 25px;
+	width: 500px;
+	height: 77px;
+	font-family: Podkova, Georgia, Times New Roman, serif;
+	color: #fff;
+	font-size: 30pt;
+	text-shadow: 1px 1px #333;
+	background-image: url(../../images/i_property/logo.png);
+	background-repeat: no-repeat;
+	background-position: top left;
+	padding-left: 96px;
+	padding-top: 17px;
+}
+
+/**
+* Navigation ###########################################################
+*/
+
+div#navigation {
+	background-image: url(../../images/i_property/navigation_back.jpg);
+	height: 67px;
+	position: relative;
+}
+
+div#navigation ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+div#navigation ul li {
+	display: block;
+	float: left;
+	position: relative;
+}
+
+div#navigation ul li a {
+	display: block;	
+	float: left;
+	color: #f0f0f1;
+	font-size: 9pt;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	text-align: center;
+	padding-top: 26px;
+	padding: 26px 25px 27px;
+	text-shadow: 0px 1px #444;
+	background-image: url(../../images/i_property/nav_separator.png);
+	background-position: top right;
+	background-repeat: no-repeat;
+}
+
+div#navigation ul li.active a {
+	background-color: #111;
+	color: #bfb76c;
+	text-shadow: none;
+	font-weight: bold;
+}
+
+div#navigation ul.children {
+	display: none;
+	position: absolute;
+	left: -3px;
+	top: 66px;
+	background-color: #333;
+	z-index: 995;
+}
+
+div#navigation ul.children li a {
+	font-weight: normal;
+	background-color: #111;
+	border-left: 1px solid #888;
+	color: #f0f0f1;
+	float: none;
+	display: block;
+	width: 140px;
+	text-align: left;
+	text-shadow: none;
+	padding: 9px 15px;
+	margin: 1px 0 0 1px;
+	text-transform: none;
+	background-image: none;
+}
+
+div#navigation ul.children li:first-child a {
+	margin-top: 0px;
+}
