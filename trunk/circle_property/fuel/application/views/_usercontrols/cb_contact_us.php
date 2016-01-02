@@ -34,7 +34,7 @@
                 echo '  </div>';
                 $message_id =  count($contact_list) - 1;
                 echo '  <div class="col-md-6">';
-                    echo '<textarea id="contact_us_msg" maxlength="300" id="contact_us_input_'.$message_id.'"rows="11" class="contact_us_textarea" value="" class="form-control" placeholder="'. $contact_list[$message_id][1] . '"></textarea>';
+                    echo '<textarea id="contact_us_msg" maxlength="300" id="contact_us_input_'.$message_id.'"rows="14" class="contact_us_textarea" value="" class="form-control" placeholder="'. $contact_list[$message_id][1] . '"></textarea>';
                 echo '</div>';
           ?>
             </div><br>
