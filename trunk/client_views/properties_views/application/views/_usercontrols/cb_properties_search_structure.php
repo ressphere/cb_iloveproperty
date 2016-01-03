@@ -104,7 +104,7 @@
                                                         
                                                         <div  class="col-md-12 filter_info_requirement_div_2">
                                                             <div class="gothic_bool_font filter_info_requirement_label">
-                                                                <p>Min Sqft</p>
+                                                                <p>Min Built-Up Area</p>
                                                             </div>
                                                             <div class="input-group ">
                                                                 <span class="input-group-addon gothic_font filter_info_requirement_input_label lbl_measurement_type">sqft</span>
@@ -117,7 +117,7 @@
                                                         
                                                         <div  class="col-md-12 filter_info_requirement_div">
                                                             <div class="gothic_bool_font filter_info_requirement_label">
-                                                                <p>Max Sqft</p>
+                                                                <p>Max Built-Up Area</p>
                                                             </div>
                                                             <div class="input-group ">
                                                                 <span class="input-group-addon gothic_font filter_info_requirement_input_label lbl_measurement_type">sqft</span>
