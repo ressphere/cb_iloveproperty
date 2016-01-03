@@ -84,3 +84,7 @@ span {
 #wrapper {
     padding-left: 0px;
 }
+
+#btn_delete {
+   border-radius: 10px;
+}

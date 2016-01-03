@@ -12,6 +12,13 @@ $(document).ready(
                 });
                 $('#popup').modal('hide');
        });
+       $('.sidebar-nav > li > a').click(
+          function()
+          {
+              $('.sidebar-nav > li > a').css('color','#999999');
+              $(this).css('color','black');
+          }
+       );
    }
 );
 
@@ -22,7 +29,7 @@ var profileApp = angular.module('ProfileApps',[]);
 profileApp.controller('ProfileController', function($scope, $http) {
    
    var checked_boxes = [];
-   
+    $scope.delete_btn = false;
     $scope.services = [
         {
           name: "General",
@@ -210,6 +217,7 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
                     }
                 }
             }
+			$scope.delete_btn = false;
     }
     
     function cal_checked_box(category)
@@ -243,6 +251,7 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
    
     $scope.rm_record = function(category)
     {
+	    $scope.delete_btn = true;
         cal_checked_box(category);
         
         if(checked_boxes.length !== 0)
@@ -264,13 +273,18 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
               }).then(function(response) {
 
                     //display the delete listing message
-                   $('#Remove_Record_Message').html(response.data.status_information);     							
-                   reset_ui(category);
+					var msg = response.data.status_information; 
+					if(msg.indexOf("Info:") > -1)
+					{
+						$('#general_info_content').html(msg.replace("Info: ", ""));$("#popup_general_info").modal("show");    							
+					}
+					reset_ui(category);
+				   
               });
         }
         else
         {
-            alert("no checkbox has been selected!");
+            alert("no checkbox has been selected!");$scope.delete_btn = false;
         }
        };
        
