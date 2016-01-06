@@ -71,6 +71,7 @@ private $property_info_list = NULL;
        $this->extemplate->add_js('js/property_edit_listing.js');
        $this->extemplate->add_js('js/property_header.js');
        $this->extemplate->add_css(base_url() . 'css/properties_sell_buy.css', 'link', FALSE, FALSE);
+       $this->extemplate->add_css(base_url() . 'css/property_edit.css', 'link', FALSE, FALSE);
    }
    
    private function set_property_info_list($ref_tag)
