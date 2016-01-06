@@ -181,6 +181,16 @@ class Tank_auth
             //return $this->ci->users->get_state_codes($user_id);
             return $this->ci->users->get_country($user_id);
         }
+        
+        /**
+	 * Get the country by user id
+	 * @return	array
+	 */
+        function get_user_prop_listing_limit($user_id)
+        {
+            return $this->ci->users->get_user_prop_listing_limit($user_id);
+        }
+        
 	/**
 	 * Create new user on the site and return some data about it:
 	 * user_id, username, password, email, new_email_key (if any).

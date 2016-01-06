@@ -92,6 +92,24 @@ class Users extends CI_Model
 		return NULL;
 	}
 
+        /**
+	 * Get user property listing limit
+	 *
+	 * @param	int
+	 * @return	int
+	 */
+	function get_user_prop_listing_limit($user_id)
+	{
+		$this->db->where('id', $user_id);
+
+		$query = $this->db->get($this->table_name);
+                
+		if ($query->num_rows() == 1) 
+                    return $query->row()->prop_listing_limit;
+                else
+                    return NULL;
+	}
+        
 	/**
 	 * Check if username available for registering
 	 *

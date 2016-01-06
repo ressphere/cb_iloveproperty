@@ -378,10 +378,11 @@ class properties_upload extends properties_base
         */
         return $status;
     }
-    /*Get number of listing to disallow more than expected listing can be uploaded*/
-    public function get_number_of_listings()
+    /*Compare existing number of listing and the user listing limit to determine whether new listing is allowed or not*/
+    public function is_user_allowed_to_create_new_listing()
        {           
            $user_id = $this->session->userdata('user_id');
+           $allowed = true;
            
            if($user_id)
            {              
@@ -389,13 +390,25 @@ class properties_upload extends properties_base
                 $filter_struct["filter"]["user_id"] = $user_id;
 
                 //get the filtered listing details
-                $val_return_listing = GeneralFunc::CB_SendReceive_Service_Request("CB_Property:filter_listing",
-                        json_encode($filter_struct));
+                $user_listing_limit = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:get_user_property_listing_limit",
+                    json_encode($user_id));
+                
+                $listing_limit = json_decode($user_listing_limit, TRUE)["data"]["result"];
+                        
+                $user_existing_listing = GeneralFunc::CB_SendReceive_Service_Request("CB_Property:filter_listing",
+                    json_encode($filter_struct));
 
-                $listings = json_decode($val_return_listing, TRUE)["data"]["listing"];
+                $number_of_listings = sizeof(json_decode($user_existing_listing, TRUE)["data"]["listing"]);
 
-                return sizeof($listings);
-                               
+                if($number_of_listings < $listing_limit)
+                {
+                   $allowed = true; 
+                }
+                else
+                {
+                    $allowed = false;
+                }
+                return $allowed;                  
            }
            else
            {

@@ -163,6 +163,11 @@ class CBWS_AUTH_Member_Interface{
                 $return_data["result"] = $CB_Member_Obj->get_country($user_data['user_id']);
                 $info = "Info: get related user's country name";
                 break;
+            case "get_user_property_listing_limit":
+                $user_id = json_decode($request_command["send_data"], TRUE);       
+                $return_data["result"] = $CB_Member_Obj->get_user_property_listing_limit($user_id);
+                $info = "Info: get related user's properties listing limit";
+                break;
             default:
                 $data_receive["status"] = "Error";
                 $info = "Error: Member service not provided for ".$service[1];
