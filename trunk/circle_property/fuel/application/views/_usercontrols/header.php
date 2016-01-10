@@ -59,10 +59,7 @@
                                         My Profile</a>
                             </li>
                             <li role="presentation">
-                                    <button class="btn btn-danger" id="system_logout_btn"><a role="menuitem" 
-                                           tabindex="-1" id="system_logout" style="color:white" 
-                                           data-toggle="modal" data-target="#popup_logout" href="#">Logout</a>
-                                    </button>
+                                    <a role="menuitem" tabindex="-1" id="system_logout" data-toggle="modal" data-target="#popup_logout" href="#">Logout</a>
                             </li>
                             
                             
