@@ -30,7 +30,7 @@
 
 class Fuel_users extends Fuel_module {
 
-	protected $module = 'users';
+	protected $module = 'fuel_users';
 
 	public function initialize($params = array())
 	{

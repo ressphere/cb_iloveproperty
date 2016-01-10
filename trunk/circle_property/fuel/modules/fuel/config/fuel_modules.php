@@ -182,8 +182,8 @@ $config['modules']['sitevariables'] = array(
 
 
 // users module init values
-$config['modules']['users'] = array(
-	'module_name' => 'Users',
+$config['modules']['fuel_users'] = array(
+	'module_name' => 'Fuel Users',
 	'model_location' => 'fuel',
 	'model_name' => 'fuel_users_model',
 	'table_headers' => array(
@@ -199,7 +199,7 @@ $config['modules']['users'] = array(
 	'js_controller' => 'fuel.controller.UserController',
 	'display_field' => 'email',
 	'preview_path' => '',
-	'permission' => 'users',
+	'permission' => 'fuel_users',
 	//'edit_method' => 'user_info',
 	'instructions' => lang('users_instructions'),
 	'archivable' => FALSE,
