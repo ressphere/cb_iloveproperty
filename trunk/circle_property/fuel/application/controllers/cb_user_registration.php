@@ -470,22 +470,22 @@
             $confirmed_pass = $this->_get_posted_value('confirmed_password');
             if( empty($pass))
             {
-                $msg = "<span class='error'>Password cannot be empty</span>";
+                $msg = "<span class='error'>ERROR:Password cannot be empty</span>";
                 $success = FALSE;
             }
             elseif ( empty($current_pass)) 
             {
-                $msg = "<span class='error'>Current password cannot be empty</span>";
+                $msg = "<span class='error'>ERROR:Current password cannot be empty</span>";
                 $success = FALSE;
             }
             elseif ( empty($confirmed_pass)) 
             {
-                $msg = "<span class='error'>Confirmed password cannot be empty</span>";
+                $msg = "<span class='error'>ERROR:Confirmed password cannot be empty</span>";
                 $success = FALSE;
             }
             elseif ($confirmed_pass !== $pass)
             {
-                $msg = "<span class='error'>Password does not match with confirmed password</span>";
+                $msg = "<span class='error'>ERROR:Password does not match with confirmed password</span>";
                 $success = FALSE;
             }
             
@@ -517,13 +517,13 @@
                     if(isset($data["error"]))
                     {;
                         $success = FALSE;
-                        $msg = $data["error"];
+                        $msg = "<span class='error'>ERROR:The existing password is NOT correct!!!</span>";
                         #$msg = "<span class='error'>" . var_dump($forgot_pass_obj) . "</span>";
                     }
                     else
                     {;
                         $success = TRUE;
-                        $msg = "You have successfully changed your password.";
+                        $msg = "SUCCESS:You have successfully changed your password.";
                     }
                 }
                 else {
