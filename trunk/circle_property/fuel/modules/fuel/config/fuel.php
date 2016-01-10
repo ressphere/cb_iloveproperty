@@ -320,7 +320,7 @@ $config['nav']['tools'] = array();
 
 // manage
 $config['nav']['manage'] = array(
-	'users'             => lang('module_users'), 
+	'fuel_users'        => lang('module_fuel_users'), 
 	'permissions'       => lang('module_permissions'),
 	'manage/cache'      => lang('module_manage_cache'), 
 	'logs'              => lang('module_manage_activity'),

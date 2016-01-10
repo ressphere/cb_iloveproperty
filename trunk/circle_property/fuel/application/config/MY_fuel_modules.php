@@ -32,6 +32,7 @@ $config['module_overwrites']['tags']['hidden'] = TRUE; // change to FALSE if you
 $config['modules']['home_category'] = array('sanitize_images' => FALSE);
 $config['modules']['home_about_us'] = array('sanitize_images' => FALSE);
 $config['modules']['home_video'] = array('sanitize_images' => FALSE);
+$config['modules']['users'] = array('sanitize_images' => FALSE);
 
 // Property modules
 $config['modules']['properties_listing'] = array('sanitize_images' => FALSE);
