@@ -192,17 +192,6 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
        
     function reset_ui(category)
     {
-          /*
-          $.getscript("cb_update_profile.js",function(){
-                        get_user_listing_data();
-                        });
-          $.getscript("cb_update_profile.js",function(){
-                        get_user_inbox_data();
-                        });
-           */
-
-           //or....
-
             var curr_check_box = document.getElementsByName("del_option");
             var i = 0;
             for(i =0; i<curr_check_box.length; i++)
@@ -287,6 +276,11 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
             alert("no checkbox has been selected!");$scope.delete_btn = false;
         }
        };
+    
+    $scope.show_select_listing = function(url)
+    {
+        
+    };
        
     
 });

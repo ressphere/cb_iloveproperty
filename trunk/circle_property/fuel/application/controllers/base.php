@@ -2189,7 +2189,7 @@ class base extends CI_Controller {
             //cb_change_profile
             $this->extemplate->write_view('content', '_usercontrols/cb_403_page',array(
                 'reason'=>$error,
-                'img403'=>$wsdl.'images/404img.svg',
+                'img403'=>$wsdl.'images/403img.svg',
                 'homepage'=>base_url(),
                 'contactus'=>$wsdl.'#contact_us',
                 'title'=>$title,

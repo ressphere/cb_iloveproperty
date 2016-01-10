@@ -44,11 +44,10 @@
                             <li role="presentation">
                                     <a role="menuitem" target="_self" tabindex="-1" id="my_profile" href="<?php echo $myprofileurl?>">My Profile</a>
                             </li>
-                            <li role="presentation">
-                                    <button class="btn btn-danger" id="system_logout_btn"><a role="menuitem" 
-                                           tabindex="-1" id="system_logout" style="color:white" 
+                            <li role="presentation" class="system_logout_group">
+                                    <a role="menuitem" 
+                                           tabindex="-1" id="system_logout"
                                            data-toggle="modal" data-target="#popup_logout" href="#">Logout</a>
-                                    </button>
                             </li>
                     </ul>
                 </div>
