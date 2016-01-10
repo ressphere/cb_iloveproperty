@@ -813,6 +813,7 @@ $(window).load
            $('#popup').modal('show');
            $.jStorage.deleteKey("init_login");
         }
+        $('.system_logout_group').removeClass('active');
     }
 );
 
