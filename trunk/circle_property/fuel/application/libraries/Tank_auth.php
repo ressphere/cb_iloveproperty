@@ -227,6 +227,7 @@ class Tank_auth
                                 'country_id'    => $country_id,
 				'email'		=> $email,
 				'last_ip'	=> $this->ci->input->ip_address(),
+                                'last_ip'	=> $this->ci->input->ip_address(),
 			);
 
 			if ($email_activation) {
