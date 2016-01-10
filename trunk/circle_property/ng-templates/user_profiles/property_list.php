@@ -10,7 +10,7 @@
                 <th>Active</th>
               </tr>
             </thead>
-            <tbody  ng-repeat="data in listing">
+            <tbody  ng-repeat="data in listing | filter:{ref_tag:'RSP'}">
               <tr>
                 <td>
 <!--                    <div class="checkbox">
