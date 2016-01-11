@@ -814,7 +814,9 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
               clear_errors();
               var listing = prepare_message_data($scope);
               var photo_list = get_uploaded_image();
-              var senddata = "image_list=" + JSON.stringify(photo_list) + "&listing_information=" + JSON.stringify(listing);
+              var listing_str = JSON.stringify(listing);
+              listing_str = listing_str.replace('&nbsp;','%26nbsp;').replace('&', '%26');
+              var senddata = "image_list=" + JSON.stringify(photo_list) + "&listing_information=" + listing_str;
               var url = objProperty.getBaseUrl() + "index.php/_utils/properties_upload/commit_images_and_validation";
               $scope.disable_button = 1;
               $scope.photo_upload_status = "Uploading Listing..."; 
@@ -1065,7 +1067,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             // <editor-fold desc="set_listing"  defaultstate="collapsed">
             var set_listing = function(listing, $scope)
             {
-                var senddata = "listing_information=" + JSON.stringify(listing);
+                var senddata = "listing_information=" + JSON.stringify(listing).replace('&nbsp;','%26nbsp;').replace('&', '%26');
                 var url = objProperty.getBaseUrl() + "index.php/_utils/properties_upload/upload_listing";
                 $http({
                  method: 'POST',

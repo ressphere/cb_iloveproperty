@@ -180,7 +180,7 @@ class properties_upload extends properties_base
     {
         //Get the json from the client
          $image_list_json = $this->_get_posted_value('image_list');
-         $listing = $this->_get_posted_value("listing_information");
+         $listing = str_replace('%26nbsp;', '&nbsp;', $this->_get_posted_value("listing_information"));
          $reference = $this->session->userdata('Reference');
          $targeted_image_path = NULL;
          $internal_error = NULL;
@@ -279,7 +279,7 @@ class properties_upload extends properties_base
     
     public function upload_listing()
     {
-        $listing = $this->_get_posted_value("listing_information");
+        $listing = str_replace('%26nbsp;', '&nbsp;', $this->_get_posted_value("listing_information"));
         $reference = $this->session->userdata('Reference');
         $user_id = $this->session->userdata('user_id');
         $internal_error = NULL;
