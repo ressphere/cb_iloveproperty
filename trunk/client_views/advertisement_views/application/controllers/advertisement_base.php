@@ -74,7 +74,7 @@ class advertisement_base extends CI_Controller {
         $this->extemplate->add_js( $this->wsdl . 'js/bootstrap.min.js', 'import', FALSE, FALSE);
         $this->extemplate->add_js($this->wsdl .  'js/typeahead.min.js', 'import', FALSE, FALSE);
         
-        $this->extemplate->add_js('https://ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js', 'import', FALSE, FALSE);
+        $this->extemplate->add_js($this->wsdl . 'js/angular.min.js', 'import', FALSE, FALSE);
         //$this->extemplate->add_js($this->wsdl . 'js/angular-elif.js', 'import', FALSE, FALSE);
         
         $this->extemplate->add_js( $this->wsdl . 'js/_utils/jquery.makeclass.min.js', 'import', FALSE, FALSE);

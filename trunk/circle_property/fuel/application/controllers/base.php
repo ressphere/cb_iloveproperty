@@ -59,7 +59,7 @@ class base extends CI_Controller {
         $this->extemplate->add_js('js/bootstrap-mit.min.js');
         $this->extemplate->add_js('js/typeahead.min.js');
         
-        $this->extemplate->add_js('https://ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js', 'import', FALSE, FALSE);
+        $this->extemplate->add_js('js/angular.min.js');
         //$this->extemplate->add_js('js/ui-bootstrap-tpls-0.11.0.min.js');
         $this->extemplate->add_js('js/_utils/jquery.makeclass.min.js');
         $this->extemplate->add_js("js/jstorage.min.js");
