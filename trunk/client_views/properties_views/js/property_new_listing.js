@@ -44,9 +44,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                         category:'sell rent room',
                         values:
                         [
-                            'Malaysia',
-                            'Singapore',
-                            'Thailand'
+                            'Malaysia'
                         ]
                     },
                     {
