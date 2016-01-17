@@ -132,15 +132,19 @@ $(document).ready(
                             data: senddata,
                             type: 'POST',
                             success: function(result){
-                
+
                                 $("#general_info_content").html(result);
                                 $('button').prop('disabled', false);
                                 $('input').prop('disabled', false);
                                 $('textarea').prop('disabled', false);
-                                $('input').val("");       
-                                $('textarea').val("");
                                 $("#popup_general_info").modal("show");
 
+                                //do not clear user input if the submission is unsuccessful to avoid re-inserting the data
+                                if(!(result.indexOf("error") > -1))
+                                {
+                                    $('input').val("");       
+                                    $('textarea').val("");
+                                }
                             }
                         }
                     );
