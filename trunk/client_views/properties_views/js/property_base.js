@@ -109,7 +109,7 @@ var get_property_home = function() {
                 _get_doughnat_degree: function(x,y, top_offset, distance) {
                      var _x = Math.round(x - ($(window).width() / 2.0));
                      var _y = Math.round(((this._get_height()/2) + top_offset) - y);
-                     var degree = Math.acos(_y/distance);
+                     var degree = Math.acos(_y/distance);    
                           
                       if (_x < 0)
                       {
@@ -184,8 +184,9 @@ var get_property_home = function() {
                 {
                     private.categories = {
                         "RENT" : "index.php/properties_rent",
-                        "LAUNCH":"index.php/properties_new",
-                        "SERVICES":"index.php/properties_services",
+                         //uncomment this when the service category is ready
+                        //"LAUNCH":"index.php/properties_new",
+                        //"SERVICES":"index.php/properties_services",
                         "BUY":"index.php/properties_buy"
                     };
                     this.set_properties_category_as_doughnut();
@@ -274,8 +275,9 @@ var get_property_home = function() {
                                 {
                                     private.categories = {
                                         "RENT" : "index.php/properties_rent",
-                                        "LAUNCH":"index.php/properties_new",
-                                        "SERVICES":"index.php/properties_services",
+                                        //uncomment this when the service category is ready
+                                        //"LAUNCH":"index.php/properties_new",
+                                        //"SERVICES":"index.php/properties_services",
                                         "BUY":"index.php/properties_buy"
                                     };
                                 }
@@ -285,8 +287,9 @@ var get_property_home = function() {
                                         "RENT" : "index.php/properties_rent",  
                                         "LEASE":"index.php/properties_lease",  
                                         "SELL":"index.php/properties_sell",
-                                        "LAUNCH":"index.php/properties_new",
-                                        "SERVICES":"index.php/properties_services",
+                                        //uncomment this when the service category is ready
+                                        //"LAUNCH":"index.php/properties_new",
+                                        //"SERVICES":"index.php/properties_services",
                                         "BUY":"index.php/properties_buy"
                     
                                      };
