@@ -234,7 +234,7 @@
                             <div ng-switch-when='area'>
                                 <div class="validation_input_group_small input-group">
                                     <input class="gothic_font" id='{{property_category.id}}' width="200" style="width: 200px" type='text'
-                                    value="{{google_maps.details.address_components[1].long_name}}"
+                                    value='{{get_ngPlace_info_by_name(google_maps.details.adr_address, "locality")}}'
                                     placeholder='{{property_category.placeholder}}' maxlength="200"/>
                                     <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
                                 </div>
@@ -255,7 +255,7 @@
                             <div ng-switch-when='postcode'>
                                 <div class="validation_input_group_small input-group gothic_font">
                                     <input id='{{property_category.id}}' width="200" style="width: 200px" type='text'
-                                    value="{{google_maps.details.address_components[google_maps.details.address_components.length - 1].long_name}}"
+                                    value='{{get_ngPlace_info_by_name(google_maps.details.adr_address, "postal-code")}}'
                                     placeholder='{{property_category.placeholder}}' maxlength="200"/>
                                     <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
                                 </div>
@@ -264,7 +264,7 @@
                                 <div class="validation_input_group_small input-group gothic_font">
                                     
                                         <input id='{{property_category.id}}' width="200" style="width: 200px" type='text'
-                                        value="{{google_maps.details.address_components[0].long_name}}"
+                                        value='{{get_ngPlace_info_by_name(google_maps.details.adr_address, "street-address")}}'
                                         placeholder='{{property_category.placeholder}}' maxlength="200"/>
                                         <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
                                     

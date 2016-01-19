@@ -50,15 +50,6 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                         ]
                     },
                     {
-                        id:'state',
-                        name:'State',
-                        control:'select',
-                        category:'sell rent room',
-                        values:
-                        [
-                        ]
-                    },
-                    {
                         id:'unit_name',
                         name:'Unit Name',
                         control:'input-text',
@@ -66,7 +57,16 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                         placeholder:'Your Property Name',
                         values:
                         [
-                            '',
+                            ''
+                        ]
+                    },
+                    {
+                        id:'state',
+                        name:'State',
+                        control:'select',
+                        category:'sell rent room',
+                        values:
+                        [
                         ]
                     },
                     {
@@ -1449,6 +1449,36 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             });
             CKEDITOR.replace( 'remark_editor' );
             $scope.$apply();
+            $scope.get_ngPlace_info_by_name = function(info, key)
+            {
+                var start_key = '<span class="' + key +'">';
+                var end_key = '</span>';
+                if(typeof info !== 'undefined')
+                {
+                    var start_index = info.indexOf(start_key);
+
+                    
+                    if(start_index >= 0 )
+                    {
+                        start_index = info.indexOf(start_key) + start_key.length;
+                        var end_index = info.indexOf(end_key, start_index) + 1;
+                        if(end_index > 0)
+                        {
+                            return  info.substring(start_index, end_index - 1);
+                        }
+                        else
+                        {
+                            return  info.substring(start_index);
+                        }
+                    }
+                    else
+                    {
+                        return "";
+                    }
+                }
+                return "";
+                        
+            };
          
         
             

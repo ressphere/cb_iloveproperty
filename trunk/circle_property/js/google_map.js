@@ -99,7 +99,7 @@ ng_map_profile.controller('google_maps', function($scope, $http, ngGPlacesAPI) {
                 area:'',
                 autocomplete:'',
                 form: {
-                        type: 'geocode',
+                        type: 'Establishment',
                         bounds: {SWLat: 49, SWLng: -97, NELat: 50, NELng: -96},
                         country: 'my',
                         typesEnabled: false,

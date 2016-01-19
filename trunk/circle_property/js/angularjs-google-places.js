@@ -9,7 +9,6 @@ provider('ngGPlacesAPI', function () {
 
     var defaults = {
         radius: 1000,
-        sensor: false,
         latitude: null,
         longitude: null,
         types: ['food'],
