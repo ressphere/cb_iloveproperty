@@ -580,6 +580,15 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 }
               );
             });
+            
+            $scope.$watchCollection("google_maps.details", function(newVal, oldVal)
+            {
+                //use jquery to get the ISO 3166-1 Alpha-2 compatible country code and capital location
+               if(newVal === oldVal)
+                   return;
+               console.log("google_maps.details changed");
+               console.log(newVal);
+            });
 
             var add_details = function(data, details)
             {

@@ -380,23 +380,23 @@
                       
                     <div role="tabpanel" class="tab-pane active" id="transportations">
                         <div class="nearest_details col-md-8" ng-repeat="place in NearbyPlaces"
-                             ng-if="place.types.0=='subway_station' || place.types.0=='bus_station' ||
-                             place.types.0 == 'train_station' || place.types.0 == 'taxi_stand' || place.types.0 == 'airport'">
+                             ng-if="place.types[0]=='subway_station' || place.types[0]=='bus_station' ||
+                             place.types[0] == 'train_station' || place.types[0] == 'taxi_stand' || place.types[0] == 'airport'">
                            
                             <div class="col-md-6">
-                                <span class="icon-large icon-train" aria-hidden="true" ng-if="place.types.0 == 'train_station'">
+                                <span class="icon-large icon-train" aria-hidden="true" ng-if="place.types[0] == 'train_station'">
                                      
                                  </span>
-                                 <span class="icon-large icon-busalt" aria-hidden="true" ng-if="place.types.0 == 'bus_station'">
+                                 <span class="icon-large icon-busalt" aria-hidden="true" ng-if="place.types[0] == 'bus_station'">
                                      
                                  </span>
-                                <span class="icon-large icon-metro-subway" aria-hidden="true" ng-if="place.types.0 == 'subway_station'">
+                                <span class="icon-large icon-metro-subway" aria-hidden="true" ng-if="place.types[0] == 'subway_station'">
                                      
                                  </span>
-                                <span class="icon-large  icon-automobile-car" aria-hidden="true" ng-if="place.types.0 == 'taxi_stand'">
+                                <span class="icon-large  icon-automobile-car" aria-hidden="true" ng-if="place.types[0] == 'taxi_stand'">
                                      
                                  </span>
-                                <span class="icon-large icon-plane" aria-hidden="true" ng-if="place.types.0 == 'airport'">
+                                <span class="icon-large icon-plane" aria-hidden="true" ng-if="place.types[0] == 'airport'">
                                      
                                  </span>
                                 <span class="place_name gothic_font">{{place.name}}</span>
@@ -412,7 +412,7 @@
                     </div>
                     <div role="tabpanel" class="tab-pane" id="schools">
                         <div class="nearest_details col-md-8" ng-repeat="place in NearbyPlaces" 
-                             ng-if="place.types.0=='school' || place.types.0=='university'">
+                             ng-if="place.types[0]=='school' || place.types[0]=='university'">
                             <div class="col-md-4">
                                 <img width='14px' height='auto' src='images/uni.jpg' alt='university'>
                                 
@@ -427,7 +427,7 @@
                     </div>
                     <div role="tabpanel" class="tab-pane" id="shopping_malls">
                          <div class="nearest_details col-md-8" ng-repeat="place in NearbyPlaces" 
-                              ng-if="place.types.0=='shopping_mall'">
+                              ng-if="place.types[0]=='shopping_mall'">
                             <div class="col-md-4">
                                 
                                 <span class="icon-shoppingcartalt" aria-hidden="true">
@@ -443,7 +443,7 @@
                     </div>
                     <div role="tabpanel" class="tab-pane" id="medicals">
                          <div class="nearest_details  col-md-8" ng-repeat="place in NearbyPlaces" 
-                                ng-if="place.types.0=='hospital'">
+                                ng-if="place.types[0]=='hospital'">
                             <div class="col-md-4">
                                 <span class='icon-hospital' aria-hidden="true"></span>
                                 <span class="place_name">{{place.name}}</span>
@@ -456,7 +456,7 @@
                     </div>
                     <div role="tabpanel" class="tab-pane" id="banks">
                         <div class="nearest_details col-md-8" ng-repeat="place in NearbyPlaces" 
-                                ng-if="place.types.0=='bank'">
+                                ng-if="place.types[0]=='bank'">
                             <div class="col-md-4">
                                 <span class="icon-moneybag" aria-hidden="true">
                                      
@@ -472,7 +472,7 @@
                    <!--gas_stations-->   
                    <div role="tabpanel" class="tab-pane" id="gas_stations">
                         <div class="nearest_details col-md-8" ng-repeat="place in NearbyPlaces" 
-                                ng-if="place.types.0=='gas_station'">
+                                ng-if="place.types[0]=='gas_station'">
                             <div class="col-md-4">
                                 
                                 <span class="icon-gasstation" aria-hidden="true">
