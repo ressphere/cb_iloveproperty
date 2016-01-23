@@ -584,10 +584,26 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             $scope.$watchCollection("google_maps.details", function(newVal, oldVal)
             {
                 //use jquery to get the ISO 3166-1 Alpha-2 compatible country code and capital location
-               if(newVal === oldVal)
+              if(newVal === oldVal)
                    return;
-               console.log("google_maps.details changed");
-               console.log(newVal);
+             
+               var found = false;
+               for(var i = 0; i < newVal.address_components.length; i++)
+               {
+                  var component_name = newVal.address_components[i].long_name;
+                  
+                  $("#state > option").each(function()
+                  {
+                     
+                     if($(this).text() === component_name)
+                     {
+                         $("#state").val(component_name);
+                         found = true;
+                      }
+                  });
+                  if(found) break;
+               }
+               
             });
 
             var add_details = function(data, details)
