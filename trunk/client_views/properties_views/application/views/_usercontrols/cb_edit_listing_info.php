@@ -521,6 +521,7 @@
             <br><br>
             <div id="upload_controls" class="pull-right">
                 <B><span id="upload_status" ng-show="disable_button" class="blink" ng-bind="photo_upload_status"></span></B>
+                <button id="cancel" ng-disabled="disable_button" ng-click="navigate_back()" type="button" class="btn btn-danger">Cancel</button>
                 <button id="listing_preview" ng-disabled="disable_button" ng-click="preview_click()" type="button" class="btn">Preview</button>
                 <button id="submit_listing" ng-disabled="disable_button" ng-click="submit_click()" type="button" class="btn">Update & Next</button>
             </div>

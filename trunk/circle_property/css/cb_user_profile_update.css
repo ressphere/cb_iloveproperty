@@ -88,3 +88,22 @@ span {
 #btn_delete {
    border-radius: 10px;
 }
+
+a[ng-click]{
+    cursor: pointer;
+}
+
+#property_preview,
+#property_preview .modal-body,
+#property_preview_content_iframe,
+#popup_property_preview center,
+#property_preview_content
+{
+    height: 100%;
+    width: 100%
+}
+
+#popup_property_preview
+{
+    overflow: hidden
+}

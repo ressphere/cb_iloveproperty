@@ -178,6 +178,17 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
             };
             // </editor-fold>
             
+            $scope.view_listing = function(url)
+            {
+                $('#property_preview_content_iframe').attr('src', url);
+                $("#popup_property_preview").modal("show");
+            };
+            
+            $scope.edit_listing = function(url)
+            {
+                $('#property_preview_content_iframe').attr('src', url);
+                $("#popup_property_preview").modal("show");
+            };
             
             // ------ Variable declare and initialize section --- Start ----------------
             // Initialize information that require base generic API

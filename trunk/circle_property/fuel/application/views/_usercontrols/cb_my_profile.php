@@ -76,5 +76,24 @@
             
         </div>
 </div>
+<div id="popup_property_preview" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <center>
+                <div id="property_preview" class="modal-dialog modal-lg popup">
+                      <div class="modal-header">
+                        <button class="property_info close" data-dismiss="modal" type="button">
+                            <span aria-hidden="true">×</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        
+                    </div>
+                    <div class="modal-body">
+                        <div id="property_preview_content">
+                            <iframe id="property_preview_content_iframe" frameborder="0" seamless 
+                                    width="100%" height="100%"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </center>
+</div>
         <!-- /#page-content-wrapper -->
 <!--        </div>-->

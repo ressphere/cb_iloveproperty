@@ -21,7 +21,7 @@
                 <td>
                      <a href="{{ref_tag_details+data.ref_tag}}">View</a>
                      <span> | </span>
-                     <a href="{{edit_details+data.ref_tag}}">Edit</a>
+                     <a target='_self' href="{{edit_details+data.ref_tag}}">Edit</a>
                 </td>
                 <td>
                     <span>

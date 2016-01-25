@@ -1328,6 +1328,10 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 
             };
             // </editor-fold>
+            $scope.navigate_back = function()
+            {
+                window.history.back();
+            };
             $scope.$watch('country_state.states', function(val, prev){
                 if(val !== prev){
                     // do whatever you need here

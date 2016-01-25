@@ -10,3 +10,10 @@
     visibility: collapse;
 }
 
+#cancel {
+    border-radius: 20px;
+    border-color: #c0c1c5;
+    border-width: 2px;
+    margin-right: 15px;
+}
+

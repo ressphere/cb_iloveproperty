@@ -291,3 +291,7 @@ input:disabled {
     margin-left: 18px
 }
 
+.close {
+    opacity: 1;
+}
+
