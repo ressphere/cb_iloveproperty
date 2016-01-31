@@ -106,16 +106,74 @@ var get_property_home = function() {
                      var distance = Math.sqrt(Math.pow(_x, 2) + Math.pow(_y, 2));
                      return distance;
                 },
+                _get_doughnat_degree2: function(x,y, top_offset, distance) {
+                     var _x = Math.round(x - ($(window).width() / 2.0));
+                     var _y = Math.round(((this._get_height()/2) + top_offset) - y);
+                     var degree = Math.acos(_y/distance);
+                        
+                      if (_x < 0 || _y > 0)
+                      {
+                        degree = (2 * Math.PI - degree );
+                      }
+                      if (degree > 2 * Math.PI)
+                      {
+                        degree = (degree - (2 * Math.PI) );
+                      }
+                      if (degree < 0)
+                      {
+                        degree = ((2 * Math.PI) - degree );
+                      }
+                      return degree;
+                },
                 _get_doughnat_degree: function(x,y, top_offset, distance) {
                      var _x = Math.round(x - ($(window).width() / 2.0));
                      var _y = Math.round(((this._get_height()/2) + top_offset) - y);
-                     var degree = Math.acos(_y/distance);    
+                     var degree = Math.acos(_y/distance);
                           
                       if (_x < 0)
                       {
                         degree = (2 * Math.PI - degree );
                       }
+                      if (degree > 2 * Math.PI)
+                      {
+                        degree = (degree - (2 * Math.PI) );
+                      }
+                      if (degree < 0)
+                      {
+                        degree = ((2 * Math.PI) - degree );
+                      }
                       return degree;
+                },
+                _on_property_service_category_click2: function(ev) {
+                   var top = ev.target.offsetTop + $("#content-top").offset().top + $("#content-top").height() + parseFloat($(".unfixed_content").css("padding-top").replace("px", ""));
+                    var distance = this._get_doughnat_distance(ev.pageX, ev.pageY, top);
+                    //alert(this.myDoughnut.get_doughnutRadius() +','+ this.myDoughnut.get_cutoutRadius()+' : '+distance);
+                    if(distance < this.myDoughnut.get_doughnutRadius() && 
+                            distance > this.myDoughnut.get_cutoutRadius())
+                    {
+                          // Get the data tan
+                          var degree = this._get_doughnat_degree2(ev.pageX, ev.pageY, top, distance);
+                          var arr_angle = this.myDoughnut.get_segmentAngleList();
+                          degree -= Math.PI / 2;
+                          if(degree < 0)
+                          {
+                              degree = (2 * Math.PI) - degree;
+                          }
+                          if(degree > (2 * Math.PI))
+                          {
+                              degree = degree - (2 * Math.PI);
+                          }
+                          for(i=0; i < arr_angle.length; i++ )
+                          {
+                            if(arr_angle[i][0] < degree && arr_angle[i][1] >  degree)
+                            {
+                               window.location.href = this.doughnutData[i].url;
+                               
+                            }
+                               
+                          }
+                          
+                    }
                 },
                 _on_property_service_category_click: function(ev) {
                    var top = ev.target.offsetTop + $("#content-top").offset().top + $("#content-top").height() + parseFloat($(".unfixed_content").css("padding-top").replace("px", ""));
@@ -231,9 +289,17 @@ var get_property_home = function() {
                     };
                     
                     private.myDoughnut = new Chart(document.getElementById("property_service_category").getContext("2d")).Doughnut(private.doughnutData, options);
+                    
                     c.click(function(e){
-//                    
-                        private._on_property_service_category_click(e);
+                        
+                        if (Object.keys(private.categories).length === 2)
+                        {
+                            private._on_property_service_category_click2(e);
+                        }
+                        else
+                        {
+                            private._on_property_service_category_click(e);
+                        }
                     });
                    $(document).mousemove(function(ev){
                       var top = ev.target.offsetTop + $("#content-top").offset().top + $("#content-top").height() + parseFloat($(".unfixed_content").css("padding-top").replace("px", ""));

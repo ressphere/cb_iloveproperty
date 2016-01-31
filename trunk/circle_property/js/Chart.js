@@ -772,34 +772,65 @@ window.Chart = function(context){
                 {
                     return data_angle;
                 };
-                //This will fill the label to the middile of pie
-                function drawTextAlongArc(context, str, centerX, centerY, radius, angle, i) {
+                function drawTextAlongArc2(context, str, centerX, centerY, radius, prev_angle, angle, direction) {
                     //var len = str.length, s;
-                    context.save();
+                   context.save();
                    context.translate(centerX, centerY);
-                   var current_angle = i * angle;
-                   var label_angle = (angle * (i + 1)) + current_angle;
-                   //context.rotate(label_angle / 2);
-                   if(Math.ceil(current_angle) > Math.PI / 2 && Math.ceil(current_angle) < 3 * Math.PI / 2)
+                   
+                   var label_angle = (angle / 2) + prev_angle;
+                   context.rotate(label_angle);
+                   context.translate(radius * 1.4, -16);
+                   context.rotate(direction * Math.PI / 2);
+                   if(direction < 0)
                    {
-                       //alert(i + ":" + current_angle);
-                       //context.rotate(Math.PI / 2);
-                       //alert((label_angle / 2) * 180/Math.PI);
-                       context.rotate(label_angle / 2);
+                      context.translate(-28, 0);
+                   }
+                   
+                    
+                   context.font = config.LabelFontStyle + " " + config.LabelFontSize+"px " + config.LabelFontFamily;
+                    //context.font = 'bold 14pt Calibri'; 
+                   context.fillStyle = '#d9dadb';
+                    //context.fillStyle = 'red';
+                    var strlen = str.length;
+                    var margin = strlen - 5;
+                    if (margin < 0)
+                    {
+                       margin = 0;
+                    }
+                    else
+                    {
+                        margin = strlen + 1;
+                    }
+                    
+                    //var font_margin = config.LabelFontSize / 1.5;
+                    //var min = - font_margin / 2.0;
+      
+                    context.fillText(str, -margin, 0);
+                   
+                    context.restore();
+                }
+                //This will fill the label to the middile of pie
+                function drawTextAlongArc(context, str, centerX, centerY, radius, prev_angle, angle) {
+                    //var len = str.length, s;
+                   context.save();
+                   context.translate(centerX, centerY);
+                   
+                   var label_angle = (angle / 2) + prev_angle;
+                   context.rotate(label_angle);
+                   if(Math.ceil(prev_angle) > Math.PI / 2 && Math.ceil(prev_angle) < 3 * Math.PI / 2)
+                   {
+         
                        context.translate(0, -1 * (radius) - radius / 2.0);
                        context.rotate(180 * Math.PI / 180);
                        context.translate(-1 * radius/4.0, 0);
                    }
                    else
                    {
-                       context.rotate(label_angle / 2);
+                       
                        context.translate(-1 * radius/4.0, -1 * (radius) - radius / 2.0);
-                       //context.translate(radius/3.0,0);
                    }
-                   //context.translate(0, -radius);
-                   //alert(label_angle);
                     
-                    context.font = config.LabelFontStyle + " " + config.LabelFontSize+"px " + config.LabelFontFamily;
+                   context.font = config.LabelFontStyle + " " + config.LabelFontSize+"px " + config.LabelFontFamily;
                     //context.font = 'bold 14pt Calibri'; 
                    context.fillStyle = '#d9dadb';
                     //context.fillStyle = 'red';
@@ -824,9 +855,13 @@ window.Chart = function(context){
 		function drawPieSegments (animationDecimal){
                         
                         
-			var cumulativeAngle = -Math.PI/2,
-			scaleAnimation = 1,
-			rotateAnimation = 1;
+                        var cumulativeAngle = -Math.PI/2;
+                        if (data.length === 2)
+                        {
+                            cumulativeAngle = 0;
+                        }
+			var scaleAnimation = 1;
+			var rotateAnimation = 1;
 			if (config.animation) {
 				if (config.animateScale) {
 					scaleAnimation = animationDecimal;
@@ -835,10 +870,11 @@ window.Chart = function(context){
 					rotateAnimation = animationDecimal;
 				}
 			}
-                        
+                        var prev_angle = 0;
 			for (var i=0; i<data.length; i++){
                                 
 				var segmentAngle = rotateAnimation * ((data[i].value/segmentTotal) * (Math.PI*2));
+                             
                                 ctx.save();
 				ctx.beginPath();
 				ctx.arc(width/2,height/2,scaleAnimation * doughnutRadius,cumulativeAngle,cumulativeAngle + segmentAngle,false);
@@ -849,15 +885,16 @@ window.Chart = function(context){
                                 
 				ctx.fill();
                                 ctx.restore();
-                                drawTextAlongArc(ctx, data[i].Label, width/2,height/2, scaleAnimation * cutoutRadius, segmentAngle, i);
-                                
-                                
-                                /*ctx.font = config.LabelFontStyle + " " + config.LabelFontSize+"px " + config.LabelFontFamily;
-                                ctx.textBaseline = 'middle';
-                                ctx.font.fontcolor('red');
-                                ctx.fillText('haha', 100, 30, 200);*/
-                                
-                                //drawSegmentLabel(ctx.canvas, ctx, i, data, labels);
+                                if(data.length === 2)
+                                {   //console.log(segmentAngle);
+                                    drawTextAlongArc2(ctx, data[i].Label, width/2,height/2, scaleAnimation * cutoutRadius, prev_angle, segmentAngle, (i === 0)? -1 : 1);
+                                    prev_angle += segmentAngle;
+                                }   
+                                else
+                                {
+                                    drawTextAlongArc(ctx, data[i].Label, width/2,height/2, scaleAnimation * cutoutRadius, prev_angle, segmentAngle);    
+                                    prev_angle += segmentAngle;
+                                }  
 				
 				if(config.segmentShowStroke){
 					ctx.lineWidth = config.segmentStrokeWidth;
