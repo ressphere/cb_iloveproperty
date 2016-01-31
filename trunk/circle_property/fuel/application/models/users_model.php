@@ -13,14 +13,24 @@ class users_model extends Base_module_model {
     {
         $fields = parent::form_fields();
         
-        $fields['username']['required']=TRUE;
-        $fields['displayname']['required']=TRUE;
-        $fields['password']['required']=TRUE;
-        $fields['phone']['required']=TRUE;
-        $fields['email']['required']=TRUE;
+        $fields['username']['type']='hidden';
+        $fields['displayname']['type']='hidden';
+        $fields['password']['type']='hidden';
+        $fields['phone']['type']='hidden';
+        $fields['email']['type']='hidden';
+        $fields['new_password_key']['type']='hidden';
+        $fields['new_password_requested']['type']='hidden';
+        $fields['new_email']['type']='hidden';
+        $fields['new_email_key']['type']='hidden';
+        $fields['last_ip']['type']='hidden';
+        $fields['last_login']['type']='hidden';
+        $fields['created']['type']='hidden';
+        $fields['country_id']['type']='hidden';
+        $fields['modified']['type']='hidden';
+        
         $fields['activated']['required']=TRUE;
+        $fields['banned']['required']=TRUE;
         $fields['ban_reason']['required']=TRUE;
-        $fields['country_id']['required']=TRUE;
         $fields['prop_listing_limit']['required']=TRUE;
 
         return $fields;

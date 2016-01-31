@@ -68,6 +68,17 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                         ]
                     },
                     {
+                        id:'street',
+                        name:'Street',
+                        control:'input-word',
+                        category:'sell rent room',
+                        placeholder:'Enter your street name',
+                        values:
+                        [
+                            ''
+                        ]
+                    },
+                    {
                         id:'area',
                         name:'Area',
                         control:'input-text',
@@ -85,17 +96,6 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                         control:'input-text',
                         category:'sell rent room',
                         placeholder:'Enter your poscode number',
-                        values:
-                        [
-                            ''
-                        ]
-                    },
-                    {
-                        id:'street',
-                        name:'Street',
-                        control:'input-word',
-                        category:'sell rent room',
-                        placeholder:'Enter your street name',
                         values:
                         [
                             ''
