@@ -104,10 +104,11 @@ var set_facilities = function($scope, facilities)
 {
   var count = 0;
   $scope.property_information.property_facilities = [[],[],[]];
+  console.log($scope.property_information.property_facilities);
   for(var i = 0; i< facilities.length; i++)
   {
       $scope.property_information.property_facilities[count].push(facilities[i]);
-      if(++count > 3)
+      if(++count >= 3)
       {
           count = 0;
       }
