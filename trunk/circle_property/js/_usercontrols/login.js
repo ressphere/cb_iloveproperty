@@ -185,6 +185,7 @@
        
        $('#login_forgotten_pwd').click(function(event) {
                 event.preventDefault();
+				$("#reset_retrieve").show();
                 $('#forgot_password').modal({
                     'keyboard': false,
                     'backdrop':'static',

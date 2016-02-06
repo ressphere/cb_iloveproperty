@@ -38,6 +38,7 @@ $('#reset_retrieve').click(
                         success: function(html)
                         {
                            var data = jQuery.parseJSON(html);
+						   
                            if(data['msg'] === "Success")
                            {
                              message = "An email has been sent, <BR> please follow the instruction in your email to reset password";
@@ -48,14 +49,9 @@ $('#reset_retrieve').click(
                                 $(forgot_password_id).html(data['msg']);
                            }
                            $('#reset_login').val('');
-						   if(data['msg'] !== 'Password does not match with confirmed password')
-							  {
-							        $('#reset_password button').hide();
-							  }
-						    else
-							{
-							    	$('#reset_password button').prop('disabled', false);
-						    }
+						   $('#reset_password button').prop('disabled', false);
+						   $('#reset_retrieve').hide();
+						   
                                 
                         },
                         error:function (xhr, ajaxOptions, thrownError){

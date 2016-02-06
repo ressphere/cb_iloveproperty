@@ -443,7 +443,7 @@
 					}
 					else
 					{
-						$msg = "<span class='error'>Your ".$data['errors'] ." is not registered in our system.</span>";
+						$msg = "<span class='error'>Your email is not registered in our system.</span>";
 					}
                     $success = FALSE;
                 }
