@@ -140,10 +140,14 @@ var get_base = function() {
              */
             getWsdlBaseUrl: function(private, wsdl_url)
             {
-                var result = "";
                 if (private.wsdl !== null)
                 {
                    return private.wsdl;
+                }
+                private.wsdl = $.jStorage.get("wsdl", "");
+                if(private.wsdl !== "")
+                {
+                    return private.wsdl;
                 }
                 if(wsdl_url === undefined) {
                     wsdl_url = private.wsdl_path;
@@ -158,7 +162,8 @@ var get_base = function() {
                     data: null,
                     success: function(html)
                     {
-                        result = html;
+                        private.wsdl = html;
+                        $.jStorage.set("wsdl", private.wsdl);
                     },
                     error:function (xhr, ajaxOptions, thrownError)
                     {    
@@ -167,7 +172,7 @@ var get_base = function() {
                     }  
                 });
                 
-                return result;
+                return private.wsdl;
             },
             
             /*base_common_API: setLoading
