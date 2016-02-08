@@ -144,8 +144,15 @@ var get_base = function() {
                 {
                    return private.wsdl;
                 }
-                private.wsdl = $.jStorage.get("wsdl", "");
-                if(private.wsdl !== "")
+                if(typeof(Storage) !== "undefined") {
+                    private.wsdl = sessionStorage.wsdl;
+                }
+                else
+                {
+                    private.wsdl = $.cookie("wsdl");
+                }
+                
+                if(typeof(private.wsdl) !== "undefined")
                 {
                     return private.wsdl;
                 }
@@ -163,7 +170,14 @@ var get_base = function() {
                     success: function(html)
                     {
                         private.wsdl = html;
-                        $.jStorage.set("wsdl", private.wsdl);
+                        if(typeof(Storage) !== "undefined") {
+                            sessionStorage.wsdl = private.wsdl;
+                        }
+                        else
+                        {
+                            $.cookie("wsdl", private.wsdl, {expires :1,secure: true});
+                        }
+                        
                     },
                     error:function (xhr, ajaxOptions, thrownError)
                     {    
