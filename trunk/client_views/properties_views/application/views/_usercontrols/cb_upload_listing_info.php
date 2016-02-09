@@ -117,12 +117,12 @@
                             </div>
                            <div ng-switch-when='asking_price' id='{{property_category.id}}'  class="input-group" ng-if="property_category.control === 'input-currency'">
                                <div class="number-div gothic_font">
-                                    <input class="currencyOnly" type='number' ng-model="asking_price.value" min="1"/>
+                                    <input id="txtAskingPrice" class="currencyOnly" ng-model="asking_price.value" maxlength="12" />
                                </div>
                            </div>
                             <div ng-switch-when='monthly_rental' id='{{property_category.id}}'  class="input-group" ng-if="property_category.control === 'input-currency'">
                                <div class="number-div gothic_font">
-                                    <input class="currencyOnly" type='number' ng-model="monthly_rental.value" min="1"/>
+                                    <input class="currencyOnly" id="txtMonthlyRental" ng-model="monthly_rental.value" maxlength="12"/>
                                </div>
                            </div>
                            <div  class="number-div  gothic_font" ng-switch-when='built_up'>
