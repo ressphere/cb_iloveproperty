@@ -281,7 +281,7 @@ var get_property_home = function() {
                        
                     var options = {
                             onAnimationComplete: function() { private._set_doughnut_title(); },
-                            animation : true, 
+                            animation : false, 
                             animateRotate: false,
                             animateScale : true, 
                             LabelFontSize: new_font_size
