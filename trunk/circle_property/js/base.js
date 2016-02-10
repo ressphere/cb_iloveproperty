@@ -808,6 +808,30 @@ var get_base = function() {
                
                var base = new String(str).substring(last_index + 1);
                return base;
+            },
+            set_data:function(private, key, value)
+            {
+                if(typeof(jStorage) !== "undefined" && 
+                        typeof(Storage) !== "undefined") {
+                   $.jStorage.set(key, value);
+                }
+                else
+                {
+                    $.cookie(key, value, {expires :1/24,secure: true});
+                }
+            },
+            get_data:function(private, key)
+            {
+                var data = null;
+                if(typeof(jStorage) !== "undefined" && 
+                        typeof(Storage) !== "undefined") {
+                        data = $.jStorage.get(key, null);
+                }
+                if(data === null)
+                {
+                    data = $.cookie(key);
+                }
+                return data;
             }
             // ------- Base Header and Footer Features --- End -----------
             

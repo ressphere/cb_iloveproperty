@@ -307,13 +307,7 @@ var get_property_home = function() {
                       var distance = private._get_doughnat_distance(ev.pageX, ev.pageY, top);
 
                       var c = $("#property_service_category"); 
-                     //var _x = ev.pageX;
-                      //var _y = ev.pageY;
-                      //_x = Math.round(_x - ($(window).width() / 2.0));
-                      //_y = Math.round(((private._get_height()/2) + top) - _y);
-                      //distance = Math.sqrt(Math.pow(_x,2) + Math.pow(_y,2));
-                      //$("#log").text("x: " + _x + " y: " + _y +" outer radius: " + private.myDoughnut.get_doughnutRadius() +" inner radius: "+private.myDoughnut.get_cutoutRadius() + " distance:" + _distance); 
-                      //$("#log").text("x: " + _x + " y: " + _y +" outer radius: " + private.myDoughnut.get_doughnutRadius() +" inner radius: "+private.myDoughnut.get_cutoutRadius() + " distance:" + distance); 
+              
                       if(distance < private.myDoughnut.get_doughnutRadius() && 
                             distance > private.myDoughnut.get_cutoutRadius())
                       {
@@ -507,6 +501,7 @@ var get_property_home = function() {
                 {
                     private.fixed_currency_from = fixed_currency_from;
                 }
+                
                 
             }
         };
