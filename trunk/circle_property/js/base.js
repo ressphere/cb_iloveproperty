@@ -202,6 +202,30 @@ var get_base = function() {
                 $loading_html = '<center><img src="'+base_path+private.image_loader+'" id="loading-img" alt="Please Wait"/></center>';
                 $(id).html($loading_html);
             },
+			set_data:function(private, key, value)
+            {
+                if(typeof(Storage) !== "undefined") {
+                   sessionStorage[key] = value;
+				   
+                }
+                else
+                {
+                    $.cookie(key, value, {expires :1,secure: true});
+					
+                }
+            },
+            get_data:function(private, key)
+            {
+                var data = null;
+                if(typeof(Storage) !== "undefined") {
+                        data = sessionStorage[key];
+                }
+                if(data === null)
+                {
+                    data = $.cookie(key);
+                }
+                return data;
+            },
                     
             /*base_common_API: generateUUID
              * Random generate an uniqu HTML ID to avoid conflic
@@ -535,22 +559,32 @@ var get_base = function() {
                 this.setWSDL();
                 var base_path = private.wsdl;
                 this.setLoading(id);
-                $.ajax
-                ({
-                    url: base_path + private.register_form,
-                    type: 'POST',
-                    data: null,
-		    timeout: 3000000,
-                    success: function(html)
-                    {
-                        $(id).html(html);
-                    },
-                    error:function (xhr, ajaxOptions, thrownError)
-                    {
-                            window.console&&console.log(xhr.status.toString());
-                            window.console&&console.log(xhr.statusText);
-                    }  
-                });
+				var register_html = this.get_data("register");
+				if(typeof(register_html) !== "undefined")
+				{
+					$(id).html(register_html);
+				}
+				else
+				{
+				    var sender = this;
+					$.ajax
+					({
+						url: base_path + private.register_form,
+						type: 'POST',
+						data: null,
+						timeout: 3000000,
+						success: function(html)
+						{
+							$(id).html(html);
+							sender.set_data("register", html);
+						},
+						error:function (xhr, ajaxOptions, thrownError)
+						{
+								window.console&&console.log(xhr.status.toString());
+								window.console&&console.log(xhr.statusText);
+						}  
+					});
+				}
             },
             
             /*
@@ -565,24 +599,33 @@ var get_base = function() {
                 this.setWSDL();
                 var base_path = private.wsdl;
                 this.setLoading(id);
-                $.ajax
-                ({
-                    url: base_path + private.enter_form,
-                    type: 'POST',
-                    async:false,
-                    timeout: 3000000,
-                    data: null,
-                    success: function(html)
-                    {
-                        $(id).html(html);
-                        //$.getRegister('register');
-                    },
-                    error:function (xhr, ajaxOptions, thrownError)
-                    {
+				var login_html = this.get_data("login");
+				if(typeof(login_html) !== "undefined")
+				{
+					$(id).html(login_html);
+				}
+				else
+				{
+					var sender = this;
+					$.ajax
+					({
+						url: base_path + private.enter_form,
+						type: 'POST',
+						async:false,
+						timeout: 3000000,
+						data: null,
+						success: function(html)
+						{
+							$(id).html(html);
+							sender.set_data("login", html);
+						},
+						error:function (xhr, ajaxOptions, thrownError)
+						{
                             window.console&&console.log(xhr.status.toString());
                             window.console&&console.log(xhr.statusText);
-                    }  
-                });
+						}  
+					});
+				}
                 //return return_html;
             },
             
@@ -595,13 +638,22 @@ var get_base = function() {
              */
             getLogout: function(private, id){
                 this.setWSDL();
-                //alert(private.wsdl);
+                
                 var base_path = private.wsdl;
                 this.setLoading(id);
                 senddata = null;
                 url = base_path + private.exit_form;
-                this.callServer(id, url, senddata);
-                //return return_html;
+				var logout_html = this.get_data("logout");
+				if(typeof(logout_html) !== 'undefined')
+				{
+					$(id).html(logout_html);
+				}
+				else
+				{
+					this.callServer(id, url, senddata);
+					this.set_data("logout", $(id).html());
+				}
+                
             },
             
             /*
@@ -616,23 +668,33 @@ var get_base = function() {
                 this.setWSDL();
                 var base_path = private.wsdl;
                 this.setLoading(id);
-                $.ajax
-                ({
-                    url: base_path + private.forgot_password,
-                    type: 'POST',
-                    data: null,
-		    timeout: 3000000,
-                    success: function(html)
-                    {
-                        $(id).html(html);
-                    },
-                    error:function (xhr, ajaxOptions, thrownError)
-                    {
-                            window.console&&console.log(xhr.status.toString());
-                            window.console&&console.log(xhr.statusText);
-                    }  
-                });
-                //return return_html;
+				var forgot_html = this.get_data("forgot");
+				if(typeof(forgot_html) !== 'undefined')
+				{
+					$(id).html(forgot_html);
+				}
+				else
+				{
+					var sender = this;
+					$.ajax
+					({
+						url: base_path + private.forgot_password,
+						type: 'POST',
+						data: null,
+						timeout: 3000000,
+						success: function(html)
+						{
+							$(id).html(html);
+							sender.set_data("forgot", html);
+							
+						},
+						error:function (xhr, ajaxOptions, thrownError)
+						{
+								window.console&&console.log(xhr.status.toString());
+								window.console&&console.log(xhr.statusText);
+						}  
+					});
+				}
             },
             
             /*
@@ -808,30 +870,6 @@ var get_base = function() {
                
                var base = new String(str).substring(last_index + 1);
                return base;
-            },
-            set_data:function(private, key, value)
-            {
-                if(typeof(jStorage) !== "undefined" && 
-                        typeof(Storage) !== "undefined") {
-                   $.jStorage.set(key, value);
-                }
-                else
-                {
-                    $.cookie(key, value, {expires :1/24,secure: true});
-                }
-            },
-            get_data:function(private, key)
-            {
-                var data = null;
-                if(typeof(jStorage) !== "undefined" && 
-                        typeof(Storage) !== "undefined") {
-                        data = $.jStorage.get(key, null);
-                }
-                if(data === null)
-                {
-                    data = $.cookie(key);
-                }
-                return data;
             }
             // ------- Base Header and Footer Features --- End -----------
             
