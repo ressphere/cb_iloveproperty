@@ -59,25 +59,12 @@ $(document).ready(
         };
     
         var objHome = $.makeclass(home);
-        
-        var waitForFinalEvent = (function () {
-             var timers = {};
-              return function (callback, ms, uniqueId) {
-                if (!uniqueId) {
-                  uniqueId = "Don't call this twice without a uniqueId";
-                }
-                if (timers[uniqueId]) {
-                  clearTimeout (timers[uniqueId]);
-                }
-                timers[uniqueId] = setTimeout(callback, ms);
-              };
-        })();
         $( window ).resize(function(){
             var objBase = $.makeclass(get_base());
             waitForFinalEvent(function() {
                 objBase.set_footer_position();
-		delete objBase;
-                 jQuery('[data-spy="scroll"]').each(function () {
+				delete objBase;
+                jQuery('[data-spy="scroll"]').each(function () {
                     var $spy = jQuery(this).scrollspy('refresh')
                   });
                 }, 100, objBase.generateUUID());

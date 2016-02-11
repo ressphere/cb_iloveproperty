@@ -873,10 +873,63 @@ var get_base = function() {
 /*
  * To contribute initial load page animation while pocess HTML printing
  */
+var waitForFinalEvent = (function () {
+     var timers = {};
+      return function (callback, ms, uniqueId) {
+        if (!uniqueId) {
+          uniqueId = "Don't call this twice without a uniqueId";
+        }
+        if (timers[uniqueId]) {
+          clearTimeout (timers[uniqueId]);
+        }
+        timers[uniqueId] = setTimeout(callback, ms);
+      };
+})();
+
+var  getScrollBarWidth = function() {
+  var inner = document.createElement('p');
+  inner.style.width = "100%";
+  inner.style.height = "200px";
+
+  var outer = document.createElement('div');
+  outer.style.position = "absolute";
+  outer.style.top = "0px";
+  outer.style.left = "0px";
+  outer.style.visibility = "hidden";
+  outer.style.width = "200px";
+  outer.style.height = "150px";
+  outer.style.overflow = "hidden";
+  outer.appendChild (inner);
+
+  document.body.appendChild (outer);
+  var w1 = inner.offsetWidth;
+  outer.style.overflow = 'scroll';
+  var w2 = inner.offsetWidth;
+  if (w1 === w2) w2 = outer.clientWidth;
+
+  document.body.removeChild (outer);
+
+  return (w1 - w2);
+};
+var adjust_menu_size = function()
+{
+    console.log("body: " + $(".wrapper").height());
+    console.log("window: " + $(window).height());
+    if($(".wrapper").height() > $(window).height())
+    {
+        var ratio =  $(window).width() - getScrollBarWidth();
+        $('#main_content').css("width",ratio);
+    }
+    else
+    {
+        $('#main_content').css("width","100%");
+    }  
+};
 $(window).load
 (
     function()
     {
+        
         $('body').css("opacity", "1");
         $('body').removeClass('animated fadeOut');
         $('body').addClass('animated fadeIn');
@@ -887,8 +940,12 @@ $(window).load
            $.jStorage.deleteKey("init_login");
         }
         $('.system_logout_group').removeClass('active');
+        adjust_menu_size();
     }
 );
+
+$(window).resize(function(){adjust_menu_size();});
+ 
 
 /*
  * To contribute page navigate away animation

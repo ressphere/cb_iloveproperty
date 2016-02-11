@@ -513,19 +513,19 @@ var measurement_type_change_click = function()
         $("#popup_property_measurement").modal('show');  
     };
 var StaticHomeObject = (function () {
-    var objHome;
- 
-    function createHomeInstance() {
-        var objHome = $.makeclass(get_property_home());
-        return objHome;
-    }
- 
-    return {
-        getInstance: function () {
-            if (!objHome) {
-                objHome = createHomeInstance();
-            }
+        var objHome;
+
+        function createHomeInstance() {
+            var objHome = $.makeclass(get_property_home());
             return objHome;
         }
-    };
+
+        return {
+            getInstance: function () {
+                if (!objHome) {
+                    objHome = createHomeInstance();
+                }
+                return objHome;
+            }
+        };
 })();
