@@ -913,8 +913,6 @@ var  getScrollBarWidth = function() {
 };
 var adjust_menu_size = function()
 {
-    console.log("body: " + $(".wrapper").height());
-    console.log("window: " + $(window).height());
     if($(".wrapper").height() > $(window).height())
     {
         var ratio =  $(window).width() - getScrollBarWidth();
