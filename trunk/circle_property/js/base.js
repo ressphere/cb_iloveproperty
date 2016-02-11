@@ -939,6 +939,14 @@ $(window).load
         }
         $('.system_logout_group').removeClass('active');
         adjust_menu_size();
+        $('.modal').on('show.bs.modal', function () {
+            setTimeout( function() {$('body').css('overflow', 'hidden');}, 100 );
+            
+        });
+        
+        $('.modal').on('hide.bs.modal', function () {
+            $('body').css('overflow', 'auto');
+        });
     }
 );
 
