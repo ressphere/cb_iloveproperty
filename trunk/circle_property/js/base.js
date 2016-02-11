@@ -641,18 +641,10 @@ var get_base = function() {
                 
                 var base_path = private.wsdl;
                 this.setLoading(id);
-                senddata = null;
-                url = base_path + private.exit_form;
-				var logout_html = this.get_data("logout");
-				if(typeof(logout_html) !== 'undefined')
-				{
-					$(id).html(logout_html);
-				}
-				else
-				{
-					this.callServer(id, url, senddata);
-					this.set_data("logout", $(id).html());
-				}
+                var senddata = null;
+                var url = base_path + private.exit_form;
+                
+                this.callServer(id, url, senddata);
                 
             },
             

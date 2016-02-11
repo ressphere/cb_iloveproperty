@@ -295,3 +295,6 @@ input:disabled {
     opacity: 1;
 }
 
+#system_logout {
+    cursor: pointer;
+}

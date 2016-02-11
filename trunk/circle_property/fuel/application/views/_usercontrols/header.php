@@ -59,7 +59,7 @@
                                         My Profile</a>
                             </li>
                             <li role="presentation" class="system_logout_group">
-                                    <a role="menuitem" tabindex="-1" id="system_logout" data-toggle="modal" data-target="#popup_logout" href="#">Logout</a>
+                                    <a role="menuitem" tabindex="-1" id="system_logout" data-toggle="modal">Logout</a>
                             </li>
                             
                             

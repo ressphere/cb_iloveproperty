@@ -5,7 +5,7 @@ $('#system_logout').click(
                     var objBase = $.makeclass(get_base());
                     objBase.invokeLogout('#logout_body');
                     $('.logout_close').css('display', 'none');
-                    
+                    $('#popup_logout').modal('show');
                 }
  );
  $('#logout_body').bind('DOMNodeInserted', function(e) {
