@@ -1,12 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require_once 'properties_base.php';
-class properties_preview extends properties_base {
+class properties_preview_rent extends properties_base {
    
    function __construct()
    {
        // Preload necessary
         parent::__construct();
-        $this->set_action("sale");
+        $this->set_action("rent");
 	$this->SEO_Tags("Ressphere Real Estate (Property) Preview Listing");
         $this->set_title("Ressphere Properties Listing Preview");
    }
@@ -32,7 +32,7 @@ class properties_preview extends properties_base {
    protected function load_view()
    {
        // Page content
-       $this->extemplate->write_view('contents', '_usercontrols/cb_preview_listing_info',array() ,TRUE);
+       $this->extemplate->write_view('contents', '_usercontrols/cb_preview_listing_info_rent',array() ,TRUE);
        $this->extemplate->render();
    }
    protected function page_js_css()
@@ -55,11 +55,9 @@ class properties_preview extends properties_base {
        $this->extemplate->add_js('js/property_preview.js');
        $this->extemplate->add_js('js/property_header.js');
        $this->extemplate->add_css(base_url() . 'css/properties_preview.css', 'link', FALSE, FALSE);
-       
-       
-       
    }
    
    
 }
 ?>
+

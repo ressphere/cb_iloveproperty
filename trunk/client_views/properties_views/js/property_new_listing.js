@@ -1057,7 +1057,9 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 
                 var senddata = "listing_information=" + JSON.stringify(listing);
                 
-                var url = objProperty.getBaseUrl() + "index.php/properties_preview";
+		var url = (service_type === "SELL")?objProperty.getBaseUrl() + "index.php/properties_preview":
+				objProperty.getBaseUrl() + "index.php/properties_preview_rent";
+				
                 //window.openDialog(url, "preview", "preview", JSON.stringify(listing));
                 $.jStorage.set("preview_data", JSON.stringify(listing));
                 $('#property_preview_content_iframe').attr('src', url);
