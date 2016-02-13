@@ -219,8 +219,8 @@ searchrst_information.controller("FilterSearchHighLightCtrl", function($scope, $
     var sidebar_positioning = function()
     {
         var toolbar_height = $(".navbar").height();
-        var footer_height = $("#bottom_footer").height();
-        var new_height = $(this).height() - toolbar_height - footer_height;
+        //var footer_height = $("#bottom_footer").height();
+        var new_height = $(this).height() - toolbar_height;
         $('#sidebar-wrapper, .sidebar_content').height(new_height);
         $('#sidebar-wrapper, .sidebar_content, .sidebar_toggle').css('top', toolbar_height.toString() + "px");
     };

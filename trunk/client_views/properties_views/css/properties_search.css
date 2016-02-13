@@ -547,3 +547,16 @@ html, body {
     border-bottom-right-radius: 10px;
     border-left: none;
 }
+
+
+#sidebar-wrapper {
+    background-color: white
+}
+
+@media (min-width: 768px) {
+    .sidebar_toggle {
+        width: auto;
+        left: 280px;
+        z-index: 100;
+    }
+}
