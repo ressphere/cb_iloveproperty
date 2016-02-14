@@ -34,7 +34,7 @@ class properties_sell extends properties_base {
            }
            else
            {
-             show_error($this->get_upload_limit_reached("Listing limits(max:3) exceeded !!!. Please remove existing listings from your profile if you would like to create a new listing."));
+             show_error($this->get_upload_limit_reached("Listing limits(max:3) exceeded !!!. Please remove existing listings from your profile if you would like to create a new listing."),403,"");
            }
       }
       else
