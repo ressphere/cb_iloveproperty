@@ -284,7 +284,9 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
         }
         else
         {
-            alert("no checkbox has been selected!");$scope.delete_btn = false;
+			$("#general_info_content").html("no checkbox has been selected!");
+			$("#popup_general_info").modal('show');
+            $scope.delete_btn = false;
         }
        };
     
