@@ -47,8 +47,16 @@
                             <?php
                                 foreach($services as $service)
                                 {
-                                    echo "<li>";
-                                        echo '<a class="page-scroll" target="_self" href="'.$service[2].'">'.$service[0].'</a>';
+                                    
+                                    if ($service[2] === "not ready") {
+                                        echo "<li class='disabled'>";
+                                    }
+                                    else
+                                    {
+                                        echo "<li>";
+                                        
+                                    }
+                                    echo '<a class="page-scroll" target="_self" href="'.$service[2].'">'.$service[0].'</a>';   
                                     echo "</li>";
                                 }
                             ?> 
