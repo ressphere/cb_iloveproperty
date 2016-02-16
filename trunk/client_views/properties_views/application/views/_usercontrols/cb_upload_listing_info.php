@@ -52,7 +52,7 @@
                                  ng-src="{{file.name}}">
                           </div>
                           <div>
-                              <center><textarea maxlength="200" class="form-control photo-desc" maxlength="20" style='resize: none;' cols='35' rows='5' placeholder='Describe Your Photo Here'></textarea></center>
+                              <center><textarea class="form-control photo-desc" maxlength="25" style='resize: none;' cols='35' rows='5' placeholder='Describe Your Photo Here'></textarea></center>
                           </div>
                           <br>
                           <div class="progress progress-striped" ng-class="{active: file.isUploading()}">
