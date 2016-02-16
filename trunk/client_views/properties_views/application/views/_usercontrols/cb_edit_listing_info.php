@@ -31,7 +31,7 @@
                      </div>
                      <div>
                          <center>
-                             <textarea readonly maxlength="200" class="form-control photo-desc" style='resize: none;' cols='35' rows='5'>{{uploaded_file[1]}}</textarea>
+                             <textarea readonly maxlength="200" class="form-control photo-desc" maxlength="50" style='resize: none;' cols='35' rows='5'>{{uploaded_file[1]}}</textarea>
                          </center>
                      </div>
                 </div>
