@@ -2159,7 +2159,7 @@ class base extends CI_Controller {
                 'reason'=>$error,
                 'img404'=>$wsdl.'images/404img.svg',
                 'homepage'=>base_url(),
-                'contactus'=>$wsdl.'#contact_us',
+                'contactus'=>$wsdl.'#contact',
                 'title'=>$title,
             ) ,TRUE);
             $output = $this->extemplate->render(NULL, TRUE);
@@ -2191,7 +2191,7 @@ class base extends CI_Controller {
                 'reason'=>$error,
                 'img403'=>$wsdl.'images/403img.svg',
                 'homepage'=>base_url(),
-                'contactus'=>$wsdl.'#contact_us',
+                'contactus'=>$wsdl.'#contact',
                 'title'=>$title,
                 'nav'=>$home
             ) ,TRUE);

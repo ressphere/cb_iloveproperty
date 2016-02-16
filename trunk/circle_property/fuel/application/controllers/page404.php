@@ -28,7 +28,7 @@ class page404 extends base {
            'reason'=>"Look like something wrong! The page you were looking for is not here",
            'img404'=>$wsdl.'images/404img.svg',
            'homepage'=>$wsdl,
-           'contactus'=>$wsdl.'#contact_us'
+           'contactus'=>$wsdl.'#contact'
        ) ,TRUE);
        
        $this->extemplate->render();

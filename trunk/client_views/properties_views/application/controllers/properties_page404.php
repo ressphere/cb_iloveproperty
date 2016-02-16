@@ -25,7 +25,7 @@ class properties_page404 extends properties_base {
            'reason'=>"Look like something wrong! The page you were looking for is not here",
            'img404'=>$wsdl.'images/404img.svg',
            'homepage'=>base_url(),
-           'contactus'=>$wsdl.'#contact_us'
+           'contactus'=>$wsdl.'#contact'
        ) ,TRUE);
        
        $this->extemplate->render();
