@@ -260,10 +260,10 @@ var get_property_home = function() {
                     
                         private.doughnutData.push(
                         {
-                                        Label: key,
-					value: degree,
-					color:"#808285",
-                                        url: value
+                            Label: key,
+					        value: degree,
+					        color:"#414042",
+                            url: value
                          });
                     });
                     var c = $("#property_service_category");
