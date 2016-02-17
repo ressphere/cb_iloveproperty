@@ -134,10 +134,10 @@ Please browse my website for more of my listings.<br>This user-friendly website 
            $this->extemplate->add_js('js/cb_update_profile.js');
            $this->extemplate->add_css('css/jquery.bxslider.css');
            $this->extemplate->add_css('css/home.css');
-           $this->extemplate->add_css('css/user_profile.css');
            $this->extemplate->add_css('css/_sidebar/simple-sidebar.css');
            $this->extemplate->add_css('css/cb_user_profile_update.css');
            $this->extemplate->add_css('css/_scrolling_nav/scrolling-nav.css');
+           $this->extemplate->add_css('css/user_profile.css');
 
            //cb_change_profile
            $this->extemplate->write_view('contents', '_usercontrols/cb_my_profile',array(

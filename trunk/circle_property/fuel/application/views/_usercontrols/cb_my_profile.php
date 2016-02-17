@@ -20,14 +20,14 @@
              <section id="{{service.id}}" class="{{service.id}}-section section"  ng-repeat="service in services">
                 <div class="container">
                     <div class="row">
-                        <div>
-                            <h1>{{service.name}}</h1>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="section-content">
+						    <div class="row">
+								<div>
+									<h1>{{service.name}}</h1>
+								</div>
+							</div>
                             <div class="row" ng-if="id != 'name' && id !='id' && id !='active' && id != 'information'" ng-repeat="(id, info) in service">
-                                <div class="col-md-2">{{id}}</div>
+								<div class="col-md-2">{{id}}</div>
                                 <div class="col-md-8">
                                    <div id="pwd_change_fields" class="input-group">
                                         <input type="text" value="{{info}}" disabled/>
