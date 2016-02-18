@@ -259,4 +259,8 @@ input:disabled {
     cursor: pointer;
 }
 
+#popup_property_preview {
+    overflow: hidden;
+}
+
 /****End migrate from home css**/
