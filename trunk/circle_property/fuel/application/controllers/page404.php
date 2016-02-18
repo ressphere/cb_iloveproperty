@@ -18,9 +18,10 @@ class page404 extends base {
        $content = "404 Page Not Found";
        $title = "404 Ressphere Page Not Found";
        $this->SEO_Tags($content);
-       $this->set_title($title);
+       
        $wsdl = $this->_get_wsdl_base_url();
        $this->extemplate->set_extemplate('page404_home');
+	   $this->extemplate->write('title', $title);
        $this->extemplate->add_js($wsdl . 'js/jquery.easing.min.js', 'import', FALSE, FALSE);
        $this->extemplate->add_css($wsdl . 'css/404.css', 'link', FALSE, FALSE);
          //cb_change_profile

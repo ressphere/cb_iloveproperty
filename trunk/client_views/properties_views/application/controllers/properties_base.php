@@ -592,7 +592,7 @@ class properties_base extends CI_Controller {
                 'reason'=>$error,
                 'img404'=>$wsdl.'images/404img.svg',
                 'homepage'=>base_url(),
-                'contactus'=>$wsdl.'#contact_us',
+                'contactus'=>$wsdl.'#contact',
                 'title'=>$title,
             ) ,TRUE);
             $output = $this->extemplate->render(NULL, TRUE);
@@ -607,7 +607,7 @@ class properties_base extends CI_Controller {
             
             $this->extemplate->set_extemplate('page403_home');
             #$this->SEO_Tags($content);
-            //$this->extemplate->write('title', $title);
+            $this->extemplate->write('title', $title);
             $this->extemplate->add_js($wsdl . 'js/jquery.min.js', 'import', FALSE, FALSE);
             $this->extemplate->add_js($wsdl . 'js/bootstrap.min.js', 'import', FALSE, FALSE);
             $this->extemplate->add_js($wsdl . 'js/jquery.easing.min.js', 'import', FALSE, FALSE);
@@ -621,7 +621,7 @@ class properties_base extends CI_Controller {
                 'reason'=>$error,
                 'img403'=>$wsdl.'images/403img.svg',
                 'homepage'=>base_url(),
-                'contactus'=>$wsdl.'#contact_us',
+                'contactus'=>$wsdl.'#contact',
                 'title'=>$title,
                 'nav'=>$nav
             ) ,TRUE);

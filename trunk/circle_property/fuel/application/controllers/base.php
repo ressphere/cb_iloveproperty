@@ -2147,7 +2147,7 @@ class base extends CI_Controller {
             
             $this->extemplate->set_extemplate('page404_home');
             #$this->SEO_Tags($content);
-            //$this->extemplate->write('title', $title);
+            $this->extemplate->write('title', $title);
             $this->extemplate->add_js($wsdl . 'js/jquery.min.js', 'import', FALSE, FALSE);
             $this->extemplate->add_js($wsdl . 'js/bootstrap.min.js', 'import', FALSE, FALSE);
             $this->extemplate->add_js($wsdl . 'js/jquery.easing.min.js', 'import', FALSE, FALSE);
@@ -2159,8 +2159,8 @@ class base extends CI_Controller {
                 'reason'=>$error,
                 'img404'=>$wsdl.'images/404img.svg',
                 'homepage'=>base_url(),
-                'contactus'=>$wsdl.'#contact',
-                'title'=>$title,
+                'contactus'=>$wsdl.'#contact'
+                #'title'=>$title,
             ) ,TRUE);
             $output = $this->extemplate->render(NULL, TRUE);
             return $output;
@@ -2172,11 +2172,7 @@ class base extends CI_Controller {
             $wsdl = $this->_get_wsdl_base_url();
             
             $this->extemplate->set_extemplate("page403_home");
-            #$this->SEO_Tags($content);
-            //$this->extemplate->write('title', $title);
-            
-            
-            
+            $this->extemplate->write('title', $title);
             $this->extemplate->add_js($wsdl . "js/bootstrap.min.js", "import", FALSE, FALSE);
             $this->extemplate->add_js($wsdl . "js/jquery.easing.min.js", "import", FALSE, FALSE);
             //$this->extemplate->add_js($wsdl . "js/jstorage.min.js", "import", FALSE, FALSE);

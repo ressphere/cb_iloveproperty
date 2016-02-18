@@ -51,6 +51,7 @@ $extemplate['old_default']['parse_template'] = TRUE;
 
 $extemplate['page404_home']['extemplate'] = 'page404_home';
 $extemplate['page404_home']['regions'] = array(
+'title',
 'content'
 );
 $extemplate['page404_home']['parser'] = 'parser';
@@ -59,6 +60,7 @@ $extemplate['page404_home']['parse_template'] = TRUE;
 
 $extemplate['page403_home']['extemplate'] = 'page404_home';
 $extemplate['page403_home']['regions'] = array(
+'title',
 'content'
 );
 $extemplate['page403_home']['parser'] = 'parser';
