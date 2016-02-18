@@ -32,7 +32,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             'phone': '',
             'user_id':''
         };
-        $scope.temp_ref = "";
+        $scope.temp_ref = "";$scope.back_count = -1;
         // </editor-fold>
         // <editor-fold desc="property information column 3"  defaultstate="collapsed">
         $scope.property_category_3 =
@@ -716,6 +716,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             {
               if( preview_check() === true) 
               {
+			      $scope.back_count -= 1;
                   set_preview();
               }
             };

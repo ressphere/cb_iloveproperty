@@ -32,6 +32,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             'phone': '',
             'user_id':''
         };
+		$scope.back_count = -1;
         $scope.temp_ref = "";
         // </editor-fold>
         // <editor-fold desc="property information column 3"  defaultstate="collapsed">
@@ -732,6 +733,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             {
               if( preview_check() === true) 
               {
+                  $scope.back_count -= 1;			  
                   set_preview();
               }
             };
@@ -1330,7 +1332,8 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             // </editor-fold>
             $scope.navigate_back = function()
             {
-                window.history.back();
+				console.log("$scope.back_count: " + $scope.back_count);
+                history.go($scope.back_count);
             };
             $scope.$watch('country_state.states', function(val, prev){
                 if(val !== prev){
