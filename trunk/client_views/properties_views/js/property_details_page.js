@@ -547,6 +547,8 @@ ng_map_profile.controller('previewPage', function($scope, $controller, ngGPlaces
                     }
                   );
                 }
+                $('#select_property_measurement').val($('.lbl_measurement_type').text());
+                on_change_measurement_type();
             }   
         );
             
