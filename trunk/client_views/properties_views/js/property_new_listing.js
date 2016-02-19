@@ -1455,7 +1455,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             });
             flowFactory.flow.on('uploadStart', function () {
                     $scope.disable_button = 1;
-                    $scope.photo_upload_status = "Processing..."; 
+                    $scope.photo_upload_status = "Processing...";					
                 });
             flowFactory.flow.on('fileAdded', function (file, event) {
                 if(file.size > 5000000)
@@ -1471,7 +1471,8 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
   
             flowFactory.flow.on('complete', function () {
                 $scope.disable_button = 0;
-                $scope.photo_upload_status = ""; 
+                $scope.photo_upload_status = "";
+                $(".progress").hide();
             });
             CKEDITOR.replace( 'remark_editor' );
             $scope.$apply();
