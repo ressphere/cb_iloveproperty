@@ -907,9 +907,16 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     }
                 }
             };
+            var set_all_ticks = function()
+            {
+                alert("set_all_ticks with asterick");
+                $('.feedback').addClass('glyphicon-ok');
+                $('.feedback').removeClass('glyphicon-remove');
+                $('.feedback').removeClass('glyphicon-asterisk');
+                error_ids = [];
+            };
             var clear_errors = function()
             {
-                
                 for(var i = 0; i < error_ids.length; i++ )
                 {
                     $('.'+error_ids[i]+'-feedback').removeClass('glyphicon-ok');
@@ -1624,6 +1631,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             });
 
             CKEDITOR.replace( 'remark_editor' );
+            set_all_ticks();
             $scope.$apply();
             
      });
