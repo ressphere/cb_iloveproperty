@@ -167,7 +167,7 @@ class properties_base extends CI_Controller {
     private function build_footer()
     {
         // #Todo - Change this to database storing
-        $footers["Sitemap"] = base_url();
+        $footers["Sitemap"] = base_url() . "sitemap.xml";
         $footers["About Us"] = $this->_get_wsdl_base_url() . '#about';
         $footers["Contact Us"] = $this->_get_wsdl_base_url() . '#contact';
         

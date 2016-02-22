@@ -95,7 +95,7 @@ class base extends CI_Controller {
         //$this->tabs["Home"] = $this->session->userdata('client_base_url');
         $this->footers["About Us"] = base_url() . '#about';
         $this->footers["Contact Us"] = base_url() . '#contact';
-        $this->footers["Sitemap"] = base_url();
+        $this->footers["Sitemap"] = base_url() . "sitemap.xml";
     }
     
      private function load_country_location()
