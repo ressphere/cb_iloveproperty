@@ -128,7 +128,7 @@
                                 <div class="col-md-6 {{detail.category}} column gothic_font">
                                     <span id="{{detail.id}}">{{detail.value}}</span>&nbsp;
                          
-                                </div><br><br>
+                                </div><br><br><br>
                             </div>
                         </div>
                         <div class="col-md-6 column gothic_font">
@@ -140,7 +140,7 @@
                                 </div>
                                 <div class="col-md-6 {{detail.category}} column gothic_font">
                                     <span id="{{detail.id}}">{{detail.value}}</span>
-                                </div><br><br>
+                                </div><br><br><br>
                             </div>
                         </div>
                         
