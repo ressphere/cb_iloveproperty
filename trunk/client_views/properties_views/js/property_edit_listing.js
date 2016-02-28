@@ -240,7 +240,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     values:
                     [
                         'Property For Sale',
-                        'Property For Rent',
+                        'Property For Lease',
                         'Room To Let'
                     ]
                 },
@@ -1420,7 +1420,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 }
                 else if($scope.property_information.details[0][0].value === "RENT")
                 {
-                    document.getElementById('property_type').value = "Property For Rent";
+                    document.getElementById('property_type').value = "Property For Lease";
                 }
                 else if($scope.property_information.details[0][0].value === "ROOM")
                 {
@@ -1477,7 +1477,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 
                 $scope.mapping = {
                   'Property For Sale':'sell',
-                  'Property For Rent':'rent',
+                  'Property For Lease':'rent',
                   'Room To Let':'room'
               };    
             };

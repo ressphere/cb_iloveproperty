@@ -460,7 +460,7 @@ ng_map_profile.controller('previewPage', function($scope, $controller, ngGPlaces
                        case "sell":
                            return "Property For Sell";
                        case "rent":
-                           return "Property For Rent";
+                           return "Property For Lease";
                        case "room":
                            return "Room To Let";
                        default:
