@@ -217,3 +217,9 @@
    display: none;
 }
 
+@media (max-width: 990px) {
+    .g-plus, .twitter, .fb {
+        margin-bottom: 20px;
+    }
+}
+
