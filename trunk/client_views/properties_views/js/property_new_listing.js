@@ -214,7 +214,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     values:
                     [
                         'Property For Sale',
-                        'Property For Rent',
+                        'Property For Lease',
                         //'Room To Let'
                     ]
                 },
@@ -1353,7 +1353,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 
                 $scope.mapping = {
                   'Property For Sale':'sell',
-                  'Property For Rent':'rent',
+                  'Property For Lease':'rent',
                   'Room To Let':'room'
               };    
             };
