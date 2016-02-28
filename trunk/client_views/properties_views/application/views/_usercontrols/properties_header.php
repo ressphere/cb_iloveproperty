@@ -63,8 +63,8 @@
     <ul class="nav navbar-nav navbar-center header_menu">
             <li><a class="state" id="buy" target = "_top">BUY</a></li>
             <li><a class="state" id="rent" target = "_top">RENT</a></li>
-            <li><a class="state" id="lease" target = "_top">LEASE</a></li>
             <li><a class="state" id="sell" target = "_top">SELL</a></li>
+            <li><a class="state" id="lease" target = "_top">LEASE</a></li>
             <!-- 
             temporary disable it until we support them.
             <li><a class="state_disable" id="launch" target = "_top">LAUNCH</a></li>
