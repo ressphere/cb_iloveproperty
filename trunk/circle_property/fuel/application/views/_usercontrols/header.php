@@ -6,7 +6,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-    </button> <a class="navbar-brand" href="#page-top">
+    </button> <a class="navbar-brand" href="<?=base_url()?>" target="_self">
     <img class="header_logo"  alt="<?=$logo_desc?>" src="<?=$logo?>"></a>
     
 </div>				
