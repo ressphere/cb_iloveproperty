@@ -360,6 +360,9 @@
                 
             </div>
             <br><br>
+            <div class="title row clearfix gothic_font">
+                <span>Places Nearby</span>
+            </div>
             <div id ="nearest_places" class="row clearfix">
                 <div role="tabpanel">
                   <!-- Nav tabs -->
