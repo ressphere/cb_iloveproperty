@@ -216,9 +216,19 @@
 {
    display: none;
 }
+.contact_div {
+    margin-bottom: 160px
+}
+
+.facilities_div {
+    min-height: 300px
+}
 
 @media (max-width: 990px) {
     .g-plus, .twitter, .fb {
+        margin-bottom: 20px;
+    }
+    .contact_div {
         margin-bottom: 20px;
     }
 }

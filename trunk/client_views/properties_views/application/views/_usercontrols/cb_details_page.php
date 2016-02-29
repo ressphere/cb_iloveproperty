@@ -36,7 +36,7 @@
 	</div><br>
 	<div class="row clearfix">
 		<div class="col-md-6 column">
-                    <div class="gothic_font row">
+                    <div class="contact_div gothic_font row">
                         <div class="row title">
                             <span class="gothic_bold_font">Please Contact</span>
                         </div>
@@ -84,8 +84,8 @@
                             </div>
                             
                         </div>
-                    </div><br><br><br>
-                    <div class="gothic_font row">
+                    </div>
+                    <div class="social_media_div gothic_font row">
                         <div class="row title">
                             <span class="gothic_bold_font">Social Media</span>
                             
@@ -120,27 +120,27 @@
                     <div class="row information">
                         <br>
                         <div class="col-md-6 column gothic_font">
-                            <div class="row" ng-repeat="detail in property_information.details[0]">
-                                <div class="{{detail.category}} col-md-6">
-                                    <span class="gothic_bold_font" id='lbl_{{detail.id}}'>
+                            <div class="row-fluid" ng-repeat="detail in property_information.details[0]">
+                                <div class="{{detail.category}} span6">
+                                    <span class="span12 gothic_bold_font" id='lbl_{{detail.id}}'>
                                             {{detail.label}}</span>
                                 </div>
-                                <div class="col-md-6 {{detail.category}} column gothic_font">
-                                    <span id="{{detail.id}}">{{detail.value}}</span>&nbsp;
+                                <div class="span6 {{detail.category}} column gothic_font">
+                                    <span id="{{detail.id}}">{{detail.value}}</span>
                          
-                                </div><br><br><br>
+                                </div><br>
                             </div>
                         </div>
                         <div class="col-md-6 column gothic_font">
-                            <div class="row" ng-repeat="detail in property_information.details[1]">
-                                <div class="{{detail.category}} col-md-6">
-                                    <span class="gothic_bold_font" 
+                            <div class="row-fluid" ng-repeat="detail in property_information.details[1]">
+                                <div class="{{detail.category}} span6">
+                                    <span class="span12 gothic_bold_font" 
                                               id='lbl_{{detail.id}}'>
                                             {{detail.label}}</span>
                                 </div>
-                                <div class="col-md-6 {{detail.category}} column gothic_font">
+                                <div class="span6 {{detail.category}} column gothic_font">
                                     <span id="{{detail.id}}">{{detail.value}}</span>
-                                </div><br><br><br>
+                                </div><br>
                             </div>
                         </div>
                         
@@ -173,7 +173,7 @@
                     <div class="row title">
                         <span class="gothic_bold_font">Facilities</span>         
                     </div>
-                    <div class="row information">
+                    <div class="facilities_div row information">
                           <div class="col-md-12">
                             <div class="col-md-4" ng-repeat="property_facility in property_information.property_facilities[0]">
                                 <br><span>{{property_facility}}</span><br><br>
