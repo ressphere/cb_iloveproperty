@@ -228,7 +228,7 @@
        
                                     </div>
                                 </div>
-                                    <div class="row">
+                                <div class="row">
                                     <div class="col-md-12">
                                         <br><span class="gothic_bold_font">Monthly installment:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span ng-bind='property_information.installment'>{{property_information.installment}}</span></span><br><br>
        
