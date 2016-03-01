@@ -120,8 +120,8 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
             var get_user_listing_data = function()
             {
                 var url = ObjBase.getWsdlBaseUrl() + "index.php/base/obtain_user_listing_information";
-                $scope.ref_tag_details = "/cb_iloveproperty/trunk/client_views/properties_views/index.php/properties_details?reference=";
-                $scope.edit_details = "/cb_iloveproperty/trunk/client_views/properties_views/index.php/properties_edit?reference=";
+                $scope.ref_tag_details = "http://localhost/cb_iloveproperty/trunk/client_views/properties_views/index.php/properties_details?reference=";
+                $scope.edit_details = "http://localhost/cb_iloveproperty/trunk/client_views/properties_views/index.php/properties_edit?reference=";
                 $http({
                  method: 'GET',
                  url: url,
