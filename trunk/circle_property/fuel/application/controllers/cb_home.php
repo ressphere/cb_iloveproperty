@@ -112,7 +112,21 @@ class cb_home extends base {
        //$this->extemplate->write('contents', 'contact us');
        //$this->extemplate->render();
    }
-   
+   public function is_page_secure()
+   {
+       if($this->_is_secure_page())
+       {
+           $this->_print("1");
+       }
+       else
+       {
+           $this->_print("0");
+       }
+   }
+   public function check_login_status()
+   {
+        $this->_get_user_id() !== FALSE ?$this->_print("1"):$this->_print("0");   
+   }
    public function index()
    {
        parent::index();
@@ -137,7 +151,7 @@ class cb_home extends base {
                'We always listen to you',
                'textarea'
            )
-);
+        );
        
        $content = "ressphere home search";
        $title = "Welcome to ressphere";
@@ -168,5 +182,7 @@ class cb_home extends base {
        $this->extemplate->render();
       
    }
+   
+  
 }
 ?>

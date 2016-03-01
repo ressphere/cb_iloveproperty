@@ -923,6 +923,39 @@ var adjust_menu_size = function()
         $('#main_content').css("width","100%");
     }  
 };
+
+var auto_check_login_status = function(objBase)
+{
+     
+        var logoutTimeout = setInterval(
+                function()
+                { 
+                    $.ajax
+                    ({
+                        type: "POST",
+                        url: objBase.getWsdlBaseUrl() + 'index.php/cb_home/check_login_status',
+                        async:true,
+                        data: null,
+                        success: function(result)
+                        {
+                            if(result === "0")
+                            {
+                               clearInterval(logoutTimeout);
+                               alert("You are logout from the system. Please re-login again");
+                               window.location.replace(objBase.getBaseUrl());
+                               
+                            }
+                        },
+                        error:function (xhr, ajaxOptions, thrownError)
+                        {    
+                            window.console&&console.log(xhr.status.toString());
+                            window.console&&console.log(xhr.statusText);
+                        }  
+                    });
+                }, 
+        3000);  
+};
+
 $(window).load
 (
     function()
@@ -947,6 +980,27 @@ $(window).load
         $('.modal').on('hide.bs.modal', function () {
             $('body').css('overflow', 'auto');
         });
+        var objBase = $.makeclass(get_base()); 
+        $.ajax
+        ({
+            type: "POST",
+            url: objBase.getWsdlBaseUrl() + 'index.php/cb_home/is_page_secure',
+            async:true,
+            data: null,
+            success: function(result)
+            {
+                if (result === "1")
+                {
+                    auto_check_login_status(objBase);
+                }
+            },
+            error:function (xhr, ajaxOptions, thrownError)
+            {    
+                window.console&&console.log(xhr.status.toString());
+                window.console&&console.log(xhr.statusText);
+            }  
+        });
+        
     }
 );
 

@@ -11,6 +11,7 @@ class properties_sell extends properties_base {
         // Set web related info fro Search Engine
         $this->SEO_Tags("Ressphere Real Estate (Property) Home Page To Sell");
         $this->set_title("Ressphere Properties For Sale");
+        
    }
    
    public function index()
@@ -22,7 +23,7 @@ class properties_sell extends properties_base {
            // check point to disallow user from exceeding its listing limit
            if(properties_upload::is_user_allowed_to_create_new_listing())
            {
-                parent::index();
+                parent::index();$this->session->set_userdata('secure','1');
                 // Preload js and CSS script that not cover by base
                 $this->page_js_css();
                 //fake the value here will link with db in the future to get the uique

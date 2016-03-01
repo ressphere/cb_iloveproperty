@@ -38,6 +38,7 @@ class base extends CI_Controller {
         $this->load_country_short_name();
         $this->load_country_location();
         
+        
     }
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="main entry in protected">
@@ -79,6 +80,7 @@ class base extends CI_Controller {
         $this->extemplate->write('logout_view', $logoutview, TRUE);
         $this->extemplate->write('forgotpass_view', $forgotpassview, TRUE);
         $this->extemplate->write('changepass_view', $changepassview, TRUE);
+        $this->session->set_userdata('secure','0');
     }
     //</editor-fold>
     
@@ -757,6 +759,11 @@ class base extends CI_Controller {
      protected function _is_login( $activated = TRUE)
      {
         return  $this->session->userdata('status') === ($activated ? TRUE : FALSE);
+     }
+     protected function _is_secure_page()
+     {
+        return $this->session->userdata('secure') === "1";
+            
      }
      protected function _get_user_id()
      {

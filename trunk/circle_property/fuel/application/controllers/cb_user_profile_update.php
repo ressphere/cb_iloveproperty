@@ -12,6 +12,7 @@ class cb_user_profile_update extends base {
         $this->load->library("session");
 	$this->load->library("email");
 	$this->load->config('tank_auth', TRUE);
+        
    }
    private function get_specific_data()
    {
@@ -146,7 +147,7 @@ Please browse my website for more of my listings.<br>This user-friendly website 
            ) ,TRUE);
 
            $this->extemplate->render();
-          
+           $this->session->set_userdata('secure','1');
            
        }
        else

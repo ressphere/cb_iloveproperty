@@ -9,12 +9,13 @@ class properties_lease extends properties_sell {
         // Set web related info fro Search Engine
         $this->SEO_Tags("Ressphere Real Estate (Property) Home Page To Let");
         $this->set_title("Ressphere Properties To Let");
+        
    }
    
    public function index()
    {
        // Preload Header and Footer
-       parent::index();
+       parent::index();$this->session->set_userdata('secure','1');
    }
 }
 ?>

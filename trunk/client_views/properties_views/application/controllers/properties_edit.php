@@ -10,6 +10,7 @@ private $property_info_list = NULL;
         // Set web related info fro Search Engine
         $this->SEO_Tags("Ressphere Real Estate (Property) Home Page To Edit");
         $this->set_title("Ressphere Properties To Edit");
+        
    }
    
    public function index()
@@ -34,6 +35,7 @@ private $property_info_list = NULL;
                 $reference = md5(uniqid($user_id, true));
                 $this->session->set_userdata('Reference', $reference);
                 $this->load_view();
+                $this->session->set_userdata('secure','1');
             }
             else
             {

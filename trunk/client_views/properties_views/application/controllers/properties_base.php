@@ -39,7 +39,8 @@ class properties_base extends CI_Controller {
         // Load config at application/config/extemplate.php settings
         // Must be preload frist before everything related to extemplate start
         $this->extemplate->set_extemplate('default');
-		$this->session->set_userdata('client_base_url', base_url());
+	$this->session->set_userdata('client_base_url', base_url());
+        
     }
     
     
@@ -54,6 +55,7 @@ class properties_base extends CI_Controller {
         
         $this->preload_js_css();
         $this->load_prefix_page();
+        $this->session->set_userdata('secure','0');
     }
     
     

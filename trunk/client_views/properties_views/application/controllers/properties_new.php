@@ -8,12 +8,13 @@ class properties_new extends properties_base {
         parent::__construct();
         $this->set_action("new");
         
+        
    }
    
    public function index()
    {
        // Preload Header and Footer
-       parent::index();
+       parent::index();$this->session->set_userdata('secure','1');
        $this->session->set_userdata("action", $this->get_action());
        $this->extemplate->render();
    }

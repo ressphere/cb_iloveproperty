@@ -9,6 +9,7 @@ class properties_preview_rent extends properties_base {
         $this->set_action("rent");
 	$this->SEO_Tags("Ressphere Real Estate (Property) Preview Listing");
         $this->set_title("Ressphere Properties Listing Preview");
+        
    }
    
    public function index()
@@ -19,7 +20,7 @@ class properties_preview_rent extends properties_base {
        {
            $this->allow_build_header = FALSE;
            $this->allow_build_footer = FALSE;
-           parent::index();
+           parent::index();$this->session->set_userdata('secure','1');
            // Preload js and CSS script that not cover by base
            $this->page_js_css();
            $this->load_view();
