@@ -938,7 +938,6 @@ var auto_check_login_status = function(objBase)
                         data: null,
                         success: function(result)
                         {
-                            alert(result);
                             if(result !== "1")
                             {
                                clearInterval(logoutTimeout);
@@ -954,7 +953,7 @@ var auto_check_login_status = function(objBase)
                         }  
                     });
                 }, 
-        30000);  
+        10000);  
 };
 
 $(window).load
