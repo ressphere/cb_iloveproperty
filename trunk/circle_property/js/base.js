@@ -938,7 +938,8 @@ var auto_check_login_status = function(objBase)
                         data: null,
                         success: function(result)
                         {
-                            if(result === "0")
+                            alert(result);
+                            if(result !== "1")
                             {
                                clearInterval(logoutTimeout);
                                alert("You are logout from the system. Please re-login again");
@@ -953,7 +954,7 @@ var auto_check_login_status = function(objBase)
                         }  
                     });
                 }, 
-        3000);  
+        30000);  
 };
 
 $(window).load
