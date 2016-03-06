@@ -137,7 +137,7 @@
                                     
                                     if(exceeded_login === false)
                                     {
-                                        $(id).html("<font color='red'>Exceeded login...</font>");
+                                        $(id).html("<font color='red'>Invalid username or password</font>");
                                     }
                                     else
                                     {
