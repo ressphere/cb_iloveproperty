@@ -126,7 +126,8 @@
                                             {{detail.label}}</span>
                                 </div>
                                 <div class="span6 {{detail.category}} column gothic_font">
-                                    <span id="{{detail.id}}">{{detail.value}}</span>
+                                    <span id="{{detail.id}}" ng-if="detail.id == 'built_up' || detail.id == 'land_area'">{{detail.value | number:2}}</span>
+                                    <span id="{{detail.id}}" ng-if="detail.id != 'built_up' && detail.id != 'land_area'">{{detail.value}}</span>
                          
                                 </div><br>
                             </div>
