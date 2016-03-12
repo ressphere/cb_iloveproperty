@@ -17,6 +17,7 @@ var get_property_home = function() {
             },
             Private:{
                 categories: null,
+                currency_data: [],
                 doughnutData: [],
                 doughnut_size : 400,
                 font_size : 10,
@@ -42,6 +43,11 @@ var get_property_home = function() {
                                 length:4};
                         this.get_currency_subject.notify(obj);
                  },
+                 _invoked_after_getting_your_country: function(currency)
+                {
+                    var currency_info = this.currency_data.pop();
+                    this._currency_updated(currency_info.price, currency_info.from_currency, currency, currency_info.index);
+                },
                 _set_doughnut_title: function()
                 {
                    var c = $('#property_service_category');
@@ -198,7 +204,7 @@ var get_property_home = function() {
                     }
                 }
             },
-            Public:{
+            Public:{         
                addObserver: function ( private, newObserver ) 
                    {
                        private.property_category_subject.observe( newObserver );
@@ -423,50 +429,28 @@ var get_property_home = function() {
 		{
                     
                     var currency = this.get_fav_currency();
+                    var currency_info = {
+                                "index": index,
+                                "price": price,
+                                "from_currency": from_currency
+                            }
+                    
+                    private.currency_data.push(currency_info);
                     
                     if (typeof currency === 'undefined' || currency === null)
                     {
-                        
-                        $.getJSON("http://freegeoip.net/json/", function (data,status,xhr) {
-                             if(status === "success")
-                             {
-                                var country = data.country_name;
-                                switch(country)
-                                {
-                                    case "Malaysia":
-					private.currency = "MYR";
-                                        break;
-                                    case "Singapore":
-					private.currency = "SGD";
-                                        break;
-                                    default:
-                                        private.currency = "USD";
-                                }
-                                
-				private._currency_updated(price, from_currency, private.currency, index);
-                             }
-                             else
-                             {
-                                 $.getJSON("http://www.telize.com/geoip?callback=?",
-                                        function(json) {
-                                            switch(json.country)
-                                            {
-                                                case "Malaysia":
-                                                    private.currency = "MYR";
-                                                    break;
-                                                case "Singapore":
-                                                    private.currency = "SGD";
-                                                    break;
-                                                default:
-                                                    private.currency = "USD";
-                                            }
-                                            private._currency_updated(price, from_currency, private.currency, index);
-	    	
-                                        }
-                                    );
-                             }
-                                
-                         });
+
+                        private.currency = "MYR";
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(this.successGetMyLocation, this.errorGetMyLocation);
+                        }
+                        else
+                        {
+                            
+                            private._currency_updated(price, from_currency, private.currency, index);
+                        }
+ 
+                       
                     }
                 },
                 get_landarea:function(private)

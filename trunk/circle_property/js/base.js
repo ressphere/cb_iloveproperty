@@ -106,7 +106,8 @@ var get_base = function() {
             register_form: null,
             image_loader: null,
             exit_form: null,
-            login_check: null
+            login_check: null,
+            _invoked_after_getting_your_country: null
   
         },
         Public:{
@@ -862,7 +863,61 @@ var get_base = function() {
                
                var base = new String(str).substring(last_index + 1);
                return base;
-            }
+            },
+            successGetMyLocation:  function(private, position) {
+                    var geocoder = new google.maps.Geocoder();
+                    var lat = position.coords.latitude;
+                    var lng = position.coords.longitude;
+                    var latlng = new google.maps.LatLng(lat, lng);
+                    geocoder.geocode({'latLng': latlng}, function(results, status) {
+                        if (status === google.maps.GeocoderStatus.OK) {
+                            var country =  null;
+                            var currency = null;
+                            if (results[1]) {
+                                 for (var i=0; i<results[0].address_components.length; i++) {
+                                    for (var b=0;b<results[0].address_components[i].types.length;b++) {
+                                        if (results[0].address_components[i].types[b] === "country") {
+                                            //this is the object you are looking for
+                                            country= results[0].address_components[i];
+                                            break;
+                                        }
+                                    }
+                                }
+                                switch(country.short_name)
+                                {
+                                    case "MY":
+                                        currency = "MYR";
+                                        break;
+                                    case "SG":
+                                         currency = "SGD";
+                                         break;
+                                    case "US":
+                                        currency = "USD";
+                                        break;
+                                    default:
+                                        currency = "MYR";
+                                }
+
+
+                            } else {
+                              currency = "MYR";
+                            }
+                          }
+                          if(private._invoked_after_getting_your_country)
+                          {
+                              private._invoked_after_getting_your_country(currency);
+                                
+                          }
+                          else
+                          {
+                              console.log("private._invoked_after_getting_your_country is undefined");
+                          }
+                    });
+                },
+
+                errorGetMyLocation: function(private){
+                            private.currency = "MYR";
+                        }
             // ------- Base Header and Footer Features --- End -----------
             
         }
