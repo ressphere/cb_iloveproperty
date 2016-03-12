@@ -46,8 +46,7 @@ var get_property_home = function() {
                  _invoked_after_getting_your_country: function(currency)
                 {
                     var currency_info = this.currency_data.pop();
-                    if (currency_info)
-                        this._currency_updated(currency_info.price, currency_info.from_currency, currency, currency_info.index);
+                    if (currency_info) this._currency_updated(currency_info.price, currency_info.from_currency, currency, currency_info.index);
                 },
                 _set_doughnut_title: function()
                 {
