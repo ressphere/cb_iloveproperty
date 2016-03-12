@@ -433,7 +433,7 @@ var get_property_home = function() {
                                 "index": index,
                                 "price": price,
                                 "from_currency": from_currency
-                            }
+                            };
                     
                     private.currency_data.push(currency_info);
                     
