@@ -124,6 +124,34 @@ class Users extends CI_Model
 		$query = $this->db->get($this->table_name);
 		return $query->num_rows() == 0;
 	}
+        
+        /**
+	 * Check if username is using reserved keyword
+	 *
+	 * @param	string
+	 * @return	bool
+	 */
+	function is_username_reserved_keyword($username)
+	{
+            $result = false;
+            $trimmed_username = explode('@', $username, 2);
+            $reserved_keywords = array("ressphere", 
+                "admin",
+                "ressphere_admin",
+                "ressphere_property",
+                "property_admin",
+                "ressphere_advertisement",
+                "advertisement_admin");
+            
+            foreach ($reserved_keywords as $keyword)
+            {
+                if(strtolower($trimmed_username[0]) == $keyword)
+                {
+                    $result = true;
+                }
+            }
+            return $result;
+	}
 
 	/**
 	 * Check if email available for registering
