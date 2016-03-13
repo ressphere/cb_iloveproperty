@@ -126,14 +126,11 @@ Please browse my website for more of my listings.<br>This user-friendly website 
            $this->SEO_Tags($content);
            $this->set_title($title);
            //$this->load->module_model('home_category_model');
-           $this->extemplate->add_js('js/jquery.bxslider.min.js');
            $this->extemplate->add_js('js/_usercontrols/change_password.js');
-           $this->extemplate->add_js('js/jquery.fitvids.min.js');
            $this->extemplate->add_js('js/_scrolling_nav/scrolling-nav.js');
            $this->extemplate->add_js('js/cb_home.js');
            $this->extemplate->add_js('js/jquery.easing.min.js');
            $this->extemplate->add_js('js/cb_update_profile.js');
-           $this->extemplate->add_css('css/jquery.bxslider.css');
            $this->extemplate->add_css('css/home.css');
            $this->extemplate->add_css('css/_sidebar/simple-sidebar.css');
            $this->extemplate->add_css('css/cb_user_profile_update.css');

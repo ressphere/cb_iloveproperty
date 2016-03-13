@@ -668,6 +668,9 @@ class properties_base extends CI_Controller {
             $this->extemplate->add_js($wsdl . 'js/jquery.min.js', 'import', FALSE, FALSE);
             $this->extemplate->add_js($wsdl . 'js/bootstrap.min.js', 'import', FALSE, FALSE);
             $this->extemplate->add_js($wsdl . 'js/jquery.easing.min.js', 'import', FALSE, FALSE);
+            $this->extemplate->add_js($wsdl . 'js/jStorage.js', 'import', FALSE, FALSE);
+            $this->extemplate->add_js($wsdl . 'js/_utils/jquery.makeclass.min.js', 'import', FALSE, FALSE);
+            $this->extemplate->add_js($wsdl . 'js/base.js', 'import', FALSE, FALSE);
             $this->extemplate->add_js('js/property_upload_reached_limit.js');
             $this->extemplate->add_css($wsdl . 'css/bootstrap.min.css', 'link', FALSE, FALSE);
             $this->extemplate->add_css($wsdl . 'css/404.css', 'link', FALSE, FALSE);

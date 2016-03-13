@@ -37,8 +37,8 @@ $(document).ready(function()
    var uploadListing = StaticUploadReachedLimitObject.getInstance();
    $('#btn_profile').click(function()
        {
-           var wsdl = uploadListing.getWsdlBaseUrl() + 'index.php/cb_user_profile_update/my_profile#Property_Profile';
-           
+           var wsdl = uploadListing.getWsdlBaseUrl() + 'index.php/cb_user_profile_update/my_profile';
+           if(sessionStorage) sessionStorage.profileAction = "Property_Profile";
            window.location.href = wsdl;
        }
     );

@@ -19,6 +19,13 @@ $(document).ready(
               $(this).css('color','black');
           }
        );
+       if(sessionStorage.profileAction)
+       {
+            $("body").animate({
+                    scrollTop: $("#"+sessionStorage.profileAction).offset().top
+            }, 2000);
+            sessionStorage.removeItem("profileAction");
+       }
    }
 );
 
