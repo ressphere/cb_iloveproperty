@@ -212,7 +212,6 @@ ng_map_profile.controller('previewPage', function($scope, $controller, ngGPlaces
         var senddata = "measurement_value="+measurement_value + 
                 "&from_measurement_type=" + from +
                 "&to_measurement_type=" + to;
-        console.log(senddata);
         
         var objHome = StaticHomeObject.getInstance();
         var _url = String.format("{0}index.php/properties_details/get_converted_measurement_value", base_path);
