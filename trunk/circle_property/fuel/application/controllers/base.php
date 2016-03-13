@@ -825,7 +825,7 @@ class base extends CI_Controller {
             $public_key = $this->config->item('recaptcha_public_key', 'tank_auth');
             $register_content["script"] = str_replace('captcha_public_key', $public_key, file_get_contents($js_url));
          
-            $register_content["terms_conditions"] = "#";
+            $register_content["terms_conditions"] = base_url() . "index.php/policy";
             $this->extemplate->write_view('login_dialog', '_usercontrols/register', $register_content, TRUE);
             $register = $this->extemplate->render('',TRUE);
             
