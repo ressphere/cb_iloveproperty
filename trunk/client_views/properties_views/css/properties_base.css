@@ -198,11 +198,15 @@ html, body {
     cursor:pointer;
 }
 
+#txtAskingPrice {
+    width: 100%
+}
+
 .upload_properties input, .form-control, textarea, select {
     color: #666;
     font-family: 'Century Gothic';
-    font-size: 10pt;
-    width: 100%
+    font-size: 10pt
+    
     
 }
 
