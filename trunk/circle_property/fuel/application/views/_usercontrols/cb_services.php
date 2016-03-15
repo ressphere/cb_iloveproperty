@@ -11,14 +11,14 @@
             {
                 if(strpos($details[2], "http://") !== false)
                 {
-                    echo '<div class="icon col-xs-4 col-sm-4 col-md-4">';
+                    echo '<div class="icon col-xs-6 col-sm-4 col-md-4">';
                     echo '<a href="' . $details[2] . '"><img src="'.$details[1].'" alt="'.$details[0].'"></a>';
                     echo '<h4 class="service-heading">'.$details[0].'</h4>';
                     echo '</div>';
                 }
                 else
                 {
-                   echo '<div class="icon col-xs-4 col-sm-4 col-md-4">';
+                   echo '<div class="icon col-xs-6 col-sm-4 col-md-4">';
                    echo '<img src="'.$details[1].'" alt="'.$details[0].'">';
                    echo '<h4 class="service-heading">'.$details[0].'</h4>';
                    echo '</div>';
