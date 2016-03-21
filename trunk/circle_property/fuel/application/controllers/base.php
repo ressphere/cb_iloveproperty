@@ -19,7 +19,7 @@ class base extends CI_Controller {
     protected $countries = NULL;
     protected $country_location = NULL;
     // <editor-fold defaultstate="collapsed" desc="constructor">
-    function __construct($reload_client_url = FALSE)
+    function __construct($reload_client_url = FALSE, $CI = NULL)
     {
 	parent::__construct();
         $this->load->helper("url"); 
@@ -730,21 +730,25 @@ class base extends CI_Controller {
 	 * @param	array
 	 * @return	void
 	 */
-	protected function _send_email($type, $email, &$data)
+        public static function _begin_send_email($type, $email, &$data, $ci = NULL)
+        {
+            //$config['website_name'] = 'ressphere.com';
+            //$config['webmaster_email'] = 'admin@ressphere.com';
+            $website_name = $ci->config->item('website_name', 'tank_auth');
+            $webmaster_email = $ci->config->item('webmaster_email', 'tank_auth');
+           //$CI =& get_instance();
+            //$CI->load->library('email');
+            $ci->email->from($webmaster_email, $website_name);
+            $ci->email->reply_to($webmaster_email, $website_name);
+            $ci->email->to($email);
+            $ci->email->subject($type . " " . $website_name);
+            $ci->email->message($ci->load->view('_email/'.$type.'-html', $data, TRUE));
+            $ci->email->set_alt_message($ci->load->view('_email/'.$type.'-txt', $data, TRUE));
+            return $ci->email->send();
+        }
+	public function _send_email($type, $email, &$data)
 	{
-                //$config['website_name'] = 'ressphere.com';
-                //$config['webmaster_email'] = 'admin@ressphere.com';
-		$website_name = $this->config->item('website_name', 'tank_auth');
-		$webmaster_email = $this->config->item('webmaster_email', 'tank_auth');
-               //$CI =& get_instance();
-                //$CI->load->library('email');
-		$this->email->from($webmaster_email, $website_name);
-		$this->email->reply_to($webmaster_email, $website_name);
-		$this->email->to($email);
-		$this->email->subject($type . " " . $website_name);
-		$this->email->message($this->load->view('_email/'.$type.'-html', $data, TRUE));
-		$this->email->set_alt_message($this->load->view('_email/'.$type.'-txt', $data, TRUE));
-		return $this->email->send();
+                base::_begin_send_email($type, $email, $data, $this);
         
 	}
      protected function _begin_logout()
