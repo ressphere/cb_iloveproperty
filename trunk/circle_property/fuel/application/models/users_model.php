@@ -28,7 +28,7 @@ class users_model extends Base_module_model {
         $fields['last_ip']['type']='hidden';
         $fields['last_login']['type']='hidden';
         $fields['created']['type']='hidden';
-        
+        $fields['oldpassword']['type']='hidden';
         $fields['modified']['type']='hidden';
         
         $fields['displayname']['required']=TRUE;
@@ -43,43 +43,46 @@ class users_model extends Base_module_model {
         return $fields;
     }
     function random_password( $length = 8 ) {
-        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         $password = substr( str_shuffle( $chars ), 0, $length );
         return $password;
     }
     function on_before_validate($values) {
         
-        $this->password_in_clear = $password = $this->random_password();
-        $ci = CI_Controller::get_instance();
-        $hasher = new PasswordHash($ci->config->item('phpass_hash_strength', 'tank_auth'),
-		$ci->config->item('phpass_hash_portable', 'tank_auth'));
-	$hashed_password = $hasher->HashPassword($password);
+        if($values['username'] == "" || $values['username'] == NULL)
+        {
         
-        $values["password"] = $hashed_password;
-        $values["created"] = datetime_now();
-        $values['username'] = trim($values['email']);
+            $this->password_in_clear = $password = $this->random_password();
+            $ci = CI_Controller::get_instance();
+            $ci->load->helper('url');
+            $ci->load->library('session');
+            $ci->load->library('extemplate');
+            $ci->load->library("email");
+            
+            $hasher = new PasswordHash($ci->config->item('phpass_hash_strength', 'tank_auth'),
+                    $ci->config->item('phpass_hash_portable', 'tank_auth'));
+            $hashed_password = $hasher->HashPassword($password);
+
+            $values["password"] = $hashed_password;
+            $values["created"] = datetime_now();
+            $values['username'] = trim($values['email']);
+
+            $values["last_ip"] = $_SERVER['REMOTE_ADDR'];
+       
+            
+            $data = $values;
+            $data['site_name'] = 'http://www.ressphere.com';
+            $data['password'] = $this->password_in_clear;
+            if ($ci->config->item('email_account_details'))
+            {
+              base::_begin_send_email('Welcome to', $data['email'], $data, $ci);
+            }
+        }
         
-        $values["last_ip"] = $_SERVER['REMOTE_ADDR'];
         return parent::on_before_validate($values);
     }
     
-    function on_after_save($values) {
-       $values = parent::on_after_save($values);
-       $ci = CI_Controller::get_instance();
-       $ci->load->helper('url');
-       $ci->load->library('session');
-       $ci->load->library('extemplate');
-       $ci->load->library("email");
-       $data = $values;
-       $data['site_name'] = 'http://www.ressphere.com';
-       $data['password'] = $this->password_in_clear;
-       if ($ci->config->item('email_account_details'))
-       {
-          base::_begin_send_email('Welcome to', $data['email'], $data, $ci);
-       }
-                                        
-       return $values;
-    }
+    
 }
 
 class users_model_record extends Base_module_record {

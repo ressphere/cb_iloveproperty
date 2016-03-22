@@ -78,6 +78,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(100) COLLATE utf8_bin NOT NULL,
   `displayname` varchar(100) COLLATE utf8_bin NOT NULL,
   `password` varchar(255) COLLATE utf8_bin NOT NULL,
+  `oldpassword` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `phone` varchar(200) COLLATE utf8_bin NOT NULL,
   `email` varchar(100) COLLATE utf8_bin NOT NULL,
   `activated` tinyint(1) NOT NULL DEFAULT '1',
@@ -193,4 +194,14 @@ CREATE TABLE IF NOT EXISTS `state_country` (
   FOREIGN KEY (`state_id`) REFERENCES `state`(`id`),
   FOREIGN KEY (`country_id`) REFERENCES `country`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+delimiter //
+CREATE TRIGGER upd_users_pw BEFORE UPDATE ON users
+    FOR EACH ROW
+    BEGIN
+        IF NEW.password != OLD.password THEN
+            SET NEW.oldpassword = OLD.password;
+         END IF;
+    END;//
+delimiter ;
 -- --------------------------------------------------------

@@ -106,7 +106,16 @@ class cb_manage_users extends CI_Model
         }
         
         if($obj->hasProperty("password")){
+            if($users['password'] != NULL || $users['password'] != "")
+            {
+                $users['oldpassword'] = $users['password'];
+            }
+            else 
+            {
+                $users['oldpassword'] = $users_data->{"password"};
+            }
             $users['password'] = $users_data->{"password"};
+            
         }
         
         if($obj->hasProperty("name")){

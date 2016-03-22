@@ -744,11 +744,12 @@ class base extends CI_Controller {
             $ci->email->subject($type . " " . $website_name);
             $ci->email->message($ci->load->view('_email/'.$type.'-html', $data, TRUE));
             $ci->email->set_alt_message($ci->load->view('_email/'.$type.'-txt', $data, TRUE));
-            return $ci->email->send();
+            $result = $ci->email->send();
+            return $result;
         }
 	public function _send_email($type, $email, &$data)
 	{
-                base::_begin_send_email($type, $email, $data, $this);
+                return base::_begin_send_email($type, $email, $data, $this);
         
 	}
      protected function _begin_logout()
