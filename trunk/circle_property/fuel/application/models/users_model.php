@@ -8,11 +8,12 @@ require_once(APPPATH . 'controllers/base.php');
 require_once(APPPATH . 'controllers/_utils/GeneralFunc.php');
 class users_model extends Base_module_model {
     private $password_in_clear = NULL;
+    public $foreign_keys = array('country_id' => 'country_model');
     public function __construct()
     {
         parent::__construct('users');
     }
-    
+   
     function form_fields($values = array()) 
     {
         $fields = parent::form_fields();
