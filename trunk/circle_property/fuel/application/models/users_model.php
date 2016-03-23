@@ -9,6 +9,7 @@ require_once(APPPATH . 'controllers/_utils/GeneralFunc.php');
 class users_model extends Base_module_model {
     private $password_in_clear = NULL;
     public $foreign_keys = array('country_id' => 'country_model');
+    public $boolean_fields = array('agent', 'activated','banned');
     public function __construct()
     {
         parent::__construct('users');
