@@ -59,6 +59,7 @@ class users_model extends Base_module_model {
             $ci->load->library('session');
             $ci->load->library('extemplate');
             $ci->load->library("email");
+            $ci->load->config('tank_auth', TRUE);
             
             $hasher = new PasswordHash($ci->config->item('phpass_hash_strength', 'tank_auth'),
                     $ci->config->item('phpass_hash_portable', 'tank_auth'));
