@@ -27,7 +27,7 @@
 								</div>
 							</div>
                             <div class="row" ng-if="id != 'name' && id !='id' && id !='active' && id != 'information'" ng-repeat="(id, info) in service">
-								<div class="col-md-2">{{id}}</div>
+				<div class="col-md-2">{{id}}</div>
                                 <div class="col-md-8">
                                    <div id="pwd_change_fields" class="input-group">
                                         <input type="text" value="{{info}}" disabled/>
@@ -41,10 +41,10 @@
                                 <div class="tabbable" id="tabs-123805">
                                     <ul class="nav nav-tabs">
                                         <li class="active" ng-if="detail.active == 'true'" ng-repeat='(detail_id, detail) in info'>
-                                            <a href="#{{detail_id}}" data-toggle="tab">{{detail_id}}</a>
+                                            <a href="#{{detail_id}}" data-toggle="tab">{{detail_id}}&nbsp;<span class="badge" ng-if="detail_id == 'listings'">{{vailable_listing_count}}</span></a>
                                         </li>
                                         <li ng-if="detail.active == 'false'" ng-repeat='(detail_id, detail) in info'>
-                                            <a href="#{{detail_id}}" data-toggle="tab">{{detail_id}}</a>
+                                            <a href="#{{detail_id}}" data-toggle="tab">{{detail_id}}&nbsp;<span class="badge" ng-if="detail_id == 'listings'">{{vailable_listing_count}}</span></a>
                                         </li>
                                     </ul>
                                     <div  class="tab-content">

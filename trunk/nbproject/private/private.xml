@@ -1,4 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/client_views/properties_views/application/controllers/_utils/properties_upload.php</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/circle_property/fuel/application/controllers/main.php</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/circle_property/fuel/application/controllers/_unittest/CB_Member_unit_test.php</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/client_views/properties_views/application/controllers/_utils/GeneralFunc.php</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/client_views/properties_views/application/views/_usercontrols/cb_view_property_summary.php</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/circle_property/js/ng-flow.js</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/client_views/properties_views/application/views/cb_new_property.php</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/circle_property/fuel/application/controllers/cb_home.php</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/circle_property/fuel/application/config/MY_config.php</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/circle_property/fuel/application/controllers/cb_user_profile_update.php</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/circle_property/js/app.js</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/client_views/properties_views/application/views/_usercontrols/cb_upload_listing_info.php</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/client_views/properties_views/application/controllers/properties_base.php</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/client_views/properties_views/application/views/_usercontrols/cb_properties_search_structure.php</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/client_views/properties_views/application/controllers/properties_sell.php</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/circle_property/fuel/application/views/user_profile_detail.php</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/circle_property/js/google_map.js</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/client_views/properties_views/js/property_new_listing.js</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/circle_property/fuel/application/controllers/CBWS_AUTH_Service/CBWS_Member/CBWS_Member.php</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/circle_property/fuel/application/controllers/base.php</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/circle_property/fuel/application/controllers/CBWS_Interface.php</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/circle_property/fuel/application/controllers/CBWS_AUTH_Service/CBWS_Info_Interface.php</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/circle_property/fuel/application/controllers/RestAPI.php</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/circle_property/js/ngAutocomplete.js</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/client_views/properties_views/application/views/_usercontrols/properties_footer.php</file>
+            <file>file:/C:/xampp/htdocs/cb_iloveproperty/trunk/circle_property/fuel/application/controllers/_utils/file_uploader.php</file>
+        </group>
+    </open-files>
 </project-private>
