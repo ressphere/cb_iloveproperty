@@ -185,6 +185,20 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
             };
             // </editor-fold>
             
+            // <editor-fold desc="load_total_remain_listings"  defaultstate="collapsed">
+            var url = ObjBase.getWsdlBaseUrl() + "index.php/base/get_user_number_of_available_listing";
+                $http({
+                 method: 'GET',
+                 url: url,
+                 data: null,
+                 cache: true,
+                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+               }).then(function(response) {
+                   
+                    $scope.vailable_listing_count = response.data;
+               });
+            // </editor-fold>
+            
             $scope.view_listing = function(url)
             {
                 $('#property_preview_content_iframe').attr('src', url);

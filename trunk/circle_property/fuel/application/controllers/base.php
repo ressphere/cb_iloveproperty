@@ -2206,6 +2206,37 @@ class base extends CI_Controller {
             $output = $this->extemplate->render(NULL, TRUE);
             return $output;
     }
+    
+     /*Compare existing number of listing and the user listing limit to determine whether new listing is allowed or not*/
+   public function get_user_number_of_available_listing()
+   {           
+       $user_id = $this->session->userdata('user_id');
+       $allowed = true;
+
+       if($user_id)
+       {              
+            //setup the listing filter by user id
+            $filter_struct["filter"]["user_id"] = $user_id;
+
+            //get the filtered listing details
+            $user_listing_limit = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:get_user_property_listing_limit",
+                json_encode($user_id));
+
+            $listing_limit = json_decode($user_listing_limit, TRUE)["data"]["result"];
+
+            $user_existing_listing = GeneralFunc::CB_SendReceive_Service_Request("CB_Property:filter_listing",
+                json_encode($filter_struct));
+
+            $number_of_listings = sizeof(json_decode($user_existing_listing, TRUE)["data"]["listing"]);
+            
+            $number_of_remaining_listings = $listing_limit - $number_of_listings;
+            $this->_print($number_of_remaining_listings);              
+       }
+       else
+       {
+           $this->set_error("function:get_number_of_listings failed with invalid user id: (" . $user_id .")");
+       }
+   }
 }
 
 class fb_type
