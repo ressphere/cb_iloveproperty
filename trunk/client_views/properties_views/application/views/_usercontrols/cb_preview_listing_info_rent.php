@@ -172,18 +172,22 @@
                     <div class="row information">
                           <div class="col-md-12">
                             <div class="col-md-4" ng-repeat="property_facility in property_information.property_facilities[0]">
-                                <br><span>{{property_facility}}</span><br><br>
+                                <br><span class="glyphicon glyphicon-chevron-right"></span>
+                                <span>{{property_facility}}</span><br><br>
                             </div>
                             <div class="col-md-4" ng-repeat="property_facility in property_information.property_facilities[1]">
-                                <br><span>{{property_facility}}</span><br><br>
+                                <br><span class="glyphicon glyphicon-chevron-right"></span>
+                                <span>{{property_facility}}</span><br><br>
                             </div>
                             <div class="col-md-4" ng-repeat="property_facility in property_information.property_facilities[2]">
-                               <br><span>{{property_facility}}</span><br><br>
+                               <br><span class="glyphicon glyphicon-chevron-right"></span>
+                               <span>{{property_facility}}</span><br><br>
                             </div>
                             <div class="col-md-4" ng-if="(!property_information.property_facilities[0].length) &&
                                                          (!property_information.property_facilities[1].length) &&
                                                          (!property_information.property_facilities[2].length)">
-                               <br><span>"Not Available"</span><br><br>
+                               <br><span class="glyphicon glyphicon-minus-sign"></span>
+                               <span>"Not Available"</span><br><br>
                             </div>
                         </div>
                     </div>
