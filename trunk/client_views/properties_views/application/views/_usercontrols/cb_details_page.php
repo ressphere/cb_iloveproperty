@@ -185,6 +185,11 @@
                             <div class="col-md-4" ng-repeat="property_facility in property_information.property_facilities[2]">
                                <br><span>{{property_facility}}</span><br><br>
                             </div>
+                            <div class="col-md-4" ng-if="(!property_information.property_facilities[0].length) &&
+                                                         (!property_information.property_facilities[1].length) &&
+                                                         (!property_information.property_facilities[2].length)">
+                               <br><span>"Not Available"</span><br><br>
+                            </div>
                         </div>
                     </div>
 		</div>
