@@ -50,6 +50,7 @@ profileApp.controller('ProfileController', function($scope, $http) {
         {
          name:'Property Profile',
          id:'Property_Profile',
+		 link_id: 'Properties',
          information:{
  /*           home:
                     {
@@ -99,7 +100,30 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
         {  
             // Decalre base object to access generic API
             var ObjBase = $.makeclass(get_base());
-            
+            $scope.service_map_with_url = {};
+            $scope.key_available_for_service_map_with_url = function($key)
+            {
+                return $key in $scope.service_map_with_url;
+            };
+            var get_services = function()
+            {
+                var url = ObjBase.getWsdlBaseUrl() + "index.php/cb_user_profile_update/get_available_services";
+                $http({
+                 method: 'GET',
+                 url: url,
+                 data: null,
+                 cache: true,
+                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+               }).then(function(response) {
+                        for (var i = 0; i < response.data.length; i++)
+                        {
+                            var service_name = response.data[i][0];
+                            var url = response.data[i][2];
+                            $scope.service_map_with_url[service_name] = url;
+                        }
+                    }
+               );
+            };
             // <editor-fold desc="load_initial_data"  defaultstate="collapsed">
             var get_initial_data = function()
             {
@@ -214,6 +238,7 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
             // ------ Variable declare and initialize section --- Start ----------------
             // Initialize information that require base generic API
             $scope.base_url = ObjBase.getBaseUrl();
+            get_services();
             get_initial_data();
             get_user_listing_data();
             //get_user_inbox_data();

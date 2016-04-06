@@ -114,6 +114,10 @@ Please browse my website for more of my listings.<br>This user-friendly website 
        );
        return $generic_data;
    }
+   public function get_available_services()
+   {
+       $this->_print(json_encode($this->_get_features()));
+   }
    public function my_profile()
    {
        $user_id =  $this->session->userdata('user_id');

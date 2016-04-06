@@ -23,10 +23,10 @@
                         <div class="section-content">
 						    <div class="row">
 								<div>
-									<h1>{{service.name}}</h1>
+									<h1>{{service.name}} <a class="btn btn-xs btn-success" role="button" ng-if='key_available_for_service_map_with_url(service.link_id)' target='_self' href ='{{service_map_with_url[service.link_id]}}' >Launch {{service.link_id}}</a></h1> 
 								</div>
 							</div>
-                            <div class="row" ng-if="id != 'name' && id !='id' && id !='active' && id != 'information'" ng-repeat="(id, info) in service">
+                            <div class="row" ng-if="id != 'name' && id !='link_id' && id !='id' && id !='active' && id != 'information'" ng-repeat="(id, info) in service">
 				<div class="col-md-2">{{id}}</div>
                                 <div class="col-md-8">
                                    <div id="pwd_change_fields" class="input-group">
