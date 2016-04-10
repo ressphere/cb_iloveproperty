@@ -17,7 +17,7 @@
 
                                 <div class="text-align-left col-md-6 column">
                                     <h1 class="gothic_bold_font">{{property_information.currency}}&nbsp;<span ng-bind="accounting.format(property_information.Price)">&nbsp;</span><span><span style ="font-size: small" class="gothic_font rent room">Monthly</span></span></h1>
-                                    <h3 class="gothic_font">Currency <span class="PricePer"> | {{property_information.currency}}</span>&nbsp;<span class="PricePer" ng-bind="accounting.format(property_information.PricePer)"></span> <span class="PricePer">Per {{property_information.Unit}}</span></h3>
+                                    <h3 class="gothic_font"><span class="PricePer">{{property_information.currency}}</span>&nbsp;<span class="PricePer" ng-bind="accounting.format(property_information.PricePer)"></span> <span class="PricePer">Per {{property_information.Unit}}</span></h3>
 				</div>
 			</div>
 			<div class="row clearfix">
