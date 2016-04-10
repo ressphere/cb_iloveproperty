@@ -721,12 +721,51 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
               }
             };
             
+            var get_property_type_info = function(category_name)
+            {
+                var search_category = "property_type_sell";
+                var property_type = $('#property_type_sell').val();
+
+                if(category_name === "rent")
+                {
+                    search_category = "property_type_rent";
+                    property_type = $('#property_type_rent').val();
+                }
+                
+                for (i = 0; i < ($scope.property_category_1.length); i++) { 
+                    if($scope.property_category_1[i]['id']===search_category)
+                    {
+                        for (var category in ($scope.property_category_1[i]['values'])){
+                            if (($scope.property_category_1[i]['values']).hasOwnProperty(category))
+                            {
+                                for(j = 0; j < ($scope.property_category_1[i]['values'][category].length); j++){
+                                    if(($scope.property_category_1[i]['values'][category][j]) === property_type)
+                                    {
+                                        var property_category = category;
+                                    }
+                                }
+                            }
+                         }
+                    }      
+                }
+                
+                var property_type_info = new Array();
+                property_type_info['property_category']= property_category;
+                property_type_info['property_type']=property_type;
+                
+                return property_type_info;
+            }
+            
             /**
              * @description This function preparing message data
              */
             var prepare_message_data = function($scope)
             {
                 var category_name = $scope.mapping[$.trim($('#type').val())];
+                var prop_info = get_property_type_info(category_name);
+                var property_category = prop_info['property_category'];
+                var property_type = prop_info['property_type'];
+                
                 var listing;
                 $scope.country_state.location["k"] = $scope.googleMarker.getGMarkers()[0].position.lat();
                 $scope.country_state.location["B"] = $scope.googleMarker.getGMarkers()[0].position.lng();
@@ -749,8 +788,8 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                             'occupied':$.trim($('#occupied').val()),
                             'monthly_maintanance': parseFloat($('#monthly_maintanance').val()).toFixed(2),
                             'remark': CKEDITOR.instances.remark.document.getBody().getHtml(), //$('textarea#remark').val(),
-                            'property_category':$scope.property_category_sell_value_sel,
-                            'property_type':$scope.property_type_sell_value_sel,
+                            'property_category':property_category,
+                            'property_type':property_type,
                             'tenure':$.trim($('#tenure').val()),
                             'land_title_type': $.trim($('#land_title_type').val()),
                             'active':1,
@@ -786,8 +825,8 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                             'user_id':'',
                             'property_photo': '',
                             'size_measurement_code': $.trim($('#size_measurement_code').val()),
-                            'property_category':$scope.property_category_rent_value_sel,
-                            'property_type':$scope.property_type_rent_value_sel,
+                            'property_category':property_category,
+                            'property_type':property_type,
                             'facilities': get_facilities(),
                             'unit_name' : get_unit_name(),
                             'state': $.trim($('#state').val()),
@@ -1008,14 +1047,10 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 }
                 
                 var category_name = $scope.mapping[$.trim($('#type').val())];
-                var property_category = $scope.property_category_sell_value_sel;
-                var property_type = $scope.property_type_sell_value_sel;
                 
-                if(category_name === "rent")
-                {
-                        property_category = $scope.property_category_rent_value_sel;
-                        property_type = $scope.property_type_rent_value_sel;
-                };
+                var prop_info = get_property_type_info(category_name);
+                var property_category = prop_info['property_category'];
+                var property_type = prop_info['property_type'];
                 
                 //console.log(property_category+" "+property_type);
                 
@@ -1380,7 +1415,6 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             $scope.change_category_type = function(category, type)
             {
                 var category_name = $scope.mapping[$.trim($('#type').val())];
-                
                 switch(category_name)
                 {
                     case "sell":
