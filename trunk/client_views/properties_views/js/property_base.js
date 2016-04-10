@@ -442,7 +442,9 @@ var get_property_home = function() {
 
                         private.currency = "MYR";
                         if (navigator.geolocation) {
-                            navigator.geolocation.getCurrentPosition(this.successGetMyLocation, this.errorGetMyLocation);
+                            setTimeout(function () {
+                                navigator.geolocation.getCurrentPosition(this.successGetMyLocation, this.errorGetMyLocation);
+                            });
                         }
                         else
                         {
