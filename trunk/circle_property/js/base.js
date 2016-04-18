@@ -864,6 +864,12 @@ var get_base = function() {
                var base = new String(str).substring(last_index + 1);
                return base;
             },
+            showPosition:   function(private, position, mapholderID) {
+                    var latlon = position.coords.latitude + "," + position.coords.longitude;
+
+                    var img_url = "http://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false";
+                    document.getElementById(mapholderID).innerHTML = "<img src='"+img_url+"'>";
+            },
             successGetMyLocation:  function(private, position) {
                     var geocoder = new google.maps.Geocoder();
                     var lat = position.coords.latitude;
@@ -913,11 +919,11 @@ var get_base = function() {
                               console.log("private._invoked_after_getting_your_country is undefined");
                           }
                     });
-                },
-
-                errorGetMyLocation: function(private){
+                },errorGetMyLocation: function(private){
                             private.currency = "MYR";
-                        }
+                }
+                
+                
             // ------- Base Header and Footer Features --- End -----------
             
         }

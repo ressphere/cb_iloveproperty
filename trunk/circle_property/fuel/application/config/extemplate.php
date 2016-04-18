@@ -53,14 +53,21 @@ $extemplate['page404_home']['parser'] = 'parser';
 $extemplate['page404_home']['parser_method'] = 'parse';
 $extemplate['page404_home']['parse_template'] = TRUE;
 
-$extemplate['page403_home']['extemplate'] = 'page404_home';
-$extemplate['page403_home']['regions'] = array(
-    'title',
-    'content'
+$extemplate['ressphere_map']['extemplate'] = 'ressphere_map';
+$extemplate['ressphere_map']['regions'] = array(
+   'title',
+   'header',
+   'metadesc',
+   'metakey',
+   'generator',
+   'og_image',
+   'og_desc',
+   'og_title',
+   'content'
 );
-$extemplate['page403_home']['parser'] = 'parser';
-$extemplate['page403_home']['parser_method'] = 'parse';
-$extemplate['page403_home']['parse_template'] = TRUE;
+$extemplate['ressphere_map']['parser'] = 'parser';
+$extemplate['ressphere_map']['parser_method'] = 'parse';
+$extemplate['ressphere_map']['parse_template'] = TRUE;
 
 $config = array();
 ?>
