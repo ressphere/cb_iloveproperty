@@ -34,8 +34,8 @@ class properties_base extends CI_Controller {
         $this->load->helper("url"); 
         $this->load->library("extemplate");
         $this->load->library("session");
-		$this->load->library("email");
-		$this->load->config('tank_auth', TRUE);
+        $this->load->library("email");
+	$this->load->config('tank_auth', TRUE);
         // Load config at application/config/extemplate.php settings
         // Must be preload frist before everything related to extemplate start
         $this->extemplate->set_extemplate('default');

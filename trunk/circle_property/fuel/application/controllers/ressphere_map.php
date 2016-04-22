@@ -22,19 +22,23 @@ class ressphere_map extends base {
     private function load_js()
     {
         $this->wsdl = $this->_get_wsdl_base_url();
-        $this->session->set_userdata('wsdl_base_url', $this->wsdl);
-        $this->extemplate->add_js('js/jquery.min.js');
-        $this->extemplate->add_js('js/bootstrap-mit.min.js');
-        $this->extemplate->add_js('js/typeahead.min.js');
-        $this->extemplate->add_js('js/angular.min.js');
+        $this->extemplate->add_js( $this->wsdl . 'js/jquery.min.js', 'import', FALSE, FALSE);
+        $this->extemplate->add_js($this->wsdl . 'js/angular.min.js', 'import', FALSE, FALSE);      
         $this->extemplate->add_js($this->wsdl . 'js/lodash.compat.min.js', 'import', FALSE, FALSE);
         $this->extemplate->add_js($this->wsdl . 'js/bluebird.min.js', 'import', FALSE, FALSE);
         $this->extemplate->add_js('https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false', 'import', FALSE, FALSE);
+       
+        $this->extemplate->add_js($this->wsdl . 'js/angular-simple-logger.min.js', 'import', FALSE, FALSE);
         $this->extemplate->add_js($this->wsdl . 'js/angular-google-maps.min.js', 'import', FALSE, FALSE);
-        $this->extemplate->add_js($this->wsdl . 'js/angularjs-google-places.js', 'import', FALSE, FALSE);
+        #$this->extemplate->add_js($this->wsdl . 'js/ngAutocomplete.js', 'import', FALSE, FALSE);
+        #$this->extemplate->add_js($this->wsdl . 'js/angularjs-google-places.js', 'import', FALSE, FALSE);
         
-        $this->extemplate->add_js( $this->wsdl . 'js/ngAutocomplete.js', 'import', FALSE, FALSE);
-        $this->extemplate->add_js( $this->wsdl . 'js/google_map.js', 'import', FALSE, FALSE);
+      
+ 
+       #$this->extemplate->add_js($this->wsdl . 'js/app.js', 'import', FALSE, FALSE);
+       #$this->extemplate->add_js( $this->wsdl . 'js/google_map.js', 'import', FALSE, FALSE);
+        
+        
         
         
         $this->extemplate->add_js( $this->wsdl . 'js/ressphere_map.js', 'import', FALSE, FALSE);
