@@ -60,13 +60,27 @@ class ressphere_map extends base {
         parse_str(substr(strrchr($_SERVER['REQUEST_URI'], "?"), 1), $_GET);
         if(array_key_exists("lgt", $_GET) && array_key_exists("lat", $_GET))
         {
-            $this->extemplate->write_view('content', '_usercontrols/ressphere_map',
+            if(array_key_exists("width", $_GET) && array_key_exists("height", $_GET))
+            {
+                $this->extemplate->write_view('content', '_usercontrols/ressphere_map',
+                    array(
+                            'lat'=>$_GET["lat"],
+                            'lgt'=>$_GET["lgt"],
+                            'width'=>$_GET["width"],
+                            'height'=>$_GET["height"]
+                        ) ,TRUE);
+            }
+            else
+            {
+                $this->extemplate->write_view('content', '_usercontrols/ressphere_map',
                     array(
                             'lat'=>$_GET["lat"],
                             'lgt'=>$_GET["lgt"]
                         ) ,TRUE);
             
+            }
             $this->extemplate->render();
+            
         }
         else
         {

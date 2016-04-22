@@ -87,10 +87,10 @@ ng_map_profile.controller('google_maps', function($scope) {
         
         // <editor-fold desc="Google map and marker angular settings"  defaultstate="collapsed">
         // <editor-fold desc="Google map"  defaultstate="collapsed">
-        $scope.geometry = {"lat": "5.37857",
-                            "lgt": "100.3137089"};
-        $scope.map = {center: {latitude: $scope.lat, 
-                               longitude: $scope.lgt }, 
+        $scope.geometry = {"lat": 5.37857,
+                            "lgt": 100.3137089};
+        $scope.map = {center: {latitude: $scope.geometry.lat, 
+                               longitude: $scope.geometry.lgt }, 
                                 zoom: 16 };
                             
         $scope.options = {scrollwheel: false};
@@ -107,7 +107,7 @@ ng_map_profile.controller('google_maps', function($scope) {
           },
           //Set draggable to false to disable marker
           //Eg: $scope.marker.options.draggable = false;
-          options: { draggable: true },
+          options: { draggable: false },
           events: { 
 
           }
@@ -124,7 +124,9 @@ ng_map_profile.controller('google_maps', function($scope) {
                 $scope.map.center.longitude = $scope.geometry.lgt;
                 $scope.marker.coords.longitude = $scope.geometry.lgt;
 
-                $scope.googleMarker.getGMarkers()[0].setPosition({lat: $scope.geometry.lat, lng: $scope.geometry.lgt});
+                $scope.googleMarker.getGMarkers()[0].setPosition({lat: 
+                            parseFloat($scope.geometry.lat), 
+                    lng: parseFloat($scope.geometry.lgt)});
 
         });
         // </editor-fold>
