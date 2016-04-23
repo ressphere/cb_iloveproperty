@@ -175,6 +175,15 @@ ng_map_profile.controller('previewPage', function($scope, $controller, ngGPlaces
     $scope.has_next_page = false;
     $scope.has_prev_page = false;
     
+    $scope.show_map = function(lat, lgt)
+    {
+        var objHome = StaticHomeObject.getInstance();
+        var wsdl_path = objHome.getWsdlBaseUrl();
+        $('#popup_google_location').modal('show');
+        console.log(wsdl_path + 'index.php/ressphere_map/map?lat="'+lat+'"&lgt="'+lgt+'"&width="300"&height="300"');
+        $('#frameMap').attr('src', wsdl_path + '/index.php/ressphere_map/map?lat="'+lat+'"&lgt="'+lgt+'"&width="300"&height="300"');
+    };
+     
     $scope.get_ngGPlacesAPI = function()
     {
           return ngGPlacesAPI;

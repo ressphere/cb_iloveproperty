@@ -1,6 +1,5 @@
 <script>
-    ng_map_profile.controller('ressphereMap', function($scope, $controller)
-    {
+ng_map_profile.controller('ressphereMap', function($scope, $controller){
         $controller('google_maps', {$scope: $scope});
         angular.element(document).ready(
         

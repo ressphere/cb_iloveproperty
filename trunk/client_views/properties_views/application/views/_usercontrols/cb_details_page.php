@@ -317,12 +317,12 @@
                                         <span  class="icon-large icon-plane" aria-hidden="true" ng-if="place.types[0] == 'airport'">
 
                                          </span>
-                                        <span  class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng());'  class="place_name gothic_font">{{place.name}}<br><br></span>
                                     </div>
 
-<!--                                    <div class="col-md-4 location">
+                                    <div class="col-md-4 location">
                                         <span style="display: none">"{{place.detail.geometry.location}}"</span>
-                                    </div>-->
+                                    </div>
 
                                 </div>
                                 
@@ -334,7 +334,7 @@
                                      ng-if="(place.types[0]=='school' || place.types[0]=='university')">
                                         <img width='14px' height='auto' src='images/uni.jpg' alt='university'>
 
-                                        <span class="place_name gothic_font">{{place.name}} {{count}}<br><br></span>
+                                        <span ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng())' class="place_name gothic_font">{{place.name}} {{count}}<br><br></span>
                                     </div>
       
 <!--                                     <div class="col-md-4 location">
@@ -461,6 +461,32 @@ I am interested in your property.&#13;&#10;Please contact me if the listed prope
 								OK
 							</button>&nbsp;&nbsp;&nbsp;&nbsp;
                             <button class="cancel_measurement_type btn" data-dismiss="modal" type="button">Cancel</button>
+                            
+                            <br>
+                        </center>
+                    </div>
+                </div>
+            </center>
+        </div>
+        <div id="popup_google_location" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <center>
+                <div id="google_location" class="modal-dialog modal-lg popup">
+                      <div class="modal-header">
+                        <button class="property_info close" data-dismiss="modal" type="button">
+                            <span aria-hidden="true">×</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        
+                    </div>
+                    <div class="modal-body">
+                        <div id="google_location_content">
+                            <iframe id='frameMap'/>
+                        </div>
+                    </div>
+                     <div class="modal-footer">
+                        <center>
+                            
+                            <button class="cancel_google_location_type btn" data-dismiss="modal" type="button">Cancel</button>
                             
                             <br>
                         </center>
