@@ -377,7 +377,7 @@ var get_property_home = function() {
                 set_fav_currency: function(private, currency)
                 {
                      
-                     $.cookie("currency", currency);
+                     $.cookie("currency", currency, { expires : 1 });
                      $.jStorage.set("currency", currency);
                      private._currency_updated(null, null, currency, null);
                 },
@@ -385,7 +385,7 @@ var get_property_home = function() {
                 {
                     $.cookie("measurement_type", measurement_type);
                     $.jStorage.set("measurement_type", measurement_type);
-		    private.measurement_type = measurement_type;
+                    private.measurement_type = measurement_type;
                 },
                 get_fav_currency: function(private)
                 {

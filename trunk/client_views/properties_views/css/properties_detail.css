@@ -233,3 +233,12 @@
     }
 }
 
+#frameMap {
+    width: 95%;
+    height: 350px
+}
+
+#popup_google_location div {
+    width:98%
+}
+

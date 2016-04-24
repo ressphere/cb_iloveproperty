@@ -908,7 +908,7 @@ var get_base = function() {
                             } else {
                               currency = "MYR";
                             }
-                            $.cookie("currency", currency);
+                            $.cookie("currency", currency, { expires : 1 });
                             $.jStorage.set("currency", currency);
                           }
                           if(private._invoked_after_getting_your_country)

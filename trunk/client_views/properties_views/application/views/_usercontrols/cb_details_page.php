@@ -480,7 +480,8 @@ I am interested in your property.&#13;&#10;Please contact me if the listed prope
                     </div>
                     <div class="modal-body">
                         <div id="google_location_content">
-                            <iframe id='frameMap'/>
+                            <iframe id='frameMap' frameborder="0" seamless 
+                                    width="300px" height="300px"/>
                         </div>
                     </div>
                      <div class="modal-footer">
