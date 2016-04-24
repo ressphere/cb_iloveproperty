@@ -441,9 +441,10 @@ var get_property_home = function() {
                     {
 
                         private.currency = "MYR";
+						var sender = this;
                         if (navigator.geolocation) {
                             setTimeout(function () {
-                                navigator.geolocation.getCurrentPosition(this.successGetMyLocation, this.errorGetMyLocation);
+                                navigator.geolocation.getCurrentPosition(sender.successGetMyLocation, sender.errorGetMyLocation);
                             });
                         }
                         else
