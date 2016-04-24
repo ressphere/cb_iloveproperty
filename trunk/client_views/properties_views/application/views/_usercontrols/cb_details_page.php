@@ -153,7 +153,10 @@
 		<div class="col-md-12 column gothic_font">
                     <div class="row title">
                         <span class="gothic_bold_font">Location</span>
+                     
                         <span class="gothic_italic_font">({{country_state.location["k"]}}, {{country_state.location["B"]}})</span>
+                        <a ng-hide='!isMobile()' href='geo:{{country_state.location["k"]}},{{country_state.location["B"]}}' class="navigate_button btn btn-next btn-xs btn-link" type="button">Navigate</a>
+                        <a ng-hide='isMobile()' ng-href='http://maps.google.com/maps?q={{country_state.location["k"]}},{{country_state.location["B"]}}&ll={{country_state.location["k"]}},{{country_state.location["B"]}}&z=17' class="navigate_button btn-link btn-next btn-xs" type="button">Navigate</a>
                     </div>
                     <div id="map_canvas" class="map_canvas_group" class="row clearfix">
                         <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" control="googleMap">
@@ -352,7 +355,7 @@
                                         <span class="icon-shoppingcartalt" aria-hidden="true">
 
                                          </span>
-                                        <span class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng());' class="place_name gothic_font">{{place.name}}<br><br></span>
                                     </div>
                                      
 <!--                                     <div class="col-md-4 location gothic_font">
@@ -366,7 +369,7 @@
                                     <div class="col-md-4" ng-repeat="place in property_information.NearbyPlaces" 
                                         ng-if="place.types[0]=='hospital'">
                                         <span class='icon-hospital' aria-hidden="true"></span>
-                                        <span class="place_name">{{place.name}}<br><br></span>
+                                        <span ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng());' class="place_name">{{place.name}}<br><br></span>
                                     </div>
 <!--                                    <div class="col-md-4 location gothic_font">
                                         <span style="display: none">"{{place.detail.geometry.location}}"</span>
@@ -381,7 +384,7 @@
                                         <span class="icon-moneybag" aria-hidden="true">
 
                                          </span>
-                                        <span class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng());' class="place_name gothic_font">{{place.name}}<br><br></span>
                                     </div>
                                      
 
@@ -396,7 +399,7 @@
                                         <span class="icon-gasstation" aria-hidden="true">
 
                                          </span>
-                                        <span class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng());' class="place_name gothic_font">{{place.name}}<br><br></span>
                                     </div>
                                      
                                 </div>
@@ -481,13 +484,15 @@ I am interested in your property.&#13;&#10;Please contact me if the listed prope
                     <div class="modal-body">
                         <div id="google_location_content">
                             <iframe id='frameMap' frameborder="0" seamless 
-                                    width="300px" height="300px"/>
+                                    width="300px" height="300px"></iframe>
                         </div>
                     </div>
                      <div class="modal-footer">
                         <center>
                             
                             <button class="cancel_google_location_type btn" data-dismiss="modal" type="button">Cancel</button>
+                            <a ng-hide='!isMobile()' href="geo:{{gps.lat}},{{gps.lgt}}" class="navigate_button btn btn-warning" type="button">Navigate</a>
+                            <a ng-hide='isMobile()' href="http://maps.google.com/maps?q={{gps.lat}},{{gps.lat}}&ll={{gps.lgt}},{{gps.lgt}}&z=17" class="navigate_button btn btn-warning" type="button">Navigate</a>
                             
                             <br>
                         </center>
@@ -495,5 +500,5 @@ I am interested in your property.&#13;&#10;Please contact me if the listed prope
                 </div>
             </center>
         </div>
-       
-</div><br/><br/>
+       </div><br/><br/>
+</div>

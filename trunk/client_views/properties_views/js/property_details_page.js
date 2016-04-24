@@ -5,13 +5,14 @@
  * **/
 // <editor-fold desc="set google nearby place radius and type(special for property)"  defaultstate="collapsed">
 
-ng_map_profile.config(function(ngGPlacesAPIProvider) {
-    ngGPlacesAPIProvider.setDefaults({
-        radius: 1000,
-        types: ['bank', 'school', 'shopping_mall', 'hospital', 'airport', 'subway_station', 'bus_station', 'train_station',
-            'university', 'taxi_stand', 'gas_station'],
-        nearbySearchKeys: ['name', 'reference', 'vicinity', 'types', 'icon']
-    });
+ng_map_profile.config(function(ngGPlacesAPIProvider, $compileProvider) {
+            $compileProvider.aHrefSanitizationWhitelist(/^\s*(geo|https?|ftp|mailto|chrome-extension):/)
+            ngGPlacesAPIProvider.setDefaults({
+                radius: 1000,
+                types: ['bank', 'school', 'shopping_mall', 'hospital', 'airport', 'subway_station', 'bus_station', 'train_station',
+                    'university', 'taxi_stand', 'gas_station'],
+                nearbySearchKeys: ['name', 'reference', 'vicinity', 'types', 'icon']
+        });
 });
 // </editor-fold>
 
@@ -181,6 +182,8 @@ ng_map_profile.controller('previewPage', function($scope, $controller, ngGPlaces
         var wsdl_path = objHome.getWsdlBaseUrl();
         $('#popup_google_location').modal('show');
         $('#frameMap').attr('src', wsdl_path + '/index.php/ressphere_map/map?lat="'+lat+'"&lgt="'+lgt+'"&width="100%"&height="300"');
+        $scope.gps.lat = lat;
+        $scope.gps.lgt = lgt;
     };
      
     $scope.get_ngGPlacesAPI = function()
@@ -495,7 +498,10 @@ ng_map_profile.controller('previewPage', function($scope, $controller, ngGPlaces
                 {
                     $('#books').turn('previous');
                 };
-            
+                $scope.gps={
+                    "lat":null,
+                    "lgt":null
+                };
                 $("#books").bind("turning", function(event, page, view) {
                     check_page(page, $scope);
                 });
@@ -554,6 +560,10 @@ ng_map_profile.controller('previewPage', function($scope, $controller, ngGPlaces
                     }
                   );
                 }
+                $scope.isMobile = function()
+                {
+                    return objHome.isMobile().any();
+                };
                 $('#select_property_measurement').val($('.lbl_measurement_type').text());
                 on_change_measurement_type();
             }   
@@ -678,5 +688,8 @@ $(window).bind('keydown', function(e) {
 $(document).ready(function()
 {
     $('.measurement_type_group').css('display', 'inline-block');
+    $('#popup_currency_change').on('hidden', function () {
+        $('#frameMap').attr('src', null);
+    });
 });
  
