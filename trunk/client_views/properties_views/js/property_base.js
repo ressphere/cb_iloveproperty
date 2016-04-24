@@ -376,6 +376,7 @@ var get_property_home = function() {
                 },
                 set_fav_currency: function(private, currency)
                 {
+                     
                      $.cookie("currency", currency);
                      $.jStorage.set("currency", currency);
                      private._currency_updated(null, null, currency, null);
@@ -439,12 +440,16 @@ var get_property_home = function() {
                     
                     if (typeof currency === 'undefined' || currency === null)
                     {
-
                         private.currency = "MYR";
-						var sender = this;
+                        var sender = this;
                         if (navigator.geolocation) {
                             setTimeout(function () {
-                                navigator.geolocation.getCurrentPosition(sender.successGetMyLocation, sender.errorGetMyLocation);
+                                if(sender)
+                                {
+                                    navigator.geolocation.getCurrentPosition(sender.successGetMyLocation, sender.errorGetMyLocation);
+                                    delete sender;
+                                    sender = null;
+                                }
                             });
                         }
                         else
