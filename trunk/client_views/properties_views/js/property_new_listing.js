@@ -214,7 +214,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     values:
                     [
                         'Property For Sale',
-                        'Property For Lease',
+                        'Property For Lease'
                         //'Room To Let'
                     ]
                 },
@@ -470,7 +470,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     [
                         'MYR',
                         'SGD',
-                        'USD',
+                        'USD'
                         
                     ] 
                 },
@@ -754,7 +754,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 property_type_info['property_type']=property_type;
                 
                 return property_type_info;
-            }
+            };
             
             /**
              * @description This function preparing message data
@@ -1468,7 +1468,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                   );}, 100);
               }
             );
-            $('#chk_auction').on('click', function(){set_auction()});
+            $('#chk_auction').on('click', function(){set_auction();});
             // </editor-fold>
             
             flowFactory.flow.on('catchAll', function (event) {
