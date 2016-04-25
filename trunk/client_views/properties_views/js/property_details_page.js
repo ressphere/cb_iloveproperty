@@ -6,7 +6,7 @@
 // <editor-fold desc="set google nearby place radius and type(special for property)"  defaultstate="collapsed">
 
 ng_map_profile.config(function(ngGPlacesAPIProvider, $compileProvider) {
-            $compileProvider.aHrefSanitizationWhitelist(/^\s*(geo|https?|ftp|mailto|chrome-extension):/)
+            $compileProvider.aHrefSanitizationWhitelist(/^\s*(geo|https?|ftp|mailto|chrome-extension):/);
             ngGPlacesAPIProvider.setDefaults({
                 radius: 1000,
                 types: ['bank', 'school', 'shopping_mall', 'hospital', 'airport', 'subway_station', 'bus_station', 'train_station',
