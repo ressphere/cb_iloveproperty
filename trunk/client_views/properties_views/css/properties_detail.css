@@ -248,6 +248,10 @@
 }
 
 .btn-link {
-    padding-left: 0px
+    padding-left: 0px;
+}
+
+.non_clickable {
+    cursor: default;
 }
 

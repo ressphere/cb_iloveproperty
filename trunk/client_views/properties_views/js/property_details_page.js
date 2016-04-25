@@ -566,6 +566,11 @@ ng_map_profile.controller('previewPage', function($scope, $controller, ngGPlaces
                 };
                 $('#select_property_measurement').val($('.lbl_measurement_type').text());
                 on_change_measurement_type();
+                
+                 $('#popup_google_location').on('hidden.bs.modal', function () {
+                    
+                    $('#frameMap').attr('src', ""); 
+                 });
             }   
         );
             
@@ -688,8 +693,7 @@ $(window).bind('keydown', function(e) {
 $(document).ready(function()
 {
     $('.measurement_type_group').css('display', 'inline-block');
-    $('#popup_currency_change').on('hidden', function () {
-        $('#frameMap').attr('src', null);
-    });
+    
+   
 });
  

@@ -321,7 +321,8 @@
                                         <span  class="icon-large icon-plane" aria-hidden="true" ng-if="place.types[0] == 'airport'">
 
                                          </span>
-                                        <span ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng());'  class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-if='place.has_detail' ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng());'  class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-if='!place.has_detail'   class="place_name non_clickable gothic_font">{{place.name}}<br><br></span>
                                     </div>
 
                                     <div class="col-md-4 location">
@@ -338,7 +339,8 @@
                                      ng-if="(place.types[0]=='school' || place.types[0]=='university')">
                                         <img width='14px' height='auto' src='images/uni.jpg' alt='university'>
 
-                                        <span ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng())' class="place_name gothic_font">{{place.name}} {{count}}<br><br></span>
+                                        <span ng-if='place.has_detail' ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng())' class="place_name gothic_font">{{place.name}} {{count}}<br><br></span>                                        
+                                        <span ng-if='!place.has_detail'   class="place_name non_clickable gothic_font">{{place.name}} {{count}}<br><br></span>
                                     </div>
       
 <!--                                     <div class="col-md-4 location">
@@ -356,7 +358,8 @@
                                         <span class="icon-shoppingcartalt" aria-hidden="true">
 
                                          </span>
-                                        <span ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng());' class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-if='place.has_detail' ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng());' class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-if='!place.has_detail'   class="place_name non_clickable gothic_font">{{place.name}}<br><br></span>
                                     </div>
                                      
 <!--                                     <div class="col-md-4 location gothic_font">
@@ -370,7 +373,8 @@
                                     <div class="col-md-4" ng-repeat="place in property_information.NearbyPlaces" 
                                         ng-if="place.types[0]=='hospital'">
                                         <span class='icon-hospital' aria-hidden="true"></span>
-                                        <span ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng());' class="place_name">{{place.name}}<br><br></span>
+                                        <span ng-if='place.has_detail' ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng());' class="place_name">{{place.name}}<br><br></span>
+                                        <span ng-if='!place.has_detail'   class="place_name non_clickable gothic_font">{{place.name}}<br><br></span>
                                     </div>
 <!--                                    <div class="col-md-4 location gothic_font">
                                         <span style="display: none">"{{place.detail.geometry.location}}"</span>
@@ -385,7 +389,8 @@
                                         <span class="icon-moneybag" aria-hidden="true">
 
                                          </span>
-                                        <span ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng());' class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-if='place.has_detail' ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng());' class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-if='!place.has_detail'   class="place_name non_clickable gothic_font">{{place.name}}<br><br></span>
                                     </div>
                                      
 
@@ -400,7 +405,8 @@
                                         <span class="icon-gasstation" aria-hidden="true">
 
                                          </span>
-                                        <span ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng());' class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-if='place.has_detail' ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng());' class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-if='!place.has_detail'   class="place_name non_clickable gothic_font">{{place.name}}<br><br></span>
                                     </div>
                                      
                                 </div>
