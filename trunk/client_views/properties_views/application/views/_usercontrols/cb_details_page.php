@@ -3,7 +3,8 @@
 		<div class="col-md-12 column">
 			<div class="row clearfix">
 				<div class="col-md-6 column">
-                                    <h1 class="gothic_bold_font">{{property_information.PropertyName}}</h1><br>
+                                    <h1 class="gothic_bold_font">{{property_information.PropertyName}}</h1>
+                                    <a ng-hide='!isMobile()' href='geo:{{country_state.location["k"]}},{{country_state.location["B"]}}' class="navigate_button btn btn-sm btn-success" type="button">Navigate</a><a ng-hide='isMobile()' ng-href='http://maps.google.com/maps?q={{country_state.location["k"]}},{{country_state.location["B"]}}&ll={{country_state.location["k"]}},{{country_state.location["B"]}}&z=17' class="navigate_button btn-success btn-sm" type="button">Navigate</a>
                                     <h3 class="gothic_font">Area: {{property_information.Area}} &nbsp; <br><br>
                                         <small class="InsideContent">{{property_information.ToiletCount}}
                                         <img src="images/toilet.jpg"/></small> |

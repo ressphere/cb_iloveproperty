@@ -244,5 +244,10 @@
 
 .place_name, .navigate_button {
     cursor: pointer;
+    
+}
+
+.btn-link {
+    padding-left: 0px
 }
 
