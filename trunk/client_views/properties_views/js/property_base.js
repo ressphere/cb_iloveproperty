@@ -446,7 +446,18 @@ var get_property_home = function() {
                             setTimeout(function () {
                                 if(sender)
                                 {
-                                    navigator.geolocation.getCurrentPosition(sender.successGetMyLocation, sender.errorGetMyLocation);
+                                    if(sender.getCurrentPosition().latitude === null)
+                                    {
+                                        navigator.geolocation.getCurrentPosition(sender.successGetMyLocation, sender.errorGetMyLocation);
+                                    }
+                                    else
+                                    {
+                                        position = {"latitude":
+                                                    sender.getCurrentPosition().latitude, 
+                                            "longitude":sender.getCurrentPosition().longitude};
+                                        sender.successGetMyLocation(position);
+                                    }
+                                    
                                     delete sender;
                                     sender = null;
                                 }

@@ -659,6 +659,22 @@ searchrst_information.controller("FilterSearchHighLightCtrl", function($scope, $
         $scope.property_information.selected_measurement_type = $('#select_property_measurement').val();
     };
     
+    var objHome = StaticHomeObject.getInstance();
+    if(objHome.getCurrentPosition().latitude !== null)
+    {
+      $scope.my_position = objHome.getCurrentPosition();
+
+    }
+    else
+    {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(objHome.setCurrentPosition);
+        }
+        $scope.my_position = objHome.getCurrentPosition();
+     
+    }
+    
+    
     // ------ Angular API --- End ----------------
 });
 // ================== Angular Implementation ====== End ================
