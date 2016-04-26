@@ -398,11 +398,12 @@ ng_map_profile.controller('previewPage', function($scope, $controller, ngGPlaces
                 };
 
                 // </editor-fold>
-                initialize_google_map(5.34109, 100.308611);
+                
                 watcher_of_country_state();
                 get_initial_data($scope, objProperty, $http);
                 get_google_map_data($scope);
                 
+                initialize_google_map($scope.country_state.location["k"], $scope.country_state.location["B"]);
                 
                 $scope.$watch("property_information.percentage_value", function(newVal, oldVal){
                     if (_.isEqual(newVal, oldVal))
