@@ -175,6 +175,7 @@ ng_map_profile.controller('previewPage', function($scope, $controller, ngGPlaces
     $scope.loan_measurement_type = 'loan_percentage';
     $scope.has_next_page = false;
     $scope.has_prev_page = false;
+    $scope.my_position = {"latitude": null, "longitude":null};
     
     $scope.show_map = function(lat, lgt)
     {
@@ -370,6 +371,7 @@ ng_map_profile.controller('previewPage', function($scope, $controller, ngGPlaces
     };
     // </editor-fold> 
     get_new_listing_data($scope, $sce);
+    
     angular.element(document).ready(
             function() {
                 var property_preview = {
@@ -572,6 +574,21 @@ ng_map_profile.controller('previewPage', function($scope, $controller, ngGPlaces
                     
                     $('#frameMap').attr('src', ""); 
                  });
+                
+                
+                if(objHome.getCurrentPosition().latitude !== null)
+                {
+                      $scope.my_position = objHome.getCurrentPosition();
+                      
+                }
+                else
+                {
+                      if (navigator.geolocation) {
+                          navigator.geolocation.getCurrentPosition(objHome.setCurrentPosition);
+                     }
+                     $scope.my_position = objHome.getCurrentPosition();
+                     $scope.$apply();
+                }
             }   
         );
             

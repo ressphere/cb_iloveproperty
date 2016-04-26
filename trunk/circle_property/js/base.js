@@ -864,6 +864,20 @@ var get_base = function() {
                var base = new String(str).substring(last_index + 1);
                return base;
             },
+            
+            getCurrentPosition: function(private) {
+                if(sessionStorage.current_lat)
+                {
+                    return {"latitude": sessionStorage.current_lat, 
+                        "longitude": sessionStorage.current_lng};
+                }
+                else
+                {
+                    return {"latitude": null, 
+                        "longitude": null};
+                }
+                
+            },
             showPosition:   function(private, position, mapholderID) {
                     var latlon = position.coords.latitude + "," + position.coords.longitude;
 
@@ -875,6 +889,9 @@ var get_base = function() {
                     var lat = position.coords.latitude;
                     var lng = position.coords.longitude;
                     var latlng = new google.maps.LatLng(lat, lng);
+                    sessionStorage.current_lat = lat;
+                    sessionStorage.current_lng = lng;
+                    
                     geocoder.geocode({'latLng': latlng}, function(results, status) {
                         if (status === google.maps.GeocoderStatus.OK) {
                             var country =  null;
@@ -923,6 +940,12 @@ var get_base = function() {
                     });
                 },errorGetMyLocation: function(private){
                             private.currency = "MYR";
+            },
+            setCurrentPosition: function(private, position) {
+                 var lat = position.coords.latitude;
+                 var lng = position.coords.longitude;
+                 sessionStorage.current_lat = lat;
+                 sessionStorage.current_lng = lng;
             },
             isMobile: function(private) {
                return  {
