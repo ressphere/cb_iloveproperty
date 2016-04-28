@@ -266,7 +266,7 @@ input:disabled {
 #main_content {
     position: fixed;
     width: 98.8%;
-    z-index: 3;
+    z-index: 5;
     margin-right: 0px;
     margin-left: 0px;
 }
