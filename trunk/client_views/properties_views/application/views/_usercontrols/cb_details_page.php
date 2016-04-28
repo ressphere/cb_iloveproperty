@@ -4,9 +4,9 @@
 			<div class="row clearfix">
 				<div class="col-md-6 column">
                                     <h1 class="gothic_bold_font">{{property_information.PropertyName}}</h1>
-                                    <a ng-if='isMobile()' href='geo:{{country_state.location["k"]}},{{country_state.location["B"]}}' class="navigate_button btn btn-sm btn-success" type="button">Navigate</a>
-                                    <a ng-if='!isMobile()  && my_position.latitude === null && my_position.longitude === null' ng-href='http://maps.google.com/maps?q={{country_state.location["k"]}},{{country_state.location["B"]}}&ll={{country_state.location["k"]}},{{country_state.location["B"]}}&z=17' class="navigate_button btn-success btn-sm" type="button">Navigate</a>
-                                    <a ng-if='!isMobile()  && my_position.latitude !== null && my_position.longitude !== null' ng-href='https://maps.google.com/maps?f=d&saddr={{my_position.latitude}},{{my_position.longitude}}&daddr={{country_state.location["k"]}},{{country_state.location["B"]}}' class="navigate_button btn-success btn-sm" type="button">Navigate</a>
+                                    
+                                    <a ng-if='my_position.latitude === null && my_position.longitude === null' ng-href='http://maps.google.com/maps?q={{country_state.location["k"]}},{{country_state.location["B"]}}&ll={{country_state.location["k"]}},{{country_state.location["B"]}}&z=17' class="navigate_button btn-success btn-sm" type="button">Navigate</a>
+                                    <a ng-if='my_position.latitude !== null && my_position.longitude !== null' ng-href='https://maps.google.com/maps?f=d&saddr={{my_position.latitude}},{{my_position.longitude}}&daddr={{country_state.location["k"]}},{{country_state.location["B"]}}' class="navigate_button btn-success btn-sm" type="button">Navigate</a>
                                     
                                     <h3 class="gothic_font">Area: {{property_information.Area}} &nbsp; <br><br>
                                         <small class="InsideContent">{{property_information.ToiletCount}}
@@ -159,9 +159,9 @@
                         <span class="gothic_bold_font">Location</span>
                      
                         <span class="gothic_italic_font">({{country_state.location["k"]}}, {{country_state.location["B"]}})</span>
-                        <a ng-if='isMobile()' href='geo:{{country_state.location["k"]}},{{country_state.location["B"]}}' class="navigate_button btn btn-next btn-xs btn-link" type="button">Navigate</a>
-                        <a ng-if='!isMobile() && my_position.latitude === null && my_position.longitude === null' ng-href='http://maps.google.com/maps?q={{country_state.location["k"]}},{{country_state.location["B"]}}&ll={{country_state.location["k"]}},{{country_state.location["B"]}}&z=17' class="navigate_button btn-link btn-next btn-xs" type="button">Navigate</a>
-                        <a ng-if='!isMobile() && my_position.latitude !== null && my_position.longitude !== null' ng-href='https://maps.google.com/maps?f=d&saddr={{my_position.latitude}},{{my_position.longitude}}&daddr={{country_state.location["k"]}},{{country_state.location["B"]}}' class="navigate_button btn-link btn-next btn-xs" type="button">Navigate</a>
+                        
+                        <a ng-if='my_position.latitude === null && my_position.longitude === null' ng-href='http://maps.google.com/maps?q={{country_state.location["k"]}},{{country_state.location["B"]}}&ll={{country_state.location["k"]}},{{country_state.location["B"]}}&z=17' class="navigate_button btn-link btn-next btn-xs" type="button">Navigate</a>
+                        <a ng-if='my_position.latitude !== null && my_position.longitude !== null' ng-href='https://maps.google.com/maps?f=d&saddr={{my_position.latitude}},{{my_position.longitude}}&daddr={{country_state.location["k"]}},{{country_state.location["B"]}}' class="navigate_button btn-link btn-next btn-xs" type="button">Navigate</a>
                     
                     </div>
                     <div id="map_canvas" class="map_canvas_group" class="row clearfix">
@@ -503,9 +503,9 @@ I am interested in your property.&#13;&#10;Please contact me if the listed prope
                         <center>
                             
                             <button class="cancel_google_location_type btn" data-dismiss="modal" type="button">Cancel</button>
-                            <a ng-if='isMobile()' href="geo:{{gps.lat}},{{gps.lgt}}" class="navigate_button btn btn-warning" type="button">Navigate</a>
-                            <a ng-if='!isMobile() && my_position == null && my_position.longitude == null' href="http://maps.google.com/maps?q={{gps.lat}},{{gps.lgt}}&ll={{gps.lat}},{{gps.lgt}}&z=17" class="navigate_button btn btn-warning" type="button">Navigate</a>
-                            <a ng-if='!isMobile() && my_position.latitude != null && my_position.longitude != null' href="https://maps.google.com/maps?f=d&saddr={{my_position.latitude}},{{my_position.longitude}}&daddr={{gps.lat}},{{gps.lgt}}" class="navigate_button btn btn-warning" type="button">Navigate</a>
+                            
+                            <a ng-if='my_position == null && my_position.longitude == null' href="http://maps.google.com/maps?q={{gps.lat}},{{gps.lgt}}&ll={{gps.lat}},{{gps.lgt}}&z=17" class="navigate_button btn btn-warning" type="button">Navigate</a>
+                            <a ng-if='my_position.latitude != null && my_position.longitude != null' href="https://maps.google.com/maps?f=d&saddr={{my_position.latitude}},{{my_position.longitude}}&daddr={{gps.lat}},{{gps.lgt}}" class="navigate_button btn btn-warning" type="button">Navigate</a>
                             
                             <br>
                         </center>
