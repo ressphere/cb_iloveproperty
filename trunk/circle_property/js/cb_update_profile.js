@@ -340,7 +340,8 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
     {
         
     };
-       
+    
+    $(".property-activation").bootstrapSwitch();
     
 });
 

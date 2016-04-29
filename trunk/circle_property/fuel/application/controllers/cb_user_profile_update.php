@@ -121,6 +121,7 @@ Please browse my website for more of my listings.<br>This user-friendly website 
    public function my_profile()
    {
        $user_id =  $this->session->userdata('user_id');
+       $wsdl = $this->_get_wsdl_base_url();
        if ($user_id !== FALSE)
        {
            $tab_content_list = $this->get_user_profile_tabs();
@@ -134,11 +135,14 @@ Please browse my website for more of my listings.<br>This user-friendly website 
            $this->extemplate->add_js('js/_scrolling_nav/scrolling-nav.js');
            $this->extemplate->add_js('js/cb_home.js');
            $this->extemplate->add_js('js/jquery.easing.min.js');
+           $this->extemplate->add_js($wsdl . 'js/_switch-toggle/bootstrap-switch.js', 'import', FALSE, FALSE);
+            
            $this->extemplate->add_js('js/cb_update_profile.js');
            $this->extemplate->add_css('css/home.css');
            $this->extemplate->add_css('css/_sidebar/simple-sidebar.css');
            $this->extemplate->add_css('css/cb_user_profile_update.css');
            $this->extemplate->add_css('css/_scrolling_nav/scrolling-nav.css');
+           $this->extemplate->add_css($wsdl . 'css/_switch-toggle/bootstrap-switch.css', 'link', FALSE, FALSE);
            $this->extemplate->add_css('css/user_profile.css');
 
            //cb_change_profile

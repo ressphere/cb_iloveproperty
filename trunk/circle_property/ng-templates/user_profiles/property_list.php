@@ -34,8 +34,20 @@
                    </span>
                 </td>
                 <td>
-                    <span ng-if="data.activate == 1" style="color:green" class="glyphicon glyphicon-ok"/>
-                    <span ng-if="data.activate == 0" style="color:red" class="glyphicon glyphicon-remove"/>
+                    <span ng-if="data.activate == 1">
+                        <!-- Rounded switch -->
+<label class="switch">
+  <input type="checkbox" checked>
+  <div class="slider round"></div>
+</label>
+                    </span>
+                    <span ng-if="data.activate == 0">
+ <!-- Rounded switch -->
+<label class="switch">
+  <input type="checkbox">
+  <div class="slider round"></div>
+</label>
+                    </span>
                 </td>
               </tr>
             </tbody>
