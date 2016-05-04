@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require_once 'properties_base.php';
 require_once '_utils/properties_upload.php';
-class properties_sell extends properties_base {
+class properties_sell extends properties_upload {
    
    function __construct()
    {
@@ -18,10 +18,11 @@ class properties_sell extends properties_base {
    {
        // Preload Header and Footer
        $user_id =  $this->session->userdata('user_id');
+       
        if ($user_id !== FALSE)
        {
            // check point to disallow user from exceeding its listing limit
-           if(properties_upload::is_user_allowed_to_create_new_listing())
+           if($this->is_user_allowed_to_create_new_listing())
            {
                 parent::index();$this->session->set_userdata('secure','1');
                 // Preload js and CSS script that not cover by base
