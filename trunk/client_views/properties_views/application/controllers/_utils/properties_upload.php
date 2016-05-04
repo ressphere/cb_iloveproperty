@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require_once dirname(dirname(__FILE__)).'/properties_base.php';
-class properties_upload extends properties_base 
+class properties_upload extends properties_base
 {
     private $tempDir = NULL;
     function __construct() {
@@ -127,7 +127,7 @@ class properties_upload extends properties_base
             } 
             catch (RuntimeException $e) {
                 
-              if($e->getMessage() !== "Exceeded filesize limit.")
+              if($e->getMessage() !== "Exceeded filesize limit." || $e->getMessage() !== 'Uploaded file is not an image: ' . $flowRelativePath)
               {
                 $this->set_error($e->getMessage());
               }
