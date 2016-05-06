@@ -15,7 +15,7 @@ class activate_deactivate_listing {
         $this->member_obj = new CBWS_Member();
         $this->property_obj = new CB_Property();
     }
-    public function is_listing_available($user_id)
+    private function is_listing_available($user_id)
     {
         $filter_struct = array(
             "filter" => 

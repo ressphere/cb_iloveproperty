@@ -156,7 +156,45 @@ class unit_test_main extends CI_Controller {
         return $val_return;
     }
     
+    protected function method($obj, $methodname, $argument)
+    {
+        $reflected_class = new ReflectionClass(get_class($obj));
+        $reflected_method = $reflected_class->getMethod($methodname);
+        $reflected_method->setAccessible(TRUE);
+        return $reflected_method->invoke($obj,
+               $argument);
+    }
+  
+    protected function set_attribute($obj, $attribute_name, $value)
+    {
+        $reflected_class = new ReflectionClass(get_class($obj));
+        if($reflected_class->hasProperty($attribute_name))
+        {
+            $reflected_property = $reflected_class->getProperty($attribute_name);
+            $reflected_property->setAccessible(TRUE);
+            $reflected_property->setValue($obj, $value);
+            return TRUE;
+        }
+        else 
+        {
+            return FALSE;
+        }
+    }
     
+    protected function get_attribute($obj,$attribute_name)
+    {
+        $reflected_class = new ReflectionClass(get_class($obj));
+        if($reflected_class->hasProperty($attribute_name))
+        {
+            $reflected_property = $reflected_class->getProperty($attribute_name);
+            $reflected_property->setAccessible(TRUE);
+            return $reflected_property->getValue($obj);
+        }
+        else 
+        {
+            return FALSE;
+        }
+    }
     
 }
 
