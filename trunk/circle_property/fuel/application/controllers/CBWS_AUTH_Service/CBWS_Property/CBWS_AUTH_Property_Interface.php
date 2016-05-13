@@ -21,7 +21,7 @@ class CBWS_AUTH_Property_Interface {
         
         // Retrieve service group, split to [0] is Service group and [1] is service name
         $service = explode(":",$request_command["service"]);
-        
+
         // Select service group
         switch($service[1])
         {

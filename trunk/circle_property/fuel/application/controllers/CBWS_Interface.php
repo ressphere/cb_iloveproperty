@@ -89,7 +89,7 @@ class CBWS_Interface extends CI_Controller {
     private function _Service_request($request_command)
     {
         $return_information = NULL;
-        
+                
         if (array_key_exists("service", $request_command))
         {
             $service_group_list = $this->service_group_list();

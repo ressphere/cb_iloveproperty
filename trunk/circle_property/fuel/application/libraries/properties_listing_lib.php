@@ -277,6 +277,7 @@ class properties_listing_lib extends cb_base_libraries
         }
         else
         {
+            
             $this->set_error( "LPL-MLN-1",
                     "Fail to de-activate the specific listing, please contact admin",
                     "No listing hit for ref_tag $ref_tag and user_id $user_id in remove_properties_listing ".json_encode($listing_obj)

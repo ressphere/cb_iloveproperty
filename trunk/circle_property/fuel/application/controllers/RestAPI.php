@@ -80,7 +80,6 @@ class RestAPI extends CBWS_Interface {
         // Debug purpose
         //echo "<br> get: ".json_encode($_GET)."<br>";
         //echo "<br> result: ".json_encode($request_command)."<br>";
-        
         return $request_command;
     }
     
@@ -149,9 +148,9 @@ class RestAPI extends CBWS_Interface {
      */
     public function Service_SendReceive()
     {
+        
        $request_command = $this->_REST_Handle();
-       $return_information = $this->invoke_service_interface($request_command,"SendReceive"); 
-       
+       $return_information = $this->invoke_service_interface($request_command,"SendReceive");
        echo json_encode($return_information);
     }
     

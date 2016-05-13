@@ -368,8 +368,8 @@ class CB_Property extends CBWS_Service_Base{
      */
     public function change_listing_activate($input_data)
     {
+
         $info = $this->data_key_init($input_data, true);
-        
         if($this->is_error){return 0;}
         $mark_data["ref_tag"] = $this->array_value_extract($info, "ref_tag");
         if($this->is_error){return 0;}

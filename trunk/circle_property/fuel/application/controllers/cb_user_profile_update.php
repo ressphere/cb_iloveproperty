@@ -2,7 +2,9 @@
 
 require_once 'base.php';
 require_once '_utils/GeneralFunc.php';
+require_once '_utils/activate_deactivate_listing.php';
 class cb_user_profile_update extends base {
+   private $activate_deactivate_listing_obj = NULL;
    function __construct()
    {
        //overwrite base function before construct
@@ -12,6 +14,7 @@ class cb_user_profile_update extends base {
         $this->load->library("session");
 	$this->load->library("email");
 	$this->load->config('tank_auth', TRUE);
+        $this->activate_deactivate_listing_obj = new activate_deactivate_listing();
         
    }
    private function get_specific_data()
@@ -161,6 +164,50 @@ Please browse my website for more of my listings.<br>This user-friendly website 
            show_error($this->get_page403("This page is for registered member",  $this->session->userdata('client_base_url')),403, "");
        }
        
+   }
+   
+   public function set_activation()
+   {
+        
+       $data = array("result"=>FALSE, "reason"=>"");
+       if (!empty($_POST))
+       {
+           if(array_key_exists("ref_tag", $_POST) &&
+                   array_key_exists("activation", $_POST))
+           {
+               $user_id =  $this->session->userdata('user_id');
+               $ref_tag = $_POST['ref_tag'];
+               
+               $activation = $_POST['activation'] === 1?TRUE:FALSE;
+       
+               if ($user_id !== FALSE)
+               {
+                    $val_return_array = array();
+                    
+                    if($this->activate_deactivate_listing_obj->activate_listing($ref_tag, $user_id, $activation, $val_return_array))
+                    {
+                        $data["result"] = TRUE;
+                    }
+                    else
+                    {
+                        $data["result"] = FALSE;
+                        $data["reason"] =  $val_return_array;
+                    }
+               }
+               else 
+               {
+                    $data["result"] = FALSE;
+                    $data["reason"] = "Invalid user";
+               }
+           }
+           else 
+           {
+               $data["result"] = FALSE;
+               $data["reason"] = "Invalid POST data";
+           }
+           
+       }
+       $this->_print(json_encode($data));
    }
 }
 ?>

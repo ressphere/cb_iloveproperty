@@ -101,6 +101,26 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
             // Decalre base object to access generic API
             var ObjBase = $.makeclass(get_base());
             $scope.service_map_with_url = {};
+            $scope.activate = function(ref_tag, activate)
+            {
+                var activation_url = ObjBase.getWsdlBaseUrl() + "index.php/cb_user_profile_update/set_activation";
+                var senddata = "ref_tag=" + ref_tag +
+                "&activation=" + activate;
+                $http(
+                        {
+                            method:'POST',
+                            url:activation_url,
+                            data:senddata,
+                            cache: true,
+                            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                        }
+                    ).then(
+                        function(response)
+                        {
+                            console.log(response);
+                        }
+                    );
+            };
             $scope.key_available_for_service_map_with_url = function($key)
             {
                 return $key in $scope.service_map_with_url;

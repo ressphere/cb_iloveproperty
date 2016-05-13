@@ -8,6 +8,7 @@
  */
 require_once dirname(__DIR__) . '/CBWS_Service/CB_Property.php';
 require_once dirname(__DIR__) . '/CBWS_AUTH_Service/CBWS_Member/CBWS_Member.php';
+require_once "GeneralFunc.php";
 class activate_deactivate_listing {
     private $member_obj = NULL;
     private $property_obj = NULL;
@@ -24,17 +25,32 @@ class activate_deactivate_listing {
         $listing_limitation = $this->member_obj->get_user_property_listing_limit($user_id);
         $this->property_obj->filter_listing($filter_struct);
         $available_listing = $this->property_obj->get_return_data_set();
+                
         return $available_listing["data"]["count"] < $listing_limitation;
     }
-    public function activate_listing($ref_tag, $user_id, $activate)
+    public function activate_listing($ref_tag, $user_id, $activate, &$val_return_array)
     {
+       $activate_data = array();
+       $activate_data["ref_tag"] = $ref_tag;
+       $activate_data["user_id"] = $user_id;
+       $activate_data["activate"] = $activate === 1 ?TRUE:FALSE;      
         if($activate === TRUE)
         {
-           if($this->is_listing_available($user_id))
+           if(!$this->is_listing_available($user_id))
            {
-               
+               return FALSE;
            }
+           
         }
+
+        $val_return = GeneralFunc::CB_SendReceive_Service_Request("CB_Property:change_listing_activate",json_encode($activate_data));
+        $val_return_array = json_decode($val_return, true);
+
+        if($val_return_array["status_information"] === "Info: Complete change activation status")
+        {
+           return TRUE; 
+        }
+        return FALSE;
         
     }
 }

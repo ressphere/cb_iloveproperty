@@ -112,7 +112,6 @@ class REST_ServiceRequest extends CI_Controller
         }
         
         $api_endpoint = $this->api_url.$api_function;
-        
         return $this->_hash_call($api_endpoint, $command_array);
     }
     
