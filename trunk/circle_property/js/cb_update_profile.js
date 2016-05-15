@@ -101,11 +101,13 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
             // Decalre base object to access generic API
             var ObjBase = $.makeclass(get_base());
             $scope.service_map_with_url = {};
-            $scope.activate = function(ref_tag, activate)
+            $scope.activate = function(ref_tag)
             {
                 var activation_url = ObjBase.getWsdlBaseUrl() + "index.php/cb_user_profile_update/set_activation";
+                var isChecked = $('#chk_'+ref_tag+':checked').length > 0;
                 var senddata = "ref_tag=" + ref_tag +
-                "&activation=" + activate;
+                "&activation="+isChecked;
+                console.log(senddata);
                 $http(
                         {
                             method:'POST',
@@ -117,7 +119,10 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
                     ).then(
                         function(response)
                         {
-                            console.log(response);
+                            if(response.data.result === true)
+                            {
+                                console.log("activation success");        
+                            }
                         }
                     );
             };
