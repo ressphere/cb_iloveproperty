@@ -82,8 +82,7 @@ private $property_info_list = NULL;
         $val_return_json = GeneralFunc::CB_SendReceive_Service_Request("CB_Property:listing_detail",json_encode($ref_param));
         $val_return = json_decode($val_return_json, TRUE);
         if($val_return["status_information"] ===
-                sprintf("Info: Successfully retrieve data for %s", $ref_tag) &&
-           $val_return["data"]["activate"] === "1")
+                sprintf("Info: Successfully retrieve data for %s", $ref_tag))
         {
             $this->session->set_userdata('owner_email', $val_return["data"]["email"]);
             $this->session->set_userdata('ref_tag', $ref_tag);
