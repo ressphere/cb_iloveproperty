@@ -178,8 +178,8 @@ Please browse my website for more of my listings.<br>This user-friendly website 
                $user_id =  $this->session->userdata('user_id');
                $ref_tag = $_POST['ref_tag'];
                
-               $activation = $_POST['activation'] === 1?TRUE:FALSE;
-       
+               $activation = $_POST['activation'];
+               
                if ($user_id !== FALSE)
                {
                     $val_return_array = array();

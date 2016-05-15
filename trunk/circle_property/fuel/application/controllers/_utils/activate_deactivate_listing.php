@@ -33,7 +33,7 @@ class activate_deactivate_listing {
        $activate_data = array();
        $activate_data["ref_tag"] = $ref_tag;
        $activate_data["user_id"] = $user_id;
-       $activate_data["activate"] = $activate === 1 ?TRUE:FALSE;      
+       $activate_data["activate"] = $activate;// === 1 ?TRUE:FALSE;      
         if($activate === TRUE)
         {
            if(!$this->is_listing_available($user_id))
@@ -42,7 +42,6 @@ class activate_deactivate_listing {
            }
            
         }
-
         $val_return = GeneralFunc::CB_SendReceive_Service_Request("CB_Property:change_listing_activate",json_encode($activate_data));
         $val_return_array = json_decode($val_return, true);
 

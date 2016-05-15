@@ -253,23 +253,21 @@ class properties_listing_lib extends cb_base_libraries
         $info = json_decode($info_json, true);
         $ref_tag = $this->array_value_extract($info, "ref_tag");
         $user_id = $this->array_value_extract($info, "user_id");
-        $activate = $this->array_value_extract($info, "activate");
-        
+        $activate = $this->array_value_extract($info, "activate") === "true"?1:0;
         if($this->is_error){return 0;}
         
         $this->CI->load->model('properties_listing_model'); 
         $properties_listing_model = new $this->CI->properties_listing_model;
         
         // Obtain listing model through tag
-        $listing_obj = $properties_listing_model->find_one(array("ref_tag" => $ref_tag, "user_id"=>$user_id));
-        
-        if(is_object($listing_obj))
+        //$listing_obj = $properties_listing_model->find_one(array("ref_tag" => $ref_tag, "user_id"=>$user_id));
+        $where = array("ref_tag" => $ref_tag, "user_id"=>$user_id);
+        $result = $properties_listing_model->update(array('activate'=>$activate ? 1: 0), 
+                $where);      
+        if($result)
         {
-            $listing_obj->activate = $activate;
-            $listing_obj->save();
-            
             $data_array = array(
-                "ref_tag"=>$ref_tag,
+                "ref_tag"=>$info_json,
                 "activate_time" => date('m/d/Y h:i:s a', time())
             );
             
