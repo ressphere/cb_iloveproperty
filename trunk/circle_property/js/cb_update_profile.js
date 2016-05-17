@@ -101,6 +101,7 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
             // Decalre base object to access generic API
             var ObjBase = $.makeclass(get_base());
             $scope.service_map_with_url = {};
+            $scope.hide_view = false;
             $scope.activate = function(ref_tag)
             {
                 var activation_url = ObjBase.getWsdlBaseUrl() + "index.php/cb_user_profile_update/set_activation";
@@ -121,6 +122,16 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
                         {
                             if(response.data.result === true)
                             {
+                                //disable view listing
+                                if(!isChecked)
+                                {
+                                    $(".view_"+ref_tag).hide();
+                                }
+                                else
+                                {
+                                    $(".view_"+ref_tag).show();
+                                }
+                                //increment/decrement the listing availability
                                 console.log("activation success");        
                             }
                         }
