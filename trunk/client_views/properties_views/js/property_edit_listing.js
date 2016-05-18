@@ -738,6 +738,11 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
               }
             };
             
+            $scope.term_click = function()
+            {
+                $scope.err_msg = "";
+            }
+            
             var prop_ref = location.search.split('reference=')[1];
             
             /**
@@ -850,44 +855,46 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
              */
             $scope.submit_click = function()
             {
-              clear_errors();
-              var listing = prepare_message_data($scope);
-              var photo_list = get_uploaded_image();
-              var senddata = "image_list=" + JSON.stringify(photo_list) + "&listing_information=" + JSON.stringify(listing);
-              var url = objProperty.getBaseUrl() + "index.php/_utils/properties_upload/commit_images_and_validation";
-              $scope.disable_button = 1;
-              $scope.photo_upload_status = "Updating Listing..."; 
-              $http({
-                 method: 'POST',
-                 url: url,
-                 data: senddata,
-                 cache: true,
-                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-               }).then(function(response) {
-                   
-                   var parsed_result = response.data;
-                   if(parsed_result["status"] === "success")
-                   {
-                       listing['property_photo'] = parsed_result["data"];
-                       set_listing(listing, $scope);
-                   }
-                   else
-                   {
-                       if( Object.prototype.toString.call( parsed_result["data"] ) === '[object Array]' ) {
-                           set_error(parsed_result["data"]);
-                       }
-                       else
-                       {
-                           console.log(parsed_result);
-                       }
-                       //fail pop message
-                       
-                   }
-                   
-                   
-               });
+              if( submit_check() === true) 
+              {
+                clear_errors();
+                var listing = prepare_message_data($scope);
+                var photo_list = get_uploaded_image();
+                var senddata = "image_list=" + JSON.stringify(photo_list) + "&listing_information=" + JSON.stringify(listing);
+                var url = objProperty.getBaseUrl() + "index.php/_utils/properties_upload/commit_images_and_validation";
+                $scope.disable_button = 1;
+                $scope.photo_upload_status = "Updating Listing..."; 
+                $http({
+                   method: 'POST',
+                   url: url,
+                   data: senddata,
+                   cache: true,
+                   headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                 }).then(function(response) {
+
+                     var parsed_result = response.data;
+                     if(parsed_result["status"] === "success")
+                     {
+                         listing['property_photo'] = parsed_result["data"];
+                         set_listing(listing, $scope);
+                     }
+                     else
+                     {
+                         if( Object.prototype.toString.call( parsed_result["data"] ) === '[object Array]' ) {
+                             set_error(parsed_result["data"]);
+                         }
+                         else
+                         {
+                             console.log(parsed_result);
+                         }
+                         //fail pop message
+
+                     }
+
+
+                 });
                
-              
+                }
             };
             //</editor-fold>
             var set_error = function(ids)
@@ -1094,6 +1101,18 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 return true;
                 
             };
+            
+            var submit_check = function()
+            {
+                if($(upload_term_condition).val() !== "true")
+                {
+                    $scope.err_msg = "Please understand and agree to the terms and conditions";
+                    return false;       
+                }
+
+                return true;                
+            };
+            
             // </editor-fold>
             // <editor-fold desc="set_listing"  defaultstate="collapsed">
             var set_listing = function(listing, $scope)

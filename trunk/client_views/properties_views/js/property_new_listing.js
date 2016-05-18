@@ -721,6 +721,11 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
               }
             };
             
+            $scope.term_click = function()
+            {
+                $scope.err_msg = "";
+            }
+            
             var get_property_type_info = function(category_name)
             {
                 var search_category = "property_type_sell";
@@ -874,46 +879,47 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
              */
             $scope.submit_click = function()
             {
-              clear_errors();
-              var listing = prepare_message_data($scope);
-              var photo_list = get_uploaded_image();
-              var listing_str = JSON.stringify(listing);
-              listing_str = listing_str.replace('&nbsp;','%26nbsp;').replace('&', '%26');
-              var senddata = "image_list=" + JSON.stringify(photo_list) + "&listing_information=" + listing_str;
-              var url = objProperty.getBaseUrl() + "index.php/_utils/properties_upload/commit_images_and_validation";
-              $scope.disable_button = 1;
-              $scope.photo_upload_status = "Uploading Listing..."; 
-              $http({
-                 method: 'POST',
-                 url: url,
-                 data: senddata,
-                 cache: true,
-                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-               }).then(function(response) {
-                   
-                   var parsed_result = response.data;
-                   if(parsed_result["status"] === "success")
-                   {
-                       listing['property_photo'] = parsed_result["data"];
-                       set_listing(listing, $scope);
-                   }
-                   else
-                   {
-                       if( Object.prototype.toString.call( parsed_result["data"] ) === '[object Array]' ) {
-                           set_error(parsed_result["data"]);
-                       }
-                       else
-                       {
-                           console.log(parsed_result);
-                       }
-                       //fail pop message
-                       
-                   }
-                   
-                   
-               });
-               
-              
+              if( submit_check() === true) 
+              {              
+                clear_errors();
+                var listing = prepare_message_data($scope);
+                var photo_list = get_uploaded_image();
+                var listing_str = JSON.stringify(listing);
+                listing_str = listing_str.replace('&nbsp;','%26nbsp;').replace('&', '%26');
+                var senddata = "image_list=" + JSON.stringify(photo_list) + "&listing_information=" + listing_str;
+                var url = objProperty.getBaseUrl() + "index.php/_utils/properties_upload/commit_images_and_validation";
+                $scope.disable_button = 1;
+                $scope.photo_upload_status = "Uploading Listing..."; 
+                $http({
+                   method: 'POST',
+                   url: url,
+                   data: senddata,
+                   cache: true,
+                   headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                 }).then(function(response) {
+
+                     var parsed_result = response.data;
+                     if(parsed_result["status"] === "success")
+                     {
+                         listing['property_photo'] = parsed_result["data"];
+                         set_listing(listing, $scope);
+                     }
+                     else
+                     {
+                         if( Object.prototype.toString.call( parsed_result["data"] ) === '[object Array]' ) {
+                             set_error(parsed_result["data"]);
+                         }
+                         else
+                         {
+                             console.log(parsed_result);
+                         }
+                         //fail pop message
+
+                     }
+
+
+                 });
+                }
             };
             //</editor-fold>
             var set_error = function(ids)
@@ -1124,6 +1130,18 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 return true;
                 
             };
+            
+            var submit_check = function()
+            {
+                if($(upload_term_condition).val() !== "true")
+                {
+                    $scope.err_msg = "Please understand and agree to the terms and conditions";
+                    return false;       
+                }
+
+                return true;                
+            };
+            
             // </editor-fold>
             // <editor-fold desc="set_listing"  defaultstate="collapsed">
             var set_listing = function(listing, $scope)
