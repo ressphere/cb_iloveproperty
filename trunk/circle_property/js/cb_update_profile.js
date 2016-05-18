@@ -126,10 +126,12 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
                                 if(!isChecked)
                                 {
                                     $(".view_"+ref_tag).hide();
+                                    $scope.available_listing_count++;
                                 }
                                 else
                                 {
                                     $(".view_"+ref_tag).show();
+                                    $scope.available_listing_count--;
                                 }
                                 //increment/decrement the listing availability
                                 console.log("activation success");        
@@ -255,7 +257,7 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
                  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                }).then(function(response) {
                    
-                    $scope.vailable_listing_count = response.data;
+                    $scope.available_listing_count = response.data;
                });
             // </editor-fold>
             

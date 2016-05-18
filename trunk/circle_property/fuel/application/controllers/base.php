@@ -2003,6 +2003,7 @@ class base extends CI_Controller {
      public function obtain_user_listing_information()
        {           
            $user_id = $this->session->userdata('user_id');
+           $filter_struct = array("filter"=>array());
            if($user_id)
            {
                 //create am array structure to store the return listing details
@@ -2017,7 +2018,7 @@ class base extends CI_Controller {
                
                 //setup the listing filter by user id
                 $filter_struct["filter"]["user_id"] = $user_id;
-
+                
                 //get the filtered listing details
                 $val_return_listing = GeneralFunc::CB_SendReceive_Service_Request("CB_Property:filter_listing",
                         json_encode($filter_struct));
@@ -2211,12 +2212,13 @@ class base extends CI_Controller {
    public function get_user_number_of_available_listing()
    {           
        $user_id = $this->session->userdata('user_id');
-       $allowed = true;
+       $filter_struct = array("filter"=>array());
 
        if($user_id)
        {              
             //setup the listing filter by user id
             $filter_struct["filter"]["user_id"] = $user_id;
+            $filter_struct["filter"]["activate"] = '1';
 
             //get the filtered listing details
             $user_listing_limit = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:get_user_property_listing_limit",
