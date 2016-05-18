@@ -1133,7 +1133,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             
             var submit_check = function()
             {
-                if($(upload_term_condition).val() !== "true")
+                if($('#upload_term_condition:checkbox:checked').length === 0)
                 {
                     $scope.err_msg = "Please understand and agree to the terms and conditions";
                     return false;       
