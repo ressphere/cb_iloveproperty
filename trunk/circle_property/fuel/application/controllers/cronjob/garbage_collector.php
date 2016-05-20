@@ -41,8 +41,6 @@ class garbage_collector extends CI_Controller {
                     $total_diff = ($diff->format('%y') * 12) + $diff->format('%m');
                     if((int)$total_diff >= self::expire_duration)
                     {
-                        
-                        
                         $activated_list->activate = 0;
                         $activated_list->save();
                         echo $activated_list->ref_tag . " is deactivated \n";
