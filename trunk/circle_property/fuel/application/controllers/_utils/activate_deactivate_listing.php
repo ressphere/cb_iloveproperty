@@ -20,12 +20,13 @@ class activate_deactivate_listing {
     {
         $filter_struct = array(
             "filter" => 
-                array("user_id" => $user_id)
+                array("user_id" => $user_id, "activate" => 1)
         );
         $listing_limitation = $this->member_obj->get_user_property_listing_limit($user_id);
         $this->property_obj->filter_listing($filter_struct);
         $available_listing = $this->property_obj->get_return_data_set();
-                
+        
+        
         return $available_listing["data"]["count"] < $listing_limitation;
     }
     public function activate_listing($ref_tag, $user_id, $activate, &$val_return_array)
@@ -33,8 +34,11 @@ class activate_deactivate_listing {
        $activate_data = array();
        $activate_data["ref_tag"] = $ref_tag;
        $activate_data["user_id"] = $user_id;
-       $activate_data["activate"] = $activate;// === 1 ?TRUE:FALSE;      
-        if($activate === TRUE)
+       $activate_data["activate"] = $activate;// === 1 ?TRUE:FALSE;
+       $handle = fopen("C:\\log\\out_tcm.txt", "w");
+       fwrite($handle, $activate);
+       fclose($handle);
+        if($activate === "true")
         {
            if(!$this->is_listing_available($user_id))
            {

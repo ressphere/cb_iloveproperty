@@ -102,6 +102,7 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
             var ObjBase = $.makeclass(get_base());
             $scope.service_map_with_url = {};
             $scope.hide_view = false;
+            $scope.available_listing_count = -1;
             $scope.activate = function(ref_tag)
             {
                 var activation_url = ObjBase.getWsdlBaseUrl() + "index.php/cb_user_profile_update/set_activation";
@@ -132,9 +133,12 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
                                 {
                                     $(".view_"+ref_tag).show();
                                     $scope.available_listing_count--;
-                                }
-                                //increment/decrement the listing availability
-                                console.log("activation success");        
+                                }        
+                            }
+                            else
+                            {
+                                
+                                alert("You are not allow to activate the listing");
                             }
                         }
                     );
@@ -256,8 +260,7 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
                  cache: true,
                  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                }).then(function(response) {
-                   
-                    $scope.available_listing_count = response.data;
+                    $scope.available_listing_count = parseInt(response.data);
                });
             // </editor-fold>
             
@@ -335,7 +338,7 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
    
     $scope.rm_record = function(category)
     {
-	    $scope.delete_btn = true;
+	$scope.delete_btn = true;
         cal_checked_box(category);
         
         if(checked_boxes.length !== 0)
@@ -378,6 +381,31 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
     {
         
     };
+    $scope.enable_disable_listing = function(activate)
+    {
+        var disable = true;
+        if(activate === 0)
+        {
+            disable = true;
+        }
+        else
+        {
+            disable =false;
+        }
+        $('.listing_activation').each(function(index, element)
+            {
+                if(!element.checked)
+                {
+                    element.disabled = disable;
+                }
+            }
+        );
+    };
+     $scope.$watch("available_listing_count", function(newVal, oldVal){
+                if (newVal === oldVal)
+                        return;
+                $scope.enable_disable_listing(newVal);
+        });
     
     $(".property-activation").bootstrapSwitch();
     

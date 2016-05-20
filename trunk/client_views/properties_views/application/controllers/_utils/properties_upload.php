@@ -388,6 +388,7 @@ class properties_upload extends properties_base
            {              
                 //setup the listing filter by user id
                 $filter_struct["filter"]["user_id"] = $user_id;
+                $filter_struct["filter"]["activate"] = 1;
 
                 //get the filtered listing details
                 $user_listing_limit = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:get_user_property_listing_limit",

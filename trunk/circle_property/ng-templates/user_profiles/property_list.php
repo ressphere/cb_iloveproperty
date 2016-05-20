@@ -37,14 +37,14 @@
                     <span ng-if="data.activate == 1">
                         <!-- Rounded switch -->
                         <label class="switch">
-                          <input id="chk_{{data.ref_tag}}" type="checkbox" checked ng-click="activate(data.ref_tag)">
+                          <input id="chk_{{data.ref_tag}}" class="listing_activation" type="checkbox" checked ng-click="activate(data.ref_tag)">
                           <div class="slider round"></div>
                         </label>
                     </span>
                     <span ng-if="data.activate == 0">
                         <!-- Rounded switch -->
                         <label class="switch">
-                            <input id="chk_{{data.ref_tag}}" type="checkbox" ng-click="activate(data.ref_tag)">
+                            <input id="chk_{{data.ref_tag}}" class="listing_activation" type="checkbox" ng-click="activate(data.ref_tag)">
                             <div class="slider round"></div>
                         </label>
                     </span>
