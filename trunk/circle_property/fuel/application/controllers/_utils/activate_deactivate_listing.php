@@ -34,10 +34,7 @@ class activate_deactivate_listing {
        $activate_data = array();
        $activate_data["ref_tag"] = $ref_tag;
        $activate_data["user_id"] = $user_id;
-       $activate_data["activate"] = $activate;// === 1 ?TRUE:FALSE;
-       $handle = fopen("C:\\log\\out_tcm.txt", "w");
-       fwrite($handle, $activate);
-       fclose($handle);
+       $activate_data["activate"] = $activate;
         if($activate === "true")
         {
            if(!$this->is_listing_available($user_id))
