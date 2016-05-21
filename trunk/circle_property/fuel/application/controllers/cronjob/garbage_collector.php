@@ -13,19 +13,47 @@ class garbage_collector extends CI_Controller {
         $this->load->helper("url"); 
         $this->load->library("extemplate");
         $this->load->library("session");
+        $this->load->library("email");
 	
     }
-    private function get_active_listing()
+    private function get_meaningful_type_name($type)
     {
+        switch ($type)
+        {
+            case "send_prop_request":
+                return "[Property Enquiry]";
+        }
+    }
+    private function _send_email($type, $email, &$data)
+    {
+        $website_name = $this->config->item('website_name');
+        $webmaster_email = $this->config->item('webmaster_email');
         
-        
-        
-        
+       //$CI =& get_instance();
+        //$CI->load->library('email');
+        $this->email->from($webmaster_email, $website_name);
+        $this->email->reply_to($webmaster_email, $website_name);
+        $this->email->to($email);
+        $this->email->subject($this->get_meaningful_type_name($type) . " " . $website_name);
+        $this->email->message($this->load->view('_email/'.$type.'-html', $data, TRUE));
+        $this->email->set_alt_message($this->load->view('_email/'.$type.'-txt', $data, TRUE));
+        $status = $this->email->send();
+        if($status)
+        {
+              return TRUE;
+        }
+        else
+        {
+              $this->set_error($this->email->print_debugger());
+              return FALSE;
+        }
+
     }
     
     public function deactivate_expired_listing()
     {
         $this->load->model('properties_listing_model');
+        $this->load->model('users_model');
         
         $activated_lists = $this->properties_listing_model->find_all(array('activate'=>1));
         if ( ! empty($activated_lists))
@@ -43,7 +71,12 @@ class garbage_collector extends CI_Controller {
                     {
                         $activated_list->activate = 0;
                         $activated_list->save();
+                        $user = $this->users_model->find_one(array('id'=>$activated_list->user_id));
                         echo $activated_list->ref_tag . " is deactivated \n";
+                        
+                        $data['ref_tag'] = $activated_list->ref_tag;
+                        $this->_send_email('deactivation', $user['email'], $data);
+                        echo "Notification sent to " . $user['email'];
                     }
                 }
         }
