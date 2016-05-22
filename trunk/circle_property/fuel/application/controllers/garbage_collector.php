@@ -6,8 +6,12 @@
  *
  * @author Tan Chun Mun
  */
+
+define("PROPERTY_PHOTO_DIR", dirname(dirname(dirname(dirname(__DIR__)))) . "/client_views/properties_views/assets/images/properties");
 class garbage_collector extends CI_Controller {
     const expire_duration = 1;
+    
+    
     public function __construct() {
         parent::__construct();
         $this->load->helper("url"); 
@@ -48,6 +52,30 @@ class garbage_collector extends CI_Controller {
               return FALSE;
         }
 
+    }
+    public function remove_unlink_photo()
+    {
+        $this->load->model('property_photo_model');
+        $photo_lists = $this->property_photo_model->find_all();
+       
+        if(is_dir(PROPERTY_PHOTO_DIR))
+        {
+            foreach(glob(PROPERTY_PHOTO_DIR.'/*.*') as $file) {
+                $filename =  basename($file);
+                foreach($photo_lists as $photo)
+                {
+                    if(strrpos($photo.path, $filename) === FALSE)
+                    {
+                        unlink($file);
+                    } 
+                }
+            }
+        }
+        else
+        {
+            echo PROPERTY_PHOTO_DIR . " does not exists";
+        }
+//        
     }
     
     public function deactivate_expired_listing()
