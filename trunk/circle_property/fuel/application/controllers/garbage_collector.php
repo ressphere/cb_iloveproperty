@@ -64,7 +64,7 @@ class garbage_collector extends CI_Controller {
                 $filename =  basename($file);
                 foreach($photo_lists as $photo)
                 {
-                    if(strrpos($photo.path, $filename) === FALSE)
+                    if(strrpos($photo['path'], $filename) === FALSE)
                     {
                         unlink($file);
                     } 
