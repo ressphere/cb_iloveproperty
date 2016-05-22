@@ -66,6 +66,7 @@ class garbage_collector extends CI_Controller {
                 {
                     if(strrpos($photo['path'], $filename) === FALSE)
                     {
+                        echo 'DELETED ' . $file . '\n';
                         unlink($file);
                     } 
                 }
