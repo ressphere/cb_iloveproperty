@@ -60,7 +60,7 @@ class garbage_collector extends CI_Controller {
        
         if(is_dir(PROPERTY_PHOTO_DIR))
         {
-            foreach(glob(PROPERTY_PHOTO_DIR.'/*.*') as $file) {
+            foreach(glob(PROPERTY_PHOTO_DIR.'/*.tmp') as $file) {
                 $filename =  basename($file);
                 foreach($photo_lists as $photo)
                 {
