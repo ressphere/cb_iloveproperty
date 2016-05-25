@@ -19,8 +19,10 @@
                      <input type="checkbox" name="del_option" value="{{data.ref_tag}}" style="width:50px; box-shadow: 0 0 0">{{data.ref_tag}}
                 </td>
                 <td>
-                     <a class="view_{{data.ref_tag}}" href="{{ref_tag_details+data.ref_tag}}">View</a>
-                     <span class="view_{{data.ref_tag}}"> | </span>
+                     <a ng-if="data.activate == 1" class="view_{{data.ref_tag}}" href="{{ref_tag_details+data.ref_tag}}">View</a>
+                     <span ng-if="data.activate == 1" class="view_{{data.ref_tag}}"> | </span>
+                     <a ng-if="data.activate == 0" style="display:none" class="view_{{data.ref_tag}}" href="{{ref_tag_details+data.ref_tag}}">View</a>
+                     <span ng-if="data.activate == 0" style="display:none" class="view_{{data.ref_tag}}"> | </span>
                      <a target='_self' href="{{edit_details+data.ref_tag}}">Edit</a>
                 </td>
                 <td>
