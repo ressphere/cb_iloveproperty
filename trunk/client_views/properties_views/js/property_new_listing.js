@@ -724,7 +724,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             $scope.term_click = function()
             {
                 $scope.err_msg = "";
-            }
+            };
             
             var get_property_type_info = function(category_name)
             {
