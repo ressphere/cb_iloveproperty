@@ -55,8 +55,6 @@ class properties_sell extends properties_upload {
    {
        ///import for developing the doughnut chart
        $this->extemplate->add_js( "//html5shiv.googlecode.com/svn/trunk/html5.js", 'import', FALSE, FALSE);
-       $this->extemplate->add_js( $this->wsdl . 'js/Chart.js', 'import', FALSE, FALSE);
-       
        $this->extemplate->add_js( $this->wsdl . 'js/flow.min.js', 'import', FALSE, FALSE);
        $this->extemplate->add_js( $this->wsdl . 'js/fusty-flow.js', 'import', FALSE, FALSE);
        $this->extemplate->add_js( $this->wsdl . 'js/fusty-flow-factory.js', 'import', FALSE, FALSE);

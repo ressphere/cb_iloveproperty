@@ -38,7 +38,7 @@ class properties_home extends properties_base {
    private function page_js_css()
    {   
        ///import for developing the doughnut chart
-       $this->extemplate->add_js( $this->wsdl . 'js/Chart.js', 'import', FALSE, FALSE);
+       $this->extemplate->add_js( $this->wsdl . 'js/Chart.min.js', 'import', FALSE, FALSE);
        //Enable for special handling using js for properties home page
        $this->extemplate->add_js('js/property_main_page.js');
        

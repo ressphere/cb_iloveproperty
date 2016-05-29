@@ -62,7 +62,7 @@ class properties_base extends CI_Controller {
     /*
      * Preload all necessary js and CSS script
      */
-    private function preload_js_css()
+    protected function preload_js_css()
     {
         // Load necessary CSS
         
