@@ -29,11 +29,7 @@ class properties_details extends properties_base {
             parent::index();
             // Preload js and CSS script that not cover by base
             $this->page_js_css();
-            $this->load_view();
-            
-            
-            
-           
+            $this->load_view(); 
        }
    }
    private function set_social_media($property_info_list)
@@ -196,24 +192,17 @@ class properties_details extends properties_base {
        $currency_value = $this->_get_posted_value('currency_value');
        $from_currency = $this->_get_posted_value('from_currency');
        $to_currency = $this->_get_posted_value('to_currency');
-       if($currency_value && $from_currency && $to_currency)
-       {
-           $to_currency_type_enum = $this->get_currency_type_enum($to_currency);
-           
-           $converted_currency_value = $this->currency_converter_to_any($currency_value, $from_currency, $to_currency_type_enum);
-           if(is_numeric($converted_currency_value))
-           {
-                $this->_print($converted_currency_value);
-           }
-           else
-           {
-                $this->_print("--");
-           }
-       }
-       else
-       {
-           $this->_print("--");
-       }
+       
+       $argument = json_encode(array(
+                "currency_value"=>$currency_value,
+                "from_currency"=>$from_currency,
+                "to_currency" => $to_currency
+            ));
+       $val_return_json = GeneralFunc::CB_SendReceive_Service_Request("CB_Currency:get_converted_currency_value", $argument);
+       
+       $val_return = json_decode($val_return_json, TRUE);
+       $converted_currency_value = $val_return['data']['result'];
+       $this->_print($converted_currency_value);
    }
    
    public function get_converted_measurement_value()

@@ -2,6 +2,7 @@
 
 require_once 'CBWS_Property/CBWS_AUTH_Property_Interface.php';
 require_once 'CBWS_Member/CBWS_AUTH_Member_Interface.php';
+require_once 'CBWS_Currency/CBWS_AUTH_Currency_Interface.php';
 require_once 'CBWS_ressphere_home/CBWS_AUTH_Ressphere_Home_Interface.php';
 require_once 'CBWS_Info_Interface.php';
 
@@ -48,6 +49,10 @@ class CBWS_AUTH_Service_Interface {
                 break;
             case "CB_Info":
                 $cb_info = new CBWS_Info_Interface();
+                $data_receive = $cb_info->Service_AUTH_Request($request_command);
+                break;
+            case "CB_Currency":
+                $cb_info = new CBWS_AUTH_Currency_Interface();
                 $data_receive = $cb_info->Service_AUTH_Request($request_command);
                 break;
             // No Group found for AUTH Service

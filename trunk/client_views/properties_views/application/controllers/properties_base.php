@@ -10,7 +10,6 @@
 
 require_once '_utils/GeneralFunc.php';
 require_once '_utils/measurement_type_manager.php';
-require_once '_utils/currency_convertor.php';
 
 class properties_base extends CI_Controller {
     

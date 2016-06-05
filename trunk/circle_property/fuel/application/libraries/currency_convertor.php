@@ -6,8 +6,19 @@ class currency_type {
     const USD = 1;
     const SGD = 2;
 }
+
+class currency_string {
+    public $supported_currency = array("MYR"=>"Malaysia Ringgit",
+            "SGD"=>"Singapore Dollar",
+            "USD"=>"US Dollar",
+            "IDR"=>"Indonesian Rupiah",
+            "THB"=>"Thai Baht");
+}
 class CurrencyFactory
 {
+    public $currency_string_obj = NULL;
+    
+
     public static function CurrencyFactorySetError($error)
     {
         ob_start();
@@ -55,9 +66,20 @@ class CurrencyFactory
                 return NULL;
         }
     }
+    
+    public function get_supported_currency()
+    {
+        return $this->currency_string_obj->supported_currency;
+    }
 }
 
-
+class currency_convertor extends CurrencyFactory {
+    function __construct()
+    {
+        $this->currency_string_obj = new currency_string();
+    }
+   
+}
 
 abstract class CurrencyManager {
     protected $CurrencyConverter_obj;
