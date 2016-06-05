@@ -1,4 +1,4 @@
-<div id="wrapper" class="wrapper" ng-app="SearchHighLightApp">
+<div id="search_wrapper" class="wrapper" ng-app="SearchHighLightApp">
 	<div class="row clearfix" ng-controller="FilterSearchHighLightCtrl">
         <!-- This is the left section, contain area selection and filter option-->
             <div id="sidebar-wrapper" class="column">

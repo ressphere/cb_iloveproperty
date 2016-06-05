@@ -277,7 +277,7 @@ a{
 .search_location_div {
     height:40px;
     margin-top:29.76px; 
-    margin-left:61px;
+    margin-left:10px;
     padding-left: 0px; 
     padding-right: 0px;
     font-size: 14pt;
@@ -556,6 +556,10 @@ html, body {
 
 #sidebar-wrapper {
     background-color: white
+}
+
+#search_wrapper {
+    padding-left: 303px;
 }
 
 @media (min-width: 768px) {
