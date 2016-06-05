@@ -146,6 +146,10 @@ a{
     line-height: 1px;
     alignment-adjust:middle;
 }
+
+.filter_div {
+ height: inherit;   
+}
 /*
 .filter_info_top_button:first-child {
     width: 94px;

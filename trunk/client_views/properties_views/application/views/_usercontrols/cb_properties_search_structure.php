@@ -5,8 +5,8 @@
               
 		<div class="col-md-12 col-sm-12 col-xs-12 column filter_location_div sidebar_content " >
 			<div class="row clearfix filter_div" >
-                            <div class="col-md-12 column">
-                                <div class="tabbable" id="tabs-448371">
+                            <div class="col-md-12 column filter_div">
+                                <div class="tabbable filter_div" id="tabs-448371">
                                     <ul class="nav nav-tabs">
                                             <li class="active location_label">
                                                     <a class="gothic_bool_font location_label_text" href="#panel-location" data-toggle="tab">Location</a>
@@ -15,13 +15,13 @@
                                                     <a class="gothic_bool_font location_label_text" href="#panel-filters" data-toggle="tab">Filters</a>
                                             </li>
                                     </ul>
-                                    <div class="tab-content">
+                                    <div class="tab-content filter_div">
                                         
                                         <!-- location part -->
-                                        <div class="tab-pane active" id="panel-location">
+                                        <div class="tab-pane filter_div active" id="panel-location">
                                             <!-- Start information inside -->
-                                            <div class="panel-group" id="accordion">
-                                                <div class="panel panel-default" ng-repeat="(country_data, state_array) in location_list">
+                                            <div class="panel-group filter_div" id="accordion">
+                                                <div class="panel panel-default filter_div" ng-repeat="(country_data, state_array) in location_list">
                                                   <div class="panel-heading">
                                                     <h4 class="panel-title">
                                                       <a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{change_to_id_class(country_data)}}">
