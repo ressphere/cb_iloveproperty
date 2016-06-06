@@ -1,4 +1,4 @@
-<div id="wrapper" class="wrapper" ng-app="SearchHighLightApp">
+<div id="search_wrapper" class="wrapper" ng-app="SearchHighLightApp">
 	<div class="row clearfix" ng-controller="FilterSearchHighLightCtrl">
         <!-- This is the left section, contain area selection and filter option-->
             <div id="sidebar-wrapper" class="column">
@@ -32,7 +32,7 @@
                                                   <div id="collapse_{{change_to_id_class(country_data)}}" class="panel-collapse collapse" ng-class="is_requie_expend_country(country_data)">
                                                     <div class="panel-body">
                                                         <div class="list-group">
-                                                            <a ng-click="update_contry_state(country_data, state_data)" class="state_group_list list-group-item" ng-class="is_requie_highlight_state(country_data, state_data)" ng-repeat="state_data in state_array"> {{state_data}}</a>
+                                                            <a ng-click="update_contry_state(country_data, state_data)" class="state_group_list list-group-item" ng-class="is_requie_highlight_state(country_data, state_data)" ng-repeat="state_data in state_array" style="background-color:#eff0f5; border-color:#d8d8d8"> {{state_data}}</a>
                                                         </div>
                                                     </div>
                                                   </div>
