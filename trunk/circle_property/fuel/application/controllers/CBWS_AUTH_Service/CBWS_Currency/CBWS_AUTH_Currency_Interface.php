@@ -23,11 +23,26 @@ class CBWS_AUTH_Currency_Interface{
                 $return_data["result"] = $codes;
                 $info = "Info: Complete CB_Currency:get_currency_list";
                 break;
+            case "get_currency_type_enum":
+                $codes = $CB_Currency_Obj->get_currency_type_enum($request_command["send_data"]);
+                $return_data["result"] = $codes;
+                $info = "Info: Complete CB_Currency:get_currency_type_enum";
+                break;
+            case "get_currency_type_string":
+                $codes = $CB_Currency_Obj->get_currency_type_string($request_command["send_data"]);
+                $return_data["result"] = $codes;
+                $info = "Info: Complete CB_Currency:get_currency_type_string";
+                break;
             
             case "get_converted_currency_value":
                 $codes = $CB_Currency_Obj->get_converted_currency_value($request_command["send_data"]);
                 $return_data["result"] = $codes;
                 $info = "Info: Complete CB_Currency:get_converted_currency_value";
+                break;
+            case "currency_converter_to_any":
+                $codes = $CB_Currency_Obj->currency_converter_to_any($request_command["send_data"]);
+                $return_data["result"] = $codes;
+                $info = "Info: Complete CB_Currency:currency_converter_to_any";
                 break;
             default:
                 $data_receive["status"] = "Error";

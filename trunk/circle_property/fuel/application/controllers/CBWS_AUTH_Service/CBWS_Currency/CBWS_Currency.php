@@ -15,9 +15,24 @@ class CBWS_Currency {
         
         return $this->CurrencyFactoryObj->get_supported_currency();
     }
-     
-    private function currency_converter_to_any($value ,$from, $to)
+    
+    public function get_currency_type_enum($currency_type)
     {
+        return CurrencyFactory::get_currency_type_enum(json_decode($currency_type, TRUE)['currency']);
+    }
+    
+    public function get_currency_type_string($currency_type)
+    {
+        return CurrencyFactory::get_currency_type_string(json_decode($currency_type, TRUE)['currency']);
+    }
+    
+    public function currency_converter_to_any($currency)
+    {
+        $currency_info = json_decode($currency, TRUE);
+        $value = $currency_info['value'];
+        $from = $currency_info['from'];
+        $to = $currency_info['to'];
+        
         $CurrencyFactoryObj = $this->CurrencyFactoryObj->build($from);
         try
         {
@@ -38,10 +53,20 @@ class CBWS_Currency {
         $to_currency = $currency_conversion_obj['to_currency'];
         if($currency_value && $from_currency && $to_currency)
         { 
-            $to_currency_type_enum =  $this->CurrencyFactoryObj->get_currency_type_enum($to_currency);
+            $to_currency_type_enum = $to_currency;
+            if(!is_numeric($to_currency))
+            {
+                $to_currency_type_enum =  $this->CurrencyFactoryObj->get_currency_type_enum($to_currency);
+            }
+            $currency_info = array(
+              'value'=>  $currency_value,
+              'from'=> $from_currency,
+              'to'=> $to_currency_type_enum
+            );
             
             
-            $converted_currency_value = $this->currency_converter_to_any($currency_value, $from_currency, $to_currency_type_enum);
+            
+            $converted_currency_value = $this->currency_converter_to_any(json_encode($currency_info));
             if(is_numeric($converted_currency_value))
             {
                  return $converted_currency_value;

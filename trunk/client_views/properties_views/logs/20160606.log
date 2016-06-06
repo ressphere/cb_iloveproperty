@@ -1,0 +1,44 @@
+04:47:27 : string(28) "get_converted_currency_value"
+
+04:47:34 : string(28) "get_converted_currency_value"
+
+04:47:40 : string(28) "get_converted_currency_value"
+
+04:50:29 : string(28) "get_converted_currency_value"
+
+04:50:36 : string(28) "get_converted_currency_value"
+
+04:51:31 : string(28) "get_converted_currency_value"
+
+04:51:39 : string(28) "get_converted_currency_value"
+
+04:56:47 : string(28) "get_converted_currency_value"
+
+04:58:39 : string(28) "get_converted_currency_value"
+
+04:58:46 : string(28) "get_converted_currency_value"
+
+05:01:18 : string(28) "get_converted_currency_value"
+
+05:01:18 : float(1000000)
+
+05:01:56 : string(28) "get_converted_currency_value"
+
+05:01:56 : string(18) "1000000.00:MYR:MYR"
+
+05:02:10 : string(28) "get_converted_currency_value"
+
+05:02:10 : string(18) "1000000.00:MYR:SGD"
+
+05:03:47 : string(28) "get_converted_currency_value"
+
+05:03:47 : string(18) "1000000.00:MYR:SGD"
+
+05:05:47 : string(28) "get_converted_currency_value"
+
+05:05:47 : string(18) "1000000.00:MYR:SGD"
+
+05:05:53 : string(28) "get_converted_currency_value"
+
+05:05:53 : string(18) "1000000.00:MYR:MYR"
+

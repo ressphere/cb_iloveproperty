@@ -10,9 +10,9 @@ class currency_type {
 class currency_string {
     public $supported_currency = array("MYR"=>"Malaysia Ringgit",
             "SGD"=>"Singapore Dollar",
-            "USD"=>"US Dollar",
-            "IDR"=>"Indonesian Rupiah",
-            "THB"=>"Thai Baht");
+            "USD"=>"US Dollar");
+            //"IDR"=>"Indonesian Rupiah",
+            //"THB"=>"Thai Baht");
 }
 class CurrencyFactory
 {
@@ -111,6 +111,7 @@ class MYRManager extends CurrencyManager{
             default:
                 return NAN;
         }
+        
         return $this->CurrencyConverter_obj->convert('MYR', $to_currency, $value, 1, 1);  
     }
 }

@@ -552,27 +552,6 @@ class properties_base extends CI_Controller {
         }
     }
     
-    protected function get_currency_type_enum($current_currency)
-    {
-        return CurrencyFactory::get_currency_type_enum($current_currency);
-    }
-    protected function get_currency_type_string($currency_enum)
-    {
-        return CurrencyFactory::get_currency_type_string($currency_enum);
-    }
-    protected function currency_converter_to_any($value ,$from, $to)
-    {
-        $CurrencyFactoryObj = CurrencyFactory::build($from);
-        try
-        {
-            return $CurrencyFactoryObj->get_result($to, $value);
-        }
-        catch (Exception $e) {
-            $this->set_error("Invalid unit type: " . $from);
-            $this->set_error($e);
-            return FALSE;
-        }
-    }
     protected function get_page404($error)
     {
             $title = "404 Page Not Found";

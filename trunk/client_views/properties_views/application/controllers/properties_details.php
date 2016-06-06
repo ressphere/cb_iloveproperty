@@ -202,6 +202,9 @@ class properties_details extends properties_base {
        
        $val_return = json_decode($val_return_json, TRUE);
        $converted_currency_value = $val_return['data']['result'];
+       $this->set_error("get_converted_currency_value");
+       $this->set_error($currency_value.":".$from_currency.":".$to_currency);
+       
        $this->_print($converted_currency_value);
    }
    

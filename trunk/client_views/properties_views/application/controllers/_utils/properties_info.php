@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require_once dirname(dirname(__FILE__)).'/properties_base.php';
-require_once 'currency_convertor.php';
 require_once 'measurement_type_manager.php';
+require_once 'GeneralFunc.php';
 
 class properties_info extends properties_base {
     
@@ -245,19 +245,39 @@ class properties_info extends properties_base {
         return $data;
 
     }
+    public function convert_currency_from_enum_to_string($currency_in_enum)
+    {
+        $argument = json_encode(array(
+                "currency"=>$currency_in_enum
+            ));
+        $val_return = GeneralFunc::CB_SendReceive_Service_Request("CB_Currency:get_currency_type_string", 
+                $argument);
+        return json_decode($val_return, TRUE)["data"]["result"];
+    }
+    public function get_currency_list()
+    {
+        
+        $val_return = GeneralFunc::CB_SendReceive_Service_Request("CB_Currency:get_currency_list", NULL);
+           
+        return json_decode($val_return, TRUE)['data']['result'];
+    }
     /*
      * Retrieved search result
      */
     function obtain_search_result ()
     {
         // display per page
-        $limit = 9;
+        
+        $limit = 9;//
+        
         $search_result["nav_total_page"] = 0;
         $search_result["total_result"] = 0;
         $search_result["search_result"] = array();
         $ref_tag_list = array();
+        
         // Special handle for property_type_selection
         $property_category_selection = $this->_get_array_value($_GET,"property_category_selection");
+        
         if($property_category_selection === "All Category")
         {
             $property_category_selection = NULL;
@@ -281,8 +301,15 @@ class properties_info extends properties_base {
         $measurement_min = $this->_get_array_value($_GET,"min_sqft");
         $origin_measurement_type = $this->_get_array_value($_GET, "measurement_type");
         
-        for($i = 0; $i < currency_type::__len; $i++)
+        //$supported_currency = $this->get_currency_list();
+        //$val_return = GeneralFunc::CB_SendReceive_Service_Request("CB_Currency:get_currency_list", NULL);
+        $supported_currency = $this->get_currency_list();
+        
+        //$supported_currency = json_decode($val_return, TRUE)['data']['result'];
+        for($i = 0; $i < count($supported_currency); $i++)
         {
+            $currency_enum_to_string = $this->convert_currency_from_enum_to_string($i);
+            
             for($j = 0; $j < measurement_type::__len; $j++)
             {
                 $price_range = $this->construct_currency_range($origin_max, $origin_min, 
@@ -316,7 +343,7 @@ class properties_info extends properties_base {
                         "buildup <=" => ($width_range[1] === "" || $width_range[1] === "0.00")? NULL:$width_range[1],
                         "buildup >=" => $width_range[0],
                         		
-                        "currency" =>  $this->get_currency_type_string($i),
+                        "currency" => $currency_enum_to_string,
                         "size_measurement_code" =>  MeasurementFactory::get_measurement_type_string($j)
                     ),
                 );
@@ -324,7 +351,7 @@ class properties_info extends properties_base {
                 // Invoke webservice to retrieve filter data
                 $service = "CB_Property:filter_listing";
                 $val_return = GeneralFunc::CB_SendReceive_Service_Request($service,json_encode($filter_array));
-
+                
                 if($val_return === NULL)
                 {
                     continue;
@@ -354,7 +381,8 @@ class properties_info extends properties_base {
                 $search_result["total_result"] += $val_return_array["count"];
             }
         
-        }
+        }   
+        
         echo json_encode( $search_result );
     }
     

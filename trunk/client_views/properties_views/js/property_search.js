@@ -430,6 +430,7 @@ searchrst_information.controller("FilterSearchHighLightCtrl", function($scope, $
             //console.log($scope.search);
             objHome.removeCurrencyObserver($scope.update_currency_callback);
             objHome.addCurrencyObserver($scope.update_currency_callback);
+            
             if($scope.search.length === 0)
             {
                 update_price_search_range($scope, $scope.currency, input_data.currency);
