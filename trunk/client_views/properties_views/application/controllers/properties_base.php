@@ -551,7 +551,35 @@ class properties_base extends CI_Controller {
             return FALSE;
         }
     }
-    
+    protected function get_currency_type_enum($current_currency)
+    {
+         $argument = json_encode(array(
+                "currency"=>$current_currency
+            ));
+        $val_return = $this->SendReceive_Service("CB_Currency:get_currency_type_enum",
+                $argument);
+        return json_decode($val_return, TRUE)['data']['result'];
+    }
+    protected function get_currency_type_string($currency_enum)
+    {
+        $argument = json_encode(array(
+                "currency"=>$currency_enum
+            ));
+        $val_return = $this->SendReceive_Service("CB_Currency:get_currency_type_string",
+                $argument);
+        return json_decode($val_return, TRUE)['data']['result'];
+    }
+    protected function currency_converter_to_any($value ,$from, $to)
+    {
+         $argument = json_encode(array(
+                "value"=>$value,
+                "from"=>$from,
+                "to"=>$to
+            ));
+        $val_return = $this->SendReceive_Service("CB_Currency:currency_converter_to_any",
+                $argument);
+        return json_decode($val_return, TRUE)['data']['result'];
+    }
     protected function get_page404($error)
     {
             $title = "404 Page Not Found";

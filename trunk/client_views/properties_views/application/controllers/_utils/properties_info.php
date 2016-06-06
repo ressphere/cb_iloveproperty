@@ -309,11 +309,11 @@ class properties_info extends properties_base {
         for($i = 0; $i < count($supported_currency); $i++)
         {
             $currency_enum_to_string = $this->convert_currency_from_enum_to_string($i);
-            
             for($j = 0; $j < measurement_type::__len; $j++)
             {
                 $price_range = $this->construct_currency_range($origin_max, $origin_min, 
                         $origin_currency, $i);
+               
                 
                 $width_range =  $this->construct_width_range($measurement_max, $measurement_min, 
                         $origin_measurement_type, MeasurementFactory::get_measurement_type_string($j));

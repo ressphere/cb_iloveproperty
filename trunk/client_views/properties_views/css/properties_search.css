@@ -473,6 +473,10 @@ a{
     margin-top: 0px;
 }
 
+.search_result_div {
+    padding-left: 5%
+}
+
 .search_result_icon_line_bed_wc {
     float:right; 
     line-height: 0px; 

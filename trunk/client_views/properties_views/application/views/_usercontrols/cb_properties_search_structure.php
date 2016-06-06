@@ -178,7 +178,7 @@
                 
             <!-- This is the right section, contain the search promotion section and searched result -->
             <div id="page-content-wrapper" class="column">
-                <div class="col-md-12 col-sm-12 col-xs-12 column">
+                <div class="col-md-12 col-sm-12 col-xs-12 column search_result_div">
                     
                     <!-- Build the location indicator --> 
                     <div class="row clearfix">
