@@ -2239,6 +2239,12 @@ class base extends CI_Controller {
            $this->set_error("function:get_number_of_listings failed with invalid user id: (" . $user_id .")");
        }
    }
+   
+   public function get_list_of_currency()
+   {
+       $val_return = GeneralFunc::CB_Receive_Service_Request("CB_Currency:get_currency_list");
+       $this->_print($val_return);
+   }
 }
 
 class fb_type

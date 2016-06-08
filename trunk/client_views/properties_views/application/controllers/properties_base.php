@@ -442,6 +442,8 @@ class properties_base extends CI_Controller {
             return TRUE;
         }
     }
+    
+    
     private function get_state_by_country(&$states , $country)
     {
          $filter_struct = array();
