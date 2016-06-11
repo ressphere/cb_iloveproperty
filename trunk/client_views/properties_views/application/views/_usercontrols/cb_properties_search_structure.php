@@ -178,7 +178,7 @@
                 
             <!-- This is the right section, contain the search promotion section and searched result -->
             <div id="page-content-wrapper" class="column">
-                <div class="col-md-12 col-sm-12 col-xs-12 column search_result_div">
+                <div class="col-md-12 col-sm-12 col-xs-12 column properties_result_div">
                     
                     <!-- Build the location indicator --> 
                     <div class="row clearfix">
@@ -233,7 +233,7 @@
                         <div class="search_result_div">
                       
                                 <!-- Data set-->
-                                <div class ="col-md-4 col-xs-4 search_result_data_div" ng-click="detail_page_load(search_data.ref_tag)"  ng-repeat="search_data in search">
+                                <div class ="col-md-4 col-sm-4 col-xs-4 search_result_data_div" ng-click="detail_page_load(search_data.ref_tag)"  ng-repeat="search_data in search">
                                     <!-- Type2 - Purple Shadow -->
                                     <div class="search_result_purple_shadow" ng-show="search_data.display_type == 2"> </div>
                                     
