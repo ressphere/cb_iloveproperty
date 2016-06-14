@@ -76,8 +76,8 @@ $(document).ready(function() {
          {
             fav_currency = "MYR";
          }
+         var objHome = StaticHomeObject.getInstance();
+         objHome.set_fav_currency(fav_currency);
          $('#btn_currency').html("Currency (<span id='btn_currency_type'>"+fav_currency+"</span>)");
          $("#select_currency").val(fav_currency);
 });
-
-
