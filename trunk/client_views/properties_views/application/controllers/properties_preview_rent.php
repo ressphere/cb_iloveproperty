@@ -47,7 +47,7 @@ class properties_preview_rent extends properties_base {
        $this->extemplate->add_js( $this->wsdl . 'js/scale.fix.js', 'import', FALSE, FALSE);
        $this->extemplate->add_js($this->wsdl . 'js/app.js', 'import', FALSE, FALSE);
        $this->extemplate->add_js( $this->wsdl . 'js/google_map.js', 'import', FALSE, FALSE);
-       $this->extemplate->add_js( $this->wsdl . 'js/turn.min.js', 'import', FALSE, FALSE);
+       $this->extemplate->add_js( $this->wsdl . 'js/flip.min.js', 'import', FALSE, FALSE);
        //Enable for special handling using js for properties home page
        $this->extemplate->add_js('js/property_facilities.js');
        $this->extemplate->add_js('js/property_details_page.js');

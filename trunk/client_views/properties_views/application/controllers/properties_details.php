@@ -241,7 +241,7 @@ class properties_details extends properties_base {
        $this->extemplate->add_js( $this->wsdl . 'js/scale.fix.js', 'import', FALSE, FALSE);
        $this->extemplate->add_js($this->wsdl . 'js/app.js', 'import', FALSE, FALSE);
        $this->extemplate->add_js( $this->wsdl . 'js/google_map.js', 'import', FALSE, FALSE);
-       $this->extemplate->add_js( $this->wsdl . 'js/turn.min.js', 'import', FALSE, FALSE);
+       $this->extemplate->add_js( $this->wsdl . 'js/flip.min.js', 'import', FALSE, FALSE);
        
        
        
