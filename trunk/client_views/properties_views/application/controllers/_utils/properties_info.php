@@ -261,6 +261,7 @@ class properties_info extends properties_base {
            
         return json_decode($val_return, TRUE)['data']['result'];
     }
+   
     /*
      * Retrieved search result
      */

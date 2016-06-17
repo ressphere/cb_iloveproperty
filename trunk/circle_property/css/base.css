@@ -298,3 +298,8 @@ input:disabled {
 #system_logout {
     cursor: pointer;
 }
+
+.modal-backdrop
+{
+    width: 99%
+}
