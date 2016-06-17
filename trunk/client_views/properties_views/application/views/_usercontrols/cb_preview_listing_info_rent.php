@@ -35,64 +35,67 @@
 		</div>
 	</div><br>
 	<div class="row clearfix">
-		<div class="col-md-4 column">
-                    <div class="gothic_font row">
+		<div class="col-md-6 column">
+                    <div class="contact_div gothic_font row">
                         <div class="row title">
                             <span class="gothic_bold_font">Please Contact</span>
                         </div>
                         <div class="row information">
                             <br>
-                            <div class="col-lg-8 col-md-6 col-sm-10 col-xs-6">
+                            <div class="col-lg-8 col-md-6">
                                 <div class="row">
-                                        <div class="col-lg-4 col-md-2 col-sm-6 col-xs-6">
+                                        <div class="col-lg-4 col-md-6 col-sm-6">
                                             <span class="gothic_bold_font">Name</span>
                                         </div>
-                                        <div class="col-lg-8 col-md-10 col-sm-6 col-xs-6">
+                                        <div class="col-lg-8 col-md-6 col-sm-6">
                                             <span class="gothic_font">{{person.name}}</span>
                                         </div>
                                 </div><br>
                                 <div class="row">
-                                        <div class="col-lg-4 col-md-2 col-sm-6 col-xs-6">
+                                        <div class="col-lg-4 col-md-6 col-sm-6">
                                             <span class="gothic_bold_font">Contact</span>
                                         </div>
-                                        <div class="col-lg-8 col-md-10 col-sm-6 col-xs-6">
+                                       <div class="col-lg-8 col-md-6 col-sm-6">
                                             <span class="gothic_font">{{person.phone}}</span>
                                         </div>
                                 </div><br>
+                                
                                 <div class="row">
-                                        <div class="pull-left col-lg-4 col-md-2 col-sm-6 col-xs-6">
+                                        <div class="pull-left col-lg-4 col-md-6 col-sm-6">
                                             <span class="gothic_bold_font">Email</span>
                                         </div>
-                                        <div class="pull-left col-lg-8 col-md-10 col-sm-6 col-xs-6">
-                                            <span class="gothic_font">{{person.email}}</span>
+                                        <div class="pull-left col-lg-8 col-md-6 col-sm-6">
+                                            <span id="txtEmail" class="gothic_font">{{person.email}}</span>
                                         </div>
-                                </div>
+                                </div><br>
+                                <div class="row">
+                                    <button ng-disabled="!enabled_contact" id="contact" ng-disabled="disable_button" ng-click="contact_click()" type="button" class="btn">Contact</button>
+                                 </div><br>
+                        
+
                             </div>
-                            <div class="col-lg-4 col-md-6 col-sm-2 col-sm-2 col-xs-6 profile">
+                            <div class="col-lg-4 col-md-6 profile" style="display: none">
                                 
                                 <div class="row">
                                     <img class="pull-right" src="images/user_profile_big.png" width="80px"/>
                                 </div>
        
-                                 <div class="row">
-                                    <button ng-disabled="!enabled_contact" id="contact" ng-disabled="disable_button" ng-click="contact_click()" type="button" class="btn pull-right">Contact</button>
-                                 </div><br>
-
+                                 
                             </div>
                             
                         </div>
-                    </div><br><br><br>
-                    <div class="gothic_font row">
+                    </div><br/>
+                    <div class="social_media_div gothic_font row">
                         <div class="row title">
                             <span class="gothic_bold_font">Social Media</span>
                             
                         </div>
                         <div class="row information">
                             <br>
-                            <div class="col-md-4  col-sm-4 col-sm-4 col-xs-4 column">
+                            <div class="g-plus col-md-4  col-sm-4 col-sm-4 column">
                                 <div class="g-plus" data-action="share" data-annotation="bubble" ></div>
                             </div>
-                            <div class="col-md-4  col-sm-4 col-sm-4 col-xs-4 column">
+                            <div class="twitter col-md-4  col-sm-4 col-sm-4 column">
                                 <a href="https://twitter.com/share" class="twitter-share-button" 
                                    data-url="{{current_url}}">Tweet</a>
                                 <script>
@@ -103,14 +106,13 @@
                                     }(document, 'script', 'twitter-wjs');
                                 </script>
                             </div>
-                            <div class="col-md-4  col-sm-4 col-sm-4 col-xs-4 column">
+                            <div class="fb col-md-4  col-sm-4 col-sm-4 column">
                                 <div class="fb-share-button" data-href="{{current_url}}" data-layout="button_count"></div>
                             </div><br><br>
                         </div>
-                    </div><br>
-                    
+                    </div><br>    
 		</div>
-		<div class="col-md-8 column gothic_font">
+		<div class="col-md-6 column gothic_font">
                     <div class="row title">
                         <span class="gothic_bold_font">Details</span>         
                     </div>
@@ -248,11 +250,11 @@
                           <div class="tab-content">
 
                             <div role="tabpanel" class="tab-pane active" id="transportations">
-                                <div class="nearest_details col-md-8" ng-repeat="place in property_information.NearbyPlaces"
-                                     ng-if="place.types[0]=='subway_station' || place.types[0]=='bus_station' ||
-                                     place.types[0] == 'train_station' || place.types[0] == 'taxi_stand' || place.types[0] == 'airport'">
+                                <div class="nearest_details col-md-12">
                                     <br>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4" ng-repeat="place in property_information.NearbyPlaces"
+                                     ng-if="place.types[0] =='subway_station' || place.types[0]=='bus_station' ||
+                                     place.types[0] == 'train_station' || place.types[0] == 'taxi_stand' || place.types[0] == 'airport'">
                                         <span class="icon-large icon-train" aria-hidden="true" ng-if="place.types[0] == 'train_station'">
 
                                          </span>
@@ -262,15 +264,15 @@
                                         <span class="icon-large icon-metro-subway" aria-hidden="true" ng-if="place.types[0] == 'subway_station'">
 
                                          </span>
-                                        <span class="icon-large  icon-automobile-car" aria-hidden="true" ng-if="place.types[0] == 'taxi_stand'">
+                                        <span  class="icon-large  icon-automobile-car" aria-hidden="true" ng-if="place.types[0] == 'taxi_stand'">
 
                                          </span>
-                                        <span class="icon-large icon-plane" aria-hidden="true" ng-if="place.types[0] == 'airport'">
+                                        <span  class="icon-large icon-plane" aria-hidden="true" ng-if="place.types[0] == 'airport'">
 
                                          </span>
-                                        <span class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-if='place.has_detail' ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng());'  class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-if='!place.has_detail'   class="place_name non_clickable gothic_font">{{place.name}}<br><br></span>
                                     </div>
-
 
                                     <div class="col-md-4 location">
                                         <span style="display: none">"{{place.detail.geometry.location}}"</span>
@@ -281,78 +283,81 @@
 
                             </div>
                             <div role="tabpanel" class="tab-pane" id="schools">
-                                <div class="nearest_details col-md-8" ng-repeat="place in property_information.NearbyPlaces" 
-                                     ng-if="place.types[0]=='school' || place.types[0]=='university'"><br>
-                                    <div class="col-md-4">
+                                <div class="nearest_details col-md-12"><br>
+                                    <div class="col-md-4"  ng-repeat="place in property_information.NearbyPlaces" 
+                                     ng-if="(place.types[0]=='school' || place.types[0]=='university')">
                                         <img width='14px' height='auto' src='images/uni.jpg' alt='university'>
 
-                                        <span class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-if='place.has_detail' ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng())' class="place_name gothic_font">{{place.name}} {{count}}<br><br></span>                                        
+                                        <span ng-if='!place.has_detail'   class="place_name non_clickable gothic_font">{{place.name}} {{count}}<br><br></span>
                                     </div>
-                                     <div class="col-md-4 location">
+      
+<!--                                     <div class="col-md-4 location">
                                         <span style="display: none">"{{place.detail.geometry.location}}"</span>
-                                    </div>
+                                    </div>-->
 
                                 </div>
 
                             </div>
                             <div role="tabpanel" class="tab-pane" id="shopping_malls">
-                                 <div class="nearest_details col-md-8" ng-repeat="place in property_information.NearbyPlaces" 
-                                      ng-if="place.types[0]=='shopping_mall'"><br>
-                                    <div class="col-md-4">
+                                 <div class="nearest_details col-md-12"><br>
+                                    <div class="col-md-4"   ng-repeat="place in property_information.NearbyPlaces" 
+                                      ng-if="place.types[0]=='shopping_mall'">
 
                                         <span class="icon-shoppingcartalt" aria-hidden="true">
 
                                          </span>
-                                        <span class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-if='place.has_detail' ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng());' class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-if='!place.has_detail'   class="place_name non_clickable gothic_font">{{place.name}}<br><br></span>
                                     </div>
-                                     <div class="col-md-4 location gothic_font">
+                                     
+<!--                                     <div class="col-md-4 location gothic_font">
                                         <span style="display: none">"{{place.detail.geometry.location}}"</span>
-                                    </div>
+                                    </div>-->
 
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="medicals">
-                                 <div class="nearest_details  col-md-8" ng-repeat="place in property_information.NearbyPlaces" 
-                                        ng-if="place.types[0]=='hospital'"><br>
-                                    <div class="col-md-4">
+                                 <div class="nearest_details  col-md-12"><br>
+                                    <div class="col-md-4" ng-repeat="place in property_information.NearbyPlaces" 
+                                        ng-if="place.types[0]=='hospital'">
                                         <span class='icon-hospital' aria-hidden="true"></span>
-                                        <span class="place_name">{{place.name}}<br><br></span>
+                                        <span ng-if='place.has_detail' ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng());' class="place_name">{{place.name}}<br><br></span>
+                                        <span ng-if='!place.has_detail'   class="place_name non_clickable gothic_font">{{place.name}}<br><br></span>
                                     </div>
-                                    <div class="col-md-4 location gothic_font">
+<!--                                    <div class="col-md-4 location gothic_font">
                                         <span style="display: none">"{{place.detail.geometry.location}}"</span>
-                                    </div>
+                                    </div>-->
 
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="banks">
-                                <div class="nearest_details col-md-8" ng-repeat="place in property_information.NearbyPlaces" 
-                                        ng-if="place.types[0]=='bank'"><br>
-                                    <div class="col-md-4">
+                                <div class="nearest_details col-md-12"><br>
+                                    <div class="col-md-4" ng-repeat="place in property_information.NearbyPlaces" 
+                                        ng-if="place.types[0]=='bank'">
                                         <span class="icon-moneybag" aria-hidden="true">
 
                                          </span>
-                                        <span class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-if='place.has_detail' ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng());' class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-if='!place.has_detail'   class="place_name non_clickable gothic_font">{{place.name}}<br><br></span>
                                     </div>
-                                     <div class="col-md-4 location gothic_font">
-                                        <span style="display: none">"{{place.detail.geometry.location}}"</span>
-                                    </div>
+                                     
 
                                 </div>
                             </div>
                            <!--gas_stations-->   
                            <div role="tabpanel" class="tab-pane" id="gas_stations">
-                                <div class="nearest_details col-md-8" ng-repeat="place in property_information.NearbyPlaces" 
-                                        ng-if="place.types[0]=='gas_station'"><br>
-                                    <div class="col-md-4">
+                                <div class="nearest_details col-md-12"><br>
+                                    <div class="col-md-4" ng-repeat="place in property_information.NearbyPlaces" 
+                                        ng-if="place.types[0]=='gas_station'">
 
                                         <span class="icon-gasstation" aria-hidden="true">
 
                                          </span>
-                                        <span class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-if='place.has_detail' ng-click='show_map(place.detail.geometry.location.lat(), place.detail.geometry.location.lng());' class="place_name gothic_font">{{place.name}}<br><br></span>
+                                        <span ng-if='!place.has_detail'   class="place_name non_clickable gothic_font">{{place.name}}<br><br></span>
                                     </div>
-                                     <div class="col-md-4 location gothic_font">
-                                        <span style="display: none">"{{place.detail.geometry.location}}"</span>
-                                    </div>
+                                     
                                 </div>
                             </div>
                           </div>
