@@ -1515,10 +1515,22 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     file.error = true;
                     file.error_msg = 
                          "This file exceeds the maximum upload size for this server.";
+                }
+                else if (!{png:1,gif:1,jpg:1,jpeg:1}[file.getExtension()])
+                {
+                    file.error = true;
+                    file.error_msg = 
+                            "This file type is not supported.";
+                }
+                
+                if (file.error === true)
+                {
+                    alert(file.error_msg);
                     file.done = true;
                     file.flowObj.preventEvent(event);
                     return false;
                 }
+                
             });
   
             flowFactory.flow.on('complete', function () {
@@ -1558,9 +1570,6 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 return "";
                         
             };
-         
-        
-            
      });
 });
 

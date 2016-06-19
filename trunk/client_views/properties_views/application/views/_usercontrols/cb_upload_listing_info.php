@@ -26,7 +26,6 @@
             flow-drag-leave="dropClass=&#39;&#39;" 
             flow-init="uploader.opts" 
             flow-files-submitted="$flow.upload()" 
-            flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
             class="ng-scope">
             <div  class="drop row clearfix" flow-drop="" ng-class="dropClass">
                 <div>
