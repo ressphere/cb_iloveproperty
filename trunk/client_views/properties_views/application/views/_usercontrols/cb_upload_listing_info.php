@@ -28,49 +28,45 @@
             flow-files-submitted="$flow.upload()" 
             flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
             class="ng-scope">
-             <div  class="drop row clearfix" flow-drop="" ng-class="dropClass">
+            <div  class="drop row clearfix" flow-drop="" ng-class="dropClass">
                 <div>
-                <span class="btn btn-default" flow-btn="">Upload Image
-                    <input type="file" multiple="multiple" 
-                    style="visibility: hidden; position: absolute;">
-                </span>
-                <span class="gothic_font btn btn-default" 
-                      flow-btn="" flow-directory="" 
-                      ng-show="$flow.supportDirectory">Upload Folder of Images<input type="file" multiple="multiple"
-                        webkitdirectory="webkitdirectory" 
-                        style="visibility: hidden; position: absolute;">
-                </span>
-
-              </div><br>
-
-                <div class="row clearfix">
+                    <span class="btn btn-default" flow-btn="">Upload Image
+                        <input type="file" multiple="multiple" 
+                            style="visibility: hidden; position: absolute;">
+                    </span>
+                    <span class="gothic_font btn btn-default" 
+                        flow-btn="" flow-directory="" 
+                        ng-show="$flow.supportDirectory">Upload Folder of Images
+                        <input type="file" multiple="multiple"
+                            webkitdirectory="webkitdirectory" 
+                            style="visibility: hidden; position: absolute;">
+                    </span>
+                </div>
+                
+                <br>
+                
                 <div>
                     <div ng-repeat="file in $flow.files" class="col-sm-6 col-md-4">
-                          <span class="title ng-binding" ng-binding="file.name"></span>
-                          <div class="row thumbnail" ng-show="$flow.files.length">
-                            <img flow-img="file" style="max-width: 200px; height: 150px"
-                                 ng-src="{{file.name}}">
-                          </div>
-                          <div>
-                              <center><textarea maxlength="50" class="form-control photo-desc" style='resize: none;' cols='35' rows='3' placeholder='Describe Your Photo Here'></textarea></center>
-                          </div>
-                          <br>
-                          <div class="progress progress-striped" ng-class="{active: file.isUploading()}">
+                        <span class="title ng-binding" ng-binding="file.name"></span>
+                        <div class="row thumbnail" ng-show="$flow.files.length">
+                            <img flow-img="file" style="max-width: 200px; height: 150px" ng-src="{{file.name}}">
+                        </div>
+                        <div>
+                            <center><textarea maxlength="50" class="form-control photo-desc" style='resize: none;' cols='35' rows='3' placeholder='Describe Your Photo Here'></textarea></center>
+                        </div>
+                        <br>
+                        <div class="progress progress-striped" ng-class="{active: file.isUploading()}">
                             <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" ng-style="{width: (file.progress() * 100) + '%'}" style="width: 100%;">
-                              <span class="gothic_font sr-only ng-binding">1% Complete</span>
+                                <span class="gothic_font sr-only ng-binding">1% Complete</span>
                             </div>
-                          </div>
-                          <div class="btn-group">
-                              <a class="gothic_font btn btn-xs btn-danger" ng-click="file.cancel()">Remove</a>
-                          </div>
-                          <br>
-                          <br>
+                        </div>
+                        <div class="btn-group">
+                            <a class="gothic_font btn btn-xs btn-danger" ng-click="file.cancel()">Remove</a>
+                        </div>
+                        <br>
+                        <br>
                     </div>
                 </div>
-                 
-              </div>
-                 
-            
             </div>
         </div>
        <br><br>
