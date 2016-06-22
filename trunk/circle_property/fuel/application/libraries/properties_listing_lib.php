@@ -18,6 +18,7 @@ class properties_listing_lib extends cb_base_libraries
     {
         // Invoke parent constructor
        parent::__construct();
+       date_default_timezone_set("Asia/Kuala_Lumpur");
     }
     
     private function property_data_convert()
@@ -96,6 +97,7 @@ class properties_listing_lib extends cb_base_libraries
     function insert_properties_listing($properties_json)
     {
         $properties_raw = json_decode($properties_json, true);
+        $current_time = time();
 
         // Change input data to model support data, overwrite
         $properties = $this->data_value_convertor($properties_raw, $this->property_data_convert(), true);
@@ -117,14 +119,14 @@ class properties_listing_lib extends cb_base_libraries
         }
         
         // Provide current malaysia time for activate_time, edit_time and create_time
-        date_default_timezone_set("Asia/Kuala_Lumpur");
-        $properties["edit_time"] = date('Y-m-d H:i:s', time());
+        
+        $properties["edit_time"] = date('Y-m-d H:i:s', $current_time);
         
         if($ref_tag === NULL)
         {
             // Set relavent time
-            $properties["activate_time"] = date('Y-m-d H:i:s', time());
-            $properties["create_time"] = date('Y-m-d H:i:s', time());
+            $properties["activate_time"] = date('Y-m-d H:i:s', $current_time);
+            $properties["create_time"] = date('Y-m-d H:i:s', $current_time);
             
              // Default to activate when insert
             $properties["activate"] = '1';
@@ -253,6 +255,7 @@ class properties_listing_lib extends cb_base_libraries
         $info = json_decode($info_json, true);
         $ref_tag = $this->array_value_extract($info, "ref_tag");
         $user_id = $this->array_value_extract($info, "user_id");
+        $current_time = time();
         $activate = $this->array_value_extract($info, "activate") === "true"?1:0;
         if($this->is_error){return 0;}
         
@@ -260,15 +263,27 @@ class properties_listing_lib extends cb_base_libraries
         $properties_listing_model = new $this->CI->properties_listing_model;
         
         // Obtain listing model through tag
-        //$listing_obj = $properties_listing_model->find_one(array("ref_tag" => $ref_tag, "user_id"=>$user_id));
+        
+        if($activate)
+        {
+            $update_listing_data = array(
+                'activate'=>$activate,
+                'activate_time'=>date('Y-m-d H:i:s', $current_time),
+                'edit_time'=>date('Y-m-d H:i:s', $current_time)
+            );
+        }
+        else
+        {
+            $update_listing_data = array('activate'=>$activate, 'edit_time'=>date('Y-m-d H:i:s', $current_time));
+        }
         $where = array("ref_tag" => $ref_tag, "user_id"=>$user_id);
-        $result = $properties_listing_model->update(array('activate'=>$activate ? 1: 0), 
+        $result = $properties_listing_model->update($update_listing_data, 
                 $where);      
         if($result)
         {
             $data_array = array(
                 "ref_tag"=>$info_json,
-                "activate_time" => date('m/d/Y h:i:s a', time())
+                "activate_time" => date('Y-m-d H:i:s', time())
             );
             
             $this->set_data("Complete change activation status", json_encode($data_array));
@@ -508,6 +523,7 @@ class properties_listing_lib extends cb_base_libraries
             "bedrooms",
             "bathrooms",
             "activate_time",
+            "deactivate_duration",
             "activate",
             "size_measurement_code"
         ];

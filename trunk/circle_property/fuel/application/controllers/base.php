@@ -1999,8 +1999,13 @@ class base extends CI_Controller {
            }
        }
        
-     
-     public function obtain_user_listing_information()
+       protected function get_deactivate_time($activate_time, $deactivate_duration)
+       {
+           $deactivate_time_in_datetime = new DateTime($activate_time);
+           $deactivate_time_in_datetime->add(new DateInterval('P'.$deactivate_duration.'M'));
+           return $deactivate_time_in_datetime->format('Y-m-d');
+       }
+       public function obtain_user_listing_information()
        {           
            $user_id = $this->session->userdata('user_id');
            $filter_struct = array("filter"=>array());
@@ -2012,7 +2017,8 @@ class base extends CI_Controller {
                                             "ref_tag"=>"",
                                             "property_name"=>"",
                                             "price"=>"",
-                                            "activate"=>""
+                                            "activate"=>"",
+                                            "deactivate_time"=>""
                                          )
                                      );
                
@@ -2032,6 +2038,8 @@ class base extends CI_Controller {
                     $listing_info[$index]["ref_tag"] = $listing["ref_tag"];
                     $listing_info[$index]["property_name"] = $listing["property_name"];
                     $listing_info[$index]["price"] = $listing["price"];
+                    $listing_info[$index]["deactivate_time"] =
+                            $this->get_deactivate_time($listing["activate_time"],$listing["deactivate_duration"]);
                     $listing_info[$index]["activate"] = $listing["activate"];
                     $index = $index + 1;
                 }

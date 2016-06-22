@@ -7,6 +7,7 @@
                 <th></th>
                 <th>Name</th>
                 <th>Price</th>
+                <th>Expire</th>
                 <th>Active</th>
               </tr>
             </thead>
@@ -33,6 +34,11 @@
                 <td>
                    <span>
                        {{data.price}}<br>
+                   </span>
+                </td>
+                <td>
+                   <span>
+                       {{data.deactivate_time}}<br>
                    </span>
                 </td>
                 <td>

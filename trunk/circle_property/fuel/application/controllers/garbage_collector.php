@@ -9,9 +9,6 @@
 
 define("PROPERTY_PHOTO_DIR", dirname(dirname(dirname(dirname(__DIR__)))) . "/client_views/properties_views/assets/images/properties");
 class garbage_collector extends CI_Controller {
-    const expire_duration = 1;
-    
-    
     public function __construct() {
         parent::__construct();
         $this->load->helper("url"); 
@@ -96,7 +93,8 @@ class garbage_collector extends CI_Controller {
                     
                     $diff = date_diff($activate_date, $current_date, TRUE);
                     $total_diff = ($diff->format('%y') * 12) + $diff->format('%m');
-                    if((int)$total_diff >= self::expire_duration)
+                    $expire_duration = $activated_list->deactivate_duration;
+                    if((int)$total_diff >= $expire_duration)
                     {
                         $activated_list->activate = 0;
                         $activated_list->save();
