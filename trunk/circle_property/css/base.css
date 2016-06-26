@@ -139,13 +139,15 @@ html, body {
 }
 
 #system_login_parent {
-    background-color: #463cad;
+    background-color: #e5e7e8;
+    border-color: #bcbec0;
     border-radius: 20px;
     font-size: 10.77px
 }
 
 #system_login {
-color: #e7e3ff;
+color: #231f20;
+font-family: 'Century Gothic Bold'
 }
 
 .navbar-nav>li>a {

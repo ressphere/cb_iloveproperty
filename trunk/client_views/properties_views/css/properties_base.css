@@ -167,12 +167,13 @@ html, body {
     padding-bottom: 10px;
 }
 
-/*    .navbar-default {
+/*.navbar-default {
     background-color: #f2f3f7;
     border-color: transparent
 }*/
     .navbar {
         margin-bottom: 0px;
+        background-color: #f2f3f7;
     }
 
 html, body {
@@ -235,10 +236,24 @@ input:disabled {
 
 #btn_currency
 {
-    background-color: #463cad;
+    background-color: #e5e7e8;
     border-radius: 20px;
-    font-size: 10.77px
+    font-size: 10.77px;
+    color: #231f20;
+    border-color: #bcbec0;
+    font-family: 'Century Gothic Bold'
 }
+
+#property_service_category
+{
+    font-family: 'Century Gothic Bold'    
+}
+
+.header_menu
+{
+     font-family: 'Century Gothic Bold'   
+}
+
 
 #main_content > div
 {
