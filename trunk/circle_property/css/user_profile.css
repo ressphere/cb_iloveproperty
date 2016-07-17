@@ -62,3 +62,11 @@
 .section {
    padding-top: 50px;
 }
+
+#section_in_profile
+{
+    border-bottom:1px solid;
+    border-color: #E3E3E3;
+    margin-bottom: 15px;
+}
+
