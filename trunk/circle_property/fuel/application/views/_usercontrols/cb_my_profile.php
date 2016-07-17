@@ -26,16 +26,17 @@
 									<h1>{{service.name}} <a class="btn btn-xs btn-success" role="button" ng-if='key_available_for_service_map_with_url(service.link_id)' target='_self' href ='{{service_map_with_url[service.link_id]}}' >Launch {{service.link_id}}</a></h1> 
 								</div>
 							</div>
-                            <div class="row" ng-if="id != 'name' && id !='link_id' && id !='id' && id !='active' && id != 'information'" ng-repeat="(id, info) in service">
+                            <div class="row" ng-if="id == 'username'" ng-repeat="(id, info) in service">
+                                <div id="username_in_profile" class="col-md-2">{{info}}</div>
+                                <a class="col-md-8"> 
+                                    <span id="change_pwd_req">
+                                        <button id="chpass_in_profile">change your password</button>
+                                    </span>
+                                </a>
+                            </div>
+                            <div id="general_info_in_profile" class="row" ng-if="id != 'username' && id != 'password' && id != 'name' && id !='link_id' && id !='id' && id !='active' && id != 'information'" ng-repeat="(id, info) in service">
 				<div class="col-md-2">{{id}}</div>
-                                <div class="col-md-8">
-                                   <div id="pwd_change_fields" class="input-group">
-                                        <input type="text" value="{{info}}" disabled/>
-                                        <span id="change_pwd_req_group" class="input-group-btn">
-                                            <button id="change_pwd_req" class="btn btn-default btn-xs" ng-if="id == 'password'" type="button"> <span class="glyphicon glyphicon-edit"></span> </button>
-                                        </span>
-                                   </div>
-                                </div>
+                                <div class="col-md-8">{{info}}</div>
                             </div><br/>
                             <div class="row" ng-if="id == 'information'" ng-repeat="(id, info) in service">
                                 <div class="tabbable" id="tabs-123805">

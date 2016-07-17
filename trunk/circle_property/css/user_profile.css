@@ -70,3 +70,27 @@
     margin-bottom: 15px;
 }
 
+/*following 3 CSS style should be in a group, do not separate them for the ease of tracking*/
+#username_in_profile
+{
+    font-size: 30px; /*please update the following padding and margin accordingly if the font size is change*/
+    font-weight: bold;
+}
+
+#chpass_in_profile
+{
+    font-style:italic;
+    background-color: #FFFFFF;
+    border: none;
+    color: #C7C7C7;
+    font-size: 14px;
+    padding-top: 14px; /*when the username font size is changed, this need to be updated accordingly*/
+    padding-left: 0px;
+}
+
+#general_info_in_profile
+{
+    margin-bottom: 3px; /*when the username font size is changed, this need to be updated accordingly*/
+}
+/*the above 3 CSS style should be in a group, do not separate them for the ease of tracking*/
+
