@@ -1,4 +1,5 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+define("DEACTIVATION_DURATION", 1);
 require_once('_utils/cb_base_libraries.php');
 
 /**
@@ -10,6 +11,7 @@ class properties_listing_lib extends cb_base_libraries
     // ------------ Setup Function ---------------------------------------------
     public $library_name = "properties_listing_lib";
     public $library_code = "LPL";
+    
     
     /*
      * Constructor 
@@ -98,10 +100,9 @@ class properties_listing_lib extends cb_base_libraries
     {
         $properties_raw = json_decode($properties_json, true);
         $current_time = time();
-
-        // Change input data to model support data, overwrite
-        $properties = $this->data_value_convertor($properties_raw, $this->property_data_convert(), true);
         
+        // Change input data to model support data, overwrite
+        $properties = $this->data_value_convertor($properties_raw, $this->property_data_convert(), true);        
         // Check if the listing submitted before
         $ref_tag = $this->array_value_extract($properties, "ref_tag", true);
         $search_condition = array(); // Init it so that later won't screw
@@ -127,7 +128,7 @@ class properties_listing_lib extends cb_base_libraries
             // Set relavent time
             $properties["activate_time"] = date('Y-m-d H:i:s', $current_time);
             $properties["create_time"] = date('Y-m-d H:i:s', $current_time);
-            
+            $properties["deactivate_duration"] = DEACTIVATION_DURATION; 
              // Default to activate when insert
             $properties["activate"] = '1';
         }
@@ -141,6 +142,8 @@ class properties_listing_lib extends cb_base_libraries
         
         $this->CI->load->model('properties_listing_model'); 
         $properties_listing_model = new $this->CI->properties_listing_model;
+        
+
         $properties_listing_model->insert_data(json_encode($properties),$search_condition);
         
         // validate data and set current error
@@ -153,6 +156,8 @@ class properties_listing_lib extends cb_base_libraries
 
         // Obtain listing ID
         $property_id = $listing_return["data"]["id"];
+        
+        
         
         // Remove facility and photo if update, as dono got new or change. so reflush require
         // @todo - here duplicate with remove listing, can consolidate
@@ -228,7 +233,15 @@ class properties_listing_lib extends cb_base_libraries
         if ($this->is_error){return 0;}
         
         // Provide ref tag when success
+        $properties_listing_model->query_detail_data_setup();
+        $property_info = $properties_listing_model->find_one(array("ref_tag" => $properties_listing_model->ref_tag),"","array");
+        
+        $activate_date = new DateTime($property_info["activate_time"]);
+        $activate_date->add(new DateInterval('P'.$property_info["deactivate_duration"].'M'));
+        
         $return_data["ref_tag"] = $properties_listing_model->ref_tag;
+        $return_data["expire_time"] = $activate_date->format('Y-m-d'); 
+        
         $this->set_data("Complete insert data", $return_data);
         
         // file dump -- for testing purpose -- Start --

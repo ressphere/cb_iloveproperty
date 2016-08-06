@@ -304,8 +304,10 @@ class properties_upload extends properties_base
             if(strtolower ($val_return_array["status"]) === "complete")
             {
                $reference = $val_return_array["data"]["ref_tag"];
+               $expire_time = $val_return_array["data"]["expire_time"];
+               
                $result["status"] = "success";
-               $result["info"] = "Your property information is uploaded<BR>Your reference is<BR><B>". $reference . "</B>";
+               $result["info"] = "Your property information is uploaded<BR>Your reference is<BR><B>". $reference . "</B><BR><i>" . "Expired on " . $expire_time ."</i>";
                
             }
             else {

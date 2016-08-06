@@ -46,6 +46,8 @@ class properties_listing_model extends cb_base_module_model {
             array("name" => "ref_tag", "must_have" => false, "is_id" => false),
             array("name" => "remark", "must_have" => false, "is_id" => false),
             array("name" => "car_park", "must_have" => false, "is_id" => false),
+            array("name" => "deactivate_duration", "must_have" => false, "is_id" => false),
+            
 
             // Storing id
             array("name" => "land_title_type_id", "must_have" => false, "is_id" => true),
@@ -179,6 +181,7 @@ class properties_listing_model extends cb_base_module_model {
                     // Combine and get ref
                     $ref_tag = $ref_prefix . $ref_number;
                     $dataset["ref_tag"] = $ref_tag;
+                    
                     $this->ref_tag = $ref_tag;
                 }
                 else
