@@ -149,6 +149,14 @@ class properties_listing_lib extends cb_base_libraries
         // validate data and set current error
         $this->validate_return_data($properties_listing_model);
         
+        /*// file dump -- for testing purpose -- Start --
+        $current = "\n--------- model---------------------\n";
+        $current .= "properties_listing_lib  -- upload_listing -- ori input\n";
+        $current .= json_encode($properties)."\n";
+        $current .= json_encode($search_condition);
+        error_log($current, 3, "D:/webdev/resphere_test_dump.txt");
+        // file dump -- for testing purpose -- End --*/
+        
         if($this->is_error) {return 0;}
         
         // Data retrieved
@@ -229,7 +237,7 @@ class properties_listing_lib extends cb_base_libraries
         }
         
         // @todo - clean the assert data when fail (e.g. photo fail to insert will need to remove the listing and facility inserted data)
-
+        
         if ($this->is_error){return 0;}
         
         // Provide ref tag when success
@@ -245,7 +253,7 @@ class properties_listing_lib extends cb_base_libraries
         $this->set_data("Complete insert data", $return_data);
         
         // file dump -- for testing purpose -- Start --
-        /*$current = "\n------------------------------\n";
+        $current = "\n------------------------------\n";
         $current .= "properties_listing_lib  -- upload_listing -- ori input\n";
         $current .= json_encode($properties)."\n";
         $current .= json_encode($search_condition);

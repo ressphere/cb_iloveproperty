@@ -72,10 +72,10 @@ class CB_Property extends CBWS_Service_Base{
             "service_type" => true,
             "state" => true,
             "area" => true,
-            "postcode" => true,
+            "post_code" => true,
             "street" => true,
             "country" => true,
-            "location" => true,
+            "map_location" => true,
             "currency" => true,
             "size_measurement_code" => true,
             "price" => true,
@@ -90,7 +90,7 @@ class CB_Property extends CBWS_Service_Base{
             "property_type" => true,
             "tenure" => true,
             "land_title_type" => true,
-            "unit_name" => true,
+            "property_name" => true,
             "reserve_type" => true,
             "facilities" => true,
             "property_photo" => true,
@@ -130,10 +130,11 @@ class CB_Property extends CBWS_Service_Base{
         // Format: 
         //    "view_key_name" => "model_key_name"
         $array_key_change = array(
+            "listing_Type" => "service_type",
+            "listing_type" => "service_type",
             "unit_name" => "property_name",
             "location" => "map_location",
             "postcode" => "post_code",
-            
         );
         
         return $array_key_change;
@@ -163,7 +164,7 @@ class CB_Property extends CBWS_Service_Base{
         /*
         $current = "\n------------------------------\n";
         $current .= "CB_Property  -- upload_listing -- ori input\n";
-        $current .= gettype($input_data);
+        $current .= "data type is : ".gettype($input_data);
         $current .= "\n";
         $current .= json_encode($input_data);
         $current .= "\n";
@@ -261,6 +262,18 @@ class CB_Property extends CBWS_Service_Base{
         $status_information = "Info: Successfully retrieve data for ".$property_info["ref_tag"];
         $return_data = $insert_return["data"];
         $this->set_data($status_information,$return_data);
+        
+        // file dump -- for testing purpose -- Start --
+        /*
+        $current = "\n------------------------------\n";
+        $current .= "CB_Property  -- listing_detail -- input\n";
+        $current .= json_encode($input_data);
+        $current .= "\n";
+        $current .= "\nCB_Property  -- listing_detail -- output\n";
+        $current .= json_encode($return_data);
+        error_log($current, 3, "D:/webdev/resphere_test_dump.txt");   
+        // file dump -- for testing purpose -- End --*/
+        
     }
     
     

@@ -61,9 +61,10 @@ class properties_info extends properties_base {
         // Retrieve country and state
         $database_list["location_list"] = $country_state_first_conv;
         
-        /*
-        // file dump -- for develop purpose -- Start --
+        
+        /*// file dump -- for develop purpose -- Start --
         $current = "\n------------------------------\n";
+        $current .= "Input data -- \n".json_encode($base_filter_struct)."\n";
         $current .= "initial data -- \n".json_encode($database_list)."\n";
         $current .= "filter data -- \n".json_encode($filter_property_type)."\n";
         $current .= "\n";

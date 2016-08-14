@@ -363,11 +363,10 @@ class CBWS_Service_Base {
         
         // Call setting API from the caller class
         $array_key_change = $this->data_key_v_and_m();
-
+        
         // Change base on direction
         if($is_view)
         {
-            $data_array = $this->_filter_data($data_array);
             foreach ($array_key_change as $view_key => $model_key)
             {
                 if($data_array !== NULL && array_key_exists($view_key, $data_array))
@@ -387,8 +386,10 @@ class CBWS_Service_Base {
                     unset($data_array[$model_key]);
                 }
             }
-            $data_array = $this->_filter_data($data_array);
         }
+        
+        // Remove redundant key after change name
+        $data_array = $this->_filter_data($data_array);
         
         // Remove NULL data
         foreach ($data_array as $key => $value)
@@ -402,7 +403,6 @@ class CBWS_Service_Base {
                 unset($data_array[$key]);
             }
         }
-        
         if($data_array === NULL)
         {
             $this->set_error("CSB-".$this->service_code."-DKI-3",
