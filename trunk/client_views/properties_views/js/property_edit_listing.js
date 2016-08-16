@@ -65,7 +65,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                         placeholder:'Your Property Name',
                         values:
                         [
-                            '',
+                            ''
                         ]
                     },
                     {
@@ -359,7 +359,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     [
                         'MYR',
                         'SGD',
-                        'USD',
+                        'USD'
                         
                     ] 
                 },
@@ -741,7 +741,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             $scope.term_click = function()
             {
                 $scope.err_msg = "";
-            }
+            };
             
             var prop_ref = location.search.split('reference=')[1];
             
@@ -1289,7 +1289,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                            }
                        }
                    }
-                )
+                );
             };
             
             // </editor-fold>
@@ -1608,7 +1608,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                   );}, 100);
               }
             );
-            $('#chk_auction').on('click', function(){set_auction()});
+            $('#chk_auction').on('click', function(){set_auction();});
             // </editor-fold>
             
             flowFactory.flow.on('catchAll', function (event) {
