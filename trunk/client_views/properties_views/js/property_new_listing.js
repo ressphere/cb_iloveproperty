@@ -1538,7 +1538,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 $scope.photo_upload_status = "";
                 $(".progress").hide();
             });
-            CKEDITOR.replace( 'remark_editor' );
+            CKEDITOR.replace( 'remark_editor',{removeButtons:'Link,Unlink,Anchor'});
             $scope.$apply();
             $scope.get_ngPlace_info_by_name = function(info, key)
             {

@@ -1649,7 +1649,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
 				$(".progress").hide();
             });
 
-            CKEDITOR.replace( 'remark_editor' );
+            CKEDITOR.replace( 'remark_editor',{removeButtons:'Link,Unlink,Anchor'});
             set_all_ticks();
             $scope.$apply();
             
