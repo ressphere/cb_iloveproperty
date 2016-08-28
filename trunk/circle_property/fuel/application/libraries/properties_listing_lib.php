@@ -252,7 +252,7 @@ class properties_listing_lib extends cb_base_libraries
         
         $this->set_data("Complete insert data", $return_data);
         
-        // file dump -- for testing purpose -- Start --
+        /*// file dump -- for testing purpose -- Start --
         $current = "\n------------------------------\n";
         $current .= "properties_listing_lib  -- upload_listing -- ori input\n";
         $current .= json_encode($properties)."\n";
