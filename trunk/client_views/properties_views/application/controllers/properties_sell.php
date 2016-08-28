@@ -41,8 +41,8 @@ class properties_sell extends properties_upload {
       }
       else
       {
-          //TODO Temporary use 404 page
-           show_error($this->get_page403("This page is for registered member", $this->session->userdata('client_base_url')),403, "");
+            //TODO Temporary use 404 page
+            show_error($this->get_page403("This page is for registered or login member. Please register or re-login.", $this->session->userdata('client_base_url')),403, "");
       }
    }
    protected function load_view()

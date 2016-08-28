@@ -39,7 +39,8 @@ private $property_info_list = NULL;
             }
             else
             {
-                 show_404();
+                //TODO Temporary use 404 page
+                show_error($this->get_page403("This page is for registered or login member. Please register or re-login.", $this->session->userdata('client_base_url')),403, "");
             }
        }
    }
