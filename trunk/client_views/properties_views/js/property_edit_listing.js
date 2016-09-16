@@ -1230,44 +1230,81 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             {
                 var return_val;
                 if(facility === "Barbeque Area")
+                {
                     return_val = "BBQ";
+                }
                 else if(facility === "Parking")
+                {
                     return_val = "PARKING";
+                }
                 else if(facility === "Jogging Track")
+                {
                     return_val = "JOGGING";
+                }
                 else if(facility === "Playground")
+                {
                     return_val = "PLAYGROUND";
+                }
                 else if(facility === "Tennis court")
+                {
                     return_val = "TENNIS";
+                }
                 else if(facility === "Squash court")
+                {
                     return_val = "SQUASH";
+                }
                 else if(facility === "Club House")
+                {
                     return_val = "CLUB";
+                }
                 else if(facility === "Jacuzzi")
+                {
                     return_val = "JACUZZI";
+                }
                 else if(facility === "Nursery")
+                {
                     return_val = "NURSERY";
+                }
                 else if(facility === "Sauna")
+                {
                     return_val = "SAUNA";
+                }
                 else if(facility === "Cafeteria")
+                {
                     return_val = "CAFE";
+                }
                 else if(facility === "Library")
+                {
                     return_val = "LIBRARY";
+                }
                 else if(facility === "Bussiness Center")
+                {
                     return_val = "BusinessCenter";
+                }
                 else if(facility === "Gymnasium")
+                {
                     return_val = "GYM";
+                }
                 else if(facility === "Mini market")
+                {
                     return_val = "MINIMART";
+                }
                 else if(facility === "Salon")
+                {
                     return_val = "SALON";
+                }
                 else if(facility === "Swimming Pool")
+                {
                     return_val = "SWIMMING";
+                }
                 else if(facility === "24 Hours Security")
+                {
                     return_val = "SECURITY";
+                }
                 else
+                {
                     console.log("missing key value pair in facility dictionary");
-                
+                }
                 return return_val;
             };
             
