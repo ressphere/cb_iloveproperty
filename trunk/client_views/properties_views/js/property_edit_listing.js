@@ -8,6 +8,7 @@ ng_map_profile.config(function(ngGPlacesAPIProvider){
         });
 });
  // </editor-fold>
+
 ng_map_profile.controller('uploadProfile', function($injector, $scope, $controller, ngGPlacesAPI, flowFactory, $http, $sce) {
         if(typeof ngGPlacesAPI !== 'undefined')
         {
@@ -321,7 +322,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     category:'sell rent',
                     values:
                     [
-                        'ft2',
+                        'sqft',
                         'm2'
                     ]
                 },
@@ -1410,6 +1411,10 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                          function(value, index, arr)
                          {
                              var option = $('<option></option>').attr("value", value).text(value);
+                             if($scope.property_information.State === value)
+                             {
+                                option = $('<option selected></option>').attr("value", value).text(value);
+                             }
                              $("#state").append(option);
                          }
                         );
@@ -1544,7 +1549,6 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             {
                 //to update location
                 document.getElementById('country').value = $scope.property_information.Country;
-                document.getElementById('state').value = $scope.property_information.State;
                 document.getElementById('unit_name').value = $scope.property_information.PropertyName;
                 document.getElementById('area').value = $scope.property_information.Area;
                 document.getElementById('postcode').value = $scope.property_information.PostCode;
