@@ -120,24 +120,24 @@
                     <div class="row information">
                         <br>
                         <div class="col-md-6 column gothic_font">
-                            <div class="row" ng-repeat="detail in property_information.details[0]">
-                                <div class="{{detail.category}} col-md-6">
+                            <div class="row-fluid" ng-repeat="detail in property_information.details[0]">
+                                <div class="{{detail.category}} span6">
                                     <span class="gothic_bold_font" id='lbl_{{detail.id}}'>
                                             {{detail.label}}</span>
                                 </div>
-                                <div class="col-md-6 {{detail.category}} column gothic_font">
+                                <div class="span6 {{detail.category}} column gothic_font">
                                     <span id="{{detail.id}}">{{detail.value}}</span>
                                 </div><br><br>
                             </div>
                         </div>
                         <div class="col-md-6 column gothic_font">
-                            <div class="row" ng-repeat="detail in property_information.details[1]">
-                                <div class="{{detail.category}} col-md-6">
+                            <div class="row-fluid" ng-repeat="detail in property_information.details[1]">
+                                <div class="{{detail.category}} span6">
                                     <span class="gothic_bold_font" 
                                               id='lbl_{{detail.id}}'>
                                             {{detail.label}}</span>
                                 </div>
-                                <div class="col-md-6 {{detail.category}} column gothic_font">
+                                <div class="span6 {{detail.category}} column gothic_font">
                                     <span id="{{detail.id}}">{{detail.value}}</span>
                                 </div><br><br>
                             </div>
