@@ -128,10 +128,11 @@ var set_facilities = function($scope, facilities)
                     {
                        $scope.property_information["details"][i][j].value = "--";
                     }
-                    else
+                    else if(value !== undefined)
                     {
-                        $scope.property_information["details"][i][j].value = value;
+                       $scope.property_information["details"][i][j].value = value;
                     }
+                    return;
             }
        }
     }
