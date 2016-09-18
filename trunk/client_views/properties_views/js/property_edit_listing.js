@@ -320,11 +320,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     name:'Size Measure Code',
                     control:'select',
                     category:'sell rent',
-                    values:
-                    [
-                        'sqft',
-                        'm2'
-                    ]
+                    values:['sqft','m2']
                 },
                 {
                     id:'built_up',
@@ -332,11 +328,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     control:'input-number',
                     category:'sell rent',
                     values:
-                    [
-                        1,
-                        1000000,
-                        1500
-                    ]
+                    [1,1000000,1500]
                 },
                 {
                     id:'land_area',
