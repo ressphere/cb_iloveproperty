@@ -1566,15 +1566,15 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 switch(key)
                 {
                     case "postal-code":
-                        $('#postcode').val(info.substring(start_index, end_index - 1));
+                        $('#postcode').val(display_str);
                         $('#postcode').change();
                         break;
                     case "street-address":
-                        $('#street').val(info.substring(start_index, end_index - 1));
+                        $('#street').val(display_str);
                         $('#street').change();
                         break;
                     case "locality":
-                        $('#area').val(info.substring(start_index, end_index - 1));
+                        $('#area').val(display_str);
                         $('#area').change();
                         break;
                 }
