@@ -43,6 +43,7 @@ var get_new_listing_data = function($scope,  $sce)
         setup_details_info("property_category", listing_obj["property_category"], $scope);
         setup_details_info("property_type", listing_obj["property_type"], $scope);
         
+        
         setup_details_info("measurement_type", listing_obj["size_measurement_code"], $scope);
         setup_details_info("monthly", listing_obj["monthly_maintanance"], $scope);
         setup_details_info("land_title_type", listing_obj["land_title_type"], $scope);
@@ -127,11 +128,10 @@ var set_facilities = function($scope, facilities)
                     {
                        $scope.property_information["details"][i][j].value = "--";
                     }
-                    else if(value !== undefined)
+                    else
                     {
-                       $scope.property_information["details"][i][j].value = value;
+                        $scope.property_information["details"][i][j].value = value;
                     }
-                    return;
             }
        }
     }
