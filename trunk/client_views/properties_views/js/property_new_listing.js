@@ -911,10 +911,11 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                          }
                          else
                          {
+                             // Will drop into here if is a generic issue (mean no object structure)
                              console.log(parsed_result);
+                             alert("Fail to submit listing, please contact admin");
+                             $scope.disable_button = 0;
                          }
-                         //fail pop message
-
                      }
 
 
@@ -925,6 +926,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             var set_error = function(ids)
             {
                 error_ids = ids;
+                
                 for(var i = 0; i < ids.length; i++ )
                 {
                     var id = ids[i]+"-feedback";
