@@ -411,6 +411,10 @@ var get_property_home = function() {
                    {
                        measurement_type = private.measurement_type;
                    }
+                   if(measurement_type === "null")
+                   {
+                      measurement_type = null;
+                   }
                    return measurement_type;
                 },
                 OnUpdatingCurrency: function(private, price, from_currency, index)
