@@ -38,6 +38,8 @@ var get_new_listing_data = function($scope,  $sce)
         $scope.property_information.NearbyPlaces = listing_obj["nearest_spot"];
         $scope.property_information.Remark =  $sce.trustAsHtml(listing_obj["remark"]);
         $scope.property_information.PropertyImages = listing_obj["property_photo"];
+        $scope.property_information.Unit = listing_obj["size_measurement_code"];
+        
         setup_details_info("reference", null, $scope);
         setup_details_info("tenure", listing_obj["tenure"], $scope);
         setup_details_info("property_category", listing_obj["property_category"], $scope);
@@ -128,10 +130,11 @@ var set_facilities = function($scope, facilities)
                     {
                        $scope.property_information["details"][i][j].value = "--";
                     }
-                    else
+                    else if(value !== undefined)
                     {
-                        $scope.property_information["details"][i][j].value = value;
+                       $scope.property_information["details"][i][j].value = value;
                     }
+                    return;
             }
        }
     }

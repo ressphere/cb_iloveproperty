@@ -212,11 +212,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     control:'select',
                     category:'sell rent room',
                     values:
-                    [
-                        'Property For Sale',
-                        'Property For Lease'
-                        //'Room To Let'
-                    ]
+                    ['Property For Sale','Property For Lease']
                 },
                 {
                     id:'auction',
@@ -430,11 +426,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     name:'Size Measure Code',
                     control:'select',
                     category:'sell rent',
-                    values:
-                    [
-                        'sqft',
-                        'm2'
-                    ]
+                    values:['sqft','m2']
                 },
                 {
                     id:'built_up',
@@ -1527,7 +1519,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 
                 if (file.error === true)
                 {
-                    alert(file.error_msg);
+                    console.log(file.error_msg);
                     file.done = true;
                     file.flowObj.preventEvent(event);
                     return false;

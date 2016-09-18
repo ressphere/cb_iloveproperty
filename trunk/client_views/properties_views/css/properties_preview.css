@@ -186,6 +186,16 @@
 .navbar {
     display: none
 }
+
+@media (max-width: 990px) {
+    .g-plus, .twitter, .fb {
+        margin-bottom: 20px;
+    }
+    .contact_div {
+        margin-bottom: 20px;
+    }
+}
+
 /*#E1D2BF*/
 
 
