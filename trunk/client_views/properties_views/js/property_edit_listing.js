@@ -8,6 +8,7 @@ ng_map_profile.config(function(ngGPlacesAPIProvider){
         });
 });
  // </editor-fold>
+
 ng_map_profile.controller('uploadProfile', function($injector, $scope, $controller, ngGPlacesAPI, flowFactory, $http, $sce) {
         if(typeof ngGPlacesAPI !== 'undefined')
         {
@@ -321,7 +322,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     category:'sell rent',
                     values:
                     [
-                        'ft2',
+                        'sqft',
                         'm2'
                     ]
                 },
@@ -754,6 +755,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 var listing;
                 $scope.country_state.location["k"] = $scope.googleMarker.getGMarkers()[0].position.lat();
                 $scope.country_state.location["B"] = $scope.googleMarker.getGMarkers()[0].position.lng();
+                var remark = CKEDITOR.instances.remark.document.getBody().getHtml();
                 switch(category_name)
                 {
                     case "sell":
@@ -770,7 +772,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                             'furnished':$.trim($('#furnishing').val()),
                             'occupied':$.trim($('#occupied').val()),
                             'monthly_maintanance': parseFloat($('#monthly_maintanance').val()).toFixed(2),
-                            'remark': CKEDITOR.instances.remark.document.getBody().getHtml(), //$('textarea#remark').val(),
+                            'remark': remark,
                             'property_type':$.trim($('#property_type').val()),
                             'tenure':$.trim($('#tenure').val()),
                             'title_type':$.trim($('#title_type').val()),
@@ -803,7 +805,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                             'ref_tag': prop_ref,
                             'furnished':$.trim($('#furnishing').val()),
                             'occupied':$.trim($('#occupied').val()),
-                            'remark': CKEDITOR.instances.remark.document.getBody().getHtml(),//$('textarea#remark').val(),
+                            'remark': remark,
                             'unittype':$.trim($('#unit_type').val()),
                             'land_title_type': $.trim($('#land_title_type').val()),
                             'active':1,
@@ -830,7 +832,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                             'ref_tag': prop_ref,
                             'furnished':$.trim($('#furnishing').val()),
                             'occupied':$.trim($('#occupied').val()),
-                            'remark': CKEDITOR.instances.remark.document.getBody().getHtml(),//$('textarea#remark').val(),
+                            'remark': remark,
                             'room_type':$.trim($('#room_type').val()),
                             'property_type':$.trim($('#property_type').val()),
                             'active':1,
@@ -1027,6 +1029,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 $scope.country_state.location["k"] = $scope.googleMarker.getGMarkers()[0].position.lat();
                 $scope.country_state.location["B"] = $scope.googleMarker.getGMarkers()[0].position.lng();
                 var listing_type = new String($('#type').val()).indexOf('For Sale') >= 0? "SELL" : "RENT";
+                var remark = CKEDITOR.instances.remark.document.getBody().getHtml();
                 if ($('#type').val().indexOf('Room To Let') > 0)
                 {
                     listing_type = "ROOM";
@@ -1044,7 +1047,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     'furnished':$.trim($('#furnishing').val()),
                     'occupied':$.trim($('#occupied').val()),
                     'monthly_maintanance': parseFloat($('#monthly_maintanance').val()).toFixed(2),
-                    'remark': CKEDITOR.instances.remark.document.getBody().getHtml(),//$('textarea#remark').val(),
+                    'remark': remark,
                     'room_type':$.trim($('#room_type').val()),
                     'property_type':$.trim($('#property_type').val()),
                     'tenure':$.trim($('#tenure').val()),
@@ -1228,44 +1231,81 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             {
                 var return_val;
                 if(facility === "Barbeque Area")
+                {
                     return_val = "BBQ";
+                }
                 else if(facility === "Parking")
+                {
                     return_val = "PARKING";
+                }
                 else if(facility === "Jogging Track")
+                {
                     return_val = "JOGGING";
+                }
                 else if(facility === "Playground")
+                {
                     return_val = "PLAYGROUND";
+                }
                 else if(facility === "Tennis court")
+                {
                     return_val = "TENNIS";
+                }
                 else if(facility === "Squash court")
+                {
                     return_val = "SQUASH";
+                }
                 else if(facility === "Club House")
+                {
                     return_val = "CLUB";
+                }
                 else if(facility === "Jacuzzi")
+                {
                     return_val = "JACUZZI";
+                }
                 else if(facility === "Nursery")
+                {
                     return_val = "NURSERY";
+                }
                 else if(facility === "Sauna")
+                {
                     return_val = "SAUNA";
+                }
                 else if(facility === "Cafeteria")
+                {
                     return_val = "CAFE";
+                }
                 else if(facility === "Library")
+                {
                     return_val = "LIBRARY";
+                }
                 else if(facility === "Bussiness Center")
+                {
                     return_val = "BusinessCenter";
+                }
                 else if(facility === "Gymnasium")
+                {
                     return_val = "GYM";
+                }
                 else if(facility === "Mini market")
+                {
                     return_val = "MINIMART";
+                }
                 else if(facility === "Salon")
+                {
                     return_val = "SALON";
+                }
                 else if(facility === "Swimming Pool")
+                {
                     return_val = "SWIMMING";
+                }
                 else if(facility === "24 Hours Security")
+                {
                     return_val = "SECURITY";
+                }
                 else
+                {
                     console.log("missing key value pair in facility dictionary");
-                
+                }
                 return return_val;
             };
             
@@ -1371,6 +1411,10 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                          function(value, index, arr)
                          {
                              var option = $('<option></option>').attr("value", value).text(value);
+                             if($scope.property_information.State === value)
+                             {
+                                option = $('<option selected></option>').attr("value", value).text(value);
+                             }
                              $("#state").append(option);
                          }
                         );
@@ -1505,7 +1549,6 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             {
                 //to update location
                 document.getElementById('country').value = $scope.property_information.Country;
-                document.getElementById('state').value = $scope.property_information.State;
                 document.getElementById('unit_name').value = $scope.property_information.PropertyName;
                 document.getElementById('area').value = $scope.property_information.Area;
                 document.getElementById('postcode').value = $scope.property_information.PostCode;
