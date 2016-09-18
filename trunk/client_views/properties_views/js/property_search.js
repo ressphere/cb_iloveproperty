@@ -343,7 +343,6 @@ searchrst_information.controller("FilterSearchHighLightCtrl", function($scope, $
             
             if(measurement_type !== null)
             {
-                
                 $('.lbl_measurement_type').text(measurement_type);
                  $scope.property_information.selected_measurement_type = 
                             measurement_type;
@@ -351,7 +350,6 @@ searchrst_information.controller("FilterSearchHighLightCtrl", function($scope, $
             }
             else
             {
-                
                 $('.lbl_measurement_type').text($scope.property_information.selected_measurement_type);
                 ObjHome.set_fav_measurement_type($scope.property_information.selected_measurement_type);
             }
