@@ -1538,6 +1538,8 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             {
                 var start_key = '<span class="' + key +'">';
                 var end_key = '</span>';
+                var display_str = "";
+                
                 if(typeof info !== 'undefined')
                 {
                     var start_index = info.indexOf(start_key);
@@ -1547,21 +1549,37 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     {
                         start_index = info.indexOf(start_key) + start_key.length;
                         var end_index = info.indexOf(end_key, start_index) + 1;
+                        
                         if(end_index > 0)
                         {
-                            return  info.substring(start_index, end_index - 1);
+                            display_str =  info.substring(start_index, end_index - 1);
                         }
                         else
                         {
-                            return  info.substring(start_index);
+                            display_str =  info.substring(start_index);
                         }
                     }
-                    else
-                    {
-                        return "";
-                    }
                 }
-                return "";
+                
+                // Ugly hack, to ensure it manage update even after manually edit
+                //console.log("hit: "+key+" - "+info.substring(start_index, end_index - 1));
+                switch(key)
+                {
+                    case "postal-code":
+                        $('#postcode').val(info.substring(start_index, end_index - 1));
+                        $('#postcode').change();
+                        break;
+                    case "street-address":
+                        $('#street').val(info.substring(start_index, end_index - 1));
+                        $('#street').change();
+                        break;
+                    case "locality":
+                        $('#area').val(info.substring(start_index, end_index - 1));
+                        $('#area').change();
+                        break;
+                }
+                        
+                return display_str;
                         
             };
      });
