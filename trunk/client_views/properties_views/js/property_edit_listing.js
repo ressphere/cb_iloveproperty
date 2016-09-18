@@ -887,7 +887,10 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                          }
                          else
                          {
+                             // Will drop into here if is a generic issue (mean no object structure)
                              console.log(parsed_result);
+                             alert("Fail to submit listing, please contact admin");
+                             $scope.disable_button = 0;
                          }
                          //fail pop message
 
