@@ -955,6 +955,10 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                      function()
                      {
                          var tmp_files = new Array();
+                         if(index >= $scope.uploader.flow.files.length)
+                         {
+                             return;       
+                         }
                          var filename = $scope.uploader.flow.files[index].name;
                          index = index +1;
                          for (var i = 0; i < php_vals.length; i++) { 
