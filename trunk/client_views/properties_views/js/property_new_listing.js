@@ -928,8 +928,12 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     //$(id).css('border-color','red');
                     if(i===0)
                     {
-                        
-                        document.getElementById("lbl_"+ids[i]).scrollIntoView();
+                        document.getElementById("lbl_"+ids[i]).scrollIntoView(true);
+                        // Offset according to top label
+                        var cur_top = document.body.scrollTop;
+                        cur_top = cur_top - 80;
+                        document.body.scrollTop=cur_top;
+                       
                     }
                 }
             };
@@ -941,12 +945,12 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     $('.'+error_ids[i]+'-feedback').removeClass('glyphicon-ok');
                     $('.'+error_ids[i]+'-feedback').removeClass('glyphicon-remove');
                     $('.'+error_ids[i]+'-feedback').addClass('glyphicon-asterisk');
-                    if(i===0)
+                    /*if(i===0)
                     {
                         $('html, body').animate({
                             scrollTop: $(id).offset().top
                         }, 1000);
-                    }
+                    }*/
                 }
                 error_ids = [];
             };
@@ -1149,7 +1153,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                  cache: false,
                  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                }).then(function(response) {
-                   console.log(response);
+                    //console.log(response);
                     //nav to main page
                     var objBase = $.makeclass(get_base());
                     var parsed_result = response.data;
