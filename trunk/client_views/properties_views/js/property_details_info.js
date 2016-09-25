@@ -266,7 +266,6 @@ var get_google_map_data = function($scope)
         }
         ).then(
             function(data){
-
                 for (var i = 0; i < data.length; i++) {
                     data[i]['has_detail'] = false;
                     ngGPlacesAPI_obj.placeDetails({reference:data[i].reference}).then(
@@ -279,7 +278,25 @@ var get_google_map_data = function($scope)
                         }
                     );
                 }
-                $scope.property_information.NearbyPlaces = data;
+                
+                //remove duplicate record base on place's name
+                var filtered_data = [];
+                var found = 0;
+                filtered_data[0] = data[0];
+                
+                for (var i = 0; i < data.length; i++) {    
+                    found = 0;
+                    for (var j = 0; j < filtered_data.length; j++) {
+                        if(filtered_data[j].name == data[i].name){
+                            found = 1;
+                        }
+                    }
+
+                    if(!found){
+                        filtered_data.push(data[i]);
+                    }
+                }
+                $scope.property_information.NearbyPlaces = filtered_data;
                 
         });
     }
