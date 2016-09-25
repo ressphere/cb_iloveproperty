@@ -234,7 +234,7 @@ class properties_info extends properties_base {
         $data["wc"] = $query_data["bathrooms"];
 
         //@todo - need to settel parking, which current data don't have
-        $data["parking"] = "--";
+        $data["parking"] = $query_data["car_park"];
 
         // Image process
         $image_array = $this->_get_array_value($query_data, "property_photo");

@@ -543,6 +543,7 @@ class properties_listing_lib extends cb_base_libraries
             "furnished_type",
             "bedrooms",
             "bathrooms",
+            "car_park",
             "activate_time",
             "deactivate_duration",
             "activate",
