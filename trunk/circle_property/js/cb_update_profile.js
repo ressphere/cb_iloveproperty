@@ -103,6 +103,8 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
             $scope.service_map_with_url = {};
             $scope.hide_view = false;
             $scope.available_listing_count = -1;
+            $scope.listing_used = -1;
+            $scope.listing_limit = -1;
             $scope.activate = function(ref_tag)
             {
                 var activation_url = ObjBase.getWsdlBaseUrl() + "index.php/cb_user_profile_update/set_activation";
@@ -260,7 +262,10 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
                  cache: true,
                  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                }).then(function(response) {
-                    $scope.available_listing_count = parseInt(response.data);
+                   var listing_info = response.data;
+                   $scope.available_listing_count = listing_info.listing_avaliable;
+                   $scope.listing_used = listing_info.listing_used;
+                   $scope.listing_limit = listing_info.listing_limit;
                });
             // </editor-fold>
             

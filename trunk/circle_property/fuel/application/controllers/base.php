@@ -2240,7 +2240,16 @@ class base extends CI_Controller {
             $number_of_listings = sizeof(json_decode($user_existing_listing, TRUE)["data"]["listing"]);
             
             $number_of_remaining_listings = $listing_limit - $number_of_listings;
-            $this->_print($number_of_remaining_listings);              
+            
+            // Consolidate all data into a container
+            $return_json = array(
+                "listing_limit" => (int)$listing_limit,
+                "listing_avaliable" => $number_of_remaining_listings,
+                "listing_used" => $number_of_listings
+            );
+            
+            
+            $this->_print(json_encode($return_json));              
        }
        else
        {
