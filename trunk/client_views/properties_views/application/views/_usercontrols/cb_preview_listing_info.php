@@ -92,10 +92,10 @@
                         </div>
                         <div class="row information">
                             <br>
-                            <div class="g-plus col-md-4  col-sm-4 col-sm-4 column">
+                            <div class="g-plus col-md-4  col-sm-4 col-sm-4 column preview-none-click">
                                 <div class="g-plus" data-action="share" data-annotation="bubble" ></div>
                             </div>
-                            <div class="twitter col-md-4  col-sm-4 col-sm-4 column">
+                            <div class="twitter col-md-4  col-sm-4 col-sm-4 column preview-none-click">
                                 <a href="https://twitter.com/share" class="twitter-share-button" 
                                    data-url="{{current_url}}">Tweet</a>
                                 <script>
@@ -107,7 +107,7 @@
                                 </script>
                             </div>
                             <div class="fb col-md-4  col-sm-4 col-sm-4 column">
-                                <div class="fb-share-button" data-href="{{current_url}}" data-layout="button_count"></div>
+                                <div class="fb-share-button preview-none-click" data-href="{{current_url}}" data-layout="button_count"></div>
                             </div><br><br>
                         </div>
                     </div><br>

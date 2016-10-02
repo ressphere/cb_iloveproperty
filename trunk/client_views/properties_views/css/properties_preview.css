@@ -196,6 +196,10 @@
     }
 }
 
+/*Disable click function*/
+.preview-none-click {
+    pointer-events:none;
+}
 /*#E1D2BF*/
 
 
