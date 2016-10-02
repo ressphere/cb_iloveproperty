@@ -259,7 +259,7 @@
                         {	
                             // fail
                             $data['show_captcha'] = FALSE;
-                            $msg = "<span class='error'>Invalid username and password<span>";
+                            $msg = "<span class='error'>Invalid username or password<span>";
                         }
                         elseif($cap_success == false) {
                             $msg = "<span class='error'> Invalid image text, please retype</span>";
