@@ -45,7 +45,7 @@
               </div><br>
          
              <div class="row clearfix">
-                <div>
+                <div id="image_group">
                   <div ng-repeat="file in uploaded_files" id="{{file[2]}}" class="col-sm-6 col-md-4 photo-default">
                         <div class="row thumbnail">
                           <img flow-img="file" style="max-width: 200px; height: 150px"
@@ -57,7 +57,9 @@
                         <br>
 
                         <div class="btn-group">
-                            <a class="gothic_font btn btn-xs btn-danger" ng-click="remove_uploaded_file()">Remove</a>
+                            <a class="gothic_font btn btn-xs btn-danger" ng-click="remove_uploaded_file(file[2])">
+                                Remove
+                            </a>
                         </div>
                         <br>
                         <br>

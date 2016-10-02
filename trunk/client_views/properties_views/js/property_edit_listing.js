@@ -1617,6 +1617,11 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
               }
             };
             
+            $scope.remove_uploaded_file = function(image_groupname)
+            {
+              $('#'+image_groupname).remove();
+            };
+            
             // <editor-fold desc="data initialization"  defaultstate="collapsed">
 			waitForFinalEvent(function() {
 					objProperty.set_footer_position();
