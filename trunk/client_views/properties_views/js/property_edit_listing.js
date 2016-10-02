@@ -1011,41 +1011,36 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                var photo_list = [];
                var index = 0;
                var php_vals = uploaded_images;
+               var uploaded_images = get_uploaded_image();
                
-               
-               $('.thumbnail-photo').each(
-                    function()
-                    {
-                        if($(this).hasClass('photo-default'))
-                        {
-                            var img = $(this).find('img').first();
-                            var desc = $(this).find('textarea').first();
-                            
-                            photo_list.push([
-                                img.attr('src'),
-                                desc.val()
-                            ]);    
-                        }
-                        else
-                        {
-                            var tmp_files = new Array();
-                            var filename = $scope.uploader.flow.files[index].name;
-                            index = index +1;
-                            for (var i = 0; i < php_vals.length; i++) { 
-                                if(php_vals[i].post.flowFilename === filename)
-                                {
-                                    tmp_files.push(objProperty.get_filebaseName(php_vals[i].files.file.tmp_name));
-                                }
-                            }
-                            photo_list.push([
+               for(var i=0; i< uploaded_images.length; i++)
+               {
+                  var exists = uploaded_images[i]['exists'];
+                  var desc = uploaded_images[i]['desc'];
+                  if(exists)
+                  {
+                      uploaded_images[i]['tmp_files'].forEach(
+                              function(value)
+                              {
+                                  photo_list.push([
+                                      value,
+                                      desc
+                                  ]);
+                              }
+                      );
+                      
+                  }
+                  else
+                  {
+                      photo_list.push([
                                 String.format("../../temp/images/{0}/{1}/{2}",
-                                    $scope.person.user_id, $scope.temp_ref, tmp_files[0]),
-                                    $(this).val()
-                            ]);
-                        }
-                    }
-                );
-                return photo_list;  
+                                    $scope.person.user_id, $scope.temp_ref, 
+                                    uploaded_images[i]['tmp_files'][0]),
+                                    desc
+                      ]);
+                  }
+               }
+               return photo_list;  
             };
             var set_preview = function()
             {  
