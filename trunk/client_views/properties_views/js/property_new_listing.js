@@ -982,7 +982,8 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                         photo_list.push({
                             'name': filename,
                             'desc': $(this).val(),
-                            'tmp_files': tmp_files
+                            'tmp_files': tmp_files,
+                            'exists':false
                         });
 
                     });

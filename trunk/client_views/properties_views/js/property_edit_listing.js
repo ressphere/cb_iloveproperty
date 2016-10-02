@@ -570,8 +570,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             {
                 //use jquery to get the ISO 3166-1 Alpha-2 compatible country code and capital location
                 
-               if(newVal === oldVal)
-                   return;
+               if(newVal === oldVal) return;
                var objProperty = $.makeclass(get_base());
                objProperty.setWSDL();
                var url = objProperty.getWsdlBaseUrl() + "index.php/base/get_country_short_name";
@@ -644,8 +643,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             //marker.coords
             $scope.$watchCollection("marker.coords", function(newVal, oldVal)
             {
-                if(newVal === oldVal)
-                   return;
+                if(newVal === oldVal) return;
                 else
                 {
                     //var callbacks = $.Callbacks();
@@ -884,7 +882,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                              alert("Fail to submit listing, please contact admin");
                              $scope.disable_button = 0;
                          }
-                         //fail pop message
+                         
 
                      }
 
@@ -949,6 +947,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                var photo_list = new Array();
                var index = 0;
                var php_vals = uploaded_images;
+               
                if($.isArray(php_vals) === true)
                {
                     $('.photo-desc').each(
@@ -970,11 +969,31 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                         photo_list.push({
                             'name': filename,
                             'desc': $(this).val(),
-                            'tmp_files': tmp_files
+                            'tmp_files': tmp_files,
+                            'exists':false
                         });
 
                     });
+                   
+                    
                 }
+                $('.photo-default').each(
+                        function()
+                        {
+                            var img = $(this).find('img').first();
+                            var desc = $(this).find('textarea').first();
+                            
+                            photo_list.push({
+                             'name': '',
+                              'desc': desc.val(),
+                              'tmp_files': [img.attr('src')],
+                              'exists':true
+                              
+                           });
+                        }
+                         
+                    );
+                //console.log(photo_list);
                 return photo_list;
            };
             // </editor-fold>
@@ -1120,7 +1139,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             var set_listing = function(listing, $scope)
             {
                 var senddata = "listing_information=" + JSON.stringify(listing);   
-                console.log(senddata);
+                //console.log(senddata);
                 var url = objProperty.getBaseUrl() + "index.php/_utils/properties_upload/upload_listing";
                 $http({
                  method: 'POST',
@@ -1396,7 +1415,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             // </editor-fold>
             $scope.navigate_back = function()
             {
-				console.log("$scope.back_count: " + $scope.back_count);
+		//console.log("$scope.back_count: " + $scope.back_count);
                 history.go($scope.back_count);
             };
             $scope.$watch('country_state.states', function(val, prev){
@@ -1574,7 +1593,16 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             {
                 $scope.reload_photo = "false";
                 //to set uploaded image                
-                $scope.uploaded_files = $scope.property_information.PropertyImages;
+                $scope.uploaded_files = [];
+                for(var i = 0; i < $scope.property_information.PropertyImages.length; i++)
+                {
+                    var PropertyImageSrc = $scope.property_information.PropertyImages[i][0];
+                    var PropertyImageDesc = $scope.property_information.PropertyImages[i][1];
+                    var PropertyImageName = "img"+i;
+                    
+                    $scope.uploaded_files.push([PropertyImageSrc, PropertyImageDesc,PropertyImageName]);
+                }
+                
             };
             
             $scope.reload_photo_click = function()

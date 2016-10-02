@@ -692,6 +692,22 @@ class properties_base extends CI_Controller {
             $output = $this->extemplate->render(NULL, TRUE);
             return $output;
     }
+    
+    protected function is_dir_empty($dir) {
+        if (!is_readable($dir))
+        {
+            return NULL;
+        }
+        $handle = opendir($dir);
+        while (false !== ($entry = readdir($handle))) 
+        {
+            if ($entry != "." && $entry != "..") 
+            {
+                return FALSE;
+            }
+        }
+        return TRUE;
+    }
     //******* Common API ******** End ****
 }
 
