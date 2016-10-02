@@ -46,7 +46,7 @@
          
              <div class="row clearfix">
                 <div id="image_group">
-                  <div ng-repeat="file in uploaded_files" id="{{file[2]}}" class="col-sm-6 col-md-4 photo-default">
+                  <div ng-repeat="file in uploaded_files" id="{{file[2]}}" class="col-sm-6 col-md-4 thumbnail-photo photo-default">
                         <div class="row thumbnail">
                           <img flow-img="file" style="max-width: 200px; height: 150px"
                                ng-src="{{file[0]}}">
@@ -64,7 +64,7 @@
                         <br>
                         <br>
                     </div>
-                  <div ng-repeat="file in $flow.files" class="col-sm-6 col-md-4">
+                  <div ng-repeat="file in $flow.files" class="col-sm-6 col-md-4 thumbnail-photo photo-new">
                               <span class="title ng-binding" ng-binding="file.name"></span>
                               <div class="row thumbnail" ng-show="$flow.files.length">
                                 <img flow-img="file" style="max-width: 200px; height: 150px"

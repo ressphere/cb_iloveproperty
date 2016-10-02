@@ -856,6 +856,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 var url = objProperty.getBaseUrl() + "index.php/_utils/properties_upload/commit_images_and_validation";
                 $scope.disable_button = 1;
                 $scope.photo_upload_status = "Updating Listing..."; 
+                
                 $http({
                    method: 'POST',
                    url: url,
@@ -947,54 +948,47 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                var photo_list = new Array();
                var index = 0;
                var php_vals = uploaded_images;
-               
-                $('.photo-default').each(
-                        function()
+                
+               $('.thumbnail-photo').each(
+                    function()
+                    {
+                        var desc = $(this).find('textarea').first().val();
+                        if($(this).hasClass('photo-default'))
                         {
                             var img = $(this).find('img').first();
-                            var desc = $(this).find('textarea').first();
-                            
                             photo_list.push({
                              'name': '',
-                              'desc': desc.val(),
+                              'desc': desc,
                               'tmp_files': [img.attr('src')],
-                              'exists':true
-                              
-                           });
+                              'exists':true  
+                           });    
                         }
-                         
-                    ); 
-               if($.isArray(php_vals) === true)
-               {
-                    $('.photo-desc').each(
-                     function()
-                     {
-                         var tmp_files = new Array();
-                         if(index >= $scope.uploader.flow.files.length)
-                         {
-                             return;       
-                         }
-                         var filename = $scope.uploader.flow.files[index].name;
-                         index = index +1;
-                         for (var i = 0; i < php_vals.length; i++) { 
-                             if(php_vals[i].post.flowFilename === filename)
-                             {
-                                 tmp_files.push(objProperty.get_filebaseName(php_vals[i].files.file.tmp_name));      
-                             }
+                        else
+                        {
+                            var tmp_files = new Array();
+                            
+                            if(index < $scope.uploader.flow.files.length)
+                            {
+                                var filename = $scope.uploader.flow.files[index].name;
+                                
+                                for (var i = 0; i < php_vals.length; i++) { 
+                                    if(php_vals[i].post.flowFilename === filename)
+                                    {
+                                        tmp_files.push(objProperty.get_filebaseName(php_vals[i].files.file.tmp_name));      
+                                    }
+                                }
+                                photo_list.push({
+                                    'name': filename,
+                                    'desc': desc,
+                                    'tmp_files': tmp_files,
+                                    'exists':false
+                                });
+                                index = index +1;
+                            }
                         }
-                        photo_list.push({
-                            'name': filename,
-                            'desc': $(this).val(),
-                            'tmp_files': tmp_files,
-                            'exists':false
-                        });
-
-                    });
-                   
-                    
-                }
-               
-                //console.log(photo_list);
+                    }
+                );
+                
                 return photo_list;
            };
             // </editor-fold>
@@ -1017,8 +1011,12 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                var photo_list = [];
                var index = 0;
                var php_vals = uploaded_images;
-               $('.photo-default').each(
-                        function()
+               var uploaded_photo_list = get_uploaded_image();
+               
+               $('.thumbnail-photo').each(
+                    function()
+                    {
+                        if($(this).hasClass('photo-default'))
                         {
                             var img = $(this).find('img').first();
                             var desc = $(this).find('textarea').first();
@@ -1026,34 +1024,27 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                             photo_list.push([
                                 img.attr('src'),
                                 desc.val()
+                            ]);    
+                        }
+                        else
+                        {
+                            var tmp_files = new Array();
+                            var filename = $scope.uploader.flow.files[index].name;
+                            index = index +1;
+                            for (var i = 0; i < php_vals.length; i++) { 
+                                if(php_vals[i].post.flowFilename === filename)
+                                {
+                                    tmp_files.push(objProperty.get_filebaseName(php_vals[i].files.file.tmp_name));
+                                }
+                            }
+                            photo_list.push([
+                                String.format("../../temp/images/{0}/{1}/{2}",
+                                    $scope.person.user_id, $scope.temp_ref, tmp_files[0]),
+                                    $(this).val()
                             ]);
                         }
-                         
-               );
-               if($.isArray(php_vals) === true)
-               {
-                    $('.photo-desc').each(
-                     function()
-                     {
-                         var tmp_files = new Array();
-                         var filename = $scope.uploader.flow.files[index].name;
-                         index = index +1;
-                         for (var i = 0; i < php_vals.length; i++) { 
-                             if(php_vals[i].post.flowFilename === filename)
-                             {
-                                 tmp_files.push(objProperty.get_filebaseName(php_vals[i].files.file.tmp_name));
-                             }
-                        }
-                        photo_list.push([
-                            String.format("../../temp/images/{0}/{1}/{2}",
-                                $scope.person.user_id, $scope.temp_ref, tmp_files[0]),
-                            $(this).val()
-                        ]);
-
-                    });
-                }
-                
-                
+                    }
+                );
                 return photo_list;  
             };
             var set_preview = function()
