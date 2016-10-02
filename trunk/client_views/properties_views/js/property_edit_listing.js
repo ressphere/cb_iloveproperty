@@ -1011,7 +1011,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                var photo_list = [];
                var index = 0;
                var php_vals = uploaded_images;
-               var uploaded_photo_list = get_uploaded_image();
+               
                
                $('.thumbnail-photo').each(
                     function()
