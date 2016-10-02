@@ -24,7 +24,6 @@
 
 <body>
         <?php echo $contents;
-        ?><br><br><br>
-  
+        ?><br>
 </body>
 </html>
