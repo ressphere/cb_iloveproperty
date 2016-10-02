@@ -948,6 +948,22 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                var index = 0;
                var php_vals = uploaded_images;
                
+                $('.photo-default').each(
+                        function()
+                        {
+                            var img = $(this).find('img').first();
+                            var desc = $(this).find('textarea').first();
+                            
+                            photo_list.push({
+                             'name': '',
+                              'desc': desc.val(),
+                              'tmp_files': [img.attr('src')],
+                              'exists':true
+                              
+                           });
+                        }
+                         
+                    ); 
                if($.isArray(php_vals) === true)
                {
                     $('.photo-desc').each(
@@ -977,22 +993,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                    
                     
                 }
-                $('.photo-default').each(
-                        function()
-                        {
-                            var img = $(this).find('img').first();
-                            var desc = $(this).find('textarea').first();
-                            
-                            photo_list.push({
-                             'name': '',
-                              'desc': desc.val(),
-                              'tmp_files': [img.attr('src')],
-                              'exists':true
-                              
-                           });
-                        }
-                         
-                    );
+               
                 //console.log(photo_list);
                 return photo_list;
            };
@@ -1016,7 +1017,19 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                var photo_list = [];
                var index = 0;
                var php_vals = uploaded_images;
-               
+               $('.photo-default').each(
+                        function()
+                        {
+                            var img = $(this).find('img').first();
+                            var desc = $(this).find('textarea').first();
+                            
+                            photo_list.push([
+                                img.attr('src'),
+                                desc.val()
+                            ]);
+                        }
+                         
+               );
                if($.isArray(php_vals) === true)
                {
                     $('.photo-desc').each(
@@ -1039,6 +1052,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
 
                     });
                 }
+                
                 
                 return photo_list;  
             };
