@@ -7,7 +7,8 @@ ng_map_profile.config(function(ngGPlacesAPIProvider){
                 nearbySearchKeys: ['name', 'reference', 'vicinity', 'types', 'icon']
         });
 });
- // </editor-fold>
+// </editor-fold>
+
 ng_map_profile.controller('uploadProfile', function($injector, $scope, $controller, ngGPlacesAPI, flowFactory, $http) {
         if(typeof ngGPlacesAPI !== 'undefined')
         {
@@ -32,7 +33,8 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             'phone': '',
             'user_id':''
         };
-        $scope.temp_ref = "";$scope.back_count = -1;
+        $scope.back_count = -1;
+        $scope.temp_ref = "";
         // </editor-fold>
         // <editor-fold desc="property information column 3"  defaultstate="collapsed">
         $scope.property_category_3 =
@@ -48,6 +50,15 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                         ]
                     },
                     {
+                        id:'state',
+                        name:'State',
+                        control:'select',
+                        category:'sell rent room',
+                        values:
+                        [
+                        ]
+                    },
+                    {
                         id:'unit_name',
                         name:'Unit Name',
                         control:'input-text',
@@ -56,15 +67,6 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                         values:
                         [
                             ''
-                        ]
-                    },
-                    {
-                        id:'state',
-                        name:'State',
-                        control:'select',
-                        category:'sell rent room',
-                        values:
-                        [
                         ]
                     },
                     {
@@ -212,7 +214,10 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     control:'select',
                     category:'sell rent room',
                     values:
-                    ['Property For Sale','Property For Lease']
+                    [
+                        'Property For Sale',
+                        'Property For Lease'
+                    ]
                 },
                 {
                     id:'auction',
