@@ -770,6 +770,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 var remark = CKEDITOR.instances.remark.getData();
                 var objHome = StaticHomeObject.getInstance();
                 remark = objHome.remove_special_character_from_data(remark);
+                console.log(remark);
                 
                 switch(category_name)
                 {
