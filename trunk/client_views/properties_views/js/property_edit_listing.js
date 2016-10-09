@@ -745,7 +745,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 var listing;
                 $scope.country_state.location["k"] = $scope.googleMarker.getGMarkers()[0].position.lat();
                 $scope.country_state.location["B"] = $scope.googleMarker.getGMarkers()[0].position.lng();
-                var remark = CKEDITOR.instances.remark.document.getBody().getHtml();
+                var remark = CKEDITOR.instances.remark.document.getBody().getData();
                 switch(category_name)
                 {
                     case "sell":
@@ -856,7 +856,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 var url = objProperty.getBaseUrl() + "index.php/_utils/properties_upload/commit_images_and_validation";
                 $scope.disable_button = 1;
                 $scope.photo_upload_status = "Updating Listing..."; 
-                
+                console.log(senddata);
                 $http({
                    method: 'POST',
                    url: url,
@@ -1047,7 +1047,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 $scope.country_state.location["k"] = $scope.googleMarker.getGMarkers()[0].position.lat();
                 $scope.country_state.location["B"] = $scope.googleMarker.getGMarkers()[0].position.lng();
                 var listing_type = new String($('#type').val()).indexOf('For Sale') >= 0? "SELL" : "RENT";
-                var remark = CKEDITOR.instances.remark.document.getBody().getHtml();
+                var remark = CKEDITOR.instances.remark.document.getBody().getData();
                 if ($('#type').val().indexOf('Room To Let') > 0)
                 {
                     listing_type = "ROOM";
