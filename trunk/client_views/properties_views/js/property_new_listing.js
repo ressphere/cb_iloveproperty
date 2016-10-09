@@ -772,6 +772,10 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 $scope.country_state.location["k"] = $scope.googleMarker.getGMarkers()[0].position.lat();
                 $scope.country_state.location["B"] = $scope.googleMarker.getGMarkers()[0].position.lng();
                 
+                var remark = CKEDITOR.instances.remark.getData();
+                var objHome = StaticHomeObject.getInstance();
+                remark = objHome.remove_special_character_from_data(remark);
+                
                 switch(category_name)
                 {
                     case "sell":
@@ -789,7 +793,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                             'furnished_type':$.trim($('#furnishing').val()),
                             'occupied':$.trim($('#occupied').val()),
                             'monthly_maintanance': parseFloat($('#monthly_maintanance').val()).toFixed(2),
-                            'remark': CKEDITOR.instances.remark.getData(), //$('textarea#remark').val(),
+                            'remark': remark, //$('textarea#remark').val(),
                             'property_category':property_category,
                             'property_type':property_type,
                             'tenure':$.trim($('#tenure').val()),
@@ -821,7 +825,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                             'ref':'',
                             'furnished_type':$.trim($('#furnishing').val()),
                             'occupied':$.trim($('#occupied').val()),
-                            'remark': CKEDITOR.instances.remark.getData(),//$('textarea#remark').val(),
+                            'remark': remark,//$('textarea#remark').val(),
                             'land_title_type': $.trim($('#land_title_type').val()),
                             'active':1,
                             'user_id':'',
@@ -1062,7 +1066,9 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 var property_category = prop_info['property_category'];
                 var property_type = prop_info['property_type'];
                 
-                //console.log(property_category+" "+property_type);
+                var remark = CKEDITOR.instances.remark.getData();
+                var objHome = StaticHomeObject.getInstance();
+                remark = objHome.remove_special_character_from_data(remark);
                 
                 var listing = {
                     'service_type' : service_type,
@@ -1077,7 +1083,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     'furnished_type':$.trim($('#furnishing').val()),
                     'occupied':$.trim($('#occupied').val()),
                     'monthly_maintanance': parseFloat($('#monthly_maintanance').val()).toFixed(2),
-                    'remark': CKEDITOR.instances.remark.getData(),//$('textarea#remark').val(),
+                    'remark': remark,//$('textarea#remark').val(),
                     'property_category':property_category,
                     'property_type':property_type,
                     'tenure':$.trim($('#tenure').val()),

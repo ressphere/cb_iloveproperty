@@ -711,6 +711,10 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 $scope.country_state.location["k"] = $scope.googleMarker.getGMarkers()[0].position.lat();
                 $scope.country_state.location["B"] = $scope.googleMarker.getGMarkers()[0].position.lng();
                 var remark = CKEDITOR.instances.remark.getData();
+                
+                var objHome = StaticHomeObject.getInstance();
+                remark = objHome.remove_special_character_from_data(remark);
+                
                 switch(category_name)
                 {
                     case "sell":
@@ -1010,6 +1014,9 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 $scope.country_state.location["B"] = $scope.googleMarker.getGMarkers()[0].position.lng();
                 var listing_type = new String($('#type').val()).indexOf('For Sale') >= 0? "SELL" : "RENT";
                 var remark = CKEDITOR.instances.remark.getData();
+                var objHome = StaticHomeObject.getInstance();
+                remark = objHome.remove_special_character_from_data(remark);
+                
                 if ($('#type').val().indexOf('Room To Let') > 0)
                 {
                     listing_type = "ROOM";

@@ -507,9 +507,13 @@ var get_property_home = function() {
                 set_currency_from:function(private, fixed_currency_from)
                 {
                     private.fixed_currency_from = fixed_currency_from;
-                }
-                
-                
+                },
+                remove_special_character_from_data:function(private, msg_str)
+                {
+                    /*remove the possible special character that could kill json*/
+                    var replaced_content = msg_str.replace(/&[a-zA-Z]*;/g, ' ');
+                    return replaced_content;
+                }        
             }
         };
  };
