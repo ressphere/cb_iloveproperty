@@ -1,99 +1,104 @@
 <br><br>
 <div  class="fuelux container upload_properties" ng-app="user_profileApp" ng-controller="uploadProfile">
-    
     <div class="userprofile row clearfix">
-        <div class="title"><span>Personal Information</span></div>
+        <div class="title">
+            <span>Personal Information</span>
+        </div>
         <div class="oceanblue col-md-8 column">
             <div  class="col-md-4 column">
-                <div><span class="gothic_font">Name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="gothic_font" id="name" value="{{person.name}}" disabled></div><br>
-                <div><span class="gothic_font">Email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="gothic_font" id="email" value="{{person.email}}"  disabled></div> <br>
-
+                <div>
+                    <span class="gothic_font">Name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="gothic_font" id="name" value="{{person.name}}" disabled>
+                </div>
+                <br>
+                <div>
+                    <span class="gothic_font">Email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="gothic_font" id="email" value="{{person.email}}"  disabled>
+                </div>
+                <br>
             </div>
             <div class="col-md-4 column">
-                <div><span class="gothic_font">Contact No.</span>&nbsp;&nbsp;&nbsp;<input class="gothic_font" type="text" id="contact_number" value="{{person.phone}}" disabled></div><br>
-
+                <div>
+                    <span class="gothic_font">Contact No.</span>&nbsp;&nbsp;&nbsp;<input class="gothic_font" type="text" id="contact_number" value="{{person.phone}}" disabled>
+                </div>
+                <br>
             </div>
         </div>
-    </div><br>
-   <div class="row">
+    </div>
+    <br>
+    <div class="row">
         <div class="title">
             <span>Upload Photo</span>
         </div>
-       <br>
-       <div ng-model="reload_photo"> 
+        <br>
+        <div ng-model="reload_photo"> 
             <div ng-show="reload_photo" 
-            id="ng-app"
-            flow-prevent-drop="" flow-drag-enter="dropClass=&#39;drag-over&#39;" 
-            flow-name="uploader.flow"
-            flow-drag-leave="dropClass=&#39;&#39;" 
-            flow-init="uploader.opts" 
-            flow-files-submitted="$flow.upload()" 
-            flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
-            class="ng-scope">
-             <div  class="drop row clearfix" flow-drop="" ng-class="dropClass">
-                <div>
-                    <span class="btn btn-default" flow-btn="">Upload Image
-                        <input type="file" multiple="multiple" 
-                        style="visibility: hidden; position: absolute;">
-                    </span>
-                    <span class="gothic_font btn btn-default" 
-                          flow-btn="" flow-directory="" 
-                          ng-show="$flow.supportDirectory">Upload Folder of Images<input type="file" multiple="multiple"
-                            webkitdirectory="webkitdirectory" 
-                            style="visibility: hidden; position: absolute;">
-                    </span>
-              </div><br>
-         
-             <div class="row clearfix">
-                <div id="image_group">
-                  <div ng-repeat="file in uploaded_files" id="{{file[2]}}" class="col-sm-6 col-md-4 thumbnail-photo photo-default">
-                        <div class="row thumbnail">
-                          <img flow-img="file" style="max-width: 200px; height: 150px"
-                               ng-src="{{file[0]}}">
-                        </div>
-                        <div>
-                            <center><textarea maxlength="200" class="form-control photo-default-desc" style='resize: none;' cols='35' rows='5' placeholder='Describe Your Photo Here'>{{file[1]}}</textarea></center>
-                        </div>
-                        <br>
-
-                        <div class="btn-group">
-                            <a class="gothic_font btn btn-xs btn-danger" ng-click="remove_uploaded_file(file[2])">
-                                Remove
-                            </a>
-                        </div>
-                        <br>
-                        <br>
+                id="ng-app"
+                flow-prevent-drop="" flow-drag-enter="dropClass=&#39;drag-over&#39;" 
+                flow-name="uploader.flow"
+                flow-drag-leave="dropClass=&#39;&#39;" 
+                flow-init="uploader.opts" 
+                flow-files-submitted="$flow.upload()" 
+                class="ng-scope">
+                <div  class="drop row clearfix" flow-drop="" ng-class="dropClass">
+                    <div>
+                        <span class="btn btn-default" flow-btn="">Upload Image
+                            <input type="file" multiple="multiple" style="visibility: hidden; position: absolute;">
+                        </span>
+                        <span class="gothic_font btn btn-default" 
+                            flow-btn="" flow-directory="" 
+                            ng-show="$flow.supportDirectory">Upload Folder of Images
+                            <input type="file" multiple="multiple"
+                                    webkitdirectory="webkitdirectory" 
+                                    style="visibility: hidden; position: absolute;">
+                        </span>
                     </div>
-                  <div ng-repeat="file in $flow.files" class="col-sm-6 col-md-4 thumbnail-photo photo-new">
-                              <span class="title ng-binding" ng-binding="file.name"></span>
-                              <div class="row thumbnail" ng-show="$flow.files.length">
-                                <img flow-img="file" style="max-width: 200px; height: 150px"
-                                     ng-src="{{file.name}}">
-                              </div>
-                              <div>
-                                  <center><textarea maxlength="200" class="form-control photo-desc" style='resize: none;' cols='35' rows='5' placeholder='Describe Your Photo Here'></textarea></center>
-                              </div>
-                              <br>
-                              <div class="progress progress-striped" ng-class="{active: file.isUploading()}">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" ng-style="{width: (file.progress() * 100) + '%'}" style="width: 100%;">
-                                  <span class="gothic_font sr-only ng-binding">1% Complete</span>
+                    <br>
+                    <div class="row clearfix">
+                        <div id="image_group">
+                            <div ng-repeat="file in uploaded_files" id="{{file[2]}}" class="col-sm-6 col-md-4 thumbnail-photo photo-default">
+                                <div class="row thumbnail">
+                                    <img flow-img="file" style="max-width: 200px; height: 150px" ng-src="{{file[0]}}">
                                 </div>
-                              </div>
-                              <div class="btn-group">
-                                  <a class="gothic_font btn btn-xs btn-danger" ng-click="file.cancel()">Remove</a>
-                              </div>
-                          <br>
-                          <br>
+                                <div>
+                                    <center>
+                                        <textarea maxlength="50" class="form-control photo-default-desc" style='resize: none;' cols='35' rows='3' placeholder='Describe Your Photo Here'>{{file[1]}}
+                                        </textarea>
+                                    </center>
+                               </div>
+                               <br>
+                               <div class="btn-group">
+                                    <a class="gothic_font btn btn-xs btn-danger" ng-click="remove_uploaded_file(file[2])">
+                                        Remove
+                                    </a>
+                               </div>
+                               <br>
+                               <br>
+                            </div>
+                            <div ng-repeat="file in $flow.files" class="col-sm-6 col-md-4 thumbnail-photo photo-new">
+                                <span class="title ng-binding" ng-binding="file.name"></span>
+                                <div class="row thumbnail" ng-show="$flow.files.length">
+                                    <img flow-img="file" style="max-width: 200px; height: 150px" ng-src="{{file.name}}">
+                                </div>
+                                <div>
+                                    <center><textarea maxlength="50" class="form-control photo-desc" style='resize: none;' cols='35' rows='3' placeholder='Describe Your Photo Here'></textarea></center>
+                                </div>
+                                <br>
+                                <div class="progress progress-striped" ng-class="{active: file.isUploading()}">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" ng-style="{width: (file.progress() * 100) + '%'}" style="width: 100%;">
+                                        <span class="gothic_font sr-only ng-binding">1% Complete</span>
+                                    </div>
+                                </div>
+                                <div class="btn-group">
+                                    <a class="gothic_font btn btn-xs btn-danger" ng-click="file.cancel()">Remove</a>
+                                </div>
+                                <br>
+                                <br>
+                            </div>
+                        </div> 
                     </div>
-                </div> 
-              </div>
-                 
-            
+                </div>
             </div>
         </div>
-       </div>
- 
-       <br><br>
+        <br><br>
         <div class="properties_details">
             <div class="title row clearfix">
                 <span class="gothic_bold_font">Property Information</span>
@@ -137,16 +142,16 @@
                             </div>
                            <div ng-switch-when='asking_price' id='{{property_category.id}}'  class="input-group" ng-if="property_category.control === 'input-currency'">
                                <div class="number-div gothic_font">
-                                    <input class="currencyOnly" type='number' ng-model="asking_price.value" min="1"/>
+                                    <input id="txtAskingPrice" class="currencyOnly" ng-model="asking_price.value" maxlength="12" />
                                </div>
                            </div>
                             <div ng-switch-when='monthly_rental' id='{{property_category.id}}'  class="input-group" ng-if="property_category.control === 'input-currency'">
                                <div class="number-div gothic_font">
-                                    <input class="currencyOnly" type='number' ng-model="monthly_rental.value" min="1"/>
+                                    <input id="txtMonthlyRental" class="currencyOnly" ng-model="monthly_rental.value" maxlength="12"/>
                                </div>
                            </div>
                            <div  class="number-div  gothic_font" ng-switch-when='built_up'>
-                               <input class="currencyOnly" id='{{property_category.id}}' type='number' ng-model="build_up.value" ng-if="property_category.control === 'input-number'" min='{{property_category.values[0]}}' max='{{property_category.values[1]}}' value='{{property_category.values[2]}}'/>
+                               <input id='{{property_category.id}}' class="currencyOnly" type='number' ng-model="build_up.value" ng-if="property_category.control === 'input-number'" min='{{property_category.values[0]}}' max='{{property_category.values[1]}}' value='{{property_category.values[2]}}'/>
                            </div>
                            <div ng-switch-when='asking_price_per' id='{{property_category.id}}'  class="gothic_font {{property_category.category}} input-group" ng-if="property_category.control === 'input-currency'">
                                     <!--<span class="input-group-addon" ng-bind="currency_value.currency"></span>-->
@@ -368,7 +373,7 @@
             <br><br>
             <div id="upload_controls" class="pull-right">
                 <B><span id="upload_status" ng-show="disable_button" class="blink" ng-bind="photo_upload_status"></span></B>
-                <input id="upload_term_condition"  type="checkbox" ng-click="term_click()"> I have read and agree with the <a href="index.php/properties_policy" target="_blank"><em>Terms & Conditions</em></a></input><br>
+                <input id="upload_term_condition" type="checkbox" ng-click="term_click()"> I have read and agree with the <a href="index.php/properties_policy" target="_blank"><em>Terms & Conditions</em></a></input><br>
                 <span class='error'>{{err_msg}}</span><br> 
                 <button id="cancel" ng-disabled="disable_button" ng-click="navigate_back()" type="button" class="btn btn-danger">Cancel</button>
                 <button id="listing_preview" ng-disabled="disable_button" ng-click="preview_click()" type="button" class="btn">Preview</button>

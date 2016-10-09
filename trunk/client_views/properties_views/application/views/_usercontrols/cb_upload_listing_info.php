@@ -1,25 +1,34 @@
 <br><br>
 <div  class="fuelux container upload_properties" ng-app="user_profileApp" ng-controller="uploadProfile">
-    
     <div class="userprofile row clearfix">
-        <div class="title"><span>Personal Information</span></div>
+        <div class="title">
+            <span>Personal Information</span>
+        </div>
         <div class="oceanblue col-md-8 column">
             <div  class="col-md-4 column">
-                <div><span class="gothic_font">Name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="gothic_font" id="name" value="{{person.name}}" disabled></div><br>
-                <div><span class="gothic_font">Email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="gothic_font" id="email" value="{{person.email}}"  disabled></div> <br>
-
+                <div>
+                    <span class="gothic_font">Name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="gothic_font" id="name" value="{{person.name}}" disabled>
+                </div>
+                <br>
+                <div>
+                    <span class="gothic_font">Email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="gothic_font" id="email" value="{{person.email}}"  disabled>
+                </div>
+                <br>
             </div>
             <div class="col-md-4 column">
-                <div><span class="gothic_font">Contact No.</span>&nbsp;&nbsp;&nbsp;<input class="gothic_font" type="text" id="contact_number" value="{{person.phone}}" disabled></div><br>
-
+                <div>
+                    <span class="gothic_font">Contact No.</span>&nbsp;&nbsp;&nbsp;<input class="gothic_font" type="text" id="contact_number" value="{{person.phone}}" disabled>
+                </div>
+                <br>
             </div>
         </div>
-    </div><br>
-   <div class="row">
+    </div>
+    <br>
+    <div class="row">
         <div class="title">
             <span>Upload Photo</span>
         </div>
-       <br>
+        <br>
         <div id="ng-app"
             flow-prevent-drop="" flow-drag-enter="dropClass=&#39;drag-over&#39;" 
             flow-name="uploader.flow"
@@ -30,8 +39,7 @@
             <div  class="drop row clearfix" flow-drop="" ng-class="dropClass">
                 <div>
                     <span class="btn btn-default" flow-btn="">Upload Image
-                        <input type="file" multiple="multiple" 
-                            style="visibility: hidden; position: absolute;">
+                        <input type="file" multiple="multiple" style="visibility: hidden; position: absolute;">
                     </span>
                     <span class="gothic_font btn btn-default" 
                         flow-btn="" flow-directory="" 
@@ -41,9 +49,7 @@
                             style="visibility: hidden; position: absolute;">
                     </span>
                 </div>
-                
                 <br>
-                
                 <div>
                     <div ng-repeat="file in $flow.files" class="col-sm-6 col-md-4">
                         <span class="title ng-binding" ng-binding="file.name"></span>
@@ -68,7 +74,7 @@
                 </div>
             </div>
         </div>
-       <br><br>
+        <br><br>
         <div class="properties_details">
             <div class="title row clearfix">
                 <span class="gothic_bold_font">Property Information</span>
@@ -117,11 +123,11 @@
                            </div>
                             <div ng-switch-when='monthly_rental' id='{{property_category.id}}'  class="input-group" ng-if="property_category.control === 'input-currency'">
                                <div class="number-div gothic_font">
-                                    <input class="currencyOnly" id="txtMonthlyRental" ng-model="monthly_rental.value" maxlength="12"/>
+                                    <input id="txtMonthlyRental" class="currencyOnly" ng-model="monthly_rental.value" maxlength="12"/>
                                </div>
                            </div>
                            <div  class="number-div  gothic_font" ng-switch-when='built_up'>
-                               <input class="currencyOnly" id='{{property_category.id}}' type='number' ng-model="build_up.value" ng-if="property_category.control === 'input-number'" min='{{property_category.values[0]}}' max='{{property_category.values[1]}}' value='{{property_category.values[2]}}'/>
+                               <input id='{{property_category.id}}' class="currencyOnly" type='number' ng-model="build_up.value" ng-if="property_category.control === 'input-number'" min='{{property_category.values[0]}}' max='{{property_category.values[1]}}' value='{{property_category.values[2]}}'/>
                            </div>
                            <div ng-switch-when='asking_price_per' id='{{property_category.id}}'  class="gothic_font {{property_category.category}} input-group" ng-if="property_category.control === 'input-currency'">
                                     <!--<span class="input-group-addon" ng-bind="currency_value.currency"></span>-->
