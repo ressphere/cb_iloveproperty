@@ -8,7 +8,7 @@ class properties_preview extends properties_base {
         parent::__construct();
         $this->set_action("sale");
 	$this->SEO_Tags("Ressphere Real Estate (Property) Preview Listing");
-        $this->set_title("Ressphere Properties Listing Preview");
+        $this->set_title("Ressphere Properties - Preview");
         
    }
    

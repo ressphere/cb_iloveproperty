@@ -130,7 +130,7 @@ Please browse my website for more of my listings.<br>This user-friendly website 
            $tab_content_list = $this->get_user_profile_tabs();
            parent::index();
            $content = "ressphere home search";
-           $title = "Welcome to ressphere";
+           $title = "Ressphere - My Profile";
            $this->SEO_Tags($content);
            $this->set_title($title);
            //$this->load->module_model('home_category_model');
