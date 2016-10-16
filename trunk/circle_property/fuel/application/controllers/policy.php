@@ -17,7 +17,7 @@ class policy extends base {
        parent::index();
        
        $content = "ressphere policy";
-       $title = "Resspsher - Term and Conditions";
+       $title = "Resspshere - Term and Conditions";
        $this->SEO_Tags($content);
        $this->set_title($title);
        
