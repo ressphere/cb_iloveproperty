@@ -10,7 +10,7 @@ class properties_sell extends properties_upload {
         $this->set_action("sale");
         // Set web related info fro Search Engine
         $this->SEO_Tags("Ressphere Real Estate (Property) Home Page To Sell");
-        $this->set_title("Ressphere Properties For Sale");
+        $this->set_title("Ressphere Properties - Sell");
         
    }
    

@@ -10,7 +10,7 @@ class properties_rent extends properties_search {
         $this->set_action("rent");
         // Set web related info fro Search Engine
         $this->SEO_Tags("Ressphere Real Estate (Property) Home Page For Rent");
-        $this->set_title("Ressphere Looking Properties For Rent");
+        $this->set_title("Ressphere Properties - Rent");
    }
    
    public function index()

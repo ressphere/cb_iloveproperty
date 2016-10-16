@@ -8,7 +8,7 @@ class properties_lease extends properties_sell {
         $this->set_action("rent");
         // Set web related info fro Search Engine
         $this->SEO_Tags("Ressphere Real Estate (Property) Home Page To Let");
-        $this->set_title("Ressphere Properties To Let");
+        $this->set_title("Ressphere Properties - Lease");
         
    }
    
