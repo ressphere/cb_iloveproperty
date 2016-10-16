@@ -437,6 +437,7 @@ class properties_base extends CI_Controller {
         imagepng($im, $watermark_path);
         imagedestroy($im);
         $this->set_watermark($img_path, $watermark_path);
+        unlink($watermark_path);
     }
     
     protected function set_default_watermark($img_path)
