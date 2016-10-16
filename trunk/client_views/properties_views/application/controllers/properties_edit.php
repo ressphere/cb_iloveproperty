@@ -9,7 +9,7 @@ private $property_info_list = NULL;
         $this->set_action("edit");
         // Set web related info fro Search Engine
         $this->SEO_Tags("Ressphere Real Estate (Property) Home Page To Edit");
-        $this->set_title("Ressphere Properties To Edit");
+        $this->set_title("Ressphere Properties - Edit");
         
    }
    
