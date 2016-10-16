@@ -159,7 +159,9 @@ class properties_upload extends properties_base
         try
         {
             if (!is_dir($returned_targeted_image_directory))
+            {
                 mkdir($returned_targeted_image_directory);
+            }
             return TRUE;
         }
         catch (Exception $ex)
@@ -168,7 +170,67 @@ class properties_upload extends properties_base
         }
         return FALSE;
     }
-     /**
+    
+    public function upload_commit_images_manager($reference, $tmp_image, $targeted_image_path, 
+            &$uploaded_files, $desc,$exists)
+    {
+       
+       if(!$exists)
+       {
+            $new_filename = $targeted_image_path . DIRECTORY_SEPARATOR . 
+                str_replace('tmp','jpg',$tmp_image);
+            $new_filename_url = base_url() . "assets/images/properties/" . 
+                         $reference ."/".str_replace('tmp','jpg',$tmp_image);
+            $full_tmp_image = $this->tempDir . DIRECTORY_SEPARATOR . $reference .
+                               DIRECTORY_SEPARATOR . $tmp_image;
+            if(file_exists($full_tmp_image))
+            {
+                 //$ext = pathinfo($image['name'], PATHINFO_EXTENSION);
+                 rename($full_tmp_image, $new_filename);
+                 array_push($uploaded_files, array("path"=>$new_filename_url, "description"=>$desc));
+            }
+            else
+            {
+                $this->set_error($full_tmp_image . " does not exists!!!!");
+            }
+       }
+       else
+       {
+           if (filter_var($tmp_image, FILTER_VALIDATE_URL, FILTER_FLAG_PATH_REQUIRED)) 
+           { 
+               $splited_url = explode('/', $tmp_image);
+               $photo_name = end($splited_url);
+               $photo_dir =  $splited_url[count($splited_url)-2];
+               $parent_photo_dir = dirname($targeted_image_path);
+               
+               $existing_photo_full_path = $parent_photo_dir . DIRECTORY_SEPARATOR . $photo_dir . DIRECTORY_SEPARATOR . $photo_name;
+               if(file_exists($existing_photo_full_path))
+               {
+                   $new_filename = $targeted_image_path . DIRECTORY_SEPARATOR . 
+                         str_replace('tmp','jpg',$photo_name);
+                   $new_filename_url = base_url() . "assets/images/properties/" . 
+                         $reference . "/" . str_replace('tmp','jpg',$photo_name);
+                   
+                   rename($existing_photo_full_path, $new_filename);
+                   array_push($uploaded_files, array("path"=>$new_filename_url, "description"=>$desc));
+                   if($this->is_dir_empty(dirname($existing_photo_full_path)))
+                   {
+                       $this->deleteDirectory(dirname($existing_photo_full_path));
+                   }
+               }
+               else
+               {
+                   $this->set_error($existing_photo_full_path . " does not found!!!!");
+               }
+           }
+           else
+           {
+                $this->set_error($tmp_image . " is not a valid url!!!!");
+           }
+       }
+    }
+
+    /**
      * 
      * @author Tan Chun Mun
      * @TODO copy the image base on reference to the destinated folder
@@ -192,8 +254,6 @@ class properties_upload extends properties_base
                 $validation == TRUE)
          {
              $image_list = json_decode($image_list_json, true);
-             //var_dump($image_list);
-             //create the folder base on the session reference number
              $uploaded_files = array();
              $asset_dir_created = FALSE;
              if(count($image_list) > 0)
@@ -215,28 +275,16 @@ class properties_upload extends properties_base
              }
              if($asset_dir_created === TRUE)
              {
+                
                 foreach ($image_list as $image)
                 {
                    foreach($image['tmp_files'] as $tmp_image )
                    {
-                       $full_tmp_image = $this->tempDir . DIRECTORY_SEPARATOR . $reference .
-                               DIRECTORY_SEPARATOR . $tmp_image;
-                       if(file_exists($full_tmp_image))
-                       {
-                            //$ext = pathinfo($image['name'], PATHINFO_EXTENSION);
-                            $new_filename = $targeted_image_path . DIRECTORY_SEPARATOR . 
-                                    $tmp_image;
-                            $new_filename_url = base_url() . "assets/images/properties/" . 
-                                    $reference ."/".$tmp_image;
-                            rename($full_tmp_image, $new_filename);
-                            array_push($uploaded_files, array("path"=>$new_filename_url, "description"=>$image['desc']));
-                       }
-                       else
-                       {
-                           $this->set_error($full_tmp_image . " does not exists!!!!");
-                       }
+                       $this->upload_commit_images_manager($reference, $tmp_image, $targeted_image_path, $uploaded_files,
+                               $image['desc'], $image['exists']);
                    }
                 }
+                
                 $result["status"] = "success";
                 $result["data"] = $uploaded_files;
                 

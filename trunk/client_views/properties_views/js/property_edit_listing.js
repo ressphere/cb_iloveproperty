@@ -33,7 +33,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             'phone': '',
             'user_id':''
         };
-		$scope.back_count = -1;
+	$scope.back_count = -1;
         $scope.temp_ref = "";
         // </editor-fold>
         // <editor-fold desc="property information column 3"  defaultstate="collapsed">
@@ -157,19 +157,6 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                          ]
                     },
                     {
-                    id:'title_type',
-                    name:'Title Type',
-                    control:'select',
-                    category:'sell',
-                    values:
-                     [
-                        '--',
-                        'Strata',
-                        'Individual'
-
-                     ]
-                    },
-                    {
                     id:'land_title_type',
                     name:'Land Title Type',
                     control:'select',
@@ -204,19 +191,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                             'No',
                             'Yes'
                         ]
-                    },
-                    {
-                        id:'unit_type',
-                        name:'Unit Type',
-                        control:'select',
-                        category:'sell rent room',
-                        values:
-                        [
-                            '--',
-                            'Corner',
-                            'Intermediate'
-                        ]
-                    },   
+                    }, 
                     {
                         id:'monthly_maintanance',
                         name:'Monthly Maintanance',
@@ -241,8 +216,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     values:
                     [
                         'Property For Sale',
-                        'Property For Lease',
-                        'Room To Let'
+                        'Property For Lease'
                     ]
                 },
                 {
@@ -328,7 +302,11 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     control:'input-number',
                     category:'sell rent',
                     values:
-                    [1,1000000,1500]
+                    [
+                        1,
+                        1000000,
+                        1500
+                    ]
                 },
                 {
                     id:'land_area',
@@ -448,13 +426,6 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 'category':'sell rent room'
             },
             {
-                'label': 'Unit Type',
-                'id':'unittype',
-                'value': 'Corner',
-                'category':'sell rent room'
-
-            },
-            {
                 'label': 'Room Type',
                 'id':'room_type',
                 'value': 'Master room',
@@ -493,13 +464,6 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 'label': 'Reserve Type',
                 'id':'reserve_type',
                 'value': 'Bumi Lot',
-                'category':'sell'
-
-            },
-            {
-                'label': 'Title Type',
-                'id': 'title_type',
-                'value': 'Strata',
                 'category':'sell'
 
             },
@@ -644,8 +608,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             //marker.coords
             $scope.$watchCollection("marker.coords", function(newVal, oldVal)
             {
-                if(newVal === oldVal)
-                   return;
+                if(newVal === oldVal) return;
                 else
                 {
                     //var callbacks = $.Callbacks();
@@ -747,7 +710,11 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 var listing;
                 $scope.country_state.location["k"] = $scope.googleMarker.getGMarkers()[0].position.lat();
                 $scope.country_state.location["B"] = $scope.googleMarker.getGMarkers()[0].position.lng();
-                var remark = CKEDITOR.instances.remark.document.getBody().getHtml();
+                var remark = CKEDITOR.instances.remark.getData();
+                
+                var objHome = StaticHomeObject.getInstance();
+                remark = objHome.remove_special_character_from_data(remark);
+                
                 switch(category_name)
                 {
                     case "sell":
@@ -767,8 +734,6 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                             'remark': remark,
                             'property_type':$.trim($('#property_type').val()),
                             'tenure':$.trim($('#tenure').val()),
-                            'title_type':$.trim($('#title_type').val()),
-                            'unittype':$.trim($('#unit_type').val()),
                             'land_title_type': $.trim($('#land_title_type').val()),
                             'active':1,
                             'user_id':'',
@@ -798,7 +763,6 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                             'furnished':$.trim($('#furnishing').val()),
                             'occupied':$.trim($('#occupied').val()),
                             'remark': remark,
-                            'unittype':$.trim($('#unit_type').val()),
                             'land_title_type': $.trim($('#land_title_type').val()),
                             'active':1,
                             'user_id':'',
@@ -858,6 +822,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 var url = objProperty.getBaseUrl() + "index.php/_utils/properties_upload/commit_images_and_validation";
                 $scope.disable_button = 1;
                 $scope.photo_upload_status = "Updating Listing..."; 
+                console.log(senddata);
                 $http({
                    method: 'POST',
                    url: url,
@@ -884,7 +849,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                              alert("Fail to submit listing, please contact admin");
                              $scope.disable_button = 0;
                          }
-                         //fail pop message
+                         
 
                      }
 
@@ -949,32 +914,47 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                var photo_list = new Array();
                var index = 0;
                var php_vals = uploaded_images;
-               if($.isArray(php_vals) === true)
-               {
-                    $('.photo-desc').each(
-                     function()
-                     {
-                         var tmp_files = new Array();
-                         if(index >= $scope.uploader.flow.files.length)
-                         {
-                             return;       
-                         }
-                         var filename = $scope.uploader.flow.files[index].name;
-                         index = index +1;
-                         for (var i = 0; i < php_vals.length; i++) { 
-                             if(php_vals[i].post.flowFilename === filename)
-                             {
-                                 tmp_files.push(objProperty.get_filebaseName(php_vals[i].files.file.tmp_name));      
-                             }
+                
+               $('.thumbnail-photo').each(
+                    function()
+                    {
+                        var desc = $(this).find('textarea').first().val();
+                        if($(this).hasClass('photo-default'))
+                        {
+                            var img = $(this).find('img').first();
+                            photo_list.push({
+                             'name': '',
+                              'desc': desc,
+                              'tmp_files': [img.attr('src')],
+                              'exists':true  
+                           });    
                         }
-                        photo_list.push({
-                            'name': filename,
-                            'desc': $(this).val(),
-                            'tmp_files': tmp_files
-                        });
-
-                    });
-                }
+                        else
+                        {
+                            var tmp_files = new Array();
+                            
+                            if(index < $scope.uploader.flow.files.length)
+                            {
+                                var filename = $scope.uploader.flow.files[index].name;
+                                
+                                for (var i = 0; i < php_vals.length; i++) { 
+                                    if(php_vals[i].post.flowFilename === filename)
+                                    {
+                                        tmp_files.push(objProperty.get_filebaseName(php_vals[i].files.file.tmp_name));      
+                                    }
+                                }
+                                photo_list.push({
+                                    'name': filename,
+                                    'desc': desc,
+                                    'tmp_files': tmp_files,
+                                    'exists':false
+                                });
+                                index = index +1;
+                            }
+                        }
+                    }
+                );
+                
                 return photo_list;
            };
             // </editor-fold>
@@ -997,38 +977,46 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                var photo_list = [];
                var index = 0;
                var php_vals = uploaded_images;
+               var uploaded_images = get_uploaded_image();
                
-               if($.isArray(php_vals) === true)
+               for(var i=0; i< uploaded_images.length; i++)
                {
-                    $('.photo-desc').each(
-                     function()
-                     {
-                         var tmp_files = new Array();
-                         var filename = $scope.uploader.flow.files[index].name;
-                         index = index +1;
-                         for (var i = 0; i < php_vals.length; i++) { 
-                             if(php_vals[i].post.flowFilename === filename)
-                             {
-                                 tmp_files.push(objProperty.get_filebaseName(php_vals[i].files.file.tmp_name));
-                             }
-                        }
-                        photo_list.push([
-                            String.format("../../temp/images/{0}/{1}/{2}",
-                                $scope.person.user_id, $scope.temp_ref, tmp_files[0]),
-                            $(this).val()
-                        ]);
-
-                    });
-                }
-                
-                return photo_list;  
+                  var exists = uploaded_images[i]['exists'];
+                  var desc = uploaded_images[i]['desc'];
+                  if(exists)
+                  {
+                      uploaded_images[i]['tmp_files'].forEach(
+                              function(value)
+                              {
+                                  photo_list.push([
+                                      value,
+                                      desc
+                                  ]);
+                              }
+                      );
+                      
+                  }
+                  else
+                  {
+                      photo_list.push([
+                                String.format("../../temp/images/{0}/{1}/{2}",
+                                    $scope.person.user_id, $scope.temp_ref, 
+                                    uploaded_images[i]['tmp_files'][0]),
+                                    desc
+                      ]);
+                  }
+               }
+               return photo_list;  
             };
             var set_preview = function()
             {  
                 $scope.country_state.location["k"] = $scope.googleMarker.getGMarkers()[0].position.lat();
                 $scope.country_state.location["B"] = $scope.googleMarker.getGMarkers()[0].position.lng();
                 var listing_type = new String($('#type').val()).indexOf('For Sale') >= 0? "SELL" : "RENT";
-                var remark = CKEDITOR.instances.remark.document.getBody().getHtml();
+                var remark = CKEDITOR.instances.remark.getData();
+                var objHome = StaticHomeObject.getInstance();
+                remark = objHome.remove_special_character_from_data(remark);
+                
                 if ($('#type').val().indexOf('Room To Let') > 0)
                 {
                     listing_type = "ROOM";
@@ -1050,8 +1038,6 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     'room_type':$.trim($('#room_type').val()),
                     'property_type':$.trim($('#property_type').val()),
                     'tenure':$.trim($('#tenure').val()),
-                    'title_type':$.trim($('#title_type').val()),
-                    'unittype':$.trim($('#unit_type').val()),
                     'land_title_type': $.trim($('#land_title_type').val()),
                     'active':1,
                     'user_id':'',
@@ -1120,7 +1106,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             var set_listing = function(listing, $scope)
             {
                 var senddata = "listing_information=" + JSON.stringify(listing);   
-                console.log(senddata);
+                //console.log(senddata);
                 var url = objProperty.getBaseUrl() + "index.php/_utils/properties_upload/upload_listing";
                 $http({
                  method: 'POST',
@@ -1396,7 +1382,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             // </editor-fold>
             $scope.navigate_back = function()
             {
-				console.log("$scope.back_count: " + $scope.back_count);
+		//console.log("$scope.back_count: " + $scope.back_count);
                 history.go($scope.back_count);
             };
             $scope.$watch('country_state.states', function(val, prev){
@@ -1489,28 +1475,27 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     document.getElementById('property_type').value = "Room To Let";
                 }
                 
-                $scope.build_up = {value:Number($scope.property_information.details[0][5].value)};
+                $scope.build_up = {value:Number($scope.property_information.details[0][4].value)};
                 $scope.monthly_rental = {value:Number($scope.property_information.Price)};
                 $scope.asking_price = {value:Number($scope.property_information.Price)};
                 
                 document.getElementById('property_type').value = $scope.property_information.details[0][2].value; 
-                document.getElementById('chk_auction').checked = !($scope.property_information.details[1][7].value);
-                document.getElementById('size_measurement_code').value = $scope.property_information.details[0][7].value; 
+                document.getElementById('chk_auction').checked = !($scope.property_information.details[1][6].value);
+                document.getElementById('size_measurement_code').value = $scope.property_information.details[0][6].value; 
                 document.getElementById('reserve_type').value = $scope.property_information.details[1][1].value; 
                 document.getElementById('bedroom').value = $scope.property_information.RoomCount;
                 document.getElementById('bathroom').value = $scope.property_information.ToiletCount;
                 document.getElementById('car_park').value = $scope.property_information.ParkingCount; 
                 document.getElementById('tenure').value = $scope.property_information.details[0][1].value;
-                document.getElementById('title_type').value = $scope.property_information.details[1][2].value;
-                document.getElementById('land_title_type').value = $scope.property_information.details[1][3].value;   
+                document.getElementById('land_title_type').value = $scope.property_information.details[1][2].value;   
                 
                 //furnishing
                 var furnished;
-                if($scope.property_information.details[1][4].value === "Fully")
+                if($scope.property_information.details[1][3].value === "Fully")
                 {
                     $furnished = "Full Furnished";
                 }
-                else if($scope.property_information.details[1][4].value === "Partially")
+                else if($scope.property_information.details[1][3].value === "Partially")
                 {
                     $furnished = "Partially Furnished";
                 }
@@ -1521,7 +1506,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 
                 //occupied
                 var occupied;
-                if($scope.property_information.details[1][5].value === 0)
+                if($scope.property_information.details[1][4].value === 0)
                 {
                     $occupied = "No";
                 }
@@ -1531,7 +1516,6 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 }
                 document.getElementById('furnishing').value = $furnished;
                 document.getElementById('occupied').value = $occupied;
-                document.getElementById('unit_type').value = $scope.property_information.details[0][3].value;
                 document.getElementById('monthly_maintanance').value = $scope.property_information.details[1][0].value;
                 
                 //to update the remark
@@ -1574,7 +1558,16 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             {
                 $scope.reload_photo = "false";
                 //to set uploaded image                
-                $scope.uploaded_files = $scope.property_information.PropertyImages;
+                $scope.uploaded_files = [];
+                for(var i = 0; i < $scope.property_information.PropertyImages.length; i++)
+                {
+                    var PropertyImageSrc = $scope.property_information.PropertyImages[i][0];
+                    var PropertyImageDesc = $scope.property_information.PropertyImages[i][1];
+                    var PropertyImageName = "img"+i;
+                    
+                    $scope.uploaded_files.push([PropertyImageSrc, PropertyImageDesc,PropertyImageName]);
+                }
+                
             };
             
             $scope.reload_photo_click = function()
@@ -1587,6 +1580,11 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
               {
                   $scope.reload_photo = "true";
               }
+            };
+            
+            $scope.remove_uploaded_file = function(image_groupname)
+            {
+              $('#'+image_groupname).remove();
             };
             
             // <editor-fold desc="data initialization"  defaultstate="collapsed">
@@ -1679,10 +1677,22 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     file.error = true;
                     file.error_msg = 
                          "This file exceeds the maximum upload size for this server.";
+                }
+                else if (!{png:1,gif:1,jpg:1,jpeg:1}[file.getExtension()])
+                {
+                    file.error = true;
+                    file.error_msg = 
+                            "This file type is not supported.";
+                }
+                
+                if (file.error === true)
+                {
+                    console.log(file.error_msg);
                     file.done = true;
                     file.flowObj.preventEvent(event);
                     return false;
                 }
+                
             });
 
             flowFactory.flow.on('complete', function () {
