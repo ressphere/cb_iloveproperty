@@ -16,6 +16,7 @@ class properties_upload extends properties_base
                         DIRECTORY_SEPARATOR . 'temp' . 
                         DIRECTORY_SEPARATOR . 'images' . 
                     DIRECTORY_SEPARATOR . $user_id;
+           
         }
     }
     private function deleteDirectory($dir) {
@@ -58,7 +59,7 @@ class properties_upload extends properties_base
             if (!is_dir($this->tempDir)) {
                 try
                 {
-                    mkdir($this->tempDir);
+                    mkdir($this->tempDir, 0777, TRUE);
                 }
                 catch (Exception $e) {
                     $this->set_error($e->getMessage());
