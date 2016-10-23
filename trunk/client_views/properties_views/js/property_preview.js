@@ -111,7 +111,7 @@ var filter_nearest_place = function($scope, nearestSpot)
     for (var i = 0; i < nearestSpot.length; i++) {    
         found = 0;
         for (var j = 0; j < filtered_data.length; j++) {
-            if(filtered_data[j].name == nearestSpot[i].name){
+            if(filtered_data[j].name === nearestSpot[i].name){
                 found = 1;
             }
         }
@@ -122,7 +122,8 @@ var filter_nearest_place = function($scope, nearestSpot)
     }
     
     $scope.property_information.NearbyPlaces = filtered_data;
-}
+};
+
 var set_facilities = function($scope, facilities)
 {
   var count = 0;

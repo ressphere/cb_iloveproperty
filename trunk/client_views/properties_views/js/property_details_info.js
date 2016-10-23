@@ -287,7 +287,7 @@ var get_google_map_data = function($scope)
                 for (var i = 0; i < data.length; i++) {    
                     found = 0;
                     for (var j = 0; j < filtered_data.length; j++) {
-                        if(filtered_data[j].name == data[i].name){
+                        if(filtered_data[j].name === data[i].name){
                             found = 1;
                         }
                     }
