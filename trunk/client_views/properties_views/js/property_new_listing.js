@@ -1503,6 +1503,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             flowFactory.flow.on('catchAll', function (event) {
                 if(event === "fileSuccess")
                 {
+                    console.log(arguments);
                     var php_val = jQuery.parseJSON(arguments[2]);
                     if (uploaded_images !== "NULL")
                     {   

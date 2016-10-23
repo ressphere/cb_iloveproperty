@@ -106,21 +106,23 @@ var filter_nearest_place = function($scope, nearestSpot)
 {
     var filtered_data = [];
     var found = 0;
-    filtered_data[0] = nearestSpot[0];
+    if(nearestSpot !== undefined)
+    {
+        
+        filtered_data[0] = nearestSpot[0];
+        for (var i = 0; i < nearestSpot.length; i++) {    
+            found = 0;
+            for (var j = 0; j < filtered_data.length; j++) {
+                if(filtered_data[j].name === nearestSpot[i].name){
+                    found = 1;
+                }
+            }
 
-    for (var i = 0; i < nearestSpot.length; i++) {    
-        found = 0;
-        for (var j = 0; j < filtered_data.length; j++) {
-            if(filtered_data[j].name === nearestSpot[i].name){
-                found = 1;
+            if(!found){
+                filtered_data.push(nearestSpot[i]);
             }
         }
-
-        if(!found){
-            filtered_data.push(nearestSpot[i]);
-        }
-    }
-    
+    } 
     $scope.property_information.NearbyPlaces = filtered_data;
 };
 
