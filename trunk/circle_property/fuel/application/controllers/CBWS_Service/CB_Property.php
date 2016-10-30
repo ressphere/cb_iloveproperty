@@ -170,8 +170,10 @@ class CB_Property extends CBWS_Service_Base{
             if($this->is_error){return 0;}
             $detail_data = $this->get_return_data_set();  
         
-            // Replace/retain property_name
+            // Replace/retain property_name and type
             $property_info["property_name"] = $detail_data["data"]["property_name"];
+            $property_info["service_type"] = $detail_data["data"]["service_type"];
+            
         }
         
         // file dump -- for testing purpose -- Start --

@@ -226,6 +226,10 @@ input:disabled {
     background: #dddddd;
 }
 
+select:disabled {
+    background: #dddddd;
+}
+
 .state {
     cursor: pointer;
 }
