@@ -14,8 +14,13 @@ class properties_upload extends properties_base
         {
             $this->tempDir = dirname(dirname(dirname(dirname(dirname(__DIR__))))) .
                         DIRECTORY_SEPARATOR . 'temp' . 
-                        DIRECTORY_SEPARATOR . 'images' . 
-                    DIRECTORY_SEPARATOR . $user_id;
+                        DIRECTORY_SEPARATOR . 'images';
+            if (!is_dir($this->tempDir)) 
+            {
+                mkdir($this->tempDir, 0777, TRUE);
+            }
+            $this->tempDir = $this->tempDir . DIRECTORY_SEPARATOR . $user_id;
+           
         }
     }
     private function deleteDirectory($dir) {
@@ -116,7 +121,8 @@ class properties_upload extends properties_base
                     )) {
                         //Begin watermark successful loaded photo
                         $img_url = $this->tempDir. DIRECTORY_SEPARATOR . $file_name . "." . $ext;
-                        if($this->set_watermark($img_url) === FALSE)
+                        
+                        if($this->set_customized_watermark($img_url) === FALSE)
                             unlink ($img_url);//remove photo that cannot been watermark
                     }
                     else

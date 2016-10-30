@@ -35,7 +35,6 @@ var get_new_listing_data = function($scope,  $sce)
         $scope.property_information.ToiletCount =  listing_obj["bathrooms"];
         $scope.property_information.ParkingCount = listing_obj["car_park"];
         $scope.property_information.Area = listing_obj["area"] + " " + listing_obj["state"];
-        $scope.property_information.NearbyPlaces = listing_obj["nearest_spot"];
         $scope.property_information.Remark =  $sce.trustAsHtml(listing_obj["remark"]);
         $scope.property_information.PropertyImages = listing_obj["property_photo"];
         $scope.property_information.Unit = listing_obj["size_measurement_code"];
@@ -57,6 +56,7 @@ var get_new_listing_data = function($scope,  $sce)
         setup_details_info("furnishing", listing_obj["furnished_type"], $scope);
         setup_details_info("occupied", listing_obj["occupied"], $scope);
         set_facilities($scope, listing_obj["facilities"]);
+        filter_nearest_place($scope, listing_obj["nearest_spot"]);
         
     }
 
@@ -100,6 +100,30 @@ var get_initial_data = function($scope, objProperty, $http)
         $scope.person.phone = response.data.phone;
         $scope.person.name = response.data.displayname;
     });
+};
+
+var filter_nearest_place = function($scope, nearestSpot)
+{
+    var filtered_data = [];
+    var found = 0;
+    if(nearestSpot !== undefined)
+    {
+        
+        filtered_data[0] = nearestSpot[0];
+        for (var i = 0; i < nearestSpot.length; i++) {    
+            found = 0;
+            for (var j = 0; j < filtered_data.length; j++) {
+                if(filtered_data[j].name === nearestSpot[i].name){
+                    found = 1;
+                }
+            }
+
+            if(!found){
+                filtered_data.push(nearestSpot[i]);
+            }
+        }
+    } 
+    $scope.property_information.NearbyPlaces = filtered_data;
 };
 
 var set_facilities = function($scope, facilities)

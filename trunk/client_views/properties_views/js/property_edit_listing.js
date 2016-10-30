@@ -1166,7 +1166,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             var set_listing = function(listing, $scope)
             {
                 var senddata = "listing_information=" + JSON.stringify(listing).replace('&nbsp;','%26nbsp;').replace('&', '%26');
-                console.log(senddata);
+                //console.log(senddata);
                 var url = objProperty.getBaseUrl() + "index.php/_utils/properties_upload/upload_listing";
                 $http({
                  method: 'POST',
@@ -1175,14 +1175,14 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                  cache: false,
                  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                }).then(function(response) {
-                    console.log(response);
+                    //console.log(response);
                     //nav to main page
                     var objBase = $.makeclass(get_base());
                     var parsed_result = response.data;
                     if(parsed_result["status"] === "success")
                     {
                          $.jStorage.set("listing_uploaded", parsed_result["info"]);
-                         //window.location.replace(objBase.getBaseUrl());
+                         window.location.replace(objBase.getBaseUrl());
                     }
                     else
                     {
@@ -1709,6 +1709,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             };
             $scope.photo_upload_status = "";
             $scope.disable_button = 0;
+            $scope.property_edit_tag = true;
             
             // To capture the user selection
             $scope.change_category_type = function(category, type)

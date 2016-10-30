@@ -7,7 +7,7 @@ class properties_buy extends properties_search {
         parent::__construct();
         $this->set_action("buy");
         $this->SEO_Tags("Ressphere Real Estate (Property) Home Page To Purchase");
-        $this->set_title("Ressphere Looking Properties To Buy");
+        $this->set_title("Ressphere Properties - Buy");
    }
    
    public function index()

@@ -296,7 +296,7 @@
                         
                         <!-- If have data -->
                         <div ng-if = "nav_total_page > 0" class="row clearfix search_pagination_div">
-                            <div class="pull-right">
+                            <div class="pull-left">
                                 
                                 <p ng-if = "nav_page <= nav_total_page" class="gothic_bool_font">Total result {{total_result}}, current display {{cur_display_min}}~{{cur_display_max}}</p>
                                 <p ng-if = "nav_page > nav_total_page" class="gothic_bool_font">The navigation selection is invalid, please re-select</p>

@@ -246,6 +246,8 @@ var get_new_listing_data = function($scope,  $sce)
             var url = base_path + "index.php/properties_details/send_user_contact";
             var response = null;
             var challenge = null;
+            var reference_link = "properties_details";
+           
             try
             {
                 var response = Recaptcha.get_response();
@@ -300,7 +302,6 @@ var get_new_listing_data = function($scope,  $sce)
                             
                         }  
                     });
-            
         };
         $scope.validate_sending_contact_details = function()
         {
@@ -401,7 +402,7 @@ var get_google_map_data = function($scope)
                 for (var i = 0; i < data.length; i++) {    
                     found = 0;
                     for (var j = 0; j < filtered_data.length; j++) {
-                        if(filtered_data[j].name == data[i].name){
+                        if(filtered_data[j].name === data[i].name){
                             found = 1;
                         }
                     }

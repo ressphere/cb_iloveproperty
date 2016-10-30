@@ -136,7 +136,6 @@ class properties_base extends CI_Controller {
      */
     private function build_header()
     {
-        $email = $this->session->userdata('username');
         $username = $this->session->userdata('displayname');
         /*******Contains the list of menu feature*******/
         $myprofileurl = $this->_get_wsdl_base_url() . 'index.php/cb_user_profile_update/my_profile';
@@ -247,8 +246,8 @@ class properties_base extends CI_Controller {
     protected function _get_wsdl_base_url()
     {
         $val_return = GeneralFunc::CB_Receive_Service_Request("CB_Info:base_url");
-        $wsdl_base_url = json_decode($val_return, TRUE);
-        $wsdl_base_url  = $wsdl_base_url["data"]["result"];
+        $wsdl_base_url = json_decode($val_return, TRUE)["data"]["result"];
+        
         return $wsdl_base_url;
     }
     //******* URL Related ******** End ****
@@ -381,16 +380,92 @@ class properties_base extends CI_Controller {
                 return NULL;
         }
     }
-    protected function set_watermark($img_path)
+    private function setWatermarkPositionToCenter($im, $fontSize, $degree, $y, $color, $strokecolor, $font, $txt)
+    {
+        
+        $bbox = imagettfbbox($fontSize, $degree, $font, $txt);
+        $centerX = (imagesx($im) / 2) - (($bbox[2] - $bbox[0]) / 2);
+        // Add some shadow to the name
+        $this->imagettfstroketext($im, $fontSize, $degree, $centerX, $y, $color, $strokecolor, $font, $txt, 2);
+        
+        
+    }
+    private function imagettfstroketext(&$image, $size, $angle, $x, $y, &$textcolor, &$strokecolor, $fontfile, $text, $px) {
+
+        for($c1 = ($x-abs($px)); $c1 <= ($x+abs($px)); $c1++)
+            for($c2 = ($y-abs($px)); $c2 <= ($y+abs($px)); $c2++)
+                imagettftext($image, $size, $angle, $c1, $c2, $strokecolor, $fontfile, $text);
+
+        return imagettftext($image, $size, $angle, $x, $y, $textcolor, $fontfile, $text);
+    }
+    protected function set_customized_watermark($img_path)
+    {
+        $user_id = $this->session->userdata('user_id');
+        $name = $this->session->userdata('displayname');
+        $current_time = date('H:i:s', time());
+        $tempDir = dirname(dirname(dirname(dirname(__DIR__)))) .
+                        DIRECTORY_SEPARATOR . 'temp' . 
+                        DIRECTORY_SEPARATOR . 'images' . 
+                    DIRECTORY_SEPARATOR . $user_id;
+        $fontStyle = dirname(dirname(dirname(dirname(__DIR__)))) . DIRECTORY_SEPARATOR . 
+                "fonts" . DIRECTORY_SEPARATOR . "GOTHIC.TTF";
+        
+        $ext = "png";
+        $user["user_id"] = $user_id;
+        $phone_return_val = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:get_user_phone_number",
+                        json_encode($user));
+        $phone = json_decode($phone_return_val, TRUE)["data"]["result"];
+        $watermark_file_name = sha1($name . $phone . $current_time);
+        
+        $watermark_path = $tempDir. DIRECTORY_SEPARATOR . $watermark_file_name . "." . $ext;
+        
+        // Set the content-type
+        
+
+        // Create the image
+        $im = imagecreatetruecolor(800, 200);
+        
+        $trans_colour = imagecolorallocatealpha($im, 0, 0, 0, 127);
+        imagefill($im, 0, 0, $trans_colour);
+        imagesavealpha($im, TRUE);
+        
+        $grey = imagecolorallocatealpha($im, 128, 128, 128, 50);//imagecolorallocate($im, 128, 128, 128);
+        //$black = imagecolorallocatealpha($im, 0, 0, 0, 60);//imagecolorallocate($im, 0, 0, 0);
+        $white = imagecolorallocatealpha($im, 255, 255, 255, 60);
+        
+        // Replace path by your own font path
+        $font = $fontStyle;
+        //$this->setWatermarkPositionToCenter($im, 20, 0, 21, $grey, $black, $font, $name);
+        //$this->setWatermarkPositionToCenter($im, 22, 0, 20, $black, $font, $name);
+        $this->setWatermarkPositionToCenter($im, 20, 0, 20, $white, $grey, $font, $name);
+        
+        
+        //$this->setWatermarkPositionToCenter($im, 18, 0, 51, $grey, $black, $font, $phone);
+        //$this->setWatermarkPositionToCenter($im, 19, 0, 50, $black, $font, $phone);
+        $this->setWatermarkPositionToCenter($im, 18, 0, 50, $white, $grey, $font, $phone);
+        
+        
+        // Using imagepng() results in clearer text compared with imagejpeg()
+        imagepng($im, $watermark_path);
+        imagedestroy($im);
+        $this->set_watermark($img_path, $watermark_path);
+        unlink($watermark_path);
+    }
+    
+    protected function set_default_watermark($img_path)
     {
         // Load the stamp and the photo to apply the watermark to
         $watermark_path = dirname(dirname(dirname(__FILE__))) . 
                 DIRECTORY_SEPARATOR . "images" . DIRECTORY_SEPARATOR .
                 'ressphere_property_logo.png';
+        set_watermark($img_path, $watermark_path);
+    }
+    
+    protected function set_watermark($img_path, $watermark_path)
+    {
         $stamp = NULL;
         $im = NULL;
-        
-        list($width, $height, $type, $attr) = getimagesize($img_path);
+       
         list($stamp_width, $stamp_height, $stamp_type, $stamp_attr) = getimagesize($watermark_path);
         if(file_exists($watermark_path))
         {
@@ -404,6 +479,7 @@ class properties_base extends CI_Controller {
         
         if(file_exists($img_path))
         {
+            list($width, $height, $type, $attr) = getimagesize($img_path);
             $im = $this->get_image_resource_by_type($type, $img_path);
         }
         else
@@ -425,6 +501,11 @@ class properties_base extends CI_Controller {
             // Copy the stamp image onto our photo using the margin offsets and the photo 
             // width to calculate positioning of the stamp. 
             try{
+                imagealphablending($stamp, true);
+                imagesavealpha($stamp, true);
+                
+                imagealphablending($im, true);
+                imagesavealpha($im, true);
                 if(!imagecopy($im, $stamp, $left, $top, 0, 0, imagesx($stamp), imagesy($stamp)))
                 {
                     $this->set_error("[FAIL] Watermark image");
@@ -434,11 +515,14 @@ class properties_base extends CI_Controller {
             catch (Exception $e) {  
                   $this->set_error($e->getMessage());
             }
-
+            
+            imagealphablending($im, false);
+            imagesavealpha($im, true);
             // Output and free memory
             imagepng($im, $img_path, 9);
             imagedestroy($im);
             imagedestroy($stamp);
+            
             return TRUE;
         }
     }

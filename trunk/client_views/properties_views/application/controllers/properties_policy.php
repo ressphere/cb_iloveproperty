@@ -14,7 +14,7 @@ class properties_policy extends properties_base {
        parent::index();
        
        $content = "ressphere policy";
-       $title = "Ressphere Properties Term and Conditions";
+       $title = "Ressphere Properties - Term and Conditions";
        $this->SEO_Tags($content);
        $this->set_title($title);
        

@@ -737,6 +737,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 var remark = CKEDITOR.instances.remark.getData();
                 var objHome = StaticHomeObject.getInstance();
                 remark = objHome.remove_special_character_from_data(remark);
+                console.log(remark);
                 
                 switch(category_name)
                 {
@@ -1464,6 +1465,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             flowFactory.flow.on('catchAll', function (event) {
                 if(event === "fileSuccess")
                 {
+                    console.log(arguments);
                     var php_val = jQuery.parseJSON(arguments[2]);
                     if (uploaded_images !== "NULL")
                     {   
