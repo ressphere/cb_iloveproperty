@@ -63,7 +63,7 @@ class properties_sell extends properties_upload {
        $this->extemplate->add_js( $this->wsdl . 'js/google_map.js', 'import', FALSE, FALSE);
        
        //Enable for special handling using js for properties home page
-       $this->extemplate->add_js('js/property_facilities.js');
+       $this->extemplate->add_js('js/property_detail_value.js');
        $this->extemplate->add_js('js/property_new_listing.js');
        $this->extemplate->add_js('js/property_header.js');
        $this->extemplate->add_js('js/property_details_info.js');

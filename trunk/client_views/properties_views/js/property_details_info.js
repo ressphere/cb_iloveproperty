@@ -1,105 +1,6 @@
 var send_contact_captcha_obj = null;
 var current_scope = null;
 
-// Information value
-var detail_info = [
-        [{
-            'label': 'Type',
-            'id':'type',
-            'category':'sell rent room'
-
-        },
-        {
-            'label': 'Tenure',
-            'id':'tenure',
-            'category':'sell'
-
-        },
-        {
-            'label': 'Property Category',
-            'id':'property_category',
-            'category':'sell rent room'
-        },
-        {
-            'label': 'Property Type',
-            'id':'property_type',
-            'category':'sell rent room'
-        },
-        {
-            'label': 'Built Up',
-            'id':'built_up',
-            'category':'sell rent'
-
-        },
-        {
-            'label': 'Land Area',
-            'id':'land_area',
-            'category':'sell rent'
-
-
-        },
-        {
-            'label': 'Size Measure Code',
-            'id':'measurement_type',
-            'category':'sell rent'
-
-        }],
-        [{
-            'label': 'Monthly Maintenance',
-            'id':'monthly',
-            'category':'sell'
-
-        },
-        {
-            'label': 'Reserve Type',
-            'id':'reserve_type',
-            'category':'sell'
-
-        },
-        {
-            'label': 'Land Title Type',
-            'id':'land_title_type',
-            'category':'sell'
-
-        },
-        {
-            'label': 'Furnishing',
-            'id':'furnishing',
-            'category':'sell rent room'
-
-        },
-        {
-            'label': 'Occupied',
-            'id':'occupied',
-            'value': 'No',
-            'category':'sell rent room'
-
-        },
-        {
-            'label': 'Reference',
-            'id':'reference',
-            'category':'sell rent room'
-
-        },
-        {
-            'label': 'Auction',
-            'id':'auction',
-            'category':'sell'
-
-        }]
-    ];
-    
-var list_of_unit_conversion = [
-            {
-                    'value':'sqft',
-                    'display':'Square feet (sqft)'
-            },
-            {
-                    'value':'m2',
-                    'display':'Square metres (m2)'
-            }
-        ]
-
 var getParameterByName = function(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -180,13 +81,6 @@ var get_new_listing_data = function($scope,  $sce)
         var is_occupied = (listing_obj["occupied"] === '1') ? "Yes":"No";
         var map_location_obj = jQuery.parseJSON(listing_obj["map_location"]);        
         $scope.accounting = accounting;
-        
-        // Check property_information existance, create if not
-        if (typeof $scope.property_information === 'undefined') {
-            $scope.property_information = {}; 
-            $scope.property_information["details"] = detail_info;
-            $scope.property_information["list_of_unit_conversion"] = list_of_unit_conversion;
-        }
         
         $scope.property_information.Price = Price.toFixed(2);
         $scope.property_information.currency = listing_obj["currency"];

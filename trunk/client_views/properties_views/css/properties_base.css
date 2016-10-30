@@ -90,22 +90,25 @@ html, body {
 
 .properties_footer_link li a:link
 {
-    color: white
+    color: white;
 }
 .properties_footer_link li a:visited
 {
-    color: white
+    color: white;
 }
 .properties_footer_link li a:active
 {
-    color: white
+    color: white;
 }
 .properties_footer_link li a:hover
 {
-    color: white
+    color: white;
 }
 
-
+.hide
+{
+    display:none;
+}
 
 @media (min-width: 767px) {
      .wrapper{

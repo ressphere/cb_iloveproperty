@@ -120,6 +120,10 @@
                             {
                                 $msg = "<span class='error'>" . $phone . " is in used. Please try another phone</span>";
                             }
+                            elseif (isset($errors['displayname'])) 
+                            {
+                                $msg = "<span class='error'> Reserved keyword or non-alphabetic/numberic character is found in " . $display_name . " Please try another name</span>";
+                            }
                             elseif (isset($errors['username'])) 
                             {
                                 $msg = "<span class='error'>" . $email . " is in used. Please try another email</span>";
