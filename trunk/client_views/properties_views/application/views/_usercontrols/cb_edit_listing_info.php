@@ -305,9 +305,8 @@
                                     <input ng-model="google_maps.autocomplete" 
                                        class="form-control" 
                                        ng-autocomplete options="google_maps.options"
-                                       details="google_maps.details" id='{{property_category.id}}'/>
-
-                                    <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
+                                       details="google_maps.details" id='{{property_category.id}}'
+                                       disabled/>
                                 </div>
                             </div>
                             <div ng-switch-default>
