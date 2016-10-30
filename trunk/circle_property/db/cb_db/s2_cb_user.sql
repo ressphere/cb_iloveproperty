@@ -196,13 +196,4 @@ CREATE TABLE IF NOT EXISTS `state_country` (
   FOREIGN KEY (`country_id`) REFERENCES `country`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-delimiter //
-CREATE TRIGGER upd_users_pw BEFORE UPDATE ON users
-    FOR EACH ROW
-    BEGIN
-        IF NEW.password != OLD.password THEN
-            SET NEW.oldpassword = OLD.password;
-         END IF;
-    END;//
-delimiter ;
 -- --------------------------------------------------------

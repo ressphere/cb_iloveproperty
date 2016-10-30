@@ -248,6 +248,11 @@ class CBWS_Member {
             }
             return $data;
      }
+     
+     public function is_user_banned($user_id)
+     {
+         return $this->CI->tank_auth->is_userbanned($user_id);
+     }
 }
 
 
