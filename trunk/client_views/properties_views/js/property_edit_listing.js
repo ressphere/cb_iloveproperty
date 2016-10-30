@@ -10,6 +10,8 @@ ng_map_profile.config(function(ngGPlacesAPIProvider){
  // </editor-fold>
 
 ng_map_profile.controller('uploadProfile', function($injector, $scope, $controller, ngGPlacesAPI, flowFactory, $http, $sce) {
+        $controller('listing_prefix', {$scope: $scope});
+
         if(typeof ngGPlacesAPI !== 'undefined')
         {
                 $controller('google_maps', {$scope: $scope, ngGPlacesAPI:ngGPlacesAPI, flowFactory: flowFactory});

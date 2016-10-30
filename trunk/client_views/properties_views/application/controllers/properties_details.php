@@ -244,7 +244,7 @@ class properties_details extends properties_base {
        
        
        //Enable for special handling using js for properties home page
-       $this->extemplate->add_js('js/property_facilities.js');
+       $this->extemplate->add_js('js/property_detail_value.js');
        $this->extemplate->add_js('js/property_details_page.js');
        $this->extemplate->add_js('js/property_details_info.js');
        $this->extemplate->add_js('js/property_header.js');
