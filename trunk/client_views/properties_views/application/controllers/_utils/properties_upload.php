@@ -406,13 +406,16 @@ class properties_upload extends properties_base
         
         foreach($required_fields as $required_field)
         {
-            if($listing->{$required_field} === "" || $listing->{$required_field} === NULL)
+            if($listing !== 'undefined')
             {
-                array_push($error_fields, $required_field);
-            }
-            elseif($required_field === 'postcode' &&  is_numeric($listing->{$required_field}) === FALSE)
-            {
-                array_push($error_fields, $required_field);
+                if($listing->{$required_field} === "" || $listing->{$required_field} === NULL)
+                {
+                    array_push($error_fields, $required_field);
+                }
+                elseif($required_field === 'postcode' &&  is_numeric($listing->{$required_field}) === FALSE)
+                {
+                    array_push($error_fields, $required_field);
+                }
             }
         }
         if(count($error_fields) > 0)
