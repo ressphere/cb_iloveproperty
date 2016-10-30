@@ -158,6 +158,13 @@
                                     <input id='{{property_category.id}}' width="200" style="width: 200px" type='text' value="{{asking_price.value/build_up.value | number:2}}" disabled/>
 
                            </div>
+                           <div ng-switch-when='type' class="select-div  gothic_font">
+                                <select id='{{property_category.id}}' disabled>
+                                    <option ng-repeat="property_category_val in property_category.values" value="{{property_category_val}}">
+                                        {{property_category_val}}
+                                    </option>
+                                </select>
+                           </div>
                            <div ng-switch-default>
                                 <!-- select control with title for property type-->
                                  <div class="select-div  gothic_font"  ng-if="property_category.control === 'select-title'">
