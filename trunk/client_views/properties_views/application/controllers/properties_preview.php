@@ -48,7 +48,7 @@ class properties_preview extends properties_base {
        $this->extemplate->add_js( $this->wsdl . 'js/google_map.js', 'import', FALSE, FALSE);
        $this->extemplate->add_js( $this->wsdl . 'js/flip.min.js', 'import', FALSE, FALSE);
        //Enable for special handling using js for properties home page
-       $this->extemplate->add_js('js/property_facilities.js');
+       $this->extemplate->add_js('js/property_detail_value.js');
        $this->extemplate->add_js('js/property_details_page.js');
        $this->extemplate->add_js('js/property_preview.js');
        $this->extemplate->add_js('js/property_header.js');

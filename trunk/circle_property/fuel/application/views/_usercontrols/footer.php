@@ -8,7 +8,14 @@
     <center><ul>
     <?php
                 foreach ($menus as $menu => $link) {
-                    echo "<li>";
+                    if($menu === "Sitemap") {
+                    echo "<li class=\"hide\">";
+                    }
+                    else
+                    { 
+                        echo "<li>";
+                    }
+                    
                     echo '<span class="divider">|</span>&nbsp;&nbsp;&nbsp;<a target="_self" href="'.$link.'">'.$menu.'</a>&nbsp;&nbsp;&nbsp;';
                     echo "</li>";
                 }

@@ -69,7 +69,7 @@ private $property_info_list = NULL;
        //Enable for special handling using js for properties home page
        $this->extemplate->add_js('js/property_details_page.js');
        $this->extemplate->add_js('js/property_details_info.js');
-       $this->extemplate->add_js('js/property_facilities.js');
+       $this->extemplate->add_js('js/property_detail_value.js');
        $this->extemplate->add_js('js/property_edit_listing.js');
        $this->extemplate->add_js('js/property_header.js');
        $this->extemplate->add_css(base_url() . 'css/properties_sell_buy.css', 'link', FALSE, FALSE);

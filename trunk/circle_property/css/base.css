@@ -305,3 +305,8 @@ input:disabled {
 {
     width: 98.6%
 }
+
+.hide
+{
+    display:none;
+}

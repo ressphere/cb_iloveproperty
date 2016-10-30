@@ -12,8 +12,7 @@
              $msg = "";
              $success = FALSE;
              $is_login = $this->_is_login();
-             $is_activated = $this->_is_login(FALSE);
-             
+            
              #start register to push to database
              if ($is_login) 
              {
@@ -27,7 +26,7 @@
                  $email = $this->_get_posted_value('email');
                  $password = $this->_get_posted_value('password');
                  $repassword = $this->_get_posted_value('repassword');
-                 $country = $this->_get_posted_value('country');
+                 
                  $area = $this->_get_posted_value('area');
                  $phone = $this->_get_posted_value('phone');
                  //$phone = 'fake_' . uniqid();
@@ -130,11 +129,11 @@
                             }
                             elseif (isset($errors['banned'])) 
                             {
-                                $msg = "<span class='error'>" . $login . " is banned from page.</span>";
+                                $msg = "<span class='error'>" . $email . " is banned from page.</span>";
                             } 
                             elseif (isset($errors['not_activated'])) 
                             {				// not activated user
-                                $msg = "<span class='error'>" . $login . " is not activated.</span>";
+                                $msg = "<span class='error'>" . $email . " is not activated.</span>";
 
                             } 
                             else
