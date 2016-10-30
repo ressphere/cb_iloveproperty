@@ -161,6 +161,19 @@ class CB_Property extends CBWS_Service_Base{
     {
         $property_info = $this->data_key_init($input_data, true);
         
+        // If there is ref_tag (mean is edit)
+        $detail_data = array();
+        if(array_key_exists("ref_tag", $property_info))
+        {
+            // Retrieve original data from database
+            $this->listing_detail(array("ref_tag" => $property_info["ref_tag"]));
+            if($this->is_error){return 0;}
+            $detail_data = $this->get_return_data_set();  
+        
+            // Replace/retain property_name
+            $property_info["property_name"] = $detail_data["data"]["property_name"];
+        }
+        
         // file dump -- for testing purpose -- Start --
         /*
         $current = "\n------------------------------\n";
@@ -238,7 +251,7 @@ class CB_Property extends CBWS_Service_Base{
         $property_info = $this->data_key_init($input_data, true);
         
         if($this->is_error){return 0;}
-
+        
         if(!array_key_exists("ref_tag", $property_info))
         {
              $this->set_error($this->service_code."-LD-1",
@@ -246,8 +259,7 @@ class CB_Property extends CBWS_Service_Base{
                         "Data array doesn't contain ref_tag key ".$this->service_name.". Which ". json_encode($property_info));
              return 0;
         }
-
-
+        
         // Build model array data
         $library_data = array(
             'library' => $this->properties_library_name,

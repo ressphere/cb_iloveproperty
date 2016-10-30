@@ -160,7 +160,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     id:'land_title_type',
                     name:'Land Title Type',
                     control:'select',
-                    category:'sell rent',
+                    category:'sell',
                     values:
                      [
                         'Residential',
