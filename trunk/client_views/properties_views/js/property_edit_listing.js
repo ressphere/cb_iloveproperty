@@ -1623,8 +1623,6 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                             break;
                     }
                 };
-                
-                    // @todo - disable location (unit name edit)
 
                 //to update the remark
                 $("#remark").val($scope.property_information.Remark);

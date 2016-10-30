@@ -135,6 +135,7 @@ class CB_Property extends CBWS_Service_Base{
             "unit_name" => "property_name",
             "location" => "map_location",
             "postcode" => "post_code",
+            "ref" => "ref_tag"
         );
         
         return $array_key_change;
