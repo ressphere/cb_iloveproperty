@@ -229,44 +229,6 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                         ''
                     ]
                 },
-                /*
-                {
-                    id:'property_category',
-                    name: 'Property Category',
-                    control:'select',
-                    category:'sell rent',
-                    values:
-                    [
-                        'Apartment/Flat',
-                        'Condo/Residence',
-                        'Semi-D/Banglo',
-                        'Terrace/Link/Townhouse',
-                        'Land',
-                        'Shop',
-                        'Office',
-                        'Industrial',
-                        'Hotel'
-                    ]
-                },
-               {
-                    id:'property_category',
-                    name: 'Property Category',
-                    control:'select',
-                    category:'rent',
-                    values:
-                    [
-                        'Apartment/Flat',
-                        'Condo/Residence',
-                        'Semi-D/Banglo',
-                        'Terrace/Link/Townhouse',
-                        'Land',
-                        'Shop',
-                        'Office',
-                        'Industrial',
-                        'Hotel',
-                        'Room'
-                    ]
-                },*/
                 {
                     id:'property_type_sell',
                     name: 'Property Type',
@@ -1548,8 +1510,11 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 $scope.photo_upload_status = "";
                 $(".progress").hide();
             });
+            
             CKEDITOR.replace( 'remark_editor',{removeButtons:'Link,Unlink,Anchor'});
+            
             $scope.$apply();
+            
             $scope.get_ngPlace_info_by_name = function(info, key)
             {
                 var start_key = '<span class="' + key +'">';

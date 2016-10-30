@@ -230,38 +230,37 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     ]
                 },
                 {
-                    id:'room_type',
-                    name:'Room Type',
-                    control:'select',
-                    category:'room',
-                    values:
-                    [
-                        'Master Room',
-                        'Middle Room',
-                        'Small Room'
-                    ]
-                },
-                {
-                    id:'property_type',
+                    id:'property_type_sell',
                     name: 'Property Type',
                     control:'select-title',
-                    category:'sell rent room',
+                    category:'sell',
                     values:
                     {
-                         'Condo/Service Residence':[
-                            'Condo',
-                            'Service Apartment',
-                            'Serviced Residence',
-                            'Duplex',
-                            'Triplex',
-                            'Soho',
-                            'Penthouse',
-                            'Townhouse Condo'
-                        ],
-                        'Apartment/Flat':[
-                            'Flat',
+                         'Apartment/Flat':[
                             'Apartment',
-                            'Apartment Duplex'
+                            'Apartment Duplex',
+                            'Flat',
+                            'Service Apartment',
+                            'Other'
+                        ],
+                        'Condo/Residence':[
+                            'Condo',
+                            'Duplex',
+                            'Penthouse',
+                            'Residence',
+                            'Serviced Condo',
+                            'Serviced Residence',
+                            'Soho',
+                            'Studio',
+                            'Townhouse Condo',
+                            'Triplex',
+                            'Other'
+                        ],
+                        'Semi-D/Banglo':[
+                            'Bungalow House',
+                            'Country House',
+                            'Semi-Detached',
+                            'Other'
                         ],
                         'Terrace/Link/Townhouse':[
                              'Single Storey',
@@ -272,20 +271,120 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                              '3.5 Storey',
                              'quadruple Storey',
                              '4.5 Storey',
-                             'Townhouse'
+                             'Other'
                          ],
-                        'Semi-D/Banglo':[
-                            'Semi-Detached',
-                            'Bungalow House',
+                        'Land':[
+                            'Aqricultural Land',
                             'Bungalow Land',
-                            'Link Bungalow',
-                            'Twin Villas',
-                            'Twin Courtyard Villa',
-                            'Zero Lot Bangalow',
-                            'Cluster Homes'
+                            'Commercial Land',
+                            'Residential Land',
+                            'Other'
                         ],
-                        'Residential Land':[
-                            'Residential Land'
+                        'Shop':[
+                            'Retail Shop',
+                            'Shop House',
+                            'Shop Lot',
+                            'Shopping Mall',
+                            'Other'
+                        ],
+                        'Office':[
+                            'Office Lot',
+                            'Office Suite',
+                            'Soho Office',
+                            'Shopping mall',
+                            'Other'
+                        ],
+                        'Industrial':[
+                            'Factories',
+                            'Light Industrial',
+                            'Warehouse',
+                            'Other'
+                        ],
+                        'Hotel':[
+                            'Hotel'
+                        ]
+                    }
+                },
+                {
+                    id:'property_type_rent',
+                    name: 'Property Type',
+                    control:'select-title',
+                    category:'rent',
+                    values:
+                    {
+                        'Apartment/Flat':[
+                            'Apartment',
+                            'Apartment Duplex',
+                            'Flat',
+                            'Service Apartment',
+                            'Other'
+                        ],
+                        'Condo/Residence':[
+                            'Condo',
+                            'Duplex',
+                            'Penthouse',
+                            'Residence',
+                            'Serviced Condo',
+                            'Serviced Residence',
+                            'Soho',
+                            'Studio',
+                            'Townhouse Condo',
+                            'Triplex',
+                            'Other'
+                        ],
+                        'Semi-D/Banglo':[
+                            'Bungalow House',
+                            'Country House',
+                            'Semi-Detached',
+                            'Other'
+                        ],
+                        'Terrace/Link/Townhouse':[
+                             'Single Storey',
+                             '1.5 Storey',
+                             'Double Storey',
+                             '2.5 Storey',
+                             'Triple Storey',
+                             '3.5 Storey',
+                             'quadruple Storey',
+                             '4.5 Storey',
+                             'Other'
+                         ],
+                        'Land':[
+                            'Aqricultural Land',
+                            'Bungalow Land',
+                            'Commercial Land',
+                            'Residential Land',
+                            'Other'
+                        ],
+                        'Shop':[
+                            'Retail Shop',
+                            'Shop House',
+                            'Shop Lot',
+                            'Shopping Mall',
+                            'Other'
+                        ],
+                        'Office':[
+                            'Office Lot',
+                            'Office Suite',
+                            'Soho Office',
+                            'Shopping mall',
+                            'Other'
+                        ],
+                        'Industrial':[
+                            'Factories',
+                            'Light Industrial',
+                            'Warehouse',
+                            'Other'
+                        ],
+                        'Hotel':[
+                            'Hotel'
+                        ],
+                        'Room':[
+                            'Master',
+                            'Junior Master',
+                            'Big Room',
+                            'Middle Room',
+                            'Small Room'
                         ]
                     }
                 },
@@ -375,147 +474,25 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 }
             ];
        // </editor-fold>
-       
-       $scope.property_information = {
-        "PropertyName": "Test Suites",
-        "Price": 1000000,
-        "Country": "Test1",
-        "State": "Test2",
-        "Area": "Test3",
-        "PostCode": "Test4",
-        "Street": "Test5",
-        "MapLocationK": "1.234567",
-        "MapLocationB": "100.234567",
-        "ToiletCount": "2",
-        "RoomCount": "3",
-        "ParkingCount": "3",
-        "PricePer": "1,000",
-        "currency": "RM",
-        "Unit": "sqft",
-        "Total_loan": "900000.00",
-        "PropertyImages": [
-           ['../../temp/images/2/test/php67D8.tmp', 'Apartment road side view']
-           ['../../temp/images/2/test/php3329.tmp', 'Kids Swimming Pool'],
-           ['../../temp/images/2/test/php4848.tmp', 'Swimming Pool']
-        ],
-        "Remark": "",
-        "property_facilities":[
-            [],
-            [],
-            []
-        ],
-        "details": [
-            [{
-                'label': 'Type',
-                'id':'type',
-                'value': 'Sell',
-                'category':'sell rent room'
-
-            },
-            {
-                'label': 'Tenure',
-                'id':'tenure',
-                'value': 'Freehold',
-                'category':'sell'
-
-            },
-            {
-                'label': 'Property Type',
-                'id':'property_type',
-                'value': 'Condo',
-                'category':'sell rent room'
-            },
-            {
-                'label': 'Room Type',
-                'id':'room_type',
-                'value': 'Master room',
-                'category':'room'
-            },
-            {
-                'label': 'Built Up',
-                'id':'built_up',
-                'value': '2500',
-                'category':'sell rent'
-
-            },
-            {
-                'label': 'Land Area',
-                'id':'land_area',
-                'value': 'Sell',
-                'category':'sell rent'
-                
-
-            },
-            {
-                'label': 'Size Measure Code',
-                'id':'measurement_type',
-                'value': 'Square Feet',
-                'category':'sell rent'
-
-            }],
-            [{
-                'label': 'Monthly Maintenance',
-                'id':'monthly',
-                'value': '100.00',
-                'category':'sell'
-
-            },
-            {
-                'label': 'Reserve Type',
-                'id':'reserve_type',
-                'value': 'Bumi Lot',
-                'category':'sell'
-
-            },
-            {
-                'label': 'Land Title Type',
-                'id':'land_title_type',
-                'value': 'Residential',
-                'category':'sell'
-
-            },
-            {
-                'label': 'Furnishing',
-                'id':'furnishing',
-                'value': 'Fully Furnished',
-                'category':'sell rent room'
-
-            },
-            {
-                'label': 'Occupied',
-                'id':'occupied',
-                'value': 'No',
-                'category':'sell rent room'
-
-            },
-            {
-                'label': 'Reference',
-                'id':'reference',
-                'value': '12345678',
-                'category':'sell rent room'
-
-            },
-            {
-                'label': 'Auction',
-                'id':'auction',
-                'value': '--',
-                'category':'sell'
-
-            }]
-
-        ],
-        "facilities": "",
-        "NearbyPlaces": [],
-        "percentage_value": 90,
-        "interest_rate": 4.5,
-        "years": 35,
-        "installment": 0.0
+        $scope.mapping = {
+            'Property For Sale':'sell',
+            'Property For Lease':'rent',
+            'Room To Let':'room',
+            'Fully':'Full Furnished',
+            'Partially':'Partially Furnished',
+            'No':'No Furnished'
+            
+        };
+        $scope.mapping_reverse = {
+            'sell':'Property For Sale',
+            'rent':'Property For Lease',
+            'room':'Room To Let',
+            'Full Furnished': 'Fully',
+            'Partially Furnished': 'Partially',
+            'No Furnished':'No'
+        };
         
-
-
-    };
-       
-       
+                
        // <editor-fold desc="On google map and marker loaded completely"  defaultstate="collapsed">
         angular.element('ui-gmap-google-map').ready(function () {
         //var homeControlDiv = document.createElement('div');
@@ -580,6 +557,31 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
               );
             });
 
+            $scope.$watchCollection("google_maps.details", function(newVal, oldVal)
+            {
+                //use jquery to get the ISO 3166-1 Alpha-2 compatible country code and capital location
+              if(newVal === oldVal)
+                   return;
+             
+               var found = false;
+               for(var i = 0; i < newVal.address_components.length; i++)
+               {
+                  var component_name = newVal.address_components[i].long_name;
+                  
+                  $("#state > option").each(function()
+                  {
+                     
+                     if($(this).text() === component_name)
+                     {
+                         $("#state").val(component_name);
+                         found = true;
+                      }
+                  });
+                  if(found) break;
+               }
+               
+            });
+
             var add_details = function(data, details)
             {
                 for(var j=0; j<data.length; j++)
@@ -608,7 +610,8 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             //marker.coords
             $scope.$watchCollection("marker.coords", function(newVal, oldVal)
             {
-                if(newVal === oldVal) return;
+                if(newVal === oldVal)
+                   return;
                 else
                 {
                     //var callbacks = $.Callbacks();
@@ -660,6 +663,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
 
                 }
             };
+            var prop_ref = getParameterByName("reference");
             var objProperty = $.makeclass(property_edit_listing);
             var waitForFinalEvent = (function () {
                  var timers = {};
@@ -699,7 +703,40 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 $scope.err_msg = "";
             };
             
-            var prop_ref = location.search.split('reference=')[1];
+            var get_property_type_info = function(category_name)
+            {
+                var search_category = "property_type_sell";
+                var property_type = $('#property_type_sell').val();
+
+                if(category_name === "rent")
+                {
+                    search_category = "property_type_rent";
+                    property_type = $('#property_type_rent').val();
+                }
+                
+                for (i = 0; i < ($scope.property_category_1.length); i++) { 
+                    if($scope.property_category_1[i]['id']===search_category)
+                    {
+                        for (var category in ($scope.property_category_1[i]['values'])){
+                            if (($scope.property_category_1[i]['values']).hasOwnProperty(category))
+                            {
+                                for(j = 0; j < ($scope.property_category_1[i]['values'][category].length); j++){
+                                    if(($scope.property_category_1[i]['values'][category][j]) === property_type)
+                                    {
+                                        var property_category = category;
+                                    }
+                                }
+                            }
+                         }
+                    }      
+                }
+                
+                var property_type_info = new Array();
+                property_type_info['property_category']= property_category;
+                property_type_info['property_type']=property_type;
+                
+                return property_type_info;
+            };
             
             /**
              * @description This function preparing message data
@@ -707,11 +744,15 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             var prepare_message_data = function($scope)
             {
                 var category_name = $scope.mapping[$.trim($('#type').val())];
+                var prop_info = get_property_type_info(category_name);
+                var property_category = prop_info['property_category'];
+                var property_type = prop_info['property_type'];
+                
                 var listing;
                 $scope.country_state.location["k"] = $scope.googleMarker.getGMarkers()[0].position.lat();
                 $scope.country_state.location["B"] = $scope.googleMarker.getGMarkers()[0].position.lng();
-                var remark = CKEDITOR.instances.remark.getData();
                 
+                var remark = CKEDITOR.instances.remark.getData();
                 var objHome = StaticHomeObject.getInstance();
                 remark = objHome.remove_special_character_from_data(remark);
                 
@@ -719,20 +760,22 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 {
                     case "sell":
                         listing = {
-                            'listing_Type' : category_name.toUpperCase(),
+                            'service_type' : category_name.toUpperCase(),
                             'price': parseFloat($('#asking_price input').val()).toFixed(2),
                             'car_park':$('#car_park').val(),
                             'auction': $('#auction').val(),
+                            'size_measurement_code': $.trim($('#size_measurement_code').val()),
                             'buildup': $('#built_up').val(),
                             'landarea': $('#land_area').val(),
                             'bedrooms': $('#bedroom').val(),
                             'bathrooms': $('#bathroom').val(),
-                            'ref_tag': prop_ref,
-                            'furnished':$.trim($('#furnishing').val()),
+                            'ref': prop_ref,
+                            'furnished_type':$.trim($('#furnishing').val()),
                             'occupied':$.trim($('#occupied').val()),
                             'monthly_maintanance': parseFloat($('#monthly_maintanance').val()).toFixed(2),
-                            'remark': remark,
-                            'property_type':$.trim($('#property_type').val()),
+                            'remark': remark, //$('textarea#remark').val(),
+                            'property_category':property_category,
+                            'property_type':property_type,
                             'tenure':$.trim($('#tenure').val()),
                             'land_title_type': $.trim($('#land_title_type').val()),
                             'active':1,
@@ -752,22 +795,24 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                         break;
                     case "rent":
                         listing = {
-                            'listing_Type' : category_name.toUpperCase(),
+                            'service_type' : category_name.toUpperCase(),
                             'price': parseFloat($('#monthly_rental input').val()).toFixed(2),
                             'car_park':$('#car_park').val(),
                             'buildup': $('#built_up').val(),
                             'landarea': $('#land_area').val(),
                             'bedrooms': $('#bedroom').val(),
                             'bathrooms': $('#bathroom').val(),
-                            'ref_tag': prop_ref,
-                            'furnished':$.trim($('#furnishing').val()),
+                            'ref': prop_ref,
+                            'furnished_type':$.trim($('#furnishing').val()),
                             'occupied':$.trim($('#occupied').val()),
-                            'remark': remark,
+                            'remark': remark,//$('textarea#remark').val(),
                             'land_title_type': $.trim($('#land_title_type').val()),
                             'active':1,
                             'user_id':'',
                             'property_photo': '',
-                            'property_type':$.trim($('#property_type').val()),
+                            'size_measurement_code': $.trim($('#size_measurement_code').val()),
+                            'property_category':property_category,
+                            'property_type':property_type,
                             'facilities': get_facilities(),
                             'unit_name' : get_unit_name(),
                             'state': $.trim($('#state').val()),
@@ -779,17 +824,18 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                             'currency': $.trim($('#currency').val())
                         };
                         break;
+                        /*
                     case "room":
                            listing = {
-                            'listing_Type' : category_name.toUpperCase(),
+                            'service_type' : category_name.toUpperCase(),
                             'price': parseFloat($('#monthly_rental input').val()).toFixed(2),
                             'car_park':$('#car_park').val(),
                             'bathrooms': $('#bathroom').val(),
-                            'ref_tag': prop_ref,
-                            'furnished':$.trim($('#furnishing').val()),
+                            'ref': prop_ref,
+                            'furnished_type':$.trim($('#furnishing').val()),
                             'occupied':$.trim($('#occupied').val()),
-                            'remark': remark,
-                            'room_type':$.trim($('#room_type').val()),
+                            'remark': CKEDITOR.instances.remark.document.getData().getHtml(),//$('textarea#remark').val(),
+                            'property_category':$.trim($('#property_category').val()),
                             'property_type':$.trim($('#property_type').val()),
                             'active':1,
                             'user_id':'',
@@ -805,6 +851,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                             'currency': $.trim($('#currency').val())
                         };
                         break;
+                            */
                 }
                 return listing;
             };
@@ -822,7 +869,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 var url = objProperty.getBaseUrl() + "index.php/_utils/properties_upload/commit_images_and_validation";
                 $scope.disable_button = 1;
                 $scope.photo_upload_status = "Updating Listing..."; 
-                console.log(senddata);
+                //console.log(senddata);
                 $http({
                    method: 'POST',
                    url: url,
@@ -849,19 +896,17 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                              alert("Fail to submit listing, please contact admin");
                              $scope.disable_button = 0;
                          }
-                         
-
                      }
 
 
                  });
-               
                 }
             };
             //</editor-fold>
             var set_error = function(ids)
             {
                 error_ids = ids;
+                
                 for(var i = 0; i < ids.length; i++ )
                 {
                     var id = ids[i]+"-feedback";
@@ -871,8 +916,12 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     //$(id).css('border-color','red');
                     if(i===0)
                     {
+                        document.getElementById("lbl_"+ids[i]).scrollIntoView(true);
+                        // Offset according to top label
+                        var cur_top = document.body.scrollTop;
+                        cur_top = cur_top - 80;
+                        document.body.scrollTop=cur_top;
                         
-                        document.getElementById("lbl_"+ids[i]).scrollIntoView();
                     }
                 }
             };
@@ -885,18 +934,19 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             };
             var clear_errors = function()
             {
+                
                 for(var i = 0; i < error_ids.length; i++ )
                 {
                     $('.'+error_ids[i]+'-feedback').removeClass('glyphicon-ok');
                     $('.'+error_ids[i]+'-feedback').removeClass('glyphicon-remove');
                     $('.'+error_ids[i]+'-feedback').addClass('glyphicon-asterisk');
-                    if(i===0)
+                    /*if(i===0)
                     {
                         $('html, body').animate({
                             scrollTop: $(id).offset().top
                         }, 1000);
+                    }*/
                     }
-                }
                 error_ids = [];
             };
             // <editor-fold desc="get_uploaded_image"  defaultstate="collapsed">
@@ -1012,31 +1062,39 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             {  
                 $scope.country_state.location["k"] = $scope.googleMarker.getGMarkers()[0].position.lat();
                 $scope.country_state.location["B"] = $scope.googleMarker.getGMarkers()[0].position.lng();
-                var listing_type = new String($('#type').val()).indexOf('For Sale') >= 0? "SELL" : "RENT";
+                var service_type = new String($('#type').val()).indexOf('For Sale') >= 0? "SELL" : "RENT";
+                
+                if ($('#type').val().indexOf('Room To Let') > 0)
+                {
+                    service_type = "ROOM";
+                }
+                
+                var category_name = $scope.mapping[$.trim($('#type').val())];
+                
+                var prop_info = get_property_type_info(category_name);
+                var property_category = prop_info['property_category'];
+                var property_type = prop_info['property_type'];
+                
                 var remark = CKEDITOR.instances.remark.getData();
                 var objHome = StaticHomeObject.getInstance();
                 remark = objHome.remove_special_character_from_data(remark);
                 
-                if ($('#type').val().indexOf('Room To Let') > 0)
-                {
-                    listing_type = "ROOM";
-                }
                 var listing = {
-                    'listing_type' : listing_type,
-                    'price': (listing_type === "SELL")?parseFloat($('#asking_price input').val()).toFixed(2) : parseFloat($('#monthly_rental input').val()).toFixed(2),
+                    'service_type' : service_type,
+                    'price': (service_type === "SELL")?parseFloat($('#asking_price input').val()).toFixed(2) : parseFloat($('#monthly_rental input').val()).toFixed(2),
                     'auction': ($('#auction').val() === "")?"--":$('#auction').val(),
                     'buildup': $('#built_up').val(),
                     'landarea': $('#land_area').val(),
                     'bedrooms': $('#bedroom').val(),
                     'bathrooms': $('#bathroom').val(),
                     'car_park':$('#car_park').val(),
-                    'ref_tag': prop_ref,
-                    'furnished':$.trim($('#furnishing').val()),
+                    'ref': prop_ref,
+                    'furnished_type':$.trim($('#furnishing').val()),
                     'occupied':$.trim($('#occupied').val()),
                     'monthly_maintanance': parseFloat($('#monthly_maintanance').val()).toFixed(2),
-                    'remark': remark,
-                    'room_type':$.trim($('#room_type').val()),
-                    'property_type':$.trim($('#property_type').val()),
+                    'remark': remark,//$('textarea#remark').val(),
+                    'property_category':property_category,
+                    'property_type':property_type,
                     'tenure':$.trim($('#tenure').val()),
                     'land_title_type': $.trim($('#land_title_type').val()),
                     'active':1,
@@ -1060,7 +1118,9 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 
                 var senddata = "listing_information=" + JSON.stringify(listing);
                 
-                var url = objProperty.getBaseUrl() + "index.php/properties_preview";
+		var url = (service_type === "SELL")?objProperty.getBaseUrl() + "index.php/properties_preview":
+				objProperty.getBaseUrl() + "index.php/properties_preview_rent";
+				
                 //window.openDialog(url, "preview", "preview", JSON.stringify(listing));
                 $.jStorage.set("preview_data", JSON.stringify(listing));
                 $('#property_preview_content_iframe').attr('src', url);
@@ -1105,8 +1165,8 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             // <editor-fold desc="set_listing"  defaultstate="collapsed">
             var set_listing = function(listing, $scope)
             {
-                var senddata = "listing_information=" + JSON.stringify(listing);   
-                //console.log(senddata);
+                var senddata = "listing_information=" + JSON.stringify(listing).replace('&nbsp;','%26nbsp;').replace('&', '%26');
+                console.log(senddata);
                 var url = objProperty.getBaseUrl() + "index.php/_utils/properties_upload/upload_listing";
                 $http({
                  method: 'POST',
@@ -1115,13 +1175,14 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                  cache: false,
                  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                }).then(function(response) {
+                    console.log(response);
                     //nav to main page
                     var objBase = $.makeclass(get_base());
                     var parsed_result = response.data;
                     if(parsed_result["status"] === "success")
                     {
                          $.jStorage.set("listing_uploaded", parsed_result["info"]);
-                         window.location.replace(objBase.getBaseUrl());
+                         //window.location.replace(objBase.getBaseUrl());
                     }
                     else
                     {
@@ -1441,91 +1502,137 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                });
               
             };
-            
-            var set_prop_info = function($scope)
+            var set_scope_value = function($scope)
             {
-                $('select option').each(function()
-                {
-                   var value = $(this).val();
-                   $(this).val($.trim(value));
-                });
+                // Set flag to let detail query return data even is deactivate
+                $scope.proeprty_edit_tag = "true";
                 
-                //to update property information
-                             
-                //temporary hardcode for currency and type
-                if($scope.property_information.currency === "RM")
-                {
-                    $scope.currency_value = {currency:"MYR"};
-                }
-                else
-                {
-                    $scope.currency_value = {currency:$scope.property_information.currency};
-                }
+                // Query back the detail information
+                get_new_listing_data($scope, $sce);
+                //console.log($scope.property_information);
                 
-                if($scope.property_information.details[0][0].value === "SELL")
+                // Loop though detail and set value accordingly for property_category_1
+                for(var i =0; i< $scope.property_category_1.length; i++)
                 {
-                    document.getElementById('property_type').value = "Property For Sale";
-                }
-                else if($scope.property_information.details[0][0].value === "RENT")
-                {
-                    document.getElementById('property_type').value = "Property For Lease";
-                }
-                else if($scope.property_information.details[0][0].value === "ROOM")
-                {
-                    document.getElementById('property_type').value = "Room To Let";
-                }
+                    var id_value = $scope.property_category_1[i].id;
+                    
+                    switch(id_value)
+                    {
+                        case "type":
+                            var type_value = $scope.mapping_reverse[get_details_info("type",$scope).toLowerCase()];
+                            $("#type").val(type_value);
+                            break;
+                        case "property_type_sell":
+                            $scope.property_category_sell_value = get_details_info("property_category", $scope);
+                            $scope.property_type_sell_value = {value: $scope.property_category_1[i]['values'][$scope.property_category_sell_value][0]};
+                            $scope.property_category_sell_value_sel = $scope.property_category_sell_value;
+                            $scope.property_type_sell_value_sel = $scope.property_category_1[i]['values'][$scope.property_category_sell_value][0];
+                            break;
+                        case "property_type_rent":
+                            $scope.property_category_rent_value = get_details_info("property_category", $scope);
+                            $scope.property_type_rent_value = {value: $scope.property_category_1[i]['values'][$scope.property_category_rent_value][0]};
+                            $scope.property_category_rent_value_sel = $scope.property_category_rent_value;
+                            $scope.property_type_rent_value_sel = $scope.property_category_1[i]['values'][$scope.property_category_rent_value][0];
+                            break;
+                        case "currency":
+                            $scope.currency_value = {currency:$scope.property_information.currency};
+                            break;
+                        case "built_up":
+                            $scope.build_up = {value:Number(get_details_info("built_up", $scope))};
+                            break;
+                        case "monthly_rental":
+                            $scope.monthly_rental = {value:Number($scope.property_information.Price)};
+                            break;
+                        case "asking_price":
+                            $scope.asking_price = {value:Number($scope.property_information.Price)};
+                            break;
+                        case "size_measurement_code":
+                            var size_measurement_code = get_details_info("measurement_type",$scope);
+                            $("#size_measurement_code").val(size_measurement_code);
+                            break;
+                        case "land_area":
+                            var land_area = get_details_info("land_area",$scope);
+                            $("#land_area").val(land_area);
+                            break;
+                        case "asking_price_per":
+                            var asking_price_per = $scope.property_information.PricePer;
+                            $("#asking_price_per").val(asking_price_per);
+                            break;
+                        case "reserve_type":
+                            var reserve_type = get_details_info("reserve_type",$scope);
+                            $("#reserve_type").val(reserve_type);
+                            break;
+                        case "auction":
+                            var auction_value = get_details_info("auction",$scope);
+                            if (auction_value !== "--")
+                            {
+                                $("#auction").removeAttr('disabled'); 
+                                $("#chk_auction")[0].checked = true;
+                                $("#auction").val(auction_value);
+                            }
+                            else
+                            {
+                                set_auction();
+                            }
+                            
+                            break;
+                        default:
+                            //console.log(id_value);
+                            break;
+                    }
+                };
                 
-                $scope.build_up = {value:Number($scope.property_information.details[0][4].value)};
-                $scope.monthly_rental = {value:Number($scope.property_information.Price)};
-                $scope.asking_price = {value:Number($scope.property_information.Price)};
+                // Loop though detail and set value accordingly for property_category_2
+                for(var i =0; i< $scope.property_category_2.length; i++)
+                {
+                    var id_value = $scope.property_category_2[i].id;
+                    
+                    switch(id_value)
+                    {
+                        case "bedroom":
+                            $("#bedroom").val($scope.property_information.RoomCount);
+                            break;
+                        case "bathroom":
+                            $("#bathroom").val($scope.property_information.ToiletCount);
+                            break;
+                        case "car_park":
+                            $("#car_park").val($scope.property_information.ParkingCount);
+                            break;
+                        case "tenure":
+                            var tenure = get_details_info("tenure",$scope);
+                            $("#tenure").val(tenure);
+                            break;
+                        case "land_title_type":
+                            var land_title_type = get_details_info("land_title_type",$scope);
+                            $("#land_title_type").val(land_title_type);
+                            break;
+                        case "furnishing":
+                            var furnishing = $scope.mapping[get_details_info("furnishing",$scope)];
+                            $("#furnishing").val(furnishing);
+                            break;
+                        case "occupied":
+                            var occupied = get_details_info("occupied",$scope);
+                            $("#occupied").val(occupied);
+                            break;
+                        case "monthly_maintanance":
+                            var monthly_maintanance = get_details_info("monthly",$scope);
+                            $("#monthly_maintanance").val(monthly_maintanance);
+                            break;
+                        default:
+                            console.log(id_value);
+                            break;
+                    }
+                };
                 
-                document.getElementById('property_type').value = $scope.property_information.details[0][2].value; 
-                document.getElementById('chk_auction').checked = !($scope.property_information.details[1][6].value);
-                document.getElementById('size_measurement_code').value = $scope.property_information.details[0][6].value; 
-                document.getElementById('reserve_type').value = $scope.property_information.details[1][1].value; 
-                document.getElementById('bedroom').value = $scope.property_information.RoomCount;
-                document.getElementById('bathroom').value = $scope.property_information.ToiletCount;
-                document.getElementById('car_park').value = $scope.property_information.ParkingCount; 
-                document.getElementById('tenure').value = $scope.property_information.details[0][1].value;
-                document.getElementById('land_title_type').value = $scope.property_information.details[1][2].value;   
-                
-                //furnishing
-                var furnished;
-                if($scope.property_information.details[1][3].value === "Fully")
-                {
-                    $furnished = "Full Furnished";
-                }
-                else if($scope.property_information.details[1][3].value === "Partially")
-                {
-                    $furnished = "Partially Furnished";
-                }
-                else
-                {
-                    $furnished = "No Furnished";
-                }
-                
-                //occupied
-                var occupied;
-                if($scope.property_information.details[1][4].value === 0)
-                {
-                    $occupied = "No";
-                }
-                else
-                {
-                    $occupied = "Yes";
-                }
-                document.getElementById('furnishing').value = $furnished;
-                document.getElementById('occupied').value = $occupied;
-                document.getElementById('monthly_maintanance').value = $scope.property_information.details[1][0].value;
-                
+                    // @todo - disable location (unit name edit)
+
                 //to update the remark
-                document.getElementById('remark').value =  $scope.property_information.Remark;
+                $("#remark").val($scope.property_information.Remark);
                 
-                $scope.mapping = {
-                  'Property For Sale':'sell',
-                  'Property For Lease':'rent',
-                  'Room To Let':'room'
-              };    
+                // Set the rest of the field
+                set_location_map($scope);
+                set_loaded_image($scope);
+                set_selected_facilities();
             };
             
             var set_location_map = function($scope)
@@ -1567,7 +1674,6 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                     
                     $scope.uploaded_files.push([PropertyImageSrc, PropertyImageDesc,PropertyImageName]);
                 }
-                
             };
             
             $scope.reload_photo_click = function()
@@ -1604,15 +1710,27 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             $scope.photo_upload_status = "";
             $scope.disable_button = 0;
             
-            get_new_listing_data($scope, $sce);
-            set_prop_info($scope);
-            set_location_map($scope);
-            set_loaded_image($scope);
-            set_selected_facilities();
+            // To capture the user selection
+            $scope.change_category_type = function(category, type)
+            {
+                var category_name = $scope.mapping[$.trim($('#type').val())];
+                switch(category_name)
+                {
+                    case "sell":
+                        $scope.property_category_sell_value_sel = category;
+                        $scope.property_type_sell_value_sel = type;
+                        break;
+                    case "rent":
+                        $scope.property_category_rent_value_sel = category;
+                        $scope.property_type_rent_value_sel = type;
+                        break;
+                }
+                
+            };
             
+            set_scope_value($scope);
             // </editor-fold>
             display_by_category($scope.mapping);
-            set_auction();
             get_initial_data();
             initialize_events();
             $('#type').change();
@@ -1702,7 +1820,9 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             });
 
             CKEDITOR.replace( 'remark_editor',{removeButtons:'Link,Unlink,Anchor'});
+            
             set_all_ticks();
+            
             $scope.$apply();
             
      });

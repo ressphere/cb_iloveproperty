@@ -20,7 +20,7 @@ ng_map_profile.controller('previewPage', function($scope, $controller, ngGPlaces
 {
     $controller('google_maps', {$scope: $scope, ngGPlacesAPI: ngGPlacesAPI, flowFactory: flowFactory});
     $controller('facilities', {$scope: $scope});
-    $scope.property_information = {
+    /*$scope.property_information = {
         "origin_built_up":0,
         "origin_land_area":0,
         "origin_measurement_type": "sqft",
@@ -164,6 +164,7 @@ ng_map_profile.controller('previewPage', function($scope, $controller, ngGPlaces
             }
         ]
     };
+    */
     $scope.person = {
         'email': '',
         'name': '',
