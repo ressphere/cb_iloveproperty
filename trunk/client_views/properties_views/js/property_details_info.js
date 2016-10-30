@@ -145,6 +145,8 @@ var get_new_listing_data = function($scope,  $sce)
     var base_path = objHome.getBaseUrl();
     var ref_tag = getParameterByName("reference");
     var reference_link = "properties_details";
+    $scope.current_url = window.location.href;
+    
     if ($scope.proeprty_edit_tag !== undefined)
     {
         reference_link = "properties_edit";
@@ -176,8 +178,7 @@ var get_new_listing_data = function($scope,  $sce)
         var buildup = parseFloat(listing_obj["buildup"]);
         var PricePer = Price / buildup;
         var is_occupied = (listing_obj["occupied"] === '1') ? "Yes":"No";
-        var map_location_obj = jQuery.parseJSON(listing_obj["map_location"]);
-        $scope.current_url = window.location.href;
+        var map_location_obj = jQuery.parseJSON(listing_obj["map_location"]);        
         $scope.accounting = accounting;
         
         // Check property_information existance, create if not
