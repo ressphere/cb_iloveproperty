@@ -7,12 +7,21 @@
     <div id="" class="properties_footer_link col-md-4 column">
         <center><ul>
         <?php
-            echo "<li>";
+            
             foreach ($footer_link as $menu => $link) {
+                if($menu === "Sitemap") {
+                    echo "<li class=\"hide\">";
+                }
+                else
+                { 
+                    echo "<li>";
+                }
+                
                 echo '<span class="divider">|</span>&nbsp;&nbsp;&nbsp;<a href="'.$link.'" target="_self">'.$menu.'</a>&nbsp;&nbsp;&nbsp;';
                 echo "</li>";
-                echo "<li>";
+                
             }
+            echo "<li>";
             echo '<span class="divider">|</span>';
             echo "</li>";
         ?>
