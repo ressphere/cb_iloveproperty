@@ -102,7 +102,7 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
             var ObjBase = $.makeclass(get_base());
             $scope.service_map_with_url = {};
             $scope.hide_view = false;
-            $scope.available_listing_count = -1;
+            
             $scope.listing_used = -1;
             $scope.listing_limit = -1;
             $scope.activate = function(ref_tag)
@@ -129,12 +129,12 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
                                 if(!isChecked)
                                 {
                                     $(".view_"+ref_tag).hide();
-                                    $scope.available_listing_count++;
+                                    $scope.listing_used--;
                                 }
                                 else
                                 {
                                     $(".view_"+ref_tag).show();
-                                    $scope.available_listing_count--;
+                                    $scope.listing_used++;
                                 }        
                             }
                             else
@@ -263,9 +263,8 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
                  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                }).then(function(response) {
                    var listing_info = response.data;
-                   $scope.available_listing_count = listing_info.listing_avaliable;
-                   $scope.listing_used = listing_info.listing_used;
-                   $scope.listing_limit = listing_info.listing_limit;
+                   $scope.listing_used = parseInt(listing_info.listing_used);
+                   $scope.listing_limit = parseInt(listing_info.listing_limit);
                });
             // </editor-fold>
             
@@ -389,7 +388,7 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
     $scope.enable_disable_listing = function(activate)
     {
         var disable = true;
-        if(activate === 0)
+        if(activate === $scope.listing_limit)
         {
             disable = true;
         }
@@ -406,7 +405,7 @@ Please browse my website for more of my listings.\nThis user-friendly website ha
             }
         );
     };
-     $scope.$watch("available_listing_count", function(newVal, oldVal){
+     $scope.$watch("listing_used", function(newVal, oldVal){
                 if (newVal === oldVal)
                         return;
                 $scope.enable_disable_listing(newVal);
