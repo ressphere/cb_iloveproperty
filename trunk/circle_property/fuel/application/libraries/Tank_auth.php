@@ -203,10 +203,17 @@ class Tank_auth
 	 */
 	function create_user($username, $displayname, $email, $password, $phone, $email_activation, $country)
 	{
-		if ((strlen($username) > 0) 
+		if((strlen($displayname) > 0)
+                    AND ($this->ci->users->is_reserved_keyword($displayname, false)
+                    OR $this->ci->users->is_special_character($displayname)))
+                {
+                    $this->error = array('displayname' => 'prohibited_character_in_use');
+                }
+                elseif ((strlen($username) > 0) 
                      //AND !$this->ci->users->is_username_available($username)
-                     AND $this->ci->users->is_username_reserved_keyword($username)) 
+                     AND $this->ci->users->is_reserved_keyword($username, true)) 
                 {	
+                    //when reserved keyword is used as username/email, treat the name as being registered.
                     $this->error = array('username' => 'auth_username_in_use');
 
 		} elseif (!$this->ci->users->is_email_available($email)) {
