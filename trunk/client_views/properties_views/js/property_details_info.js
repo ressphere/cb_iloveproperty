@@ -48,7 +48,8 @@ var get_new_listing_data = function($scope,  $sce)
             base_path,"reference", ref_tag);
     var listing = null;
     
-    if ($scope.property_edit_tag === true)
+    if ($scope.property_edit_tag !== undefined && 
+            $scope.property_edit_tag === true)
     {
       var reference_link = "properties_edit";
       _url = String.format("{0}index.php/{3}/get_property_info_list?{1}={2}",

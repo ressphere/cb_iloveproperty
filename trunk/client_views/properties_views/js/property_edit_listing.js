@@ -1526,7 +1526,6 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                   'Property For Lease':'rent',
                   'Room To Let':'room'
               };
-              $scope.property_edit_tag = "true";
             };
             
             var set_location_map = function($scope)
@@ -1604,6 +1603,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             };
             $scope.photo_upload_status = "";
             $scope.disable_button = 0;
+            $scope.property_edit_tag = true;
             
             get_new_listing_data($scope, $sce);
             set_prop_info($scope);
