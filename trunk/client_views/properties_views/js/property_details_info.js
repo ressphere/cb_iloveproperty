@@ -47,7 +47,14 @@ var get_new_listing_data = function($scope,  $sce)
     var _url = String.format("{0}index.php/properties_details/get_property_info_list?{1}={2}",
             base_path,"reference", ref_tag);
     var listing = null;
-  
+    
+    if ($scope.property_edit_tag === true)
+    {
+      var reference_link = "properties_edit";
+      _url = String.format("{0}index.php/{3}/get_property_info_list?{1}={2}",
+            base_path,"reference", ref_tag,reference_link);
+    }
+    
     $.ajax({url: _url,
         success: function(result, status, xhr) {
             listing = result;
@@ -132,6 +139,8 @@ var get_new_listing_data = function($scope,  $sce)
             var url = base_path + "index.php/properties_details/send_user_contact";
             var response = null;
             var challenge = null;
+            var reference_link = "properties_details";
+           
             try
             {
                 var response = Recaptcha.get_response();
@@ -186,7 +195,6 @@ var get_new_listing_data = function($scope,  $sce)
                             
                         }  
                     });
-            
         };
         $scope.validate_sending_contact_details = function()
         {

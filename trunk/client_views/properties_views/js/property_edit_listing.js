@@ -1525,7 +1525,8 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                   'Property For Sale':'sell',
                   'Property For Lease':'rent',
                   'Room To Let':'room'
-              };    
+              };
+              $scope.property_edit_tag = "true";
             };
             
             var set_location_map = function($scope)
