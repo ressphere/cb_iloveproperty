@@ -10,19 +10,18 @@ class users_model extends Base_module_model {
     private $password_in_clear = NULL;
     public $foreign_keys = array('country_id' => 'country_model');
     public $boolean_fields = array('agent', 'activated','banned');
+    public $auto_validate_fields = array('username' => 'valid_email',);
     public function __construct()
     {
         parent::__construct('users');
+        
     }
    
+    
     function form_fields($values = array()) 
     {
         $fields = parent::form_fields();
-        
-        $fields['username']['type']='hidden';
-        
         $fields['password']['type']='hidden';
-        
         $fields['new_password_key']['type']='hidden';
         $fields['new_password_requested']['type']='hidden';
         $fields['new_email']['type']='hidden';
@@ -32,13 +31,15 @@ class users_model extends Base_module_model {
         $fields['created']['type']='hidden';
         $fields['oldpassword']['type']='hidden';
         $fields['modified']['type']='hidden';
+        $fields['email']['type']='hidden';
         
         $fields['displayname']['required']=TRUE;
         $fields['phone']['required']=TRUE;
-        $fields['email']['required']=TRUE;
+        $fields['username']['required']=TRUE;
+        //$fields['email']['required']=TRUE;
         $fields['country_id']['required']=TRUE;
         $fields['activated']['required']=TRUE;
-        $fields['banned']['required']=TRUE;
+        $fields['banned']['required']=FALSE;
         $fields['ban_reason']['required']=FALSE;
         $fields['prop_listing_limit']['required']=TRUE;
 
@@ -51,9 +52,9 @@ class users_model extends Base_module_model {
     }
     function on_before_validate($values) {
         
+        $values['email'] = $values['username'];
         if($values['username'] == "" || $values['username'] == NULL)
         {
-        
             $this->password_in_clear = $password = $this->random_password();
             $ci = CI_Controller::get_instance();
             $ci->load->helper('url');
@@ -76,6 +77,7 @@ class users_model extends Base_module_model {
             $data = $values;
             $data['site_name'] = 'http://www.ressphere.com';
             $data['password'] = $this->password_in_clear;
+            
             if ($ci->config->item('email_account_details'))
             {
               base::_begin_send_email('Welcome to', $data['email'], $data, $ci);
