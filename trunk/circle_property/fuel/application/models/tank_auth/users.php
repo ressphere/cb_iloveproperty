@@ -592,6 +592,22 @@ class Users extends CI_Model
 		$this->db->where('user_id', $user_id);
 		$this->db->delete($this->profile_table_name);
 	}
+        
+          /*
+         * Check is user banned
+         * 
+         * @param int
+         * @return TRUE if user is banned, otherwise FALSE
+         */        
+        function is_userbanned($user_id)
+        {   
+            $this->db->select('banned', FALSE);
+            $this->db->where('id', $user_id);
+            $this->db->where('banned', '1');
+
+            $query = $this->db->get($this->table_name);
+            return $query->num_rows() != 0;
+        }
 }
 
 /* End of file users.php */

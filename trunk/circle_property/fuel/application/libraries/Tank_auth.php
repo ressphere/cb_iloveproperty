@@ -706,6 +706,11 @@ class Tank_auth
 					$this->ci->config->item('login_attempt_expire', 'tank_auth'));
 		}
 	}
+                
+        function is_userbanned ($user_id)
+        {
+            return $this->ci->users->is_userbanned($user_id);
+        }
 }
 
 /* End of file Tank_auth.php */

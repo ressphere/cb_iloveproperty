@@ -392,9 +392,9 @@ class Users extends CI_Model
          */        
         function is_userbanned($user_id)
         {   
-            $this->db->select('1', FALSE);
-            $this->db->where('id=', $user_id);
-            $this->db->and_where('banned=', 1);
+            $this->db->select('banned', FALSE);
+            $this->db->where('id', $user_id);
+            $this->db->where('banned', '1');
 
             $query = $this->db->get($this->table_name);
             return $query->num_rows() != 0;

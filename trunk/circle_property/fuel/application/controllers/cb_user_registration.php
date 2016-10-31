@@ -286,9 +286,12 @@
 								'status'	=> $status?TRUE:FALSE,
                                                                 'displayname'   => $displayname
 						));
-                         error_log("cb_user_registration - begin login \n", 3, "C:\log\log.txt");
-                         error_log("cb_user_registration - userid". $user_id ."\n", 3, "C:\log\log.txt");
+                         //error_log("cb_user_registration - begin login \n", 3, "C:\log\log.txt");
+                         //error_log("cb_user_registration - userid". $user_id ."\n", 3, "C:\log\log.txt");
+                         $this->session->set_userdata('secure','1');
+                         
                          $this->_print($msg);
+                         
                      }
                     
                     

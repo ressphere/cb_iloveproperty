@@ -407,6 +407,7 @@ class Users extends CI_Model
 		$this->db->where('user_id', $user_id);
 		$this->db->delete($this->profile_table_name);
 	}
+
 }
 
 /* End of file users.php */

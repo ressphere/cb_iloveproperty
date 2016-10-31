@@ -125,7 +125,23 @@ class cb_home extends base {
    }
    public function check_login_status()
    {
-        $this->_get_user_id() !== FALSE ?$this->_print("1"):$this->_print("0");   
+        if($this->_get_user_id() === FALSE)
+        {
+            $this->_print("0");
+        }
+        else
+        {
+            if($this->is_user_banned())
+            {
+                $this->_begin_logout();
+                 $this->_print("0");
+            }
+            else
+            {
+                $this->_print("1"); 
+            }
+        }
+        
    }
    public function index()
    {

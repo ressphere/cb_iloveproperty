@@ -51,10 +51,8 @@ class properties_base extends CI_Controller {
      */
     protected function index()
     {
-        
         $this->preload_js_css();
         $this->load_prefix_page();
-        $this->session->set_userdata('secure','0');
     }
     
     
