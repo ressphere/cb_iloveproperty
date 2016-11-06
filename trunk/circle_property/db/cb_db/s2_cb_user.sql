@@ -195,5 +195,18 @@ CREATE TABLE IF NOT EXISTS `state_country` (
   FOREIGN KEY (`state_id`) REFERENCES `state`(`id`),
   FOREIGN KEY (`country_id`) REFERENCES `country`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
+-- --------------------------------------------------------
+-- --------------------------------------------------------
+--
+-- Table structure for table `number listing with date time and duration`
+--
+CREATE TABLE IF NOT EXISTS `listing_subcription` (
+  `id` int COLLATE utf8_bin AUTO_INCREMENT,
+  `user_id` int COLLATE utf8_bin NOT NULL,
+  `number_of_listing` int COLLATE utf8_bin,
+  `created_time` datetime NOT NULL,
+  `duration` int NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- --------------------------------------------------------
