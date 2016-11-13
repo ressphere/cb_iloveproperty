@@ -34,41 +34,14 @@ CREATE TRIGGER upd_properties_info BEFORE UPDATE ON properties_listing
     END;$$
 DELIMITER ;
 
-
 DELIMITER $$
-
-DROP PROCEDURE IF EXISTS `iloveproperties_db`.`prop_listing_limit_controller` $$
-CREATE PROCEDURE `iloveproperties_db`.`prop_listing_limit_controller` (
-    IN User_Id INT,
-    IN Subscribed_Limit INT,
-    OUT NewListingCount INT,
-    OUT Done INT)
-  MODIFIES SQL DATA
-BEGIN
-  DECLARE Done INTEGER DEFAULT 0;
-  DECLARE NewListingCount, OldListingCount INTEGER DEFAULT 3;
-  DECLARE EXIT HANDLER FOR NOT FOUND SET Done = -1;
-
-  SELECT `users`.`prop_listing_limit` INTO OldListingCount FROM `users` WHERE `users`.`id` = User_Id;
-  SET NewListingCount = OldListingCount + Subscribed_Limit;
-  IF  NewListingCount >= 3 THEN
-    UPDATE `users` SET `users`.`prop_listing_limit` = NewListingCount WHERE `users`.`id` = User_Id;
-  ELSE
-    SET NewListingCount = 3;
-    UPDATE `users` SET `users`.`prop_listing_limit` = NewListingCount WHERE `users`.`id` = User_Id;
-  END IF;
-END $$
-DELIMITER ;
-
-
-DELIMITER $$
-DROP TRIGGER IF EXISTS `iloveproperties_db`.`ins_listing_subcription` $$
-CREATE TRIGGER ins_listing_subcription BEFORE INSERT ON listing_subcription
+DROP TRIGGER IF EXISTS `iloveproperties_db`.`ins_listing_subscription` $$
+CREATE TRIGGER ins_listing_subscription AFTER INSERT ON listing_subscription
     FOR EACH ROW
     BEGIN
         DECLARE Done INTEGER DEFAULT 0;
-        DECLARE NewListingCount,OldListingCount  INTEGER DEFAULT 0;
-        CALL prop_listing_limit_controller(
+        DECLARE NewListingCount INTEGER DEFAULT 0;
+        CALL Prop_Listing_Limit_Controller(
           New.user_id,
           NEW.number_of_listing,
           NewListingCount,
@@ -77,16 +50,16 @@ CREATE TRIGGER ins_listing_subcription BEFORE INSERT ON listing_subcription
 delimiter ;
 
 DELIMITER $$
-DROP TRIGGER IF EXISTS `iloveproperties_db`.`del_listing_subcription` $$
-CREATE TRIGGER del_listing_subcription BEFORE DELETE ON listing_subcription
+DROP TRIGGER IF EXISTS `iloveproperties_db`.`del_listing_subscription` $$
+CREATE TRIGGER del_listing_subscription AFTER DELETE ON listing_subscription
     FOR EACH ROW
     BEGIN
         DECLARE Done INTEGER DEFAULT 0;
         DECLARE Number_Of_Deleted_Listing INTEGER DEFAULT 0;
-        DECLARE NewListingCount, OldListingCount INTEGER DEFAULT 0;
+        DECLARE NewListingCount INTEGER DEFAULT 0;
 
         SET Number_Of_Deleted_Listing = -OLD.number_of_listing;
-        CALL prop_listing_limit_controller(
+        CALL Prop_Listing_Limit_Controller(
           OLD.user_id,
           Number_Of_Deleted_Listing,
           NewListingCount,
@@ -98,16 +71,16 @@ CREATE TRIGGER del_listing_subcription BEFORE DELETE ON listing_subcription
 delimiter ;
 
 DELIMITER $$
-DROP TRIGGER IF EXISTS `iloveproperties_db`.`upd_listing_subcription` $$
-CREATE TRIGGER upd_listing_subcription BEFORE UPDATE ON listing_subcription
+DROP TRIGGER IF EXISTS `iloveproperties_db`.`upd_listing_subscription` $$
+CREATE TRIGGER upd_listing_subscription AFTER UPDATE ON listing_subscription
     FOR EACH ROW
     BEGIN
         DECLARE Done INTEGER DEFAULT 0;
         DECLARE Number_Of_Remained_Listing INTEGER DEFAULT 0;
-        DECLARE NewListingCount, OldListingCount INTEGER DEFAULT 0;
+        DECLARE NewListingCount INTEGER DEFAULT 0;
 
         SET Number_Of_Remained_Listing = NEW.number_of_listing - OLD.number_of_listing;
-        CALL prop_listing_limit_controller(
+        CALL Prop_Listing_Limit_Controller(
           New.user_id,
           Number_Of_Remained_Listing,
           NewListingCount,
@@ -120,6 +93,29 @@ delimiter ;
 
 DELIMITER $$
 
+DROP PROCEDURE IF EXISTS `iloveproperties_db`.`Prop_Listing_Limit_Controller` $$
+CREATE PROCEDURE `iloveproperties_db`.`Prop_Listing_Limit_Controller` (
+    IN User_Id INT,
+    IN Subscribed_Limit INT,
+    OUT NewListingCount INT,
+    OUT Done INT)
+BEGIN
+  DECLARE OldListingCount INTEGER DEFAULT 3;
+  DECLARE EXIT HANDLER FOR NOT FOUND SET Done = -1;
+  SET Done = 0;
+
+  SELECT `users`.`prop_listing_limit` INTO OldListingCount FROM `users` WHERE `users`.`id` = User_Id;
+  SET NewListingCount = OldListingCount + Subscribed_Limit;
+  IF  NewListingCount >= 3 THEN
+    UPDATE `users` SET `users`.`prop_listing_limit` = NewListingCount WHERE `users`.`id` = User_Id;
+  ELSE
+    SET NewListingCount = 3;
+    UPDATE `users` SET `users`.`prop_listing_limit` = NewListingCount WHERE `users`.`id` = User_Id;
+  END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
 DROP PROCEDURE IF EXISTS `iloveproperties_db`.`Deactivate_Listing_By_Count` $$
 CREATE PROCEDURE `iloveproperties_db`.`Deactivate_Listing_By_Count` (
     IN User_Id INT,
@@ -144,9 +140,10 @@ BEGIN
       OPEN c_listing;
         cursor_loop: LOOP
             FETCH c_listing INTO l_prop_id, l_prop_activate_time;
-                IF l_last_row_fetched=1 or l_deactivate_listing_count <= 0 THEN
-                LEAVE cursor_loop;
+              IF l_last_row_fetched=1 or l_deactivate_listing_count <= 0 THEN
+               LEAVE cursor_loop;
               ELSE
+                /*do something here */
                 UPDATE `properties_listing` SET `properties_listing`.`activate` = 0 WHERE
                 `properties_listing`.`id` = l_prop_id;
                 SET l_deactivate_listing_count = l_deactivate_listing_count - 1;
@@ -154,6 +151,36 @@ BEGIN
         END LOOP cursor_loop;
       CLOSE c_listing;
     END IF;
+
+END $$
+DELIMITER ;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `iloveproperties_db`.`Trigger_On_Expired_Subscribed_Listing` $$
+CREATE PROCEDURE `iloveproperties_db`.`Trigger_On_Expired_Subscribed_Listing` ()
+BEGIN
+    DECLARE l_last_row_fetched, l_subscribed_listing_id, l_duration, l_time_diff INT DEFAULT 0;
+    DECLARE l_created_time, l_expired_time DATETIME;
+    DECLARE c_subscribed_listing CURSOR FOR SELECT `listing_subcription`.`id`,
+     `listing_subcription`.`created_time`,
+     `listing_subcription`.`duration`
+      FROM `listing_subcription`;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET l_last_row_fetched=1;
+
+    OPEN c_subscribed_listing;
+        cursor_loop: LOOP
+            FETCH c_subscribed_listing INTO l_subscribed_listing_id, l_created_time, l_duration;
+              IF l_last_row_fetched=1 THEN
+                LEAVE cursor_loop;
+              ELSE
+                SET l_expired_time = DATE_ADD(l_created_time, INTERVAL l_duration MONTH);
+                SET l_time_diff = DATEDIFF(l_expired_time, l_created_time);
+                IF l_time_diff <= 0 THEN
+                  DELETE FROM listing_subcription WHERE `listing_subcription`.`id` = l_subscribed_listing_id;
+                END IF;
+              END IF;
+        END LOOP cursor_loop;
+    CLOSE c_subscribed_listing;
 
 END $$
 DELIMITER ;

@@ -200,11 +200,11 @@ CREATE TABLE IF NOT EXISTS `state_country` (
 --
 -- Table structure for table `number listing with date time and duration`
 --
-CREATE TABLE IF NOT EXISTS `listing_subcription` (
+CREATE TABLE IF NOT EXISTS `listing_subscription` (
   `id` int COLLATE utf8_bin AUTO_INCREMENT,
   `user_id` int COLLATE utf8_bin NOT NULL,
   `number_of_listing` int COLLATE utf8_bin,
-  `created_time` datetime NOT NULL,
+  `created_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `duration` int NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user_id`) REFERENCES users(`id`)

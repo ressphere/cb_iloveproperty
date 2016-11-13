@@ -14,6 +14,17 @@ class users_model extends Base_module_model {
     public function __construct()
     {
         parent::__construct('users');
+        $this->db->select('
+            id,
+            displayname,
+            phone,
+            username,
+            country_id,
+            activated,
+            banned,
+            ban_reason,
+            prop_listing_limit,
+            agent');
         
     }
    
@@ -32,6 +43,7 @@ class users_model extends Base_module_model {
         $fields['oldpassword']['type']='hidden';
         $fields['modified']['type']='hidden';
         $fields['email']['type']='hidden';
+        $fields['prop_listing_limit']['type']='hidden';
         
         $fields['displayname']['required']=TRUE;
         $fields['phone']['required']=TRUE;
@@ -41,7 +53,7 @@ class users_model extends Base_module_model {
         $fields['activated']['required']=TRUE;
         $fields['banned']['required']=FALSE;
         $fields['ban_reason']['required']=FALSE;
-        $fields['prop_listing_limit']['required']=TRUE;
+        //$fields['prop_listing_limit']['required']=TRUE;
 
         return $fields;
     }
