@@ -161,10 +161,10 @@ CREATE PROCEDURE `iloveproperties_db`.`Trigger_On_Expired_Subscribed_Listing` ()
 BEGIN
     DECLARE l_last_row_fetched, l_subscribed_listing_id, l_duration, l_time_diff INT DEFAULT 0;
     DECLARE l_created_time, l_expired_time DATETIME;
-    DECLARE c_subscribed_listing CURSOR FOR SELECT `listing_subcription`.`id`,
-     `listing_subcription`.`created_time`,
-     `listing_subcription`.`duration`
-      FROM `listing_subcription`;
+    DECLARE c_subscribed_listing CURSOR FOR SELECT `listing_subscription`.`id`,
+     `listing_subscription`.`created_time`,
+     `listing_subscription`.`duration`
+      FROM `listing_subscription`;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET l_last_row_fetched=1;
 
     OPEN c_subscribed_listing;
@@ -176,7 +176,7 @@ BEGIN
                 SET l_expired_time = DATE_ADD(l_created_time, INTERVAL l_duration MONTH);
                 SET l_time_diff = DATEDIFF(l_expired_time, l_created_time);
                 IF l_time_diff <= 0 THEN
-                  DELETE FROM listing_subcription WHERE `listing_subcription`.`id` = l_subscribed_listing_id;
+                  DELETE FROM listing_subscription WHERE `listing_subscription`.`id` = l_subscribed_listing_id;
                 END IF;
               END IF;
         END LOOP cursor_loop;

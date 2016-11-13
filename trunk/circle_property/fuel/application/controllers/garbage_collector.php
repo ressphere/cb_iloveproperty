@@ -109,6 +109,12 @@ class garbage_collector extends CI_Controller {
         }
     }
     
+    public function deactivate_expired_subscribed_listing()
+    {
+        $this->load->model('cb_manage_listing_subscription');
+        $this->cb_manage_listing_subscription->check_listing_activation();
+    }
+    
     
    
 }
