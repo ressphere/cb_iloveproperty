@@ -80,7 +80,6 @@ class base extends CI_Controller {
         $this->extemplate->write('logout_view', $logoutview, TRUE);
         $this->extemplate->write('forgotpass_view', $forgotpassview, TRUE);
         $this->extemplate->write('changepass_view', $changepassview, TRUE);
-        $this->session->set_userdata('secure','0');
     }
     //</editor-fold>
     
@@ -759,6 +758,7 @@ class base extends CI_Controller {
          $this->session->unset_userdata(array('user_id' => '', 'username' => '', 'status' => ''));
          $this->session->sess_destroy();
          $all_data = $this->session->all_userdata();
+         $this->session->set_userdata('secure','0');
          
      }
      protected function _is_login( $activated = TRUE)
@@ -2215,8 +2215,27 @@ class base extends CI_Controller {
             $output = $this->extemplate->render(NULL, TRUE);
             return $output;
     }
+   
+    public function is_user_banned()
+    {
+        $user_id = $this->session->userdata('user_id');
+        $filter_struct = array("filter"=>array());
+        $is_user_banned = FALSE;
+
+        if($user_id)
+        { 
+            $filter_struct["filter"]["user_id"] = $user_id;
+            $is_user_banned_json = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:check_is_user_banned",
+                json_encode($user_id));
+            $is_user_banned = json_decode($is_user_banned_json, TRUE)["data"]["result"];
+        }
+        return $is_user_banned;
+        
+    }
     
-     /*Compare existing number of listing and the user listing limit to determine whether new listing is allowed or not*/
+   /*Compare existing number of listing and the user listing limit 
+   * to determine whether new listing is allowed or not
+   */
    public function get_user_number_of_available_listing()
    {           
        $user_id = $this->session->userdata('user_id');

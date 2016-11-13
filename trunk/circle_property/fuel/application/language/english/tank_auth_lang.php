@@ -5,6 +5,7 @@ $lang['auth_incorrect_password'] = 'Incorrect password';
 $lang['auth_incorrect_login'] = 'Incorrect login';
 $lang['auth_incorrect_email_or_username'] = 'Login or email doesn\'t exist';
 $lang['auth_email_in_use'] = 'Email is already used by another user. Please choose another email.';
+$lang['prohibited_character_in_use'] = 'Prohibited character is used. Please rename accordingly.';
 $lang['auth_username_in_use'] = 'Username already exists. Please choose another username.';
 $lang['auth_current_email'] = 'This is your current email';
 $lang['auth_incorrect_captcha'] = 'Your confirmation code does not match the one in the image.';

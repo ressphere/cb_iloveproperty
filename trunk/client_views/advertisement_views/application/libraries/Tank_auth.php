@@ -374,7 +374,7 @@ class Tank_auth
 		}
 		return NULL;
 	}
-
+      
 	/**
 	 * Change user password (only when user is logged in)
 	 *

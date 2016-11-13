@@ -120,6 +120,10 @@
                             {
                                 $msg = "<span class='error'>" . $phone . " is in used. Please try another phone</span>";
                             }
+                            elseif (isset($errors['displayname'])) 
+                            {
+                                $msg = "<span class='error'> Reserved keyword or non-alphabetic/numberic character is found in " . $display_name . " Please try another name</span>";
+                            }
                             elseif (isset($errors['username'])) 
                             {
                                 $msg = "<span class='error'>" . $email . " is in used. Please try another email</span>";
@@ -282,9 +286,12 @@
 								'status'	=> $status?TRUE:FALSE,
                                                                 'displayname'   => $displayname
 						));
-                         error_log("cb_user_registration - begin login \n", 3, "C:\log\log.txt");
-                         error_log("cb_user_registration - userid". $user_id ."\n", 3, "C:\log\log.txt");
+                         //error_log("cb_user_registration - begin login \n", 3, "C:\log\log.txt");
+                         //error_log("cb_user_registration - userid". $user_id ."\n", 3, "C:\log\log.txt");
+                         $this->session->set_userdata('secure','1');
+                         
                          $this->_print($msg);
+                         
                      }
                     
                     

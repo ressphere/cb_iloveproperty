@@ -51,6 +51,7 @@ $config['modules']['reserve_type'] = array('sanitize_images' => FALSE);
 $config['modules']['furnished_type'] = array('sanitize_images' => FALSE);
 $config['modules']['state'] = array('sanitize_images' => FALSE);
 $config['modules']['tenure'] = array('sanitize_images' => FALSE);
+$config['modules']['listing_subcription'] = array('sanitize_images' => FALSE);
 
 //$config['modules']['property_info'] = array('sanitize_images' => FALSE);
 //$config['modules']['property_package'] = array('sanitize_images' => FALSE);

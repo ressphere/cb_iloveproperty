@@ -126,29 +126,66 @@ class Users extends CI_Model
 	}
         
         /**
-	 * Check if username is using reserved keyword
+	 * Check if username(email) is using reserved keyword
 	 *
 	 * @param	string
 	 * @return	bool
 	 */
-	function is_username_reserved_keyword($username)
+	function is_special_character($username)
 	{
             $result = false;
-            $trimmed_username = explode('@', $username, 2);
-            $reserved_keywords = array("ressphere", 
+            
+            if(preg_match('/[#$%^&*()+=\-\[\]\';,.\/{}_|":<>?~\\\\]/', $username))
+            {
+                $result = true; 
+            }
+            
+            return $result;
+        }
+        
+        /**
+	 * Check if username(email) is using reserved keyword
+	 *
+	 * @param	string
+         * @param	bool
+	 * @return	bool
+	 */
+	function is_reserved_keyword($username, $is_email)
+	{
+            $result = false;
+            if($is_email)
+            {
+                $trimmed_username = explode('@', $username, 2);
+                $trimmed_username_lowerCase = strtolower($trimmed_username[0]);
+            }
+            else
+            {
+                $trimmed_username = $username;
+                $trimmed_username_lowerCase = strtolower($trimmed_username);
+            }
+            
+            $reserved_keywords = array(
+                "ressphere", 
                 "admin",
+                "owner",
+                "agent",
                 "ressphere_admin",
                 "ressphere_property",
                 "property_admin",
                 "ressphere_advertisement",
-                "advertisement_admin");
+                "advertisement_admin"
+                );
             
             foreach ($reserved_keywords as $keyword)
             {
-                if(strtolower($trimmed_username[0]) == $keyword)
-                {
-                    $result = true;
-                }
+               if(strtolower($trimmed_username[0]) == $keyword)
+               {
+                   $result = true;
+               }
+                //if(strpos($trimmed_username_lowerCase,$keyword))
+                //{
+                //    $result = true;
+                //}
             }
             return $result;
 	}
@@ -555,6 +592,22 @@ class Users extends CI_Model
 		$this->db->where('user_id', $user_id);
 		$this->db->delete($this->profile_table_name);
 	}
+        
+          /*
+         * Check is user banned
+         * 
+         * @param int
+         * @return TRUE if user is banned, otherwise FALSE
+         */        
+        function is_userbanned($user_id)
+        {   
+            $this->db->select('banned', FALSE);
+            $this->db->where('id', $user_id);
+            $this->db->where('banned', '1');
+
+            $query = $this->db->get($this->table_name);
+            return $query->num_rows() != 0;
+        }
 }
 
 /* End of file users.php */

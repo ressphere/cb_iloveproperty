@@ -284,6 +284,11 @@ class Tank_auth
 		}
 		return FALSE;
 	}
+        
+        function is_userbanned ($user_id)
+        {
+            return $this->ci->users->is_userbanned($user_id);
+        }
 
 	/**
 	 * Set new password key for user and return some data about user:
