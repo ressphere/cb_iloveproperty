@@ -20,6 +20,7 @@ class listing_subcription_model extends Base_module_model {
     {
         parent::__construct('listing_subcription');
         $this->db->select('
+            id,
             user_id,
             number_of_listing,
             created_time,
