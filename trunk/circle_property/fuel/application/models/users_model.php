@@ -19,6 +19,7 @@ class users_model extends Base_module_model {
             displayname,
             phone,
             username,
+            email,
             country_id,
             activated,
             banned,
