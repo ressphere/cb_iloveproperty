@@ -20,23 +20,12 @@ class listing_subscription_model extends Base_module_model {
     public function __construct()
     {
         parent::__construct('listing_subscription', 'users');
-//        $this->db->join('users', 'users.id = listing_subscription.user_id', 'inner');
-//
-//        $this->db->select('
-//            listing_subscription.id,
-//            user_id,
-//            number_of_listing,
-//            created_time,
-//            duration,
-//            users.username,
-//            users.id');
+        date_default_timezone_set('Asia/Kuala_Lumpur');
     }
     
     function form_fields($values = array()) 
     {
         $fields = parent::form_fields($values);
-        //$fields['user'] = array('type'=>'select','required'=>TRUE, 'default'=>1);
-        //$fields['user_id']['options'][0][]
         $fields['number_of_listing'] = array('type' => 'number', 
             'represents' => 'int|smallint|mediumint|bigint', 
             'negative' => FALSE, 
