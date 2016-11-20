@@ -8,7 +8,15 @@
 | This file is included by the fuel/modules/fuel/config/form_builder.php file
 */
 $fields['my_custom_field'] = array();
-
+$fields['tags'] = array(
+	'class'		=> 'MY_custom_fields',
+	'function'	=> 'select2',
+	'css' => 'select2/select2',
+	'js' => array(
+		'select2/select2',
+	),
+	'represents' => array('name' => 'tags'),
+);
 include(FUEL_PATH.'config/custom_fields.php');
 
 /* End of file form_builder.php */

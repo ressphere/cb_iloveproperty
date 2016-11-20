@@ -27,11 +27,11 @@ class users_model extends Base_module_model {
             agent');
         
     }
-   
     
     function form_fields($values = array()) 
     {
-        $fields = parent::form_fields();
+        $fields = parent::form_fields($values);
+        $fields['id']['type']='hidden';
         $fields['password']['type']='hidden';
         $fields['new_password_key']['type']='hidden';
         $fields['new_password_requested']['type']='hidden';
@@ -54,7 +54,7 @@ class users_model extends Base_module_model {
         $fields['banned']['required']=FALSE;
         $fields['ban_reason']['required']=FALSE;
         //$fields['prop_listing_limit']['required']=TRUE;
-
+        
         return $fields;
     }
     function random_password( $length = 8 ) {
@@ -97,6 +97,14 @@ class users_model extends Base_module_model {
         }
         
         return parent::on_before_validate($values);
+    }
+    
+    public function model_id_list()
+    {
+        $model_id_list = array (
+        );
+        
+        return $model_id_list;
     }
     
     
