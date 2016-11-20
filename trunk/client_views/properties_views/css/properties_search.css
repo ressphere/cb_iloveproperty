@@ -277,7 +277,7 @@ a{
 .search_location_div {
     height:40px;
     margin-top:29.76px; 
-    margin-left:10px;
+    margin-left:61px;
     padding-left: 0px; 
     padding-right: 0px;
     font-size: 14pt;
@@ -547,11 +547,11 @@ html, body {
 }
 
 #menu-toggled {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
     border-left: none;
-    height: 56px;
-    width: 56px;
+    height: 48px;
+    width: 48px;
     font-size: 20px;
 }
 
