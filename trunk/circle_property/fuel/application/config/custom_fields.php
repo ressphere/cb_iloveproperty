@@ -12,9 +12,8 @@ $fields['tags'] = array(
 	'class'		=> 'MY_custom_fields',
 	'function'	=> 'select2',
 	'css' => 'select2/select2',
-	'js' => array(
-		'select2/select2',
-	),
+	'js' => array('select2/select2'),
+        'filepath'	=> FUEL_PATH.'../../application/libraries/MY_custom_fields.php',
 	'represents' => array('name' => 'tags'),
 );
 include(FUEL_PATH.'config/custom_fields.php');
