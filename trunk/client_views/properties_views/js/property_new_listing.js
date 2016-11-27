@@ -40,6 +40,17 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
         $scope.property_category_3 =
                 [
                     {
+                        id:'unit_name',
+                        name:'Unit Name',
+                        control:'input-text',
+                        category:'sell rent room',
+                        placeholder:'Your Property Name',
+                        values:
+                        [
+                            ''
+                        ]
+                    },
+                    {
                         id:'country',
                         name:'Country',
                         control:'select',
@@ -56,17 +67,6 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                         category:'sell rent room',
                         values:
                         [
-                        ]
-                    },
-                    {
-                        id:'unit_name',
-                        name:'Unit Name',
-                        control:'input-text',
-                        category:'sell rent room',
-                        placeholder:'Your Property Name',
-                        values:
-                        [
-                            ''
                         ]
                     },
                     {
