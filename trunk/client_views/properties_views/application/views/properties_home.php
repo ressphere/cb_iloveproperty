@@ -134,7 +134,7 @@
                 <div id="property_preview" class="modal-dialog modal-lg popup">
                       <div class="modal-header">
                         <button class="property_info close" data-dismiss="modal" type="button">
-                            <span aria-hidden="true">×</span>
+                            <span aria-hidden="true" style="font-size:50px;">×</span>
                             <span class="sr-only">Close</span>
                         </button>
                         

@@ -673,11 +673,11 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             // <editor-fold desc="User triggered event"  defaultstate="collapsed">
             $scope.preview_click = function()
             {
-              if( preview_check() === true) 
-              {
-			      $scope.back_count -= 1;
-                  set_preview();
-              }
+                if( preview_check() === true) 
+                {
+                    $scope.back_count -= 1;
+                    set_preview();
+                }
             };
             
             $scope.term_click = function()
@@ -737,7 +737,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 var remark = CKEDITOR.instances.remark.getData();
                 var objHome = StaticHomeObject.getInstance();
                 remark = objHome.remove_special_character_from_data(remark);
-                console.log(remark);
+                
                 
                 switch(category_name)
                 {
@@ -1096,6 +1096,15 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             
             var preview_check = function()
             {
+                // Confirm remark lenght should not over 800 width
+                var remark = CKEDITOR.instances.remark.getData();
+                if (remark.length > 1000)
+                {
+                    alert("Remark is too long, please reduce the lenght to 800");
+                    return false;
+                }
+                
+                // To check all unit related inputs must be entered
                 var ids = [];
                 $(".validation_input_group_small input, .validation_input_group_default input").each(
                         function()
@@ -1106,23 +1115,36 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                             }
                         }
                 );
-                if(ids.length > 0)
+                
+                if(ids.length > 0) // Error when there is empty input 
                 {
                     set_error(ids);
                     return false;
                 }
+                
+                // No issue
                 return true;
                 
             };
             
             var submit_check = function()
             {
+                // Confirm remark lenght should not over 800 width
+                var remark = CKEDITOR.instances.remark.getData();
+                if (remark.length > 1000)
+                {
+                    alert("Remark is too long, please reduce the lenght to 800");
+                    return false;
+                }
+                
+                // User must agree with the term and condition
                 if($('#upload_term_condition:checkbox:checked').length === 0)
                 {
                     $scope.err_msg = "Please understand and agree to the terms and conditions";
                     return false;       
                 }
-
+                
+                // No issue
                 return true;                
             };
             
