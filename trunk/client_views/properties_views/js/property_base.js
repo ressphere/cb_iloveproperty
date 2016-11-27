@@ -413,7 +413,7 @@ var get_property_home = function() {
                    }
                    if(measurement_type === "null")
                    {
-                      measurement_type = null;
+                      measurement_type = "sqft";
                    }
                    return measurement_type;
                 },
