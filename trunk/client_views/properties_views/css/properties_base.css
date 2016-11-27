@@ -110,6 +110,25 @@ html, body {
     display:none;
 }
 
+#property_header_nav_bar
+{
+    background-color: white;
+    display: block!important;
+    padding-bottom: 0;
+    overflow: visible!important;
+    border-bottom: solid #DDD 1px;
+}
+
+#property_header_nav_menu
+{
+    float: right;
+}
+
+.property_header_nav_option
+{
+    padding: 10px 29px;
+}
+
 @media (min-width: 767px) {
      .wrapper{
         /*background-image: url("../images/content-768.png");*/
@@ -260,7 +279,6 @@ select:disabled {
 {
      font-family: 'Century Gothic Bold'   
 }
-
 
 #main_content > div
 {
