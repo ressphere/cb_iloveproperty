@@ -493,8 +493,8 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             'Partially Furnished': 'Partially',
             'No Furnished':'No'
         };
+
         
-                
        // <editor-fold desc="On google map and marker loaded completely"  defaultstate="collapsed">
         angular.element('ui-gmap-google-map').ready(function () {
         //var homeControlDiv = document.createElement('div');
@@ -1127,9 +1127,19 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 $.jStorage.set("preview_data", JSON.stringify(listing));
                 $('#property_preview_content_iframe').attr('src', url);
                 $("#popup_property_preview").modal('show');
-                
 
             };
+            
+            // Push state to allow back button close the modal, if any.
+            $("#popup_property_preview").on("shown.bs.modal", function()  { // any time a modal is shown
+                var urlReplace = "#preview"; // make the hash the id of the modal shown
+                history.pushState(null, null, urlReplace); // push state that hash into the url
+            });
+
+            // If a pushstate has previously happened and the back button is clicked, hide any modals.
+            $(window).on('popstate', function() { 
+                $("#popup_property_preview").modal('hide');
+            });
             
             var preview_check = function()
             {
