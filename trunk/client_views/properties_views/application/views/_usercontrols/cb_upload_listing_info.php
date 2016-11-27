@@ -1,30 +1,34 @@
 <br><br>
 <div  class="fuelux container upload_properties" ng-app="user_profileApp" ng-controller="uploadProfile">
     <div class="userprofile row clearfix">
-        <div class="title">
+        <div class="section_divider"></div>
+        <div class="title clearfix">
             <span>Personal Information</span>
         </div>
-        <div class="oceanblue col-md-8 column">
-            <div  class="col-md-4 column">
-                <div>
-                    <span class="gothic_font">Name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="gothic_font" id="name" value="{{person.name}}" disabled>
+        <div class="oceanblue clearfix">
+            <div  class="col-md-6 column ">
+                <div class ="row clearfix">
+                    <span class="gothic_font col-md-4">Name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" class="gothic_font col-md-4" id="name" value="{{person.name}}" disabled>
                 </div>
                 <br>
-                <div>
-                    <span class="gothic_font">Email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="gothic_font" id="email" value="{{person.email}}"  disabled>
+                <div class ="row clearfix">
+                    <span class="gothic_font col-md-4">Email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" class="gothic_font col-md-4" id="email" value="{{person.email}}"  disabled>
                 </div>
                 <br>
             </div>
-            <div class="col-md-4 column">
+            <div class="col-md-6 column">
                 <div>
-                    <span class="gothic_font">Contact No.</span>&nbsp;&nbsp;&nbsp;<input class="gothic_font" type="text" id="contact_number" value="{{person.phone}}" disabled>
+                    <span class="gothic_font col-md-4">Contact No.</span>&nbsp;&nbsp;&nbsp;
+                    <input class="gothic_font col-md-4" type="text" id="contact_number" value="{{person.phone}}" disabled>
                 </div>
                 <br>
             </div>
         </div>
     </div>
-    <br>
     <div class="row">
+        <div class="section_divider"></div>
         <div class="title">
             <span>Upload Photo</span>
         </div>
@@ -74,12 +78,12 @@
                 </div>
             </div>
         </div>
-        <br><br>
         <div class="properties_details">
+            <div class="section_divider"></div>
             <div class="title row clearfix">
                 <span class="gothic_bold_font">Property Information</span>
             </div>
-            <div class="oceanblue row clearfix">
+            <div class="oceanblue row clearfix ">
                 <div class="col-md-6 column">
                     <div class="property_info_location row clearfix" class="row clearfix"  ng-repeat="property_category in property_category_1">
                         <div  class="col-md-4 {{property_category.category}}">
@@ -216,7 +220,7 @@
                 </div>
                 
             </div>
-            <br><br>
+            <div class="section_divider"></div>
             <div class="title row clearfix">
                 <span>Location</span>
             </div>
@@ -302,7 +306,7 @@
                     </div>
                 </div>
             </div>
-            <br><br>
+            <br>
           
             <div id="map_canvas" class="row clearfix">
                 <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" control="googleMap">
@@ -314,7 +318,7 @@
 
                 </ui-gmap-google-map>
             </div>
-            <br><br>
+            <div class="section_divider"></div>
             <div class="title row clearfix">
                 <span>Facilities</span>
             </div>
@@ -339,7 +343,7 @@
                 </div>
                 
             </div>
-            <br><br>
+            <div class="section_divider"></div>
             <div class="title row clearfix gothic_font">
                 <span>Remarks</span>
             </div>
