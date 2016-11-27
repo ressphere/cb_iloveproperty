@@ -40,6 +40,17 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
         $scope.property_category_3 =
                 [
                     {
+                        id:'unit_name',
+                        name:'Unit Name',
+                        control:'input-text',
+                        category:'sell rent room',
+                        placeholder:'Your Property Name',
+                        values:
+                        [
+                            ''
+                        ]
+                    },
+                    {
                         id:'country',
                         name:'Country',
                         control:'select',
@@ -56,17 +67,6 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                         category:'sell rent room',
                         values:
                         [
-                        ]
-                    },
-                    {
-                        id:'unit_name',
-                        name:'Unit Name',
-                        control:'input-text',
-                        category:'sell rent room',
-                        placeholder:'Your Property Name',
-                        values:
-                        [
-                            ''
                         ]
                     },
                     {
@@ -1082,6 +1082,17 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 
 
             };
+            
+            // Push state to allow back button close the modal, if any.
+            $("#popup_property_preview").on("shown.bs.modal", function()  { // any time a modal is shown
+                var urlReplace = "#preview"; // make the hash the id of the modal shown
+                history.pushState(null, null, urlReplace); // push state that hash into the url
+            });
+
+            // If a pushstate has previously happened and the back button is clicked, hide any modals.
+            $(window).on('popstate', function() { 
+                $("#popup_property_preview").modal('hide');
+            });
             
             var preview_check = function()
             {
