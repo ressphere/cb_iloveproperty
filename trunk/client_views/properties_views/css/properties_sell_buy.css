@@ -182,6 +182,10 @@ span {
     color:red;
 }
 
+.btn_listing_group {
+    margin-left: 10px;
+}
+
 #popup_property_preview .modal-dialog {
   width: 100%;
   height: 100%;

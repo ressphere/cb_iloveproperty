@@ -348,11 +348,21 @@
             </div>
             <br><br>
             <div id="upload_controls" class="pull-right">
-                <B><span id="upload_status" ng-show="disable_button" class="blink" ng-bind="photo_upload_status"></span></B>
-                <input id="upload_term_condition" type="checkbox" ng-click="term_click()"> I have read and agree with the <a href="index.php/properties_policy" target="_blank"><em>Terms & Conditions</em></a></input><br>
-                <span class='error'>{{err_msg}}</span><br> 
-                <button id="listing_preview" ng-disabled="disable_button" ng-click="preview_click()" type="button" class="btn">Preview</button>
-                <button id="submit_listing" ng-disabled="disable_button" ng-click="submit_click()" type="button" class="btn">Save & Next</button>
+                <div class="pull-left">
+                    <B><span id="upload_status" ng-show="disable_button" class="blink" ng-bind="photo_upload_status"></span>&nbsp;&nbsp;&nbsp;&nbsp;</B>
+                </div>
+                <div class="pull-right">
+                    <div>
+                        <input id="upload_term_condition" type="checkbox" ng-click="term_click()"> I have read and agree with the <a href="index.php/properties_policy" target="_blank"><em>Terms & Conditions</em></a></input><br/>
+                        <span class='error'>{{err_msg}}</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="btn_listing_group pull-left">
+                            <button id="listing_preview" ng-disabled="disable_button" ng-click="preview_click()" type="button" class="btn">Preview</button>
+                            <button id="submit_listing" ng-disabled="disable_button" ng-click="submit_click()" type="button" class="btn">Save & Next</button>
+                   </div>
+               </div>
             </div>
         </div>
        
