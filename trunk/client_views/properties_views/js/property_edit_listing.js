@@ -38,39 +38,9 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
 	$scope.back_count = -1;
         $scope.temp_ref = "";
         // </editor-fold>
-        // <editor-fold desc="property information column 3"  defaultstate="collapsed">
-        $scope.property_category_3 =
+        // <editor-fold desc="property information column 4"  defaultstate="collapsed">
+        $scope.property_category_4 =
                 [
-                    {
-                        id:'unit_name',
-                        name:'Unit Name',
-                        control:'input-text',
-                        category:'sell rent room',
-                        placeholder:'Your Property Name',
-                        values:
-                        [
-                            ''
-                        ]
-                    },
-                    {
-                        id:'country',
-                        name:'Country',
-                        control:'select',
-                        category:'sell rent room',
-                        values:
-                        [
-                            'Malaysia'
-                        ]
-                    },
-                    {
-                        id:'state',
-                        name:'State',
-                        control:'select',
-                        category:'sell rent room',
-                        values:
-                        [
-                        ]
-                    },
                     {
                         id:'street',
                         name:'Street',
@@ -103,6 +73,41 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                         values:
                         [
                             ''
+                        ]
+                    }
+                ];
+        // </editor-fold>
+        // <editor-fold desc="property information column 3"  defaultstate="collapsed">
+        $scope.property_category_3 =
+                [
+                    {
+                        id:'unit_name',
+                        name:'Unit Name',
+                        control:'input-text',
+                        category:'sell rent room',
+                        placeholder:'Your Property Name',
+                        values:
+                        [
+                            ''
+                        ]
+                    },
+                    {
+                        id:'country',
+                        name:'Country',
+                        control:'select',
+                        category:'sell rent room',
+                        values:
+                        [
+                            'Malaysia'
+                        ]
+                    },
+                    {
+                        id:'state',
+                        name:'State',
+                        control:'select',
+                        category:'sell rent room',
+                        values:
+                        [
                         ]
                     }
                 ];

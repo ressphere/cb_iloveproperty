@@ -74,9 +74,12 @@
     width: 100%;
 }
 
+/*
+use CSS "section_padding" instead
 .oceanblue > div {
     padding-top: 10px;
 }
+*/
 
 #ng-app {
     padding-left: 12px
@@ -93,7 +96,7 @@ input, select, textArea {
 }
 
 .userprofile input {
-    width: 280px
+    width: 330px
 }
 
 span {
@@ -252,4 +255,8 @@ label {
 .section_divider{
     height: 55px;
 }
+.section_padding{
+    padding: 28px;
+}
+
 /*86127d*/

@@ -5,23 +5,23 @@
         <div class="title">
             <span>Personal Information</span>
         </div>
-        <div class="oceanblue col-md-12 column clearfix">
-            <div  class="col-md-6 column">
-                <div>
-                    <span class="gothic_font col-md-4 column">Name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="oceanblue col-md-12 column clearfix" style="padding:0">
+            <div  class="col-md-6 column section_padding">
+                <div class ="row clearfix">
+                    <span class="gothic_font col-md-4 column">Name</span>&nbsp;&nbsp;&nbsp;
                     <input type="text" class="gothic_font col-md-4 column" id="name" value="{{person.name}}" disabled>
                 </div>
                 <br>
-                <div>
-                    <span class="gothic_font col-md-4 column">Email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class ="row clearfix">
+                    <span class="gothic_font col-md-4 column">Email</span>&nbsp;&nbsp;&nbsp;
                     <input type="text" class="gothic_font col-md-4 column" id="email" value="{{person.email}}"  disabled>
                 </div>
                 <br>
             </div>
-            <div class="col-md-6 column">
-                <div>
+            <div class="col-md-6 column section_padding">
+                <div class ="row clearfix">
                     <span class="gothic_font col-md-4 column">Contact No.</span>&nbsp;&nbsp;&nbsp;
-                    <input class="gothic_font col-md-4 column" type="text" id="contact_number" value="{{person.phone}}" disabled>
+                    <input type="text" class="gothic_font col-md-4 column"  id="contact_number" value="{{person.phone}}" disabled>
                 </div>
                 <br>
             </div>
@@ -81,8 +81,8 @@
             <div class="title row clearfix">
                 <span class="gothic_bold_font">Property Information</span>
             </div>
-            <div class="oceanblue row clearfix">
-                <div class="col-md-6 column">
+            <div class="oceanblue row clearfix" style="padding:0">
+                <div class="col-md-6 column section_padding">
                     <div class="property_info_location row clearfix" class="row clearfix"  ng-repeat="property_category in property_category_1">
                         <div  class="col-md-4 {{property_category.category}}">
                             <span ng-if="property_category.id === 'auction'">
@@ -133,7 +133,7 @@
                            </div>
                            <div ng-switch-when='asking_price_per' id='{{property_category.id}}'  class="gothic_font {{property_category.category}} input-group" ng-if="property_category.control === 'input-currency'">
                                     <!--<span class="input-group-addon" ng-bind="currency_value.currency"></span>-->
-                                    <input id='{{property_category.id}}' width="280" style="width: 280px" type='text' value="{{asking_price.value/build_up.value | number:2}}" disabled/>
+                                    <input id='{{property_category.id}}' width="330" style="width: 330px" type='text' value="{{asking_price.value/build_up.value | number:2}}" disabled/>
 
                            </div>
                            <div ng-switch-default>
@@ -155,7 +155,7 @@
                                     </select>
                                 </div>
                                 <!-- input-text-->
-                                <input class="gothic_font" id='{{property_category.id}}' width="280" style="width: 280px" type='text'  ng-if="property_category.control == 'input-text'" value='{{property_category.values[0]}}' placeholder='{{property_category.placeholder}}'/>
+                                <input class="gothic_font" id='{{property_category.id}}' width="330" style="width: 330px" type='text'  ng-if="property_category.control == 'input-text'" value='{{property_category.values[0]}}' placeholder='{{property_category.placeholder}}'/>
                                 <!-- input-currency-->
                                 <div id='{{property_category.id}}' class="input-group" ng-if="property_category.control === 'input-currency'">
                                     <div  class="gothic_font number-div">
@@ -164,7 +164,7 @@
                                     <span class="input-group-addon  gothic_font">.00</span>
                                 </div>
                                 <!--input date-->
-                                <input id='{{property_category.id}}' class="date gothic_font" width="280" style="width: 280px" ng-if="property_category.control === 'input-date'" value='{{property_category.values[0]}}'/>
+                                <input id='{{property_category.id}}' class="date gothic_font" width="330" style="width: 330px" ng-if="property_category.control === 'input-date'" value='{{property_category.values[0]}}'/>
                                 <!-- input number-->
                                 <div class="number-div gothic_font"  ng-if="property_category.control === 'input-number'">
                                     <input id='{{property_category.id}}' class="numericOnly" type='number' min='{{property_category.values[0]}}' max='{{property_category.values[1]}}' value='{{property_category.values[2]}}'/>
@@ -173,7 +173,7 @@
                         </div>
                     </div>                 
                 </div>
-                <div class="col-md-6" column>
+                <div class="col-md-6 column section_padding">
                     <div class="property_info_location row clearfix"  ng-repeat="property_category in property_category_2">
                         <div class="{{property_category.category}} col-md-4">
                              <span class="gothic_font" id='lbl_{{property_category.id}}'>{{property_category.name}}</span>
@@ -195,7 +195,7 @@
 
                                 </select>
                             </div>
-                             <input id='{{property_category.id}}' class="gothic_font" width="280" maxlength="280" style="width: 280px" 
+                             <input id='{{property_category.id}}' class="gothic_font" width="330" maxlength="330" style="width: 330px" 
                                     type='text'  ng-if="property_category.control == 'input-text'" 
                                     value='{{property_category.values[0]}}' 
                                     placeholder='{{property_category.placeholder}}'/>
@@ -206,9 +206,9 @@
                                  </div>
                                     <!--<span class="input-group-addon">.00</span>-->
                              </div>
-                             <input class="gothic_font" id='{{property_category.id}}' width="280" style="width: 280px" type='date'  ng-if="property_category.control == 'input-date'" value="{{property_category.value}}"/>
+                             <input class="gothic_font" id='{{property_category.id}}' width="330" style="width: 330px" type='date'  ng-if="property_category.control == 'input-date'" value="{{property_category.value}}"/>
                              <div class="number-div gothic_font" ng-if="property_category.control == 'input-number'">
-                                <input class="numericOnly gothic_font" id='{{property_category.id}}' width="280" 
+                                <input class="numericOnly gothic_font" id='{{property_category.id}}' width="330" 
                                     type='number'  
                                      min='{{property_category.values[0]}}' max='{{property_category.values[1]}}' value='{{property_category.values[2]}}'/>
                              </div>
@@ -223,83 +223,111 @@
                 <span>Location</span>
             </div>
             <div class="oceanblue row clearfix">
-                <div class="col-md-12">
-                    <div class="property_info_location row clearfix"  ng-repeat="property_category in property_category_3">
-                        <div class="{{property_category.category}} col-md-4 div_{{property_category.id}}">
-                             <span class="gothic_font" id='lbl_{{property_category.id}}'>{{property_category.name}}</span>
-                        </div>
-                        <div class="{{property_category.category}} col-md-8" ng-switch on='property_category.id'>
-                            <div class="select-div gothic_font"  ng-switch-when='country'>
-                                <select ng-change="change_country()" ng-model='country_state.country' id='{{property_category.id}}'>
-                                    <option ng-repeat="property_category_val in property_category.values">{{property_category_val}}</option>
-                                </select>
+                <div class="col-md-12 column" style="padding:0">
+                    <div class="col-md-6 column section_padding">
+                        <div class="property_info_location row clearfix"  ng-repeat="property_category in property_category_3">
+                            <div class="{{property_category.category}} col-md-4 div_{{property_category.id}}">
+                                 <span class="gothic_font" id='lbl_{{property_category.id}}'>{{property_category.name}}</span>
                             </div>
-                            <div ng-switch-when='area'>
-                                <div class="validation_input_group_small input-group">
-                                    <input class="gothic_font" id='{{property_category.id}}' width="280" style="width: 280px" type='text'
-                                    value='{{get_ngPlace_info_by_name(google_maps.details.adr_address, "locality")}}'
-                                    placeholder='{{property_category.placeholder}}' maxlength="280"/>
-                                    <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
-                                </div>
-                            </div>
-                            <div class="select-div div_{{property_category.id}} gothic_font" ng-switch-when='state'>
-                                <select id='{{property_category.id}}'>
-                                    <option ng-repeat="state in country_state.states">
-                                        {{state}}
-                                    </option>
-                                </select>
-<!--                                <div class="validation_input_group_small input-group">
-                                    <input id='{{property_category.id}}' width="280" style="width: 280px" type='text'
-                                    value="{{google_maps.details.address_components[2].long_name}}"
-                                    placeholder='{{property_category.placeholder}}' maxlength="280"/>
-                                    <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
-                                </div>-->
-                            </div>
-                            <div ng-switch-when='postcode'>
-                                <div class="validation_input_group_small input-group gothic_font">
-                                    <input id='{{property_category.id}}' width="280" style="width: 280px" type='text'
-                                    value='{{get_ngPlace_info_by_name(google_maps.details.adr_address, "postal-code")}}'
-                                    placeholder='{{property_category.placeholder}}' maxlength="280"/>
-                                    <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
-                                </div>
-                            </div>
-                            <div ng-switch-when='street'>
-                                <div class="validation_input_group_small input-group gothic_font">
-                                    
-                                        <input id='{{property_category.id}}' width="280" style="width: 280px" type='text'
-                                        value='{{get_ngPlace_info_by_name(google_maps.details.adr_address, "street-address")}}'
-                                        placeholder='{{property_category.placeholder}}' maxlength="280"/>
-                                        <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
-                                    
-                                </div>
-                            </div>
-<!--                            <textarea ng-switch-when='street' maxlength="280" rows='6' id='{{property_category.id}}' type='text'  
-                                      ng-if="property_category.control == 'input-word'" placeholder='{{property_category.placeholder}}' 
-                                      ng-bind="google_maps.details.address_components[0].long_name"></textarea>-->
-                          
-                            <!-- google_maps.details.geometry.location-->
-                            <div ng-switch-when='unit_name'>
-                                <div class="validation_input_group_small input-group gothic_font">
-                                    <input ng-model="google_maps.autocomplete" 
-                                       class="form-control" 
-                                       ng-autocomplete options="google_maps.options"
-                                       details="google_maps.details" id='{{property_category.id}}'
-                                       style="width: 280px"/>
-                                    <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
-                                </div>
-                            </div>
-                            <div ng-switch-default>
-                                <!-- below is the general control without binding-->
-                                <!-- normal select control-->
-                                <div class="select-div gothic_font"  ng-if="property_category.control === 'select'">
-                                    <select id='{{property_category.id}}'>
-                                        <option ng-repeat="property_category_val in property_category.values">
-                                            {{property_category_val}}
-                                         </option>
+                            <div class="{{property_category.category}} col-md-4" ng-switch on='property_category.id'>
+                                <div class="select-div gothic_font"  ng-switch-when='country'>
+                                    <select ng-change="change_country()" ng-model='country_state.country' id='{{property_category.id}}'>
+                                        <option ng-repeat="property_category_val in property_category.values">{{property_category_val}}</option>
                                     </select>
                                 </div>
+                                <div class="select-div div_{{property_category.id}} gothic_font" ng-switch-when='state'>
+                                    <select id='{{property_category.id}}'>
+                                        <option ng-repeat="state in country_state.states">
+                                            {{state}}
+                                        </option>
+                                    </select>
+    <!--                                <div class="validation_input_group_small input-group">
+                                        <input id='{{property_category.id}}' width="330" style="width: 330px" type='text'
+                                        value="{{google_maps.details.address_components[2].long_name}}"
+                                        placeholder='{{property_category.placeholder}}' maxlength="330"/>
+                                        <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
+                                    </div>-->
+                                </div>
+    <!--                            <textarea ng-switch-when='street' maxlength="330" rows='6' id='{{property_category.id}}' type='text'  
+                                          ng-if="property_category.control == 'input-word'" placeholder='{{property_category.placeholder}}' 
+                                          ng-bind="google_maps.details.address_components[0].long_name"></textarea>-->
+
+                                <!-- google_maps.details.geometry.location-->
+                                <div ng-switch-when='unit_name'>
+                                    <div class="validation_input_group_small input-group gothic_font">
+                                        <input ng-model="google_maps.autocomplete" 
+                                           class="form-control" 
+                                           ng-autocomplete options="google_maps.options"
+                                           details="google_maps.details" id='{{property_category.id}}'
+                                           style="width: 330px; border-radius:20px; height:auto"/>
+                                        <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
+                                    </div>
+                                </div>
+                                <div ng-switch-default>
+                                    <!-- below is the general control without binding-->
+                                    <!-- normal select control-->
+                                    <div class="select-div gothic_font"  ng-if="property_category.control === 'select'">
+                                        <select id='{{property_category.id}}'>
+                                            <option ng-repeat="property_category_val in property_category.values">
+                                                {{property_category_val}}
+                                             </option>
+                                        </select>
+                                    </div>
+                                </div>
+
                             </div>
-                           
+                        </div>
+                    </div>
+                    <div class="col-md-6 column section_padding">
+                        <div class="property_info_location row clearfix"  ng-repeat="property_category in property_category_4">
+                            <div class="{{property_category.category}} col-md-4 div_{{property_category.id}}">
+                                 <span class="gothic_font" id='lbl_{{property_category.id}}'>{{property_category.name}}</span>
+                            </div>
+                            <div class="{{property_category.category}} col-md-4" ng-switch on='property_category.id'>                                
+                                <div ng-switch-when='area'>
+                                    <div class="validation_input_group_small input-group">
+                                        <input class="gothic_font" id='{{property_category.id}}' width="330" style="width: 330px" type='text'
+                                        value='{{get_ngPlace_info_by_name(google_maps.details.adr_address, "locality")}}'
+                                        placeholder='{{property_category.placeholder}}' maxlength="330"/>
+                                        <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
+                                    </div>
+                                </div>
+                                <div ng-switch-when='postcode'>
+                                    <div class="validation_input_group_small input-group gothic_font">
+                                        <input id='{{property_category.id}}' width="330" style="width: 330px" type='text'
+                                        value='{{get_ngPlace_info_by_name(google_maps.details.adr_address, "postal-code")}}'
+                                        placeholder='{{property_category.placeholder}}' maxlength="330"/>
+                                        <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
+                                    </div>
+                                </div>
+                                <div ng-switch-when='street'>
+                                    <div class="validation_input_group_small input-group gothic_font">
+
+                                            <input id='{{property_category.id}}' width="330" style="width: 330px" type='text'
+                                            value='{{get_ngPlace_info_by_name(google_maps.details.adr_address, "street-address")}}'
+                                            placeholder='{{property_category.placeholder}}' maxlength="330"/>
+                                            <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
+
+                                    </div>
+                                </div>
+    <!--                            <textarea ng-switch-when='street' maxlength="330" rows='6' id='{{property_category.id}}' type='text'  
+                                          ng-if="property_category.control == 'input-word'" placeholder='{{property_category.placeholder}}' 
+                                          ng-bind="google_maps.details.address_components[0].long_name"></textarea>-->
+
+                                <!-- google_maps.details.geometry.location-->
+                                <div ng-switch-default>
+                                    <!-- below is the general control without binding-->
+                                    <!-- normal select control-->
+                                    <div class="select-div gothic_font"  ng-if="property_category.control === 'select'">
+                                        <select id='{{property_category.id}}'>
+                                            <option ng-repeat="property_category_val in property_category.values">
+                                                {{property_category_val}}
+                                             </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -320,8 +348,8 @@
             <div class="title row clearfix">
                 <span>Facilities</span>
             </div>
-            <div id ="facilities" class="oceanblue row clearfix">
-                <div class="col-md-12">
+            <div id ="facilities" class="oceanblue row clearfix" style="padding:0">
+                <div class="col-md-12 section_padding">
                     <div class="col-md-4" ng-repeat="(property_facility_key, property_facility) in property_facility_1">
                         <label class="property_facility gothic_font">
                         <input type="checkbox" name="property_facility" value="{{property_facility_key}}">&nbsp;&nbsp;{{property_facility}}<br><br>
