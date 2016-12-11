@@ -1,34 +1,30 @@
 <br><br>
 <div  class="fuelux container upload_properties" ng-app="user_profileApp" ng-controller="uploadProfile">
     <div class="userprofile row clearfix">
-        <div class="section_divider"></div>
-        <div class="title clearfix">
+        <div class="title">
             <span>Personal Information</span>
         </div>
-        <div class="oceanblue clearfix">
-            <div  class="col-md-6 column ">
-                <div class ="row clearfix">
-                    <span class="gothic_font col-md-4">Name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="text" class="gothic_font col-md-4" id="name" value="{{person.name}}" disabled>
+        <div class="oceanblue col-md-8 column">
+            <div  class="col-md-4 column">
+                <div>
+                    <span class="gothic_font">Name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="gothic_font" id="name" value="{{person.name}}" disabled>
                 </div>
                 <br>
-                <div class ="row clearfix">
-                    <span class="gothic_font col-md-4">Email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="text" class="gothic_font col-md-4" id="email" value="{{person.email}}"  disabled>
+                <div>
+                    <span class="gothic_font">Email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="gothic_font" id="email" value="{{person.email}}"  disabled>
                 </div>
                 <br>
             </div>
-            <div class="col-md-6 column">
+            <div class="col-md-4 column">
                 <div>
-                    <span class="gothic_font col-md-4">Contact No.</span>&nbsp;&nbsp;&nbsp;
-                    <input class="gothic_font col-md-4" type="text" id="contact_number" value="{{person.phone}}" disabled>
+                    <span class="gothic_font">Contact No.</span>&nbsp;&nbsp;&nbsp;<input class="gothic_font" type="text" id="contact_number" value="{{person.phone}}" disabled>
                 </div>
                 <br>
             </div>
         </div>
     </div>
+    <br>
     <div class="row">
-        <div class="section_divider"></div>
         <div class="title">
             <span>Upload Photo</span>
         </div>
@@ -78,12 +74,12 @@
                 </div>
             </div>
         </div>
+        <br><br>
         <div class="properties_details">
-            <div class="section_divider"></div>
             <div class="title row clearfix">
                 <span class="gothic_bold_font">Property Information</span>
             </div>
-            <div class="oceanblue row clearfix ">
+            <div class="oceanblue row clearfix">
                 <div class="col-md-6 column">
                     <div class="property_info_location row clearfix" class="row clearfix"  ng-repeat="property_category in property_category_1">
                         <div  class="col-md-4 {{property_category.category}}">
@@ -220,7 +216,7 @@
                 </div>
                 
             </div>
-            <div class="section_divider"></div>
+            <br><br>
             <div class="title row clearfix">
                 <span>Location</span>
             </div>
@@ -306,7 +302,7 @@
                     </div>
                 </div>
             </div>
-            <br>
+            <br><br>
           
             <div id="map_canvas" class="row clearfix">
                 <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" control="googleMap">
@@ -318,7 +314,7 @@
 
                 </ui-gmap-google-map>
             </div>
-            <div class="section_divider"></div>
+            <br><br>
             <div class="title row clearfix">
                 <span>Facilities</span>
             </div>
@@ -343,7 +339,7 @@
                 </div>
                 
             </div>
-            <div class="section_divider"></div>
+            <br><br>
             <div class="title row clearfix gothic_font">
                 <span>Remarks</span>
             </div>
@@ -352,11 +348,21 @@
             </div>
             <br><br>
             <div id="upload_controls" class="pull-right">
-                <B><span id="upload_status" ng-show="disable_button" class="blink" ng-bind="photo_upload_status"></span></B>
-                <input id="upload_term_condition" type="checkbox" ng-click="term_click()"> I have read and agree with the <a href="index.php/properties_policy" target="_blank"><em>Terms & Conditions</em></a></input><br>
-                <span class='error'>{{err_msg}}</span><br> 
-                <button id="listing_preview" ng-disabled="disable_button" ng-click="preview_click()" type="button" class="btn">Preview</button>
-                <button id="submit_listing" ng-disabled="disable_button" ng-click="submit_click()" type="button" class="btn">Save & Next</button>
+                <div class="pull-left">
+                    <B><span id="upload_status" ng-show="disable_button" class="blink" ng-bind="photo_upload_status"></span>&nbsp;&nbsp;&nbsp;&nbsp;</B>
+                </div>
+                <div class="pull-right">
+                    <div>
+                        <input id="upload_term_condition" type="checkbox" ng-click="term_click()"> I have read and agree with the <a href="index.php/properties_policy" target="_blank"><em>Terms & Conditions</em></a></input><br/>
+                        <span class='error'>{{err_msg}}</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="btn_listing_group pull-left">
+                            <button id="listing_preview" ng-disabled="disable_button" ng-click="preview_click()" type="button" class="btn">Preview</button>
+                            <button id="submit_listing" ng-disabled="disable_button" ng-click="submit_click()" type="button" class="btn">Save & Next</button>
+                   </div>
+               </div>
             </div>
         </div>
        
