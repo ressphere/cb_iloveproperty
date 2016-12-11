@@ -11,7 +11,7 @@
   <meta name="author" content="<?=$author?>">
   <meta name="description" content="<?=$metadesc?>"/>
   <meta name="keywords" content="<?=$metakey?>"/>
-  <meta property="og:url" content="<?php echo trim(base_url(), "/") . $_SERVER["REQUEST_URI"]?>" />
+  <meta property="og:url" content="<?php echo "http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]?>" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="<?=$og_title?>" />
   <meta property="og:image" content="<?=$og_image?>" />
