@@ -1,7 +1,7 @@
 <br><br>
 <div  class="fuelux container upload_properties" ng-app="user_profileApp" ng-controller="uploadProfile">
     <div class="userprofile row clearfix">
-        <div class="section_divider"></div>
+        <br><br>
         <div class="title">
             <span>Personal Information</span>
         </div>
@@ -50,9 +50,9 @@
                             style="visibility: hidden; position: absolute;">
                     </span>
                 </div>
-                <br>
                 <div>
                     <div ng-repeat="file in $flow.files" class="col-sm-6 col-md-4">
+                        <br>
                         <span class="title ng-binding" ng-binding="file.name"></span>
                         <div class="row thumbnail" ng-show="$flow.files.length">
                             <img flow-img="file" style="max-width: 200px; height: 150px" ng-src="{{file.name}}">
@@ -69,8 +69,6 @@
                         <div class="btn-group">
                             <a class="gothic_font btn btn-xs btn-danger" ng-click="file.cancel()">Remove</a>
                         </div>
-                        <br>
-                        <br>
                     </div>
                 </div>
             </div>
@@ -303,7 +301,7 @@
                     </div>
                 </div>
             </div>
-            <br><br>
+            <div class="section_divider"></div>
           
             <div id="map_canvas" class="row clearfix">
                 <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" control="googleMap">
