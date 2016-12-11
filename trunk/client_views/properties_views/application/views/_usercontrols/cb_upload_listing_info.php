@@ -5,20 +5,23 @@
         <div class="title">
             <span>Personal Information</span>
         </div>
-        <div class="oceanblue col-md-8 column">
-            <div  class="col-md-4 column">
+        <div class="oceanblue col-md-12 column clearfix">
+            <div  class="col-md-6 column">
                 <div>
-                    <span class="gothic_font">Name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="gothic_font" id="name" value="{{person.name}}" disabled>
+                    <span class="gothic_font col-md-4 column">Name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" class="gothic_font col-md-4 column" id="name" value="{{person.name}}" disabled>
                 </div>
                 <br>
                 <div>
-                    <span class="gothic_font">Email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="gothic_font" id="email" value="{{person.email}}"  disabled>
+                    <span class="gothic_font col-md-4 column">Email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" class="gothic_font col-md-4 column" id="email" value="{{person.email}}"  disabled>
                 </div>
                 <br>
             </div>
-            <div class="col-md-4 column">
+            <div class="col-md-6 column">
                 <div>
-                    <span class="gothic_font">Contact No.</span>&nbsp;&nbsp;&nbsp;<input class="gothic_font" type="text" id="contact_number" value="{{person.phone}}" disabled>
+                    <span class="gothic_font col-md-4 column">Contact No.</span>&nbsp;&nbsp;&nbsp;
+                    <input class="gothic_font col-md-4 column" type="text" id="contact_number" value="{{person.phone}}" disabled>
                 </div>
                 <br>
             </div>
@@ -130,7 +133,7 @@
                            </div>
                            <div ng-switch-when='asking_price_per' id='{{property_category.id}}'  class="gothic_font {{property_category.category}} input-group" ng-if="property_category.control === 'input-currency'">
                                     <!--<span class="input-group-addon" ng-bind="currency_value.currency"></span>-->
-                                    <input id='{{property_category.id}}' width="200" style="width: 200px" type='text' value="{{asking_price.value/build_up.value | number:2}}" disabled/>
+                                    <input id='{{property_category.id}}' width="280" style="width: 280px" type='text' value="{{asking_price.value/build_up.value | number:2}}" disabled/>
 
                            </div>
                            <div ng-switch-default>
@@ -152,7 +155,7 @@
                                     </select>
                                 </div>
                                 <!-- input-text-->
-                                <input class="gothic_font" id='{{property_category.id}}' width="200" style="width: 200px" type='text'  ng-if="property_category.control == 'input-text'" value='{{property_category.values[0]}}' placeholder='{{property_category.placeholder}}'/>
+                                <input class="gothic_font" id='{{property_category.id}}' width="280" style="width: 280px" type='text'  ng-if="property_category.control == 'input-text'" value='{{property_category.values[0]}}' placeholder='{{property_category.placeholder}}'/>
                                 <!-- input-currency-->
                                 <div id='{{property_category.id}}' class="input-group" ng-if="property_category.control === 'input-currency'">
                                     <div  class="gothic_font number-div">
@@ -161,7 +164,7 @@
                                     <span class="input-group-addon  gothic_font">.00</span>
                                 </div>
                                 <!--input date-->
-                                <input id='{{property_category.id}}' class="date gothic_font" width="200" style="width: 200px" ng-if="property_category.control === 'input-date'" value='{{property_category.values[0]}}'/>
+                                <input id='{{property_category.id}}' class="date gothic_font" width="280" style="width: 280px" ng-if="property_category.control === 'input-date'" value='{{property_category.values[0]}}'/>
                                 <!-- input number-->
                                 <div class="number-div gothic_font"  ng-if="property_category.control === 'input-number'">
                                     <input id='{{property_category.id}}' class="numericOnly" type='number' min='{{property_category.values[0]}}' max='{{property_category.values[1]}}' value='{{property_category.values[2]}}'/>
@@ -192,7 +195,7 @@
 
                                 </select>
                             </div>
-                             <input id='{{property_category.id}}' class="gothic_font" width="200" maxlength="200" style="width: 200px" 
+                             <input id='{{property_category.id}}' class="gothic_font" width="280" maxlength="280" style="width: 280px" 
                                     type='text'  ng-if="property_category.control == 'input-text'" 
                                     value='{{property_category.values[0]}}' 
                                     placeholder='{{property_category.placeholder}}'/>
@@ -203,9 +206,9 @@
                                  </div>
                                     <!--<span class="input-group-addon">.00</span>-->
                              </div>
-                             <input class="gothic_font" id='{{property_category.id}}' width="200" style="width: 200px" type='date'  ng-if="property_category.control == 'input-date'" value="{{property_category.value}}"/>
+                             <input class="gothic_font" id='{{property_category.id}}' width="280" style="width: 280px" type='date'  ng-if="property_category.control == 'input-date'" value="{{property_category.value}}"/>
                              <div class="number-div gothic_font" ng-if="property_category.control == 'input-number'">
-                                <input class="numericOnly gothic_font" id='{{property_category.id}}' width="200" 
+                                <input class="numericOnly gothic_font" id='{{property_category.id}}' width="280" 
                                     type='number'  
                                      min='{{property_category.values[0]}}' max='{{property_category.values[1]}}' value='{{property_category.values[2]}}'/>
                              </div>
@@ -233,9 +236,9 @@
                             </div>
                             <div ng-switch-when='area'>
                                 <div class="validation_input_group_small input-group">
-                                    <input class="gothic_font" id='{{property_category.id}}' width="200" style="width: 200px" type='text'
+                                    <input class="gothic_font" id='{{property_category.id}}' width="280" style="width: 280px" type='text'
                                     value='{{get_ngPlace_info_by_name(google_maps.details.adr_address, "locality")}}'
-                                    placeholder='{{property_category.placeholder}}' maxlength="200"/>
+                                    placeholder='{{property_category.placeholder}}' maxlength="280"/>
                                     <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
                                 </div>
                             </div>
@@ -246,42 +249,42 @@
                                     </option>
                                 </select>
 <!--                                <div class="validation_input_group_small input-group">
-                                    <input id='{{property_category.id}}' width="200" style="width: 200px" type='text'
+                                    <input id='{{property_category.id}}' width="280" style="width: 280px" type='text'
                                     value="{{google_maps.details.address_components[2].long_name}}"
-                                    placeholder='{{property_category.placeholder}}' maxlength="200"/>
+                                    placeholder='{{property_category.placeholder}}' maxlength="280"/>
                                     <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
                                 </div>-->
                             </div>
                             <div ng-switch-when='postcode'>
                                 <div class="validation_input_group_small input-group gothic_font">
-                                    <input id='{{property_category.id}}' width="200" style="width: 200px" type='text'
+                                    <input id='{{property_category.id}}' width="280" style="width: 280px" type='text'
                                     value='{{get_ngPlace_info_by_name(google_maps.details.adr_address, "postal-code")}}'
-                                    placeholder='{{property_category.placeholder}}' maxlength="200"/>
+                                    placeholder='{{property_category.placeholder}}' maxlength="280"/>
                                     <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
                                 </div>
                             </div>
                             <div ng-switch-when='street'>
                                 <div class="validation_input_group_small input-group gothic_font">
                                     
-                                        <input id='{{property_category.id}}' width="200" style="width: 200px" type='text'
+                                        <input id='{{property_category.id}}' width="280" style="width: 280px" type='text'
                                         value='{{get_ngPlace_info_by_name(google_maps.details.adr_address, "street-address")}}'
-                                        placeholder='{{property_category.placeholder}}' maxlength="200"/>
+                                        placeholder='{{property_category.placeholder}}' maxlength="280"/>
                                         <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
                                     
                                 </div>
                             </div>
-<!--                            <textarea ng-switch-when='street' maxlength="200" rows='6' id='{{property_category.id}}' type='text'  
+<!--                            <textarea ng-switch-when='street' maxlength="280" rows='6' id='{{property_category.id}}' type='text'  
                                       ng-if="property_category.control == 'input-word'" placeholder='{{property_category.placeholder}}' 
                                       ng-bind="google_maps.details.address_components[0].long_name"></textarea>-->
                           
                             <!-- google_maps.details.geometry.location-->
                             <div ng-switch-when='unit_name'>
-                                <div class="validation_input_group_default input-group gothic_font">
+                                <div class="validation_input_group_small input-group gothic_font">
                                     <input ng-model="google_maps.autocomplete" 
                                        class="form-control" 
                                        ng-autocomplete options="google_maps.options"
-                                       details="google_maps.details" id='{{property_category.id}}'/>
-
+                                       details="google_maps.details" id='{{property_category.id}}'
+                                       style="width: 280px"/>
                                     <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
                                 </div>
                             </div>

@@ -229,7 +229,7 @@ font-family: 'Century Gothic Bold'
 }
 
 .select-div {
-    width:200px; height:auto;
+    width:280px; height:auto;
     float:left;
     overflow:hidden;
     background:url(images/upload_lsting_dropdown.png) 0 0 no-repeat;
@@ -240,13 +240,13 @@ font-family: 'Century Gothic Bold'
     
 }
 .select-div select {
-    width:220px;
+    width:280px;
     border:none;
     background-color: transparent;
 }
 
 .number-div {
-    width:200px; height:auto;
+    width:280px; height:auto;
     float:left;
     overflow:hidden;
     background-color: white;
@@ -256,7 +256,7 @@ font-family: 'Century Gothic Bold'
 }
 
 .number-div input[type="number"]{
-    width:230px;
+    width:280px;
     border:none;
     background-color: transparent;
 }
