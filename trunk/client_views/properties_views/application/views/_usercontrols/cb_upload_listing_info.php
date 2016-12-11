@@ -1,6 +1,7 @@
 <br><br>
 <div  class="fuelux container upload_properties" ng-app="user_profileApp" ng-controller="uploadProfile">
     <div class="userprofile row clearfix">
+        <div class="section_divider"></div>
         <div class="title">
             <span>Personal Information</span>
         </div>
@@ -23,8 +24,8 @@
             </div>
         </div>
     </div>
-    <br>
     <div class="row">
+        <div class="section_divider"></div>
         <div class="title">
             <span>Upload Photo</span>
         </div>
@@ -74,8 +75,8 @@
                 </div>
             </div>
         </div>
-        <br><br>
         <div class="properties_details">
+            <div class="section_divider"></div>
             <div class="title row clearfix">
                 <span class="gothic_bold_font">Property Information</span>
             </div>
@@ -216,7 +217,7 @@
                 </div>
                 
             </div>
-            <br><br>
+            <div class="section_divider"></div>
             <div class="title row clearfix">
                 <span>Location</span>
             </div>
@@ -314,7 +315,7 @@
 
                 </ui-gmap-google-map>
             </div>
-            <br><br>
+            <div class="section_divider"></div>
             <div class="title row clearfix">
                 <span>Facilities</span>
             </div>
@@ -339,7 +340,7 @@
                 </div>
                 
             </div>
-            <br><br>
+            <div class="section_divider"></div>
             <div class="title row clearfix gothic_font">
                 <span>Remarks</span>
             </div>
