@@ -435,10 +435,10 @@
                     <div class="modal-body">
                         <input type="text" id="send_contact_name"
                                ng-keypress="validate_sending_contact_details()"
-                               class="contact_owner_required_data form-control" placeholder="Put your name here"/><br/>
+                               class="contact_owner_required_data form-control" placeholder="Please insert your name"/><br/>
                         <input type="text" id="send_contact_phone" 
                                ng-keypress="validate_sending_contact_details()" 
-                               class="contact_owner_required_data phoneOnly form-control" placeholder="+6012-8888888"/><br/>
+                               class="contact_owner_required_data phoneOnly form-control" placeholder="Please insert handphone contact"/><br/>
                         <textarea class="contact_owner_required_data form-control" id="send_contact_comment" ng-keypress="validate_sending_contact_details()">
 I am interested in your property.&#13;&#10;Please contact me if the listed property is still available.&#13;&#10;Thank you &#38; have a nice day 
                         </textarea><br/><br/>
