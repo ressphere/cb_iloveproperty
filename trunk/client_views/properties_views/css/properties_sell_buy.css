@@ -259,4 +259,8 @@ label {
     padding: 28px;
 }
 
+@media(max-width:960px) {
+    .section_padding { padding: 0px 28px 0px 28px; }
+}
+
 /*86127d*/

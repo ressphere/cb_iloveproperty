@@ -70,6 +70,20 @@ input, .form-control, textarea, select
      font: 12px/18px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
     font-size: 18px
 }
+
+.number-div input {
+    background: #FFFFFF;
+    border: 1px solid #EEEEEE;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #EDEDED inset;
+    color: #666;
+    padding: 5px 5px 5px 10px;
+    outline: none;
+    line-height: normal;
+    font: 12px/18px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+    font-size: 18px
+}
+
 .form-control {
     max-width: 250px
 }
@@ -243,6 +257,8 @@ font-family: 'Century Gothic Bold'
     width:330px;
     border:none;
     background-color: transparent;
+    -webkit-appearance:none;
+    -moz-appearance:none;
 }
 
 .number-div {
@@ -282,7 +298,7 @@ input:disabled {
 }
 
 .unfixed_content {
-   padding-top: 85px;
+   padding-top: 128px;
 }
 
 #main_content > div {
