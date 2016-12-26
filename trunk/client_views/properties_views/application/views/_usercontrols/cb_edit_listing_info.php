@@ -6,14 +6,14 @@
             <span>Personal Information</span>
         </div>
         <div class="oceanblue col-md-12 column clearfix" style="padding:0">
-            <div  class="col-md-6 column section_padding">
+            <div  class="col-md-6 column section_padding special_header_padding">
                 <div class ="row clearfix">
-                    <span class="gothic_font col-md-4 column">Name</span>&nbsp;&nbsp;&nbsp;
+                    <span class="gothic_font col-md-4 column">Name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="text" class="gothic_font col-md-4 column" id="name" value="{{person.name}}" disabled>
                 </div>
                 <br>
                 <div class ="row clearfix">
-                    <span class="gothic_font col-md-4 column">Email</span>&nbsp;&nbsp;&nbsp;
+                    <span class="gothic_font col-md-4 column">Email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="text" class="gothic_font col-md-4 column" id="email" value="{{person.email}}"  disabled>
                 </div>
                 <br>
@@ -108,7 +108,7 @@
                 <span class="gothic_bold_font">Property Information</span>
             </div>
             <div class="oceanblue row clearfix" style="padding:0">
-                <div class="col-md-6 column section_padding">
+                <div class="col-md-6 column section_padding special_header_padding">
                     <div class="property_info_location row clearfix" class="row clearfix"  ng-repeat="property_category in property_category_1">
                         <div  class="col-md-4 {{property_category.category}}">
                             <span ng-if="property_category.id === 'auction'">
@@ -206,7 +206,7 @@
                         </div>
                     </div>                 
                 </div>
-                <div class="col-md-6 column section_padding">
+                <div class="col-md-6 column section_padding special_footer_padding">
                     <div class="property_info_location row clearfix"  ng-repeat="property_category in property_category_2">
                         <div class="{{property_category.category}} col-md-4">
                              <span class="gothic_font" id='lbl_{{property_category.id}}'>{{property_category.name}}</span>
@@ -257,7 +257,7 @@
             </div>
             <div class="oceanblue row clearfix">
                 <div class="col-md-12 column" style="padding:0">
-                    <div class="col-md-6 column section_padding">
+                    <div class="col-md-6 column section_padding special_header_padding">
                     <div class="property_info_location row clearfix"  ng-repeat="property_category in property_category_3">
                         <div class="{{property_category.category}} col-md-4 div_{{property_category.id}}">
                              <span class="gothic_font" id='lbl_{{property_category.id}}'>{{property_category.name}}</span>
@@ -310,7 +310,7 @@
                         </div>
                     </div>
                     </div>
-                    <div class="col-md-6 column section_padding">
+                    <div class="col-md-6 column section_padding special_footer_padding">
                     <div class="property_info_location row clearfix"  ng-repeat="property_category in property_category_4">
                         <div class="{{property_category.category}} col-md-4 div_{{property_category.id}}">
                              <span class="gothic_font" id='lbl_{{property_category.id}}'>{{property_category.name}}</span>
@@ -375,7 +375,7 @@
                 <span>Facilities</span>
             </div>
             <div id ="facilities" class="oceanblue row clearfix" style="padding:0">
-                <div class="col-md-12 section_padding">
+                <div class="col-md-12 section_padding special_header_padding">
                     <div class="col-md-4" ng-repeat="(property_facility_key, property_facility) in property_facility_1">
                         <label class="property_facility gothic_font">
                         <input type="checkbox" name="property_facility" value="{{property_facility_key}}">&nbsp;&nbsp;{{property_facility}}<br><br>
