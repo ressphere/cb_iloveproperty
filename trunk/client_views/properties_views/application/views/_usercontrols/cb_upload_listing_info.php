@@ -8,19 +8,19 @@
         <div class="oceanblue col-md-12 column clearfix" style="padding:0">
             <div  class="col-md-6 column section_padding special_header_padding">
                 <div class ="row clearfix">
-                    <span class="gothic_font col-md-4 column">Name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="gothic_font col-md-4 column">Name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="text" class="gothic_font col-md-4 column" id="name" value="{{person.name}}" disabled>
                 </div>
                 <br>
                 <div class ="row clearfix">
-                    <span class="gothic_font col-md-4 column">Email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="gothic_font col-md-4 column">Email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="text" class="gothic_font col-md-4 column" id="email" value="{{person.email}}"  disabled>
                 </div>
                 <br>
             </div>
             <div class="col-md-6 column section_padding">
                 <div class ="row clearfix">
-                    <span class="gothic_font col-md-4 column">Contact No.</span>&nbsp;&nbsp;&nbsp;
+                    <span class="gothic_font col-md-4 column">Contact No.</span>
                     <input type="text" class="gothic_font col-md-4 column"  id="contact_number" value="{{person.phone}}" disabled>
                 </div>
                 <br>
