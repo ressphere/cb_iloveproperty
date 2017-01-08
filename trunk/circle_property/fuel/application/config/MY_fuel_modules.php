@@ -52,6 +52,7 @@ $config['modules']['properties_listing'] = array('sanitize_images' => FALSE);
 //$config['modules']['state'] = array('sanitize_images' => FALSE);
 //$config['modules']['tenure'] = array('sanitize_images' => FALSE);
 $config['modules']['listing_subscription'] = array('sanitize_images' => FALSE);
+$config['modules']['whatsapp'] = array();
 
 //$config['modules']['property_info'] = array('sanitize_images' => FALSE);
 //$config['modules']['property_package'] = array('sanitize_images' => FALSE);

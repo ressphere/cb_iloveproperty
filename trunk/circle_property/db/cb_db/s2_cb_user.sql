@@ -210,3 +210,16 @@ CREATE TABLE IF NOT EXISTS `listing_subscription` (
   FOREIGN KEY (`user_id`) REFERENCES users(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- --------------------------------------------------------
+
+-- --------------------------------------------------------
+-- --------------------------------------------------------
+--
+-- Table structure Whatsapp Info
+--
+CREATE TABLE IF NOT EXISTS `whatsapp` (
+  `id` int COLLATE utf8_bin AUTO_INCREMENT,
+  `username` varchar(100) COLLATE utf8_bin NOT NULL,
+  `access_code` int COLLATE utf8_bin,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- --------------------------------------------------------
