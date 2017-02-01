@@ -26,9 +26,10 @@ class PhoneRegistration extends base
     {
        if(isset($_POST['txtPhoneNo']))
        {
+            $method = "sms";
             $PhoneUtilsObj = new PhoneUtils();
-            $result = $PhoneUtilsObj->GetAccessCode($_POST["txtPhoneNo"], "voice", FALSE);
-            $this->GetPhonePassword("sms " . $result->status);
+            $result = $PhoneUtilsObj->GetAccessCode($_POST["txtPhoneNo"], $method, FALSE);
+            $this->GetPhonePassword($method . ": " . $result->status);
             
        }
        else
@@ -64,9 +65,14 @@ class PhoneRegistration extends base
              echo "No phone number provided";
         }
     }
+    public function ShowPassword()
+    {
+           $this->GetPhonePassword("");
+    }
     
     public function GetPassword()
     {
+       $this->GetPhonePassword("");
        if(isset($_POST['txtPhoneNo']) && isset($_POST['txtAccessCode']))
        {
             $PhoneUtilsObj = new PhoneUtils();
