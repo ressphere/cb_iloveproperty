@@ -92,7 +92,8 @@ class properties_details extends properties_base {
 
        return $result;
    }
-   private function begin_send_user_contact($owner_email, $display_name, $phone, $msg, $ref_id, &$fail_reason)
+   private function begin_send_user_contact($owner_email, $display_name, 
+           $phone, $msg, $ref_id, &$fail_reason)
    {
       $type = "send_prop_request";
       $data['name'] = $display_name;
@@ -105,6 +106,10 @@ class properties_details extends properties_base {
       if($status === FALSE )
       {
           $fail_reason = "Email Failed To Send<BR>Please contact administrator";
+      }
+      else 
+      {
+          $this->_send_sms($phone, $type, $data);
       }
      
    }

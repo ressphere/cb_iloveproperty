@@ -9,6 +9,7 @@
  */
 
 require_once '_utils/GeneralFunc.php';
+require_once '_utils/isms/sms.php';
 require_once '_utils/measurement_type_manager.php';
 
 class properties_base extends CI_Controller {
@@ -590,34 +591,54 @@ class properties_base extends CI_Controller {
                 return "[Property Enquiry]";
         }
     }
-    protected function _send_email($type, $email, &$data)
+    private function getBalance()
+    {
+       $sms_agent = new isms();
+       $balance = $sms_agent->getBalance();
+       return $balance;
+    }
+    protected function _send_sms($phone, $type, &$data)
+    {
+        if($this->getBalance() > 0)
         {
-                //$config['website_name'] = 'ressphere.com';
-                //$config['webmaster_email'] = 'admin@ressphere.com';
-            
-                $this->load->library('email');
-                $website_name = $this->config->item('website_name');
-                $webmaster_email = $this->config->item('webmaster_email');
-               //$CI =& get_instance();
-                //$CI->load->library('email');
-                $this->email->from($webmaster_email, $website_name);
-                $this->email->reply_to($webmaster_email, $website_name);
-                $this->email->to($email);
-                $this->email->subject($this->get_meaningful_type_name($type) . " " . $website_name);
-                $this->email->message($this->load->view('_email/'.$type.'-html', $data, TRUE));
-                $this->email->set_alt_message($this->load->view('_email/'.$type.'-txt', $data, TRUE));
-                $status = $this->email->send();
-                if($status)
-                {
-                      return TRUE;
-                }
-                else
-                {
-                      $this->set_error($this->email->print_debugger());
-                      return FALSE;
-                }
-
+            $sms_agent = new isms();
+            $message = $this->load->view('_email/'.$type.'-txt', $data, TRUE);
+            $sms_agent->send($phone, $message);
         }
+        else
+        {
+            $this->set_error("isms out of balance");
+        }
+    }
+    
+    protected function _send_email($type, $email, &$data)
+    {
+            //$config['website_name'] = 'ressphere.com';
+            //$config['webmaster_email'] = 'admin@ressphere.com';
+
+            $this->load->library('email');
+            $website_name = $this->config->item('website_name');
+            $webmaster_email = $this->config->item('webmaster_email');
+           //$CI =& get_instance();
+            //$CI->load->library('email');
+            $this->email->from($webmaster_email, $website_name);
+            $this->email->reply_to($webmaster_email, $website_name);
+            $this->email->to($email);
+            $this->email->subject($this->get_meaningful_type_name($type) . " " . $website_name);
+            $this->email->message($this->load->view('_email/'.$type.'-html', $data, TRUE));
+            $this->email->set_alt_message($this->load->view('_email/'.$type.'-txt', $data, TRUE));
+            $status = $this->email->send();
+            if($status)
+            {
+                  return TRUE;
+            }
+            else
+            {
+                  $this->set_error($this->email->print_debugger());
+                  return FALSE;
+            }
+
+    }
     protected function get_measurement_type_enum($measurement_type)
     {
         return MeasurementFactory::get_measurement_type_enum($measurement_type);
