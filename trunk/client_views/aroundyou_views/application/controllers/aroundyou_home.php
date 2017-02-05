@@ -1,5 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+/**
+ * This is the class for all the Around You Home page
+ *   - Help to add in header and footer
+ *   - Provide API that is commonly used
+ *
+ * @author mykhor
+ */
+
+// 
 require_once 'aroundyou_base.php'; // Include base class
 
 /*

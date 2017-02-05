@@ -1,15 +1,19 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * This is the base class for all properties page
+ * This is the base class for all Around You Service page
  *   - Help to add in header and footer
  *   - Provide API that is commonly used
  *
  * @author mykhor
  */
 
-require_once '_utils/GeneralFunc.php'; // Used to call service for CB
+require_once '_utils/GeneralFunc.php'; // Contain all the necassary API
 
+
+/*
+ * Base class for Around You Service
+ */
 class aroundyou_base extends CI_Controller {
     
     // ****** Settings list ***** Start ****
@@ -50,13 +54,13 @@ class aroundyou_base extends CI_Controller {
         $this->session->set_userdata('client_base_url', base_url());
         
         // Pre-record wsdl base url
-        $this->wsdl_url = $this->_get_wsdl_base_url();
+        $this->wsdl_url = GeneralFunc__Basic::get_wsdl_base_url();
         $this->session->set_userdata('wsdl_base_url', $this->wsdl_url);
     }
     
     /*
      * Load necessary item for children class.
-     * Intent to cut off unecessary repeat items for all children class
+     * Intent to reduce unecessary repeat items/API calling for all children class
      */
     protected function index()
     {
@@ -85,44 +89,43 @@ class aroundyou_base extends CI_Controller {
         // Load necessary CSS from local site  -- End
         
         // Load necessary JS -- Start
-        $this->extemplate->add_js( $this->wsdl_url . 'js/jquery.min.js', 'import', FALSE, FALSE); // Basic 
-        $this->extemplate->add_js( $this->wsdl_url . 'js/bootstrap.min.js', 'import', FALSE, FALSE);
-        $this->extemplate->add_js($this->wsdl_url .  'js/typeahead.min.js', 'import', FALSE, FALSE);
-        
-        $this->extemplate->add_js($this->wsdl_url . 'js/angular.min.js', 'import', FALSE, FALSE);
+        $this->extemplate->add_js( $this->wsdl_url . 'js/jquery.min.js', 'import', FALSE, FALSE); // Basic Jquery
+        $this->extemplate->add_js( $this->wsdl_url . 'js/_utils/jquery.makeclass.min.js', 'import', FALSE, FALSE); // Basic Jquery
+        $this->extemplate->add_js( $this->wsdl_url . 'js/jquery.cookie.min.js', 'import', FALSE, FALSE); // Jquery cookies support
+        $this->extemplate->add_js( $this->wsdl_url . 'js/bootstrap.min.js', 'import', FALSE, FALSE); // Handle basic UI layout and featues
+        $this->extemplate->add_js($this->wsdl_url .  'js/typeahead.min.js', 'import', FALSE, FALSE); // Provide string auto completed features (https://twitter.github.io/typeahead.js/examples/)
+        $this->extemplate->add_js($this->wsdl_url . 'js/angular.min.js', 'import', FALSE, FALSE); // Provide angular capability for fast UI support (https://angularjs.org/)
         //$this->extemplate->add_js($this->wsdl_url . 'js/angular-elif.js', 'import', FALSE, FALSE);
         
-        $this->extemplate->add_js( $this->wsdl_url . 'js/_utils/jquery.makeclass.min.js', 'import', FALSE, FALSE);
-        $this->extemplate->add_js( $this->wsdl_url . 'js/base.js', 'import', FALSE, FALSE);
-        $this->extemplate->add_js( $this->wsdl_url . 'js/jquery.cookie.min.js', 'import', FALSE, FALSE);
-       
-       
+        $this->extemplate->add_js( $this->wsdl_url . 'js/base.js', 'import', FALSE, FALSE); // Ressphere base JS
+        
         //$this->extemplate->add_js('https://www.google.com/recaptcha/api.js', 'import', FALSE, FALSE);
-        $this->extemplate->add_js('http://www.google.com/recaptcha/api/js/recaptcha_ajax.js', 'import', FALSE, FALSE);
-        
-        $this->extemplate->add_js($this->wsdl_url . 'js/lodash.compat.min.js', 'import', FALSE, FALSE);
-        $this->extemplate->add_js($this->wsdl_url . 'js/bluebird.min.js', 'import', FALSE, FALSE);
-        $this->extemplate->add_js('https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false', 'import', FALSE, FALSE);
-        $this->extemplate->add_js($this->wsdl_url . 'js/angular-google-maps.min.js', 'import', FALSE, FALSE);
-        $this->extemplate->add_js($this->wsdl_url . 'js/ngAutocomplete.js', 'import', FALSE, FALSE);
-        $this->extemplate->add_js($this->wsdl_url . 'js/angularjs-google-places.js', 'import', FALSE, FALSE);
-        $this->extemplate->add_js($this->wsdl_url . 'js/jstorage.min.js', 'import', FALSE, FALSE);
-        $this->extemplate->add_js($this->wsdl_url . 'js/_datetimepicker/moment-with-locales.min.js', 'import', FALSE, FALSE);
-        $this->extemplate->add_js($this->wsdl_url . 'js/_datetimepicker/bootstrap-datetimepicker.min.js', 'import', FALSE, FALSE);
+        $this->extemplate->add_js('http://www.google.com/recaptcha/api/js/recaptcha_ajax.js', 'import', FALSE, FALSE); // Support captcha to avoid script/spam/hack
+        $this->extemplate->add_js($this->wsdl_url . 'js/lodash.compat.min.js', 'import', FALSE, FALSE); // Eaise the handler of array, object and etc (https://lodash.com/)
+        $this->extemplate->add_js($this->wsdl_url . 'js/bluebird.min.js', 'import', FALSE, FALSE); // Error error handler/log, plus event (http://bluebirdjs.com/docs/features.html) 
+        $this->extemplate->add_js('https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false', 'import', FALSE, FALSE); // Google map API
+        $this->extemplate->add_js($this->wsdl_url . 'js/angular-google-maps.min.js', 'import', FALSE, FALSE); // Angular wrap around google map 
+        $this->extemplate->add_js($this->wsdl_url . 'js/ngAutocomplete.js', 'import', FALSE, FALSE); // Angular string auto complete
+        $this->extemplate->add_js($this->wsdl_url . 'js/angularjs-google-places.js', 'import', FALSE, FALSE); // Angular auto complete on google map place
+        $this->extemplate->add_js($this->wsdl_url . 'js/jstorage.min.js', 'import', FALSE, FALSE); // To store data locally (http://www.jstorage.info/)
+        $this->extemplate->add_js($this->wsdl_url . 'js/_datetimepicker/moment-with-locales.min.js', 'import', FALSE, FALSE); // Data and time handler, pre-requisit for bootstrap-datetimepicker (https://momentjs.com/)
+        $this->extemplate->add_js($this->wsdl_url . 'js/_datetimepicker/bootstrap-datetimepicker.min.js', 'import', FALSE, FALSE); // Boostrap drop down for date/time selection (https://eonasdan.github.io/bootstrap-datetimepicker/)
         $this->extemplate->add_js($this->wsdl_url . 'js/_fuelux/fuelux.min.js', 'import', FALSE, FALSE);  // Extension of all interactive (eg. button) for easy support, must load after bootstrap js (http://getfuelux.com/index.html)
-        $this->extemplate->add_js($this->wsdl_url . 'js/accounting.min.js', 'import', FALSE, FALSE);
+        $this->extemplate->add_js($this->wsdl_url . 'js/accounting.min.js', 'import', FALSE, FALSE); // Number and currency handler (http://openexchangerates.github.io/accounting.js/)
         
-        $this->extemplate->add_js($this->wsdl_url . 'js/_utils/angular-sanitize.min.js', 'import', FALSE, FALSE);
-        $this->extemplate->add_js($this->wsdl_url . 'js/_ckeditor/ckeditor.min.js', 'import', FALSE, FALSE);
-        $this->extemplate->add_js( 'js/aroundyou_base.js');
-        $this->extemplate->add_js('js/aroundyou_header.js');
+        $this->extemplate->add_js($this->wsdl_url . 'js/_utils/angular-sanitize.min.js', 'import', FALSE, FALSE); // Angular hack prevent JS (https://docs.angularjs.org/api/ngSanitize)
+        $this->extemplate->add_js($this->wsdl_url . 'js/_ckeditor/ckeditor.min.js', 'import', FALSE, FALSE); // Editor for comment/formatting string (http://ckeditor.com/)
         
-        // Load necessary JS -- End
+        $this->extemplate->add_js('js/aroundyou_base.js'); // Around You Service special base JS
+        $this->extemplate->add_js('js/aroundyou_header.js'); // Around You Service header JS
         
+        // Load necessary JS -- End  
     }
     
     /*
-     * Load page with extemplate
+     * Load the prefix layout for all page, which include
+     *    - Header
+     *    - Footer
      */
     private function load_prefix_page()
     {
@@ -139,42 +142,44 @@ class aroundyou_base extends CI_Controller {
     }
     
     /*
-     * Invoke extemplate to call specific header template
-     * Thus assert it per seqence specified in config/extemplate.php
+     * Construct the header
      */
     private function build_header()
     {
+        // Retrieve user through prestore data in session
         $username = $this->session->userdata('displayname');
+        
         /*******Contains the list of menu feature*******/
         $myprofileurl = $this->wsdl_url . 'index.php/cb_user_profile_update/my_profile';
-        $newlistingurl = base_url() . 'index.php/aroundyou_sell';
-        $viewlistingurl = base_url() . 'index.php/aroundyou_buy';
+        //$newlistingurl = base_url() . 'index.php/aroundyou_sell';
+        //$viewlistingurl = base_url() . 'index.php/aroundyou_buy';
         /***************End Menu Feature***************/
+        
+        // Prepare header template information
         $header_content = array (
             
             'home_link' => base_url()."index.php",
             'logo'=> base_url()."images/ressphere_aroundyou_logo.png",
-            'logo_desc' => "Ressphere Porperty",
+            'logo_desc' => "Ressphere Around You",
   
             'help_icon_pic' => base_url()."images/ressphere_page_help.png",
             'help_icon_desc' => "help",
             'user_image' => base_url() . "images/user_profile.png",
             'username'=>$username,
             'myprofileurl'=>$myprofileurl,
-            'newlistingurl'=>$newlistingurl,
-            'viewlistingurl'=>$viewlistingurl
+            //'newlistingurl'=>$newlistingurl,
+            //'viewlistingurl'=>$viewlistingurl
 
         );
         $this->extemplate->write_view('header', '_usercontrols/aroundyou_header', $header_content, TRUE);
     }
     
     /*
-     * Invoke extemplate to call specific footer template
-     * Thus assert it per seqence specified in config/extemplate.php
+     * Construct the footer
      */
     private function build_footer()
     {
-        // #Todo - Change this to database storing
+        // @Todo - Change this to database storing
         $footers["About Us"] = $this->wsdl_url . '#about';
         $footers["Contact Us"] = $this->wsdl_url . '#contact';
         $footers["Sitemap"] = base_url() . "sitemap.xml";
@@ -239,115 +244,76 @@ class aroundyou_base extends CI_Controller {
     }
     //******* Page Display ******** End ****
     
-
     
     //******* Common API ******** Start ****
     /*
-     * Get Ressphere Web service url
+     * Check the login status
      * 
-     * @Return  String  Ressphere WSDL base url
-     */
-    protected function _get_wsdl_base_url()
-    {
-        $val_return = GeneralFunc::CB_Receive_Service_Request("CB_Info:base_url");
-        $wsdl_base_url = json_decode($val_return, TRUE)["data"]["result"];
-        
-        return $wsdl_base_url;
-    }
-    
-    /*
-     * Obtain specific value from _POST
+     * @Param Bool Determine the checking is again login or not login
+     *               - TRUE, Check if login. Return TRUE if login.
+     *               - FALSE, Check if not login. Return TRUE if not login.
      * 
-     * @Param   String  Key that hope to retrieve from _POST
-     * @Return  Value   NULL if not found, else reutrn value
+     * @Return Bool The return is base on the param
      */
-    protected function _get_posted_value($key)
-    {
-        if(isset($_POST[$key]))
-        {
-            return $_POST[$key];
-        }
-        else
-        {
-            return NULL;
-        }
-    }
-    
-    /*
-     * Return Value if key exist in Array, else NULL
-     * 
-     * @Param   Array   Array that will be search
-     * @Param   String  Keys value that wish to perform check
-     * @Return  Value   NULL or value if key hit  
-     */
-    protected function _get_array_value($array, $key)
-    {
-        if(array_key_exists($key, $array))
-        {
-            return $array[$key];
-        }
-        return NULL;
-    }
-    
-    /*
-      * API for cross browser to perform "echo" function
-      * 
-      * @Param Sting
-      * @Return None
-      */
-    protected function _print ($msg) 
-    {
-        $headers = headers_list();
-        if(array_search('Access-Control-Allow-Origin: *', $headers) === FALSE)
-        {
-            header('Access-Control-Allow-Origin: *');
-        }
-        if(array_search('Access-Control-Allow-Methods: GET, POST', $headers)  === FALSE)
-        {
-            header('Access-Control-Allow-Methods: GET, POST');
-        }
-        if(is_string ( $msg ) == FALSE)
-        {
-            echo json_encode($msg);
-        }
-        else 
-        {
-            echo $msg;
-        }
-    }
     protected function _is_login( $activated = TRUE)
     {
        return  $this->session->userdata('status') === ($activated ? TRUE : FALSE);
     }
+    
+    /*
+     * Retrieve the user id
+     * 
+     * @Return Integer User ID
+     */
     protected function _get_user_id()
     {
        return $this->session->userdata('user_id');
     }
+    
+    /*
+     * Retrieve user name
+     * 
+     * @Return String User name
+     */
     protected function _get_username()
     {
        return $this->session->userdata('username');
     }
     
-    /* Use this to store/get session data for action
-     *
+    /* 
+     * Store action from session data
+     * 
+     * @Param String Action that perfrom for current page
      */
     protected function set_action($action)
     {
        $this->action = $action;
        $this->session->set_userdata("action", $this->action);
     }
+    
+    /*
+     * Retrieve action from current page variable
+     * 
+     * @Return String Action that perfrom for current page
+     */
     protected function get_action()
     {
        return $this->action;
     }
-  
+    
+    /*
+     * Retrieve action from session data, JS gateway
+     * 
+     * @Return String Action that perfrom for current page
+     */
     public function get_current_action()
     {
          $user_action =  $this->session->userdata('action');
-         $this->_print($user_action);
+         GeneralFunc__Basic::echo_js_html($user_action);
     } 
+    
     /*
-     * Set web page title
+     * Set web page title for template
      * 
      * @Param   String  Page title
      */
@@ -357,213 +323,31 @@ class aroundyou_base extends CI_Controller {
         $this->extemplate->write('title', $title);
     }
     
+    /*
+     *  Retrieve title name from current page variable
+     * 
+     *  @Return String Page title
+     */
     protected function get_title()
     {
        return $this->title;
     }
-    private function get_image_resource_by_type($type, $filename)
-    {
-        switch($type)
-        {
-            case IMAGETYPE_GIF:
-                return imagecreatefromgif($filename);
-            case IMAGETYPE_JPEG:
-            case IMAGETYPE_JPEG2000:
-                return imagecreatefromjpeg($filename);
-            case IMAGETYPE_PNG:
-                return imagecreatefrompng($filename);
-            case IMAGETYPE_BMP:
-                return imagecreatefromwbmp($filename);
-            default:
-                return NULL;
-        }
-    }
-    private function setWatermarkPositionToCenter($im, $fontSize, $degree, $y, $color, $strokecolor, $font, $txt)
-    {
     
-        $bbox = imagettfbbox($fontSize, $degree, $font, $txt);
-        $centerX = (imagesx($im) / 2) - (($bbox[2] - $bbox[0]) / 2);
-        // Add some shadow to the name
-        $this->imagettfstroketext($im, $fontSize, $degree, $centerX, $y, $color, $strokecolor, $font, $txt, 2);
-        
-        
-    }
-    private function imagettfstroketext(&$image, $size, $angle, $x, $y, &$textcolor, &$strokecolor, $fontfile, $text, $px) {
-
-        for($c1 = ($x-abs($px)); $c1 <= ($x+abs($px)); $c1++)
-            for($c2 = ($y-abs($px)); $c2 <= ($y+abs($px)); $c2++)
-                imagettftext($image, $size, $angle, $c1, $c2, $strokecolor, $fontfile, $text);
-
-        return imagettftext($image, $size, $angle, $x, $y, $textcolor, $fontfile, $text);
-    }
-    protected function set_customized_watermark($img_path)
-    {
-        $user_id = $this->session->userdata('user_id');
-        $name = $this->session->userdata('displayname');
-        $current_time = date('H:i:s', time());
-        $tempDir = dirname(dirname(dirname(dirname(__DIR__)))) .
-                        DIRECTORY_SEPARATOR . 'temp' . 
-                        DIRECTORY_SEPARATOR . 'images' . 
-                    DIRECTORY_SEPARATOR . $user_id;
-        $fontStyle = dirname(dirname(dirname(dirname(__DIR__)))) . DIRECTORY_SEPARATOR . 
-                "fonts" . DIRECTORY_SEPARATOR . "GOTHIC.TTF";
-        
-        $ext = "png";
-        $user["user_id"] = $user_id;
-        $phone_return_val = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:get_user_phone_number",
-                        json_encode($user));
-        $phone = json_decode($phone_return_val, TRUE)["data"]["result"];
-        $watermark_file_name = sha1($name . $phone . $current_time);
-        
-        $watermark_path = $tempDir. DIRECTORY_SEPARATOR . $watermark_file_name . "." . $ext;
-        
-        // Set the content-type
-        
-
-        // Create the image
-        $im = imagecreatetruecolor(800, 200);
-        
-        $trans_colour = imagecolorallocatealpha($im, 0, 0, 0, 127);
-        imagefill($im, 0, 0, $trans_colour);
-        imagesavealpha($im, TRUE);
-        
-        $grey = imagecolorallocatealpha($im, 128, 128, 128, 50);//imagecolorallocate($im, 128, 128, 128);
-        //$black = imagecolorallocatealpha($im, 0, 0, 0, 60);//imagecolorallocate($im, 0, 0, 0);
-        $white = imagecolorallocatealpha($im, 255, 255, 255, 60);
-        
-        // Replace path by your own font path
-        $font = $fontStyle;
-        //$this->setWatermarkPositionToCenter($im, 20, 0, 21, $grey, $black, $font, $name);
-        //$this->setWatermarkPositionToCenter($im, 22, 0, 20, $black, $font, $name);
-        $this->setWatermarkPositionToCenter($im, 20, 0, 20, $white, $grey, $font, $name);
-        
-        
-        //$this->setWatermarkPositionToCenter($im, 18, 0, 51, $grey, $black, $font, $phone);
-        //$this->setWatermarkPositionToCenter($im, 19, 0, 50, $black, $font, $phone);
-        $this->setWatermarkPositionToCenter($im, 18, 0, 50, $white, $grey, $font, $phone);
-        
-        
-        // Using imagepng() results in clearer text compared with imagejpeg()
-        imagepng($im, $watermark_path);
-        imagedestroy($im);
-        $this->set_watermark($img_path, $watermark_path);
-        unlink($watermark_path);
-    }
+    // @MY - I stop here. which GenerlFunction GeneralFunc__Service still need to go through 
     
-    protected function set_default_watermark($img_path)
-    {
-        // Load the stamp and the photo to apply the watermark to
-        $watermark_path = dirname(dirname(dirname(__FILE__))) . 
-                DIRECTORY_SEPARATOR . "images" . DIRECTORY_SEPARATOR .
-                'ressphere_aroundyou_logo.png';
-        set_watermark($img_path, $watermark_path);
-    }
-    
-    protected function set_watermark($img_path, $watermark_path)
-    {
-        $stamp = NULL;
-        $im = NULL;
-       
-        list($stamp_width, $stamp_height, $stamp_type, $stamp_attr) = getimagesize($watermark_path);
-        if(file_exists($watermark_path))
-        {
-            $stamp = $this->get_image_resource_by_type($stamp_type, $watermark_path);
-        }
-        else
-        {
-            $this->set_error("[NOT FOUND]Watermark image: " .  $watermark_path);
-            return FALSE;
-        }
-        
-        if(file_exists($img_path))
-        {
-            list($width, $height, $type, $attr) = getimagesize($img_path);
-            $im = $this->get_image_resource_by_type($type, $img_path);
-        }
-        else
-        {
-            $this->set_error("[NOT FOUND]Targeted image: " .  $img_path);
-            return FALSE;
-        }
-        
-
-        // Set the margins for the stamp and get the height/width of the stamp image
-        if($im === NULL || $stamp === NULL)
-        {
-            return FALSE;
-        }
-        else
-        {        
-            $left = ($width - $stamp_width)/2;
-            $top =  ($height - $stamp_height)/2;
-            // Copy the stamp image onto our photo using the margin offsets and the photo 
-            // width to calculate positioning of the stamp. 
-            try{
-                imagealphablending($stamp, true);
-                imagesavealpha($stamp, true);
-                
-                imagealphablending($im, true);
-                imagesavealpha($im, true);
-                if(!imagecopy($im, $stamp, $left, $top, 0, 0, imagesx($stamp), imagesy($stamp)))
-                {
-                    $this->set_error("[FAIL] Watermark image");
-                    return FALSE;
-                }
-            }
-            catch (Exception $e) {  
-                  $this->set_error($e->getMessage());
-            }
-            
-            imagealphablending($im, false);
-            imagesavealpha($im, true);
-            // Output and free memory
-            imagepng($im, $img_path, 9);
-            imagedestroy($im);
-            imagedestroy($stamp);
-            
-            return TRUE;
-        }
-    }
-    
-    
-    private function get_state_by_country(&$states , $country)
-    {
-        /*
-         $filter_struct = array();
-         $filter_struct["filter"]["country"] = $country; 
-        //$val_return = GeneralFunc::CB_Receive_Service_Request("CB_Info:base_url");
-        $val_return_detail = 
-                GeneralFunc::CB_SendReceive_Service_Request("CB_Property:get_country_state",
-                        json_encode($filter_struct));
-        $val_return_detail_array = json_decode($val_return_detail, true);
-
-        foreach($val_return_detail_array["data"]["state_country"] as $state_country)
-        {
-            array_push($states, $state_country["state"]);
-        }
-        
-         */
-    }
     public function get_states()
     {
-        $listing = $this->_get_posted_value("country_name");
+        $listing = GeneralFunc__Basic::get_posted_value("country_name");
         $states = array();
         if($listing)
         {
             $country = json_decode($listing, TRUE);
             $this->get_state_by_country($states, $country);
         }
-        $this->_print($states);
+        GeneralFunc__Basic::echo_js_html($states);
         
     }
-    /*
-    public function get_property_reference()
-    {
-        $ref = $this->session->userdata('Reference');
-        $this->_print(json_encode($ref));
-    }
-     
-     */
+    
     protected function set_error($error_string)
     {
         ob_start();
@@ -575,19 +359,7 @@ class aroundyou_base extends CI_Controller {
         error_log($error_string ."\n", 3, $log_location);
     }
     
-    protected function _check_recaptcha($website_name,$response_field, $challenge_field)
-    {
-        
-        $captcha_code["remote_addr"] = $website_name; 
-        $captcha_code["challenge_field"] = $challenge_field;
-        $captcha_code["response_field"] = $response_field;
-
-
-        $val_return_json = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:check_recaptcha", json_encode($captcha_code));
-        $val_return = json_decode($val_return_json, TRUE);
-        
-        return   $val_return["data"]["result"];
-    }
+    
     private function get_meaningful_type_name($type)
     {
         switch ($type)
@@ -596,6 +368,7 @@ class aroundyou_base extends CI_Controller {
                 return "[Property Enquiry]";
         }
     }
+    
     protected function _send_email($type, $email, &$data)
         {
                 //$config['website_name'] = 'ressphere.com';
