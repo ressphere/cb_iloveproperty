@@ -1,7 +1,7 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 $extemplate['active_extemplate'] = 'default';
-$extemplate['default']['extemplate'] = 'advertisement_home';
+$extemplate['default']['extemplate'] = 'aroundyou_home';
 $extemplate['default']['regions'] = array(
    'title',
    'header',

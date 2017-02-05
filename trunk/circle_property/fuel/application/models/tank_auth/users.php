@@ -172,8 +172,8 @@ class Users extends CI_Model
                 "ressphere_admin",
                 "ressphere_property",
                 "property_admin",
-                "ressphere_advertisement",
-                "advertisement_admin"
+                "ressphere_aroundyou",
+                "aroundyou_admin"
                 );
             
             foreach ($reserved_keywords as $keyword)

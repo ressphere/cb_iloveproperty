@@ -1,7 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once 'advertisement_base.php';
-class advertisement_home extends advertisement_base {
+require_once 'aroundyou_base.php'; // Include base class
+
+/*
+ * Main class for home page
+ */
+class aroundyou_home extends aroundyou_base {
    function __construct()
    {
        // Preload necessary
@@ -14,8 +18,8 @@ class advertisement_home extends advertisement_base {
        parent::index();
        
        // Set web related info
-       $content = "Ressphere advertisement Home Page";
-       $title = "Ressphere advertisement";
+       $content = "Ressphere Around You Home Page";
+       $title = "Ressphere Around You";
        $this->SEO_Tags($content);
        $this->set_title($title);
        
@@ -24,7 +28,7 @@ class advertisement_home extends advertisement_base {
        
        // Page content
        
-       $this->extemplate->write_view('contents', '_usercontrols/cb_advertisement_main',array('width'=>500, 'height'=>500) ,TRUE);
+       $this->extemplate->write_view('contents', '_usercontrols/cb_aroundyou_main',array('width'=>500, 'height'=>500) ,TRUE);
        /*$this->extemplate->write_view('features', '_usercontrols/cb_features', array('feature_list'=>$this->_get_features()), TRUE);
         */
        
@@ -38,9 +42,9 @@ class advertisement_home extends advertisement_base {
    private function page_js_css()
    {   
        ///import for developing the doughnut chart
-       $this->extemplate->add_js( $this->wsdl . 'js/Chart.js', 'import', FALSE, FALSE);
-       //Enable for special handling using js for advertisement home page
-       $this->extemplate->add_js('js/property_main_page.js');
+       $this->extemplate->add_js( $this->wsdl_url . 'js/Chart.js', 'import', FALSE, FALSE);
+       //Enable for special handling using js for aroundyou home page
+       $this->extemplate->add_js('js/aroundyou_main_page.js');
        
    }
    public function check_userdata()

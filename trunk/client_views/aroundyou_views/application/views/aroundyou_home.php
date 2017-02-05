@@ -92,22 +92,22 @@
                 </div>
             </center>
         </div>
-        <div id="popup_advertisement_info" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div id="popup_aroundyou_info" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <center>
-                <div id="advertisement_info" class="modal-dialog modal-sm popup">
+                <div id="aroundyou_info" class="modal-dialog modal-sm popup">
                     <div class="modal-header">
-                        <button class="advertisement_info close" data-dismiss="modal" type="button">
+                        <button class="aroundyou_info close" data-dismiss="modal" type="button">
                             <span aria-hidden="true">×</span>
                             <span class="sr-only">Close</span>
                         </button>
                         <img class="logo" src="images/ressphere-white.png" alt="">
                     </div>
                     <div class="modal-body">
-                        <div id="advertisement_info_content"></div>
+                        <div id="aroundyou_info_content"></div>
                     </div>
                     <div class="modal-footer">
                         <center>
-                            <button class="advertisement_info btn" data-dismiss="modal" type="button">Close</button>
+                            <button class="aroundyou_info btn" data-dismiss="modal" type="button">Close</button>
                             
                             <br>
                         </center>
@@ -115,19 +115,19 @@
                 </div>
             </center>
         </div>
-    <div id="popup_advertisement_preview" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="popup_aroundyou_preview" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <center>
-                <div id="advertisement_preview" class="modal-dialog modal-lg popup">
+                <div id="aroundyou_preview" class="modal-dialog modal-lg popup">
                       <div class="modal-header">
-                        <button class="advertisement_info close" data-dismiss="modal" type="button">
+                        <button class="aroundyou_info close" data-dismiss="modal" type="button">
                             <span aria-hidden="true">×</span>
                             <span class="sr-only">Close</span>
                         </button>
                         
                     </div>
                     <div class="modal-body">
-                        <div id="advertisement_preview_content">
-                            <iframe id="advertisement_preview_content_iframe" frameborder="0" seamless 
+                        <div id="aroundyou_preview_content">
+                            <iframe id="aroundyou_preview_content_iframe" frameborder="0" seamless 
                                     width="100%" height="100%"></iframe>
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 /* 
-    Document   : advertisement_base
+    Document   : properties_base
     Created on : Jun 8, 2014, 10:17:21 AM
     Author     : MingYeang
     Description:
@@ -10,12 +10,12 @@
 /*****************************************************
     Header related css
 *******************************************************/
-.advertisement-header {
+.properties-header {
     background-color: #eee;
     height: 97.439px;
 }
 
-.advertisement-logo {
+.properties-logo {
     width: 215.364px;
     height: 57.439px;
     margin-top: 20px;
@@ -24,14 +24,14 @@
     
 }
 
-.advertisement-header-right {
+.properties-header-right {
     /*float: right;*/
     /*margin-top: 34.6195px;*/
     /*height: 97.439px;
     margin-right: 20px;*/
 }
 
-.advertisement-help-icon {
+.properties-help-icon {
     width: 28.2px;
     height: 28.2px;
     
@@ -53,12 +53,12 @@ html, body {
 /*************************************************************
     Footer related style
 **************************************************************/
-.advertisement_footer div {
+.u_footer div {
     color: white;
 }
 
-.advertisement_footer {
-    background-image: url("../images/advertisement_footer_background.png");
+.aroundyou_footer {
+    background-image: url("../images/aroundyou_footer_background.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
@@ -70,46 +70,63 @@ html, body {
     padding-bottom:10px;
 }
 
-.advertisement_footer_link .divider
+.aroundyou_footer_link .divider
 {
     font-weight: bolder;
 }
 
-.advertisement_footer_link ul
+.aroundyou_footer_link ul
 {
     list-style-type:none;
     padding:0;
     margin: 0;
    /*float: right;*/
 }
-.advertisement_footer_link li
+.aroundyou_footer_link li
 {
     display: inline;
     color: white;
 }
 
-.advertisement_footer_link li a:link
+.aroundyou_footer_link li a:link
 {
-    color: white
+    color: white;
 }
-.advertisement_footer_link li a:visited
+.aroundyou_footer_link li a:visited
 {
-    color: white
+    color: white;
 }
-.advertisement_footer_link li a:active
+.aroundyou_footer_link li a:active
 {
-    color: white
+    color: white;
 }
-.advertisement_footer_link li a:hover
+.aroundyou_footer_link li a:hover
 {
-    color: white
+    color: white;
 }
 
+.hide
+{
+    display:none;
+}
 
+#aroundyou_header_nav_bar
+{
+    background-color: white;
+    display: block!important;
+    padding-bottom: 0;
+    overflow: visible!important;
+    border-bottom: solid #DDD 1px;
+}
+
+#aroundyou_header_nav_menu
+{
+    float: right;
+}
 
 @media (min-width: 767px) {
      .wrapper{
-        background-image: url("../images/content-768.png");
+        /*background-image: url("../images/content-768.png");*/
         background-repeat: no-repeat;
         background-size: auto 100%;
 	-moz-background-size: auto 100%;
@@ -125,7 +142,7 @@ html, body {
 
 @media (min-width: 1200px) {
      .wrapper{
-        background-image: url("../images/content-1200.png");
+        /*background-image: url("../images/content-1200.png");*/
         background-repeat: no-repeat;
         background-size: auto 100%;
 	-moz-background-size: auto 100%;
@@ -141,7 +158,7 @@ html, body {
 
 @media (min-width: 992px) {
      .wrapper{
-        background-image: url("../images/content-992.png");
+        /*background-image: url("../images/content-992.png");*/
         background-repeat: no-repeat;
         background-size: auto 100%;
 	-moz-background-size: auto 100%;
@@ -155,7 +172,7 @@ html, body {
 
 }
  .wrapper{
-        background-image: url("../images/content-1200.png");
+        /*background-image: url("../images/content-1200.png");*/
         background-repeat: no-repeat;
         background-size: auto 100%;
 	-moz-background-size: auto 100%;
@@ -167,12 +184,13 @@ html, body {
     padding-bottom: 10px;
 }
 
-/*    .navbar-default {
+/*.navbar-default {
     background-color: #f2f3f7;
     border-color: transparent
 }*/
     .navbar {
         margin-bottom: 0px;
+        background-color: #f2f3f7;
     }
 
 html, body {
@@ -198,14 +216,19 @@ html, body {
     cursor:pointer;
 }
 
-.upload_advertisement input, .form-control, textarea, select {
+#txtAskingPrice {
+    width: 100%
+}
+
+.upload_properties input, .form-control, textarea, select {
     color: #666;
     font-family: 'Century Gothic';
-    font-size: 10pt;
+    font-size: 10pt
+    
     
 }
 
-.upload_advertisement span {
+.upload_properties span {
     color: #666;
     /*font-family: 'Century Gothic';*/
     font-size: 10pt;
@@ -219,4 +242,96 @@ html, body {
 input:disabled {
     background: #dddddd;
 }
+
+select:disabled {
+    background: #dddddd;
+}
+
+.state {
+    cursor: pointer;
+}
+
+.state_disable {
+   pointer-events: none;
+}
+
+#btn_currency
+{
+    background-color: #e5e7e8;
+    border-radius: 20px;
+    font-size: 10.77px;
+    color: #231f20;
+    border-color: #bcbec0;
+    font-family: 'Century Gothic Bold'
+}
+
+#property_service_category
+{
+    font-family: 'Century Gothic Bold'    
+}
+
+.header_menu
+{
+     font-family: 'Century Gothic Bold'   
+}
+
+#main_content > div
+{
+    padding-left: 0px;
+}
+
+
+.measurement_type_group
+{
+   display: none;
+}
+
+#btn_measurement_type
+{
+    background-color: #fed136;
+    border-color: transparent;
+    border-radius: 20px;
+    font-size: 10.77px;
+
+}
+
+#system_logout {
+    cursor: pointer;
+}
+
+#popup_property_preview {
+    overflow: hidden;
+}
+
+/*This allow Nav bar collpase earlier*/
+@media (max-width: 1020px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin: 7.5px -15px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .navbar-collapse.collapse.in { 
+        display: block!important; 
+    }
+}
+
 /****End migrate from home css**/

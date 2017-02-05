@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "advertisement_home";
+$route['default_controller'] = "aroundyou_home";
 $route['404_override'] = '';
 
 
