@@ -223,3 +223,16 @@ CREATE TABLE IF NOT EXISTS `whatsapp` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- --------------------------------------------------------
+
+-- --------------------------------------------------------
+-- --------------------------------------------------------
+--
+-- Table structure Whatsapp Info
+--
+CREATE TABLE IF NOT EXISTS `isms` (
+  `id` int COLLATE utf8_bin AUTO_INCREMENT,
+  `username` varchar(100) COLLATE utf8_bin NOT NULL,
+  `password` varchar(100) COLLATE utf8_bin,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- --------------------------------------------------------
