@@ -6,8 +6,13 @@ class isms
     private function ismscURL($link){
 
       $http = curl_init($link);
+      if (FALSE === $http)
+        return 'failed to initialize';
+
       curl_setopt($http, CURLOPT_RETURNTRANSFER, TRUE);
       $http_result = curl_exec($http);
+      if (FALSE === $http_result)
+        return curl_error($http). ":". curl_errno($http);
       curl_getinfo($http, CURLINFO_HTTP_CODE);
       curl_close($http);
       return $http_result;
@@ -27,12 +32,12 @@ class isms
      
       $sender_id = urlencode("661013");
       
-      $fp = "https://www.isms.com.my/isms_send.php";
+      $fp = "http://www.isms.com.my/isms_send.php";
       $fp .= "?un=$this->username&pwd=$this->password&dstno=$destination&msg=$encoded_message&type=$type&sendid=$sender_id";
       //echo $fp;
       
       $result = $this->ismscURL($fp);
-      return $result;
+      return $result !== FALSE;
     }
 }
 ?>

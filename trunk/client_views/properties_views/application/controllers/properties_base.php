@@ -9,7 +9,6 @@
  */
 
 require_once '_utils/GeneralFunc.php';
-require_once '_utils/isms/sms.php';
 require_once '_utils/measurement_type_manager.php';
 
 class properties_base extends CI_Controller {
@@ -591,24 +590,10 @@ class properties_base extends CI_Controller {
                 return "[Property Enquiry]";
         }
     }
-    private function getBalance()
-    {
-       $sms_agent = new isms();
-       $balance = $sms_agent->getBalance();
-       return $balance;
-    }
+    
     protected function _send_sms($phone, $type, &$data)
     {
-        if($this->getBalance() > 0)
-        {
-            $sms_agent = new isms();
-            $message = $this->load->view('_email/'.$type.'-txt', $data, TRUE);
-            $sms_agent->send($phone, $message);
-        }
-        else
-        {
-            $this->set_error("isms out of balance");
-        }
+        //TODO: directly call rest api here
     }
     
     protected function _send_email($type, $email, &$data)
