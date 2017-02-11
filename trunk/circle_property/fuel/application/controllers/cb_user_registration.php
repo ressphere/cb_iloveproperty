@@ -85,7 +85,7 @@
                  else
                  {
                      //Perform registration
-                     $phone = "($area)$phone";
+                     $phone = $this->_getCorrectFormatPhone("($area)$phone", $country);
                      $Members_Info["username"] = $use_username ? $email : ''; 
                      $Members_Info["display_name"] = $display_name;
                      $Members_Info["email"] = $email;

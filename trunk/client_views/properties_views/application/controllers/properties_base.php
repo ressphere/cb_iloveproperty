@@ -55,6 +55,35 @@ class properties_base extends CI_Controller {
         $this->load_prefix_page();
     }
     
+    protected function _getCorrectFormatPhone($phone_number, $country)
+        {
+                $country_short_name = "MY";
+                $country_code = "";
+                
+                foreach ($this->countries as $key => $value)
+                {
+                    if(strtolower($value) === strtolower($country))
+                    {
+                        $country_short_name = $key;
+                        break;
+                    }
+                }
+                
+                $country_codes = $this->get_country_phone_code()['countries']['country'];
+                
+                foreach($country_codes as $country_dict)
+                {
+                    if (strtolower($country_dict["-code"]) === strtolower($country_short_name))
+                    {
+                        $country_code = $country_dict["-phoneCode"];
+                    }
+                }
+                $real_phone_number_1 = str_replace("(", "", $phone_number);
+                $real_phone_number = str_replace(")", "", $real_phone_number_1);
+                $phone_number_with_cc = sprintf("%s%s",$country_code, $real_phone_number);
+                return str_replace("+", "", $phone_number_with_cc);
+        }
+    
     
     /*
      * Preload all necessary js and CSS script
