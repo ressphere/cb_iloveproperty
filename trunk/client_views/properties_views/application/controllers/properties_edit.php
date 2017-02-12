@@ -85,6 +85,7 @@ private $property_info_list = NULL;
                 sprintf("Info: Successfully retrieve data for %s", $ref_tag))
         {
             $this->session->set_userdata('owner_email', $val_return["data"]["email"]);
+            $this->session->set_userdata('owner_phone', $val_return["data"]["phone"]);
             $this->session->set_userdata('ref_tag', $ref_tag);
             $this->property_info_list = $val_return["data"];
         }

@@ -92,7 +92,7 @@ class properties_details extends properties_base {
 
        return $result;
    }
-   private function begin_send_user_contact($owner_email, $display_name, 
+   private function begin_send_user_contact($owner_email, $owner_phone, $display_name, 
            $phone, $msg, $ref_id, &$fail_reason)
    {
       $type = "send_prop_request";
@@ -109,17 +109,18 @@ class properties_details extends properties_base {
       }
       else 
       {
-          $this->_send_sms($phone, $type, $data);
+          $this->_send_sms($type,$owner_phone, $data);
       }
      
    }
    public function send_user_contact()
    {
        $owner_email = $this->session->userdata('owner_email');
+       $owner_phone = $this->session->userdata('owner_phone');
        $ref_id = $this->session->userdata('ref_tag');
        $returned_data = array("status"=>0, "reason"=>"");
        $success_msg = "Your enquiry is sent to the owner<BR> Thank you for using the service.";
-       if ($owner_email === FALSE || $ref_id === FALSE)
+       if ($owner_email === FALSE || $ref_id === FALSE || $owner_phone === FALSE)
        {
                $fail_reason = "Your selected property is not available";
        }
@@ -135,7 +136,7 @@ class properties_details extends properties_base {
 
            if($this->validate_user_input($display_name, $phone, $msg, $cap, $challenge, $fail_reason))
            {
-                $this->begin_send_user_contact($owner_email, $display_name, $phone, $msg, $ref_id, $fail_reason);
+                $this->begin_send_user_contact($owner_email, $owner_phone, $display_name, $phone, $msg, $ref_id, $fail_reason);
            }
            else
            {
@@ -165,6 +166,7 @@ class properties_details extends properties_base {
            $val_return["data"]["activate"] === "1")
         {
             $this->session->set_userdata('owner_email', $val_return["data"]["email"]);
+            $this->session->set_userdata('owner_phone', $val_return["data"]["phone"]);
             $this->session->set_userdata('ref_tag', $ref_tag);
             $this->property_info_list = $val_return["data"];
         }

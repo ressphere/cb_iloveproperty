@@ -620,7 +620,7 @@ class properties_base extends CI_Controller {
         }
     }
     
-    protected function _send_sms($phone, $type, &$data)
+    protected function _send_sms($type,$phone, &$data)
     {
         //TODO: directly call rest api here
          $sms_param = array();
