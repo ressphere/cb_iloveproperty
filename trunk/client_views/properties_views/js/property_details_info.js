@@ -160,8 +160,9 @@ var get_new_listing_data = function($scope,  $sce)
             }
             //$display_name, $phone, $msg, $cap, $challenge
             var senddata = "display_name=" + $('#send_contact_name').val() +"&phone=" +  
-                    $('#send_contact_phone').val() + "&captcha=" +  response + "&challenge="+ challenge 
-                    + "&msg=" + $('#send_contact_comment').val();
+                    $('#send_contact_phone').val() + "&captcha=" +  response + "&challenge=\""+ challenge 
+                    + "\"&msg=\"" + $('#send_contact_comment').val().trim() + "\"";
+            
             $("#send_status_msg").html("<span class='error'>Sending ...</span>");
             document.getElementById('send_contact').disabled = true;
             $.ajax({
@@ -170,10 +171,10 @@ var get_new_listing_data = function($scope,  $sce)
                         data: senddata,
 			timeout: 3000000,
                         success: function(response_json)
-                        {          
-                            var response = JSON.parse(response_json);
-                            
+                        {        
                             reset_send_contact_ui();
+                            
+                            var response = JSON.parse(response_json);
                             if(response["status"] === -2)
                             {
                                $("#send_status_msg").html("<span class='error'>"+ response["reason"]+ "</span>");

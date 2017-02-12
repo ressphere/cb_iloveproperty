@@ -79,7 +79,7 @@ class properties_details extends properties_base {
        elseif(is_null($cap) || is_null($challenge) || 
                $this->_check_recaptcha(
                          $this->config->item('website_name'),
-                         $cap, $challenge) === FALSE)
+                         $cap, str_replace("\"", "", $challenge)) === FALSE)
        {
          
          $fail_reason = "Captcha image is not match, please retype";
