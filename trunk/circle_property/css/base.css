@@ -363,3 +363,8 @@ input:disabled {
     .input_form_width {width:220px}
     .userprofile input {width: 220px}
 }
+
+@media (max-width: 1020px)
+{
+    .unfixed_content {padding-top: 57px}
+}

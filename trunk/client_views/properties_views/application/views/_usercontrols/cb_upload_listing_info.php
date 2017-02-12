@@ -1,7 +1,7 @@
 <br><br>
 <div  class="fuelux container upload_properties" ng-app="user_profileApp" ng-controller="uploadProfile">
     <div class="userprofile row clearfix">
-        <br><br>
+        <br>
         <div class="title">
             <span>Personal Information</span>
         </div>
