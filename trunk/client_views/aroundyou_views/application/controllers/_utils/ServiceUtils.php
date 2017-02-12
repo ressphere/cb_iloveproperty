@@ -1,15 +1,20 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+/*
+ * Please avoid using these file/class directly.
+ * Advice to use "DataServer__Service" under DataServer.php as the entries
+ * 
+ */
 
 /*
- * REST Gateway
+ * REST Gateway for backend server connection
  */
 class ServiceUtils__REST_ServiceRequest extends CI_Controller
 {  
     // REST API End point
     private $api_url = "http://localhost/cb_iloveproperty/trunk/circle_property/RestAPI/";
     
-    // Auth purpose
+    // Auth purpose, must match with backend
     private $user = "root";
     private $password = "1234abcd*";
     
@@ -21,6 +26,18 @@ class ServiceUtils__REST_ServiceRequest extends CI_Controller
         $this->load->library('encrypt');
     }
     
+    /*
+     * For service calling/feedback execution
+     * 
+     * @param String Service to be call 
+     * @param Jason Information to be send to service
+     * @Param String Type of service call (send, receive, sendreceive, test)
+     * @Return Jason Return information, change according to service
+     *              ["service"] Name of the service perform. 
+     *              ["status"] Indicate the status of service run (Error, complete or etc). 
+     *              ["status_information"] Message return for display purpose. 
+     *              ["data"] Output data from the service, have only when service have return value
+     */
     public function service_request($service,$send_data,$type_request)
     {
         $command_array["service"] = $service;
@@ -108,66 +125,84 @@ class ServiceUtils__ServiceRequest extends CI_Controller
 {
     private $client;
        
-        public function __construct()
-        {
-            //$this->load->helper("url");
-            //$data_layer = new data_layer();
-             parent::__construct();
-             ini_set('soap.wsdl_cache_enabled', '0');
-             $this->client = new SoapClient("http://localhost/cb_iloveproperty/trunk/circle_property/index.php/main?wsdl",
-                     array('trace'=>1,'exceptions'=> 0, 'style'=> SOAP_DOCUMENT, 'use' => SOAP_LITERAL,
-                         'soap_version'=> SOAP_1_2,
-                         'encoding'=> 'UTF-8'
-                     ));
-             $AuthHeader = new ServiceUtils__AuthHeader();
-             $AuthHeader->username = 'root';
-           
-             $AuthHeader->password = hash('md5','1234abcd*');
-             $Headers[] = new SoapHeader('http://localhost/cb_iloveproperty/trunk/circle_property/index.php/main?wsdl', 'AuthHeader', $AuthHeader);
-             $this->client->__setSoapHeaders($Headers);
-                
-        }
-        
-        public function service_request($service,$send_data,$type_request)
-	{
-            
-           $command_array["service"] = $service;
-           $command_array["send_data"] = $send_data;
-           
-           switch ($type_request)
-           {
-               case "send":
-                   $this->client->__soapCall("_CB_Service_Send", array($command_array));
-                   break;
-               case "receive":
-                   $this->client->__soapCall("_CB_Service_Receive", array($command_array));
-                   break;
-               case "sendreceive":
-                   $this->client->__soapCall("_CB_Service_SendReceive", array($command_array));
-                   break;
-               case "test":
-                   $this->client->__soapCall("_CB_Test_Gateway", array($command_array));
-                   break;
-               default:
-                   break;
-           }
-           
-           $basic_component_set = GeneralFunc::filterSoapMessage($this->client->__getLastResponse());
-           
-           return $basic_component_set;
-           
-	}
-        
-        public function test_gateway()
-        {
-            $command_array = array();
-            $this->client->__soapCall("_CB_Test_Gateway", array($command_array));
-            $basic_component_set = GeneralFunc::filterSoapMessage($this->client->__getLastResponse());
-            
-            return json_encode($basic_component_set);
-        }
+    public function __construct()
+    {
+        //$this->load->helper("url");
+        //$data_layer = new data_layer();
+         parent::__construct();
+         ini_set('soap.wsdl_cache_enabled', '0');
+         $this->client = new SoapClient("http://localhost/cb_iloveproperty/trunk/circle_property/index.php/main?wsdl",
+                 array('trace'=>1,'exceptions'=> 0, 'style'=> SOAP_DOCUMENT, 'use' => SOAP_LITERAL,
+                     'soap_version'=> SOAP_1_2,
+                     'encoding'=> 'UTF-8'
+                 ));
+         $AuthHeader = new ServiceUtils__AuthHeader();
+         $AuthHeader->username = 'root';
+
+         $AuthHeader->password = hash('md5','1234abcd*');
+         $Headers[] = new SoapHeader('http://localhost/cb_iloveproperty/trunk/circle_property/index.php/main?wsdl', 'AuthHeader', $AuthHeader);
+         $this->client->__setSoapHeaders($Headers);
+
+    }
+
+    public function service_request($service,$send_data,$type_request)
+    {
+
+       $command_array["service"] = $service;
+       $command_array["send_data"] = $send_data;
+
+       switch ($type_request)
+       {
+           case "send":
+               $this->client->__soapCall("_CB_Service_Send", array($command_array));
+               break;
+           case "receive":
+               $this->client->__soapCall("_CB_Service_Receive", array($command_array));
+               break;
+           case "sendreceive":
+               $this->client->__soapCall("_CB_Service_SendReceive", array($command_array));
+               break;
+           case "test":
+               $this->client->__soapCall("_CB_Test_Gateway", array($command_array));
+               break;
+           default:
+               break;
+       }
+
+       $basic_component_set = $this->filterSoapMessage($this->client->__getLastResponse());
+
+       return $basic_component_set;
+
+    }
+
+    public function test_gateway()
+    {
+        $command_array = array();
+        $this->client->__soapCall("_CB_Test_Gateway", array($command_array));
+        $basic_component_set = $this->filterSoapMessage($this->client->__getLastResponse());
+
+        return json_encode($basic_component_set);
+    }
+
+    public function filterSoapMessage($data)
+    {
+        $return_pos = strpos($data, '<return');
+         $start_pos = strpos($data, '>', $return_pos);
+         if($start_pos != FALSE)
+         {
+             $end_pos = strpos($data, '</return>');
+             $data = substr($data, $start_pos + 1, $end_pos - $start_pos);
+             $data = str_replace('\\', '', $data);
+             $data = trim($data, '<');
+             $data = trim($data, '"');
+         }
+         return $data;
+    }
 }
 
+/*
+ * Tmp class to hold information
+ */
 class ServiceUtils__AuthHeader
 {
     public $username;

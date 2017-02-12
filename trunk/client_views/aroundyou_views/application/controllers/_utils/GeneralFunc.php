@@ -1,25 +1,24 @@
-<?php
-require_once 'ServiceUtils.php';
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+/*
+ * This file contain all API which categories as general.
+ * In which these API doesn't related or direct link to specific page/service/object
+ */
 
 /*
  * This Class contain all common function for basic manipulation
+ * 
+ * API list
+ *  - get_posted_value
+ *  - get_array_value
+ *  - echo_js_html
+ *  - get_image_resource_by_type
+ *  - dump_error_log
+ *  - is_dir_empty
+ * 
  */
 class GeneralFunc__Basic
 {
-    /*
-     * Get Ressphere Web service url
-     * 
-     * @Return  String  Ressphere WSDL base url
-     */
-    static function get_wsdl_base_url()
-    {
-        $val_return = GeneralFunc__Service::CB_Receive_Service_Request("CB_Info:base_url");
-        $wsdl_base_url = json_decode($val_return, TRUE)["data"]["result"];
-        
-        return $wsdl_base_url;
-    }
-
     /*
      * Obtain specific value from _POST
      * 
@@ -104,6 +103,55 @@ class GeneralFunc__Basic
                 return NULL;
         }
     }
+    
+    /*
+     * Dump error to error log
+     * 
+     * @Param String Error message to be dump
+     * 
+     */
+    static function dump_error_log($error_string)
+    {
+        // Turn on output buffering, no output is sent from the script and store in internal buffer
+        ob_start();
+        
+        // Dumps information about a variable
+        var_dump($error_string);
+        
+        // Get current buffer contents and delete/release current output buffer
+        $output = ob_get_clean();
+        
+        // Build fine error string, specified log location and dump log
+        $error_string = date("H:i:s") . " : " . $output;
+        $log_location = dirname(dirname(dirname(__FILE__))) . 
+                                  DIRECTORY_SEPARATOR . "logs".
+                                  DIRECTORY_SEPARATOR . date("Ymd"). ".log";
+        
+        error_log($error_string ."\n", 3, $log_location);
+        
+    }
+    
+    /*
+     * Check whether the directory is empty
+     * 
+     * @Param String Directory name to be check
+     * @Return Bool True when the directory is empty
+     */
+    static function is_dir_empty($dir) {
+        if (!is_readable($dir))
+        {
+            return NULL;
+        }
+        $handle = opendir($dir);
+        while (false !== ($entry = readdir($handle))) 
+        {
+            if ($entry != "." && $entry != "..") 
+            {
+                return FALSE;
+            }
+        }
+        return TRUE;
+    }
 }
 
 /*
@@ -116,12 +164,14 @@ class GeneralFunc__Basic
 class GeneralFunc_WaterMark
 {
     /*
-     * Add water mark to the original imange
+     * Add water mark to the original imange, main entry
      * 
-     * @Param Obj Caller object, so that allow to set error (must have aroundyou_base as base)
+     * @Param Integer Current session User ID
+     * @Param String Current session user name
+     * @Param String Path for the img which going to be modified
      * @Param String Determine watermark pattern
      */
-    static function set_watermark($caller_obj, $img_path, $type="user")
+    static function set_watermark($user_id, $name, $img_path, $type="user")
     {
         $watermark_path = NULL; // Determine the water mark type
         
@@ -130,10 +180,6 @@ class GeneralFunc_WaterMark
             // Take user name and phone as water mark
             
             // ------------- Determine File and path 
-            // Obtain necessary data from session
-            $user_id = $caller_obj->session->userdata('user_id');
-            $name = $caller_obj->session->userdata('displayname');
-            
             // Assign a temporary directory for the water mark image file
             $tempDir = dirname(dirname(dirname(dirname(__DIR__)))) .
                           DIRECTORY_SEPARATOR . 'temp' . 
@@ -142,7 +188,7 @@ class GeneralFunc_WaterMark
 
             // Obtain phone number from service
             $user["user_id"] = $user_id;
-            $phone_return_val = GeneralFunc__Service::CB_SendReceive_Service_Request("CB_Member:get_user_phone_number",
+            $phone_return_val = DataServer__Service::CB_SendReceive_Service_Request("CB_Member:get_user_phone_number",
                             json_encode($user));
             $phone = json_decode($phone_return_val, TRUE)["data"]["result"];
             
@@ -191,12 +237,12 @@ class GeneralFunc_WaterMark
         }
         else
         {
-            $caller_obj->set_error("Water mark type not regconized, type=".$type);
+            GeneralFunc__Basic::dump_error_log("Water mark type not regconized, type=".$type);
             return FALSE;
         }
         
         // Combine the water mark and original imange
-        GeneralFunc_WaterMark::combine_img_watermark($caller_obj, $img_path, $watermark_path);
+        GeneralFunc_WaterMark::combine_img_watermark($img_path, $watermark_path);
         
         // Post processing
         if($type == "user")
@@ -262,16 +308,16 @@ class GeneralFunc_WaterMark
      * @Param String Path to the new imange which cotain water mark
      * 
      */
-    static function combine_img_watermark($caller_obj, $img_path, $watermark_path)
+    static function combine_img_watermark($img_path, $watermark_path)
     {
         // Exit if water mark or original image not found, error and exit
         if (!file_exists($watermark_path)) { 
-            $caller_obj->set_error("[NOT FOUND]Watermark image: " .  $watermark_path);
+            GeneralFunc__Basic::dump_error_log("[NOT FOUND]Watermark image: " .  $watermark_path);
             return FALSE;
         }
         elseif(!file_exists($img_path))
         {
-            $caller_obj->set_error("[NOT FOUND]Targeted image: " .  $img_path);
+            GeneralFunc__Basic::dump_error_log("[NOT FOUND]Targeted image: " .  $img_path);
             return FALSE;
         }
 
@@ -286,7 +332,7 @@ class GeneralFunc_WaterMark
         // Exit if the indentifier fail to create
         if ($im === NULL || $stamp === NULL)
         {
-            $caller_obj->set_error("None image file detected");
+            GeneralFunc__Basic::dump_error_log("None image file detected");
             return FALSE;
         }
         
@@ -304,12 +350,12 @@ class GeneralFunc_WaterMark
             imagesavealpha($im, true);
             if(!imagecopy($im, $stamp, $left, $top, 0, 0, imagesx($stamp), imagesy($stamp)))
             {
-                $this->set_error("[FAIL] Fail to insert Watermark image");
+                GeneralFunc__Basic::dump_error_log("[FAIL] Fail to insert Watermark image");
                 return FALSE;
             }
         }
         catch (Exception $e) {  
-              $this->set_error($e->getMessage());
+              GeneralFunc__Basic::dump_error_log($e->getMessage());
               return FALSE;
         }
 
@@ -324,70 +370,4 @@ class GeneralFunc_WaterMark
         return TRUE;
     }
 }
-
-class GeneralFunc__Service
-{
-    static function check_recaptcha($website_name,$response_field, $challenge_field)
-    {
-        
-        $captcha_code["remote_addr"] = $website_name; 
-        $captcha_code["challenge_field"] = $challenge_field;
-        $captcha_code["response_field"] = $response_field;
-
-
-        $val_return_json = GeneralFunc__Service::CB_SendReceive_Service_Request("CB_Member:check_recaptcha", json_encode($captcha_code));
-        $val_return = json_decode($val_return_json, TRUE);
-        
-        return   $val_return["data"]["result"];
-    }
-    
-    public static function filterSoapMessage($data)
-    {
-        $return_pos = strpos($data, '<return');
-         $start_pos = strpos($data, '>', $return_pos);
-         if($start_pos != FALSE)
-         {
-             $end_pos = strpos($data, '</return>');
-             $data = substr($data, $start_pos + 1, $end_pos - $start_pos);
-             $data = str_replace('\\', '', $data);
-             $data = trim($data, '<');
-             $data = trim($data, '"');
-         }
-         return $data;
-    }
-    
-    public static function CB_Send_Service_Request($service, $send_data)
-    {
-        //$service_obj = new ServiceRequest;
-        $service_obj = new ServiceUtils__REST_ServiceRequest;
-        $return_data = $service_obj->service_request($service,$send_data,"send");
-        return $return_data;
-    }
-    public static function CB_Receive_Service_Request($service)
-    {
-        //$service_obj = new ServiceRequest;
-        $service_obj = new ServiceUtils__REST_ServiceRequest;
-        $return_data = $service_obj->service_request($service, null,"receive");
-        return $return_data;
-    }
-    public static function CB_SendReceive_Service_Request($service, $send_data)
-    {
-        //$service_obj = new ServiceRequest;
-        $service_obj = new ServiceUtils__REST_ServiceRequest;
-        $return_data = $service_obj->service_request($service,$send_data,"sendreceive");
-        return $return_data;
-    }
-    public static function CB_Test_Gateway()
-    {
-        //$service_obj = new ServiceRequest;
-        //$return_data = $service_obj->test_gateway();
-        
-        $service_obj = new ServiceUtils__REST_ServiceRequest;
-        $return_data = $service_obj->service_request(null,"ss&bb","test");
-        
-        return $return_data;
-
-    }
-}
-
 ?>

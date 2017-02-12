@@ -9,7 +9,7 @@
  */
 
 require_once '_utils/GeneralFunc.php'; // Contain all the necassary API
-
+require_once '_utils/DataServer.php'; // Contain all API related to server
 
 /*
  * Base class for Around You Service
@@ -54,7 +54,7 @@ class aroundyou_base extends CI_Controller {
         $this->session->set_userdata('client_base_url', base_url());
         
         // Pre-record wsdl base url
-        $this->wsdl_url = GeneralFunc__Basic::get_wsdl_base_url();
+        $this->wsdl_url = DataServer__General::get_wsdl_base_url();
         $this->session->set_userdata('wsdl_base_url', $this->wsdl_url);
     }
     
@@ -333,116 +333,59 @@ class aroundyou_base extends CI_Controller {
        return $this->title;
     }
     
-    // @MY - I stop here. which GenerlFunction GeneralFunc__Service still need to go through 
-    
-    public function get_states()
+    /*
+     * Send Email to specific user
+     * 
+     * @Param String Predefine title header string type
+     * @Param String Email 'to' address
+     * @Param String Email content
+     * 
+     */
+    protected function _send_email($type, $email, &$data)
     {
-        $listing = GeneralFunc__Basic::get_posted_value("country_name");
-        $states = array();
-        if($listing)
-        {
-            $country = json_decode($listing, TRUE);
-            $this->get_state_by_country($states, $country);
-        }
-        GeneralFunc__Basic::echo_js_html($states);
+        // Load prefix data from config
+        $website_name = $this->config->item('website_name');
+        $webmaster_email = $this->config->item('webmaster_email');
         
-    }
-    
-    protected function set_error($error_string)
-    {
-        ob_start();
-        var_dump($error_string);
-        $output = ob_get_clean();
-        $error_string = date("H:i:s") . " : " . $output;
-        $log_location =  $log_location = dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . "logs".
-                DIRECTORY_SEPARATOR . date("Ymd"). ".log";
-        error_log($error_string ."\n", 3, $log_location);
-    }
-    
-    
-    private function get_meaningful_type_name($type)
-    {
+        // Decide title header
         switch ($type)
         {
-            case "send_prop_request":
-                return "[Property Enquiry]";
+            case "send_au_request":
+                $type = "[AroundYou Enquiry]";
+            default:
+                return $type;
+        }
+        
+        // Load email library
+        $this->load->library('email');
+        
+        // Set email detail
+        $this->email->from($webmaster_email, $website_name);
+        $this->email->reply_to($webmaster_email, $website_name);
+        $this->email->to($email);
+        $this->email->subject($this->get_meaningful_type_name($type) . " " . $website_name);
+        $this->email->message($this->load->view('_email/'.$type.'-html', $data, TRUE));
+        $this->email->set_alt_message($this->load->view('_email/'.$type.'-txt', $data, TRUE));
+        
+        // Execute send email and return accordingly
+        $status = $this->email->send();
+        if($status)
+        {
+              return TRUE;
+        }
+        else
+        {
+              GeneralFunc__Basic::dump_error_log($this->email->print_debugger());
+              return FALSE;
         }
     }
     
-    protected function _send_email($type, $email, &$data)
-        {
-                //$config['website_name'] = 'ressphere.com';
-                //$config['webmaster_email'] = 'admin@ressphere.com';
-            
-                $this->load->library('email');
-                $website_name = $this->config->item('website_name');
-                $webmaster_email = $this->config->item('webmaster_email');
-               //$CI =& get_instance();
-                //$CI->load->library('email');
-                $this->email->from($webmaster_email, $website_name);
-                $this->email->reply_to($webmaster_email, $website_name);
-                $this->email->to($email);
-                $this->email->subject($this->get_meaningful_type_name($type) . " " . $website_name);
-                $this->email->message($this->load->view('_email/'.$type.'-html', $data, TRUE));
-                $this->email->set_alt_message($this->load->view('_email/'.$type.'-txt', $data, TRUE));
-                $status = $this->email->send();
-                if($status)
-                {
-                      return TRUE;
-                }
-                else
-                {
-                      $this->set_error($this->email->print_debugger());
-                      return FALSE;
-                }
-
-        }
-    protected function get_measurement_type_enum($measurement_type)
-    {
-        return MeasurementFactory::get_measurement_type_enum($measurement_type);
-    }
-    protected function size_unit_converter_to_any($unit_value ,$from_unit_type, $to_any_type)
-    {
-        $MeasurementFactoryObj = MeasurementFactory::build($from_unit_type);
-        try
-        {
-            return $MeasurementFactoryObj->get_result($to_any_type, $unit_value);
-        }
-        catch (Exception $e) {
-            $this->set_error("Invalid unit type: " . $from_unit_type);
-            $this->set_error($e);
-            return FALSE;
-        }
-    }
-    protected function get_currency_type_enum($current_currency)
-    {
-         $argument = json_encode(array(
-                "currency"=>$current_currency
-            ));
-        $val_return = $this->SendReceive_Service("CB_Currency:get_currency_type_enum",
-                $argument);
-        return json_decode($val_return, TRUE)['data']['result'];
-    }
-    protected function get_currency_type_string($currency_enum)
-    {
-        $argument = json_encode(array(
-                "currency"=>$currency_enum
-            ));
-        $val_return = $this->SendReceive_Service("CB_Currency:get_currency_type_string",
-                $argument);
-        return json_decode($val_return, TRUE)['data']['result'];
-    }
-    protected function currency_converter_to_any($value ,$from, $to)
-    {
-         $argument = json_encode(array(
-                "value"=>$value,
-                "from"=>$from,
-                "to"=>$to
-            ));
-        $val_return = $this->SendReceive_Service("CB_Currency:currency_converter_to_any",
-                $argument);
-        return json_decode($val_return, TRUE)['data']['result'];
-    }
+    /*
+     * Allow divert to 404 page with specific error message
+     * 
+     * @Param String Error message
+     * 
+     */
     protected function get_page404($error)
     {
             $title = "404 Page Not Found";
@@ -468,6 +411,12 @@ class aroundyou_base extends CI_Controller {
             return $output;
     }
     
+    /*
+     * Allow divert to 403 page with specific error and navigation link
+     * 
+     * @Param String Error message
+     * @Param String diverted link
+     */
     protected function get_page403($error, $nav)
     {
             $title = "403 Forbidden";
@@ -496,21 +445,7 @@ class aroundyou_base extends CI_Controller {
             return $output;
     }
     
-    protected function is_dir_empty($dir) {
-        if (!is_readable($dir))
-        {
-            return NULL;
-        }
-        $handle = opendir($dir);
-        while (false !== ($entry = readdir($handle))) 
-        {
-            if ($entry != "." && $entry != "..") 
-            {
-                return FALSE;
-            }
-        }
-        return TRUE;
-    }
+    
     //******* Common API ******** End ****
 }
 
