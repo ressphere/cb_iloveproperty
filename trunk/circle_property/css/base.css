@@ -326,3 +326,40 @@ input:disabled {
 {
     display:none;
 }
+
+
+.input_form_width, .userprofile input
+{
+    width:330px;
+}
+
+/*
+@media (min-width: 992px) and (max-width: 1200px)
+{
+    .select-div {width:165px}
+    .select-div select {width:165px}
+    .number-div {width:165px}
+    .number-div input[type="number"] {width:165px} 
+    .input_form_width {width:165px}
+}
+*/
+
+@media (max-width: 1200px)
+{
+    .select-div {width:275px}
+    .select-div select {width:275px}
+    .number-div {width:275px}
+    .number-div input[type="number"] {width:275px} 
+    .input_form_width {width:275px}
+    .userprofile input {width: 275px}
+}
+
+@media (max-width: 480px)
+{
+    .select-div {width:220px}
+    .select-div select {width:220px}
+    .number-div {width:220px}
+    .number-div input[type="number"] {width:220px} 
+    .input_form_width {width:220px}
+    .userprofile input {width: 220px}
+}

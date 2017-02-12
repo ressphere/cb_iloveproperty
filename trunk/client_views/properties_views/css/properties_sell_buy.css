@@ -15,22 +15,35 @@
 {
     width:100%
 }
+ }
+
 .validation_input_group_small
 {
-    width:200px
-    
+    width:345px;
 }
- }
+ 
+@media (max-width: 1200px)
+{
+    .validation_input_group_small
+    {
+        width:290px
+    }
+}
+
+ @media (max-width: 480px)
+{
+    .validation_input_group_small
+    {
+        width:230px
+    }
+}
+ 
  @media (min-width: 940px) {
 .validation_input_group_default
 {
     width:400px;
 }
-.validation_input_group_small
-{
-    width:200px;
 }
- }
  .validation_input_group_default >input,
  .validation_input_group_small >input
  {
@@ -93,10 +106,6 @@ input, select, textArea {
     border-radius: 20px;
     resize: none;
     
-}
-
-.userprofile input {
-    width: 330px
 }
 
 span {
