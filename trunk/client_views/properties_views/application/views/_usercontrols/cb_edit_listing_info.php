@@ -159,7 +159,7 @@
                            </div>
                            <div ng-switch-when='asking_price_per' id='{{property_category.id}}'  class="gothic_font {{property_category.category}} input-group" ng-if="property_category.control === 'input-currency'">
                                     <!--<span class="input-group-addon" ng-bind="currency_value.currency"></span>-->
-                                    <input id='{{property_category.id}}' width="330" style="width: 330px" type='text' value="{{asking_price.value/build_up.value | number:2}}" disabled/>
+                                    <input id='{{property_category.id}}' width="330" class="input_form_width" type='text' value="{{asking_price.value/build_up.value | number:2}}" disabled/>
 
                            </div>
                            <div ng-switch-when='type' class="select-div  gothic_font">
@@ -188,7 +188,7 @@
                                     </select>
                                 </div>
                                 <!-- input-text-->
-                                <input class="gothic_font" id='{{property_category.id}}' width="330" style="width: 330px" type='text'  ng-if="property_category.control == 'input-text'" value='{{property_category.values[0]}}' placeholder='{{property_category.placeholder}}'/>
+                                <input class="gothic_font input_form_width" id='{{property_category.id}}' width="330" type='text'  ng-if="property_category.control == 'input-text'" value='{{property_category.values[0]}}' placeholder='{{property_category.placeholder}}'/>
                                 <!-- input-currency-->
                                 <div id='{{property_category.id}}' class="input-group" ng-if="property_category.control === 'input-currency'">
                                     <div  class="gothic_font number-div">
@@ -197,7 +197,7 @@
                                     <span class="input-group-addon  gothic_font">.00</span>
                                 </div>
                                 <!--input date-->
-                                <input id='{{property_category.id}}' class="date gothic_font" width="330" style="width: 330px" ng-if="property_category.control === 'input-date'" value='{{property_category.values[0]}}'/>
+                                <input id='{{property_category.id}}' class="date gothic_font input_form_width" width="330" ng-if="property_category.control === 'input-date'" value='{{property_category.values[0]}}'/>
                                 <!-- input number-->
                                 <div class="number-div gothic_font"  ng-if="property_category.control === 'input-number'">
                                     <input id='{{property_category.id}}' class="numericOnly" type='number' min='{{property_category.values[0]}}' max='{{property_category.values[1]}}' value='{{property_category.values[2]}}'/>
@@ -228,7 +228,7 @@
 
                                 </select>
                             </div>
-                             <input id='{{property_category.id}}' class="gothic_font" width="330" maxlength="330" style="width: 330px" 
+                             <input id='{{property_category.id}}' class="gothic_font input_form_width" width="330" maxlength="330"  
                                     type='text'  ng-if="property_category.control == 'input-text'" 
                                     value='{{property_category.values[0]}}' 
                                     placeholder='{{property_category.placeholder}}'/>
@@ -239,7 +239,7 @@
                                  </div>
                                     <!--<span class="input-group-addon">.00</span>-->
                              </div>
-                             <input class="gothic_font" id='{{property_category.id}}' width="330" style="width: 330px" type='date'  ng-if="property_category.control == 'input-date'" value="{{property_category.value}}"/>
+                             <input class="gothic_font input_form_width" id='{{property_category.id}}' width="330" type='date'  ng-if="property_category.control == 'input-date'" value="{{property_category.value}}"/>
                              <div class="number-div gothic_font" ng-if="property_category.control == 'input-number'">
                                 <input class="numericOnly gothic_font" id='{{property_category.id}}' width="330" 
                                     type='number'  
@@ -289,10 +289,10 @@
                             <div ng-switch-when='unit_name'>
                                 <div class="validation_input_group_default input-group gothic_font">
                                     <input ng-model="google_maps.autocomplete" 
-                                       class="form-control" 
+                                       class="form-control input_form_width" 
                                        ng-autocomplete options="google_maps.options"
                                        details="google_maps.details" id='{{property_category.id}}'
-                                       style="width: 330px; border-radius:20px; height:auto"
+                                       style="border-radius:20px; height:auto"
                                        disabled/>
                                 </div>
                             </div>
@@ -318,7 +318,7 @@
                         <div class="{{property_category.category}} col-md-4" ng-switch on='property_category.id'>
                             <div ng-switch-when='area'>
                                 <div class="validation_input_group_small input-group">
-                                    <input class="gothic_font" id='{{property_category.id}}' width="330" style="width: 330px" type='text'
+                                    <input class="gothic_font input_form_width" id='{{property_category.id}}' width="330" type='text'
                                     value='{{get_ngPlace_info_by_name(google_maps.details.adr_address, "locality")}}'
                                     placeholder='{{property_category.placeholder}}' maxlength="330"/>
                                     <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
@@ -326,7 +326,7 @@
                             </div>
                             <div ng-switch-when='postcode'>
                                 <div class="validation_input_group_small input-group gothic_font">
-                                    <input id='{{property_category.id}}' width="330" style="width: 330px" type='text'
+                                    <input id='{{property_category.id}}' width="330" class="input_form_width" type='text'
                                     value='{{get_ngPlace_info_by_name(google_maps.details.adr_address, "postal-code")}}'
                                     placeholder='{{property_category.placeholder}}' maxlength="330"/>
                                     <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
@@ -335,7 +335,7 @@
                             <div ng-switch-when='street'>
                                 <div class="validation_input_group_small input-group gothic_font">
                                     
-                                        <input id='{{property_category.id}}' width="330" style="width: 330px" type='text'
+                                        <input id='{{property_category.id}}' width="330" class="input_form_width" type='text'
                                         value='{{get_ngPlace_info_by_name(google_maps.details.adr_address, "street-address")}}'
                                         placeholder='{{property_category.placeholder}}' maxlength="330"/>
                                         <span class="feedback {{property_category.id}}-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
