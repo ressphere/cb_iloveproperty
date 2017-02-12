@@ -1984,6 +1984,9 @@ class base extends CI_Controller {
                 $user["user_id"] = $user_id;
                 $val_return = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:get_user_phone_number",
                         json_encode($user));
+                $val_return_country = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:get_country",
+ -                        json_encode($user));
+                $country = json_decode($val_return_country, TRUE)["data"]["result"];
                 
                 $phone_number = json_decode($val_return, TRUE);                
                 $user_info["displayname"] = $this->session->userdata('displayname');
