@@ -626,8 +626,8 @@ class properties_base extends CI_Controller {
          $sms_param = array();
          $this->load->library('email');
          //$msg = "";
-         $msg = $this->load->view("_email/".$type."-txt", $data, TRUE);
-         $sms_param["destination"] = $phone; 
+         $msg = $this->load->view("_email/".$type."-sms", $data, TRUE);
+         $sms_param["destination"] = $phone;
          $sms_param["message"] = $msg; 
         //$val_return = GeneralFunc::CB_Receive_Service_Request("CB_Info:base_url");
         $val_return_detail = 

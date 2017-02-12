@@ -100,6 +100,7 @@ class properties_details extends properties_base {
       $data['serial'] = $ref_id;
       $data['phone'] = $phone;
       $data['content'] = $msg;
+      $data['owner_email'] = $owner_email;
       $data['url'] = base_url() . 'index.php/properties_details?reference=' . $ref_id;
       
       $status = $this->_send_email($type, $owner_email, $data);
