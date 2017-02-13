@@ -199,6 +199,23 @@ class cb_home extends base {
       
    }
    
+   public function p($ref_tag)
+   {
+       //This is short form url of properties
+       $url = base_url() . $ref_tag;
+       $features = $this->_get_features();
+       
+       foreach($features as &$f)
+       {
+           if(strtolower($f[0]) === "properties")
+           {
+               $prop_url = $f[2]."index.php/properties_details?reference=$ref_tag";
+               header("Location: $prop_url");
+               die();
+           }
+       }
+   }
+   
   
 }
 ?>
