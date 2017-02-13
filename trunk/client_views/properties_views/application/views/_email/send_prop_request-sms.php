@@ -1,2 +1,2 @@
-<?=$name?> (<?=$phone?>) look for your property ("http://www.ressphere.com/p/<?php echo $serial;?>)
+<?=$name?> (<?=$phone?>) interested in ("http://www.ressphere.com/p/<?php echo $serial;?>)
 
