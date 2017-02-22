@@ -2235,6 +2235,20 @@ class base extends CI_Controller {
         return $is_user_banned;
         
     }
+     
+   public function get_user_number_of_available_sms()
+   {
+       //get_user_property_sms_limit
+       $owner_email = $this->session->userdata('owner_email');
+       $sms_limit = 0;
+       if($owner_email)
+        {
+           $sms_limit_json = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:get_user_property_sms_limit",
+                json_encode($owner_email));
+           $sms_limit = json_decode($sms_limit_json, TRUE)["data"]["result"];
+        }
+        return $sms_limit;
+   }
     
    /*Compare existing number of listing and the user listing limit 
    * to determine whether new listing is allowed or not

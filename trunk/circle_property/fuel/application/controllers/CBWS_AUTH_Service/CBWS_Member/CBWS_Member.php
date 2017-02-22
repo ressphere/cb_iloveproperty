@@ -29,6 +29,12 @@ class CBWS_Member {
         return $this->CI->tank_auth->get_user_prop_listing_limit($user_id);
     }
     
+     public function get_user_property_sms_limit($user_id)
+    {
+
+        return $this->CI->tank_auth->get_user_prop_listing_limit($user_id);
+    }
+    
     public function create_user($username, $display_name, $email, $password, $phone, $email_activation, $country)
     {
         //return "Create User";

@@ -183,12 +183,21 @@ class Tank_auth
         }
         
         /**
-	 * Get the country by user id
+	 * Get the prop listing limit by user id
 	 * @return	array
 	 */
         function get_user_prop_listing_limit($user_id)
         {
             return $this->ci->users->get_user_prop_listing_limit($user_id);
+        }
+        
+        /**
+	 * Get the sms limit by user id
+	 * @return	array
+	 */
+        function get_user_property_sms_limit($user_id)
+        {
+            return $this->ci->users->get_user_property_sms_limit($user_id);
         }
         
 	/**

@@ -110,6 +110,18 @@ class Users extends CI_Model
                     return NULL;
 	}
         
+        function get_user_property_sms_limit($user_id)
+	{
+		$this->db->where('id', $user_id);
+
+		$query = $this->db->get($this->table_name);
+                
+		if ($query->num_rows() == 1) 
+                    return $query->row()->prop_sms_limit;
+                else
+                    return NULL;
+	}
+        
 	/**
 	 * Check if username available for registering
 	 *
