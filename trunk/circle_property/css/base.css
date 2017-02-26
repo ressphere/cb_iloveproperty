@@ -1,3 +1,30 @@
+
+/***************************************************
+   Common CSS 
+*****************************************************/
+.cb_hide
+{
+    display:none;
+}
+
+.cb_string_type
+{
+    font-family: 'Century Gothic Bold';
+}
+
+.cb_cursor_pointer{
+    cursor: pointer;
+}
+
+.cb_state_disable
+{
+    pointer-events: none;
+}
+
+/***************************************************
+   Not Yet clean up section
+*****************************************************/
+
 @media (min-width: 768px) {
   .navbar-nav {
     float: left;
