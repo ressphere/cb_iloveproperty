@@ -2,10 +2,10 @@ INSERT INTO CB_Home_category (category, category_path, category_icon, category_m
 VALUES ('Properties',  'http://www.ressphere.com/properties/', 'properties.png', 'color-properties.png');
 
 INSERT INTO CB_Home_category (category, category_path, category_icon, category_mo_icon)
-VALUES ('Advertisement',  'not ready', 'advertisement.png', 'color-services.png');
+VALUES ('Around You',  'not ready', 'service_aroundyou.png', 'color-services.png');
 
 INSERT INTO CB_Home_category (category, category_path, category_icon, category_mo_icon)
-VALUES ('Coming Soon',  'not ready', 'advertisement.png', 'color-services.png');
+VALUES ('Coming Soon',  'not ready', 'service_commingsoon.png', 'service_commingsoon,pgn');
 
 INSERT INTO CB_Home_about_us (content)
 VALUES ("<strong>Ressphere</strong> is founded on 17th of March, 2014.<BR> 
