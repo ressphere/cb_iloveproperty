@@ -10,59 +10,27 @@
     padding-left: 35px
 }
 
-/*
  @media (max-width: 940px) {
 .validation_input_group_default
 {
     width:100%
 }
+.validation_input_group_small
+{
+    width:200px
+    
+}
  }
-
  @media (min-width: 940px) {
 .validation_input_group_default
 {
     width:400px;
 }
-}
-*/
-
 .validation_input_group_small
 {
-    width:345px;
+    width:200px;
 }
-
-.validation_input_group_default
-{
-    width:330px;
-}
- 
-@media (max-width: 1200px)
-{
-    .validation_input_group_small
-    {
-        width:290px
-    }
-    
-    .validation_input_group_default
-    {
-        width:275px
-    }
-}
-
- @media (max-width: 480px)
-{
-    .validation_input_group_small
-    {
-        width:230px
-    }
-    
-    .validation_input_group_default
-    {
-        width:220px
-    }
-}
- 
-
+ }
  .validation_input_group_default >input,
  .validation_input_group_small >input
  {
@@ -125,6 +93,10 @@ input, select, textArea {
     border-radius: 20px;
     resize: none;
     
+}
+
+.userprofile input {
+    width: 330px
 }
 
 span {
@@ -287,15 +259,4 @@ label {
     padding: 28px;
 }
 
-@media (max-width:960px) {
-    .section_padding { padding: 0px 28px 0px 28px; }
-}
-
-@media (max-width:960px) {
-    .special_header_padding { padding: 14px 28px 0px 28px; }
-}
-
-@media (max-width:960px) {
-    .special_footer_padding { padding: 0px 28px 14px 28px; }
-}
 /*86127d*/

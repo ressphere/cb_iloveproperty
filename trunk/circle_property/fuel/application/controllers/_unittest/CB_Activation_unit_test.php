@@ -15,7 +15,6 @@ require_once dirname(dirname(__FILE__)) .'/_utils/activate_deactivate_listing.ph
 class Stub_CBWS_Member extends CBWS_Member
 {
     private $property_listing_limit = 0;
-    private $property_sms_limit = 0;
     public function set_property_listing_limit($limit)
     {
         $this->property_listing_limit = $limit;
@@ -24,17 +23,6 @@ class Stub_CBWS_Member extends CBWS_Member
     {
         return $this->property_listing_limit;
     }
-    
-    public function get_user_property_sms_limit($user_id)
-    {
-        return $this->$property_sms_limit;
-    }
-    
-    public function set_user_property_sms_limit($limit)
-    {
-        $this->$property_sms_limit = $limit;
-    }
-    
 }
 
 class Stub_CB_Property extends CB_Property

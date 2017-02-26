@@ -38,17 +38,9 @@
 |
 */
 
+$route['default_controller'] = "aroundyou_home";
+$route['404_override'] = '';
 
-$route['default_controller'] = 'cb_home';
-$route['404_override'] = 'page404';
-
-/*	
-| Uncomment this line if you want to use the automatically generated sitemap based on your navigation.
-| To modify the sitemap.xml, go to the views/sitemap_xml.php file.
-*/ 
-//$route['sitemap.xml'] = 'sitemap_xml';
-
-include(MODULES_PATH.'/fuel/config/fuel_routes.php');
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

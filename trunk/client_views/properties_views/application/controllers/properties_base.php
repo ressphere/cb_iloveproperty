@@ -59,7 +59,7 @@ class properties_base extends CI_Controller {
         {
                 $country_short_name = "MY";
                 $country_code = "";
-                
+    
                 foreach ($this->countries as $key => $value)
                 {
                     if(strtolower($value) === strtolower($country))
@@ -638,33 +638,33 @@ class properties_base extends CI_Controller {
     }
     
     protected function _send_email($type, $email, &$data)
-    {
-            //$config['website_name'] = 'ressphere.com';
-            //$config['webmaster_email'] = 'admin@ressphere.com';
+        {
+                //$config['website_name'] = 'ressphere.com';
+                //$config['webmaster_email'] = 'admin@ressphere.com';
+            
+                $this->load->library('email');
+                $website_name = $this->config->item('website_name');
+                $webmaster_email = $this->config->item('webmaster_email');
+               //$CI =& get_instance();
+                //$CI->load->library('email');
+                $this->email->from($webmaster_email, $website_name);
+                $this->email->reply_to($webmaster_email, $website_name);
+                $this->email->to($email);
+                $this->email->subject($this->get_meaningful_type_name($type) . " " . $website_name);
+                $this->email->message($this->load->view('_email/'.$type.'-html', $data, TRUE));
+                $this->email->set_alt_message($this->load->view('_email/'.$type.'-txt', $data, TRUE));
+                $status = $this->email->send();
+                if($status)
+                {
+                      return TRUE;
+                }
+                else
+                {
+                      $this->set_error($this->email->print_debugger());
+                      return FALSE;
+                }
 
-            $this->load->library('email');
-            $website_name = $this->config->item('website_name');
-            $webmaster_email = $this->config->item('webmaster_email');
-           //$CI =& get_instance();
-            //$CI->load->library('email');
-            $this->email->from($webmaster_email, $website_name);
-            $this->email->reply_to($webmaster_email, $website_name);
-            $this->email->to($email);
-            $this->email->subject($this->get_meaningful_type_name($type) . " " . $website_name);
-            $this->email->message($this->load->view('_email/'.$type.'-html', $data, TRUE));
-            $this->email->set_alt_message($this->load->view('_email/'.$type.'-txt', $data, TRUE));
-            $status = $this->email->send();
-            if($status)
-            {
-                  return TRUE;
-            }
-            else
-            {
-                  $this->set_error($this->email->print_debugger());
-                  return FALSE;
-            }
-
-    }
+        }
     protected function get_measurement_type_enum($measurement_type)
     {
         return MeasurementFactory::get_measurement_type_enum($measurement_type);
