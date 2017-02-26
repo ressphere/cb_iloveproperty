@@ -17,7 +17,7 @@
  *  - is_dir_empty
  * 
  */
-class GeneralFunc__Basic
+class aroundyou_utils__GeneralFunc__Basic
 {
     /*
      * Obtain specific value from _POST
@@ -161,7 +161,7 @@ class GeneralFunc__Basic
  * 
  * @MY - This have not tested, might be broken.... lol 
  */
-class GeneralFunc_WaterMark
+class aroundyou_utils__GeneralFunc_WaterMark
 {
     /*
      * Add water mark to the original imange, main entry
@@ -188,7 +188,7 @@ class GeneralFunc_WaterMark
 
             // Obtain phone number from service
             $user["user_id"] = $user_id;
-            $phone_return_val = DataServer__Service::CB_SendReceive_Service_Request("CB_Member:get_user_phone_number",
+            $phone_return_val = aroundyou_utils__DataServer__Service::SendReceive_Service_Request("CB_Member:get_user_phone_number",
                             json_encode($user));
             $phone = json_decode($phone_return_val, TRUE)["data"]["result"];
             
@@ -220,8 +220,8 @@ class GeneralFunc_WaterMark
                             DIRECTORY_SEPARATOR . "GOTHIC.TTF";
             
             // Insert phone and name
-            GeneralFunc_WaterMark::setWatermarkPositionToCenter($im, 20, 0, 20, $white, $grey, $fontStyle, $name);
-            GeneralFunc_WaterMark::setWatermarkPositionToCenter($im, 18, 0, 50, $white, $grey, $fontStyle, $phone);
+            aroundyou_utils__GeneralFunc_WaterMark::setWatermarkPositionToCenter($im, 20, 0, 20, $white, $grey, $fontStyle, $name);
+            aroundyou_utils__GeneralFunc_WaterMark::setWatermarkPositionToCenter($im, 18, 0, 50, $white, $grey, $fontStyle, $phone);
 
             // Dump outcome into PNG file and free memory
             // Using imagepng() results in clearer text compared with imagejpeg()
@@ -237,12 +237,12 @@ class GeneralFunc_WaterMark
         }
         else
         {
-            GeneralFunc__Basic::dump_error_log("Water mark type not regconized, type=".$type);
+            aroundyou_utils__GeneralFunc__Basic::dump_error_log("Water mark type not regconized, type=".$type);
             return FALSE;
         }
         
         // Combine the water mark and original imange
-        GeneralFunc_WaterMark::combine_img_watermark($img_path, $watermark_path);
+        aroundyou_utils__GeneralFunc_WaterMark::combine_img_watermark($img_path, $watermark_path);
         
         // Post processing
         if($type == "user")
@@ -272,7 +272,7 @@ class GeneralFunc_WaterMark
         //Obtain the first character x location, so that the string can be place at the center point
         $centerX = (imagesx($im) / 2) - (($bbox[2] - $bbox[0]) / 2);
         // Add some shadow to the name
-        GeneralFunc_WaterMark::imagettfstroketext($im, $fontSize, $degree, $centerX, $y, $color, $strokecolor, $font, $txt, 2);
+        aroundyou_utils__GeneralFunc_WaterMark::imagettfstroketext($im, $fontSize, $degree, $centerX, $y, $color, $strokecolor, $font, $txt, 2);
     }
     
     /*
@@ -312,27 +312,27 @@ class GeneralFunc_WaterMark
     {
         // Exit if water mark or original image not found, error and exit
         if (!file_exists($watermark_path)) { 
-            GeneralFunc__Basic::dump_error_log("[NOT FOUND]Watermark image: " .  $watermark_path);
+            aroundyou_utils__GeneralFunc__Basic::dump_error_log("[NOT FOUND]Watermark image: " .  $watermark_path);
             return FALSE;
         }
         elseif(!file_exists($img_path))
         {
-            GeneralFunc__Basic::dump_error_log("[NOT FOUND]Targeted image: " .  $img_path);
+            aroundyou_utils__GeneralFunc__Basic::dump_error_log("[NOT FOUND]Targeted image: " .  $img_path);
             return FALSE;
         }
 
         // Obtain water mark indentifier
         list($stamp_width, $stamp_height, $stamp_type, $stamp_attr) = getimagesize($watermark_path);
-        $stamp = GeneralFunc__Basic::get_image_resource_by_type($stamp_type, $watermark_path);
+        $stamp = aroundyou_utils__GeneralFunc__Basic::get_image_resource_by_type($stamp_type, $watermark_path);
 
         // Obtain original image indentifier
         list($im_width, $im_height, $im_type, $im_attr) = getimagesize($img_path);
-        $im = GeneralFunc__Basic::get_image_resource_by_type($im_type, $img_path);
+        $im = aroundyou_utils__GeneralFunc__Basic::get_image_resource_by_type($im_type, $img_path);
             
         // Exit if the indentifier fail to create
         if ($im === NULL || $stamp === NULL)
         {
-            GeneralFunc__Basic::dump_error_log("None image file detected");
+            aroundyou_utils__GeneralFunc__Basic::dump_error_log("None image file detected");
             return FALSE;
         }
         
@@ -350,12 +350,12 @@ class GeneralFunc_WaterMark
             imagesavealpha($im, true);
             if(!imagecopy($im, $stamp, $left, $top, 0, 0, imagesx($stamp), imagesy($stamp)))
             {
-                GeneralFunc__Basic::dump_error_log("[FAIL] Fail to insert Watermark image");
+                aroundyou_utils__GeneralFunc__Basic::dump_error_log("[FAIL] Fail to insert Watermark image");
                 return FALSE;
             }
         }
         catch (Exception $e) {  
-              GeneralFunc__Basic::dump_error_log($e->getMessage());
+              aroundyou_utils__GeneralFunc__Basic::dump_error_log($e->getMessage());
               return FALSE;
         }
 

@@ -1,7 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-    require_once 'properties_base.php';
-    require_once '_utils/GeneralFunc.php';
-    class cb_user_registration extends properties_base
+    
+    // Request necessary PHP ---- Start ----
+    require_once 'aroundyou_base.php';
+    require_once '_utils/aroundyou_utils__DataServer.php';
+    // Request necessary PHP ---- End ----
+    
+    class aroundyou_user_registration extends aroundyou_base
     {
         
         ####### This function will load the login page######################################
@@ -82,7 +86,7 @@
                      $Members_Info["password"] = $password;
                      $Members_Info["phone"] = $phone; 
                      $Members_Info["email_activation"] = $this->config->item('email_activation');
-                     $val_return = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:create_member",  json_encode($Members_Info));
+                     $val_return = aroundyou_utils__DataServer__Service::SendReceive_Service_Request("CB_Member:create_member",  json_encode($Members_Info));
       
                      //Expected output
                      $return_data = json_decode($val_return, TRUE);
@@ -153,31 +157,31 @@
                 $captcha_html = $this->_create_captcha('register');
                 $data["captcha_html"] = $captcha_html;
                 $data["msg"] = $msg;
-                $this->_print(json_encode($data));
+                aroundyou_utils__GeneralFunc__Basic::echo_js_html(json_encode($data));
              }
              else
              {
                  $data["captcha_html"] = $this->_create_captcha('register');
                  $data["msg"] = "Success";
-                 $this->_print(json_encode($data));
+                 aroundyou_utils__GeneralFunc__Basic::echo_js_html(json_encode($data));
              }
         }
       
         public function registerView()
         {
             
-            $this->_print($this->_registerView());
+            aroundyou_utils__GeneralFunc__Basic::echo_js_html($this->_registerView());
         }
         public function getAreaCode()
         {
             $country = $this->_get_posted_value("country");
             if(!is_null($country))
             {
-                $this->_print(json_encode($this->_get_country_code($country)));
+                aroundyou_utils__GeneralFunc__Basic::echo_js_html(json_encode($this->_get_country_code($country)));
             }
             else
             {
-                $this->_print("");
+                aroundyou_utils__GeneralFunc__Basic::echo_js_html("");
             }
         }
         public function beginLogin()
@@ -195,7 +199,7 @@
 				
                 if ($is_login) 
                 {
-                    $this->_print( "<span class='error'>Please logout and login again</span>");
+                    aroundyou_utils__GeneralFunc__Basic::echo_js_html( "<span class='error'>Please logout and login again</span>");
                 } 
                 else 
                 {
@@ -208,7 +212,7 @@
                      $msg = "Success";
                      $cap = $this->_get_posted_value('captcha');
                      $login_parameters["login"] = $login;
-                     $is_login_exceeded = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:is_max_login_attempts_exceeded",
+                     $is_login_exceeded = aroundyou_utils__DataServer__Service::SendReceive_Service_Request("CB_Member:is_max_login_attempts_exceeded",
                         json_encode($login_parameters));
                      $is_login_exceeded = json_decode($is_login_exceeded, TRUE);
 					 $is_login_exceeded = $is_login_exceeded["data"]["result"];
@@ -227,7 +231,7 @@
                      $login_parameters["login_by_email"] = $data['login_by_email'];
                      if($cap_success)
                      {
-                        $val_return = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:login", 
+                        $val_return = aroundyou_utils__DataServer__Service::SendReceive_Service_Request("CB_Member:login", 
                              json_encode($login_parameters));
                         $val_return = json_decode($val_return, TRUE);
 						$val_return = $val_return["data"]["result"];
@@ -262,7 +266,7 @@
                         else {
                             $msg = "<span class='error'>Fail to login, please try again</span>";
                         }
-                        $this->_print($this->require_login_captcha($login, $msg));
+                        aroundyou_utils__GeneralFunc__Basic::echo_js_html($this->require_login_captcha($login, $msg));
                      }
                      else
                      {
@@ -274,7 +278,7 @@
 								'username'	=> $username,
 								'status'	=> $status?TRUE:FALSE,
 						));
-                         $this->_print($msg);
+                         aroundyou_utils__GeneralFunc__Basic::echo_js_html($msg);
                          //echo var_dump($this->session->all_userdata());
                      }
                     
@@ -287,19 +291,19 @@
         public function loginView()
         {
             
-            $this->_print($this->_loginView());
+            aroundyou_utils__GeneralFunc__Basic::echo_js_html($this->_loginView());
         }
 
         public function forgotpassView()
         {
             
-            $this->_print($this->_forgotpassView());
+            aroundyou_utils__GeneralFunc__Basic::echo_js_html($this->_forgotpassView());
         }
        
         public function logoutView()
         {
             
-            $this->_print($this->_logoutView());
+            aroundyou_utils__GeneralFunc__Basic::echo_js_html($this->_logoutView());
         }
        
         public function activate()
@@ -307,12 +311,12 @@
             //$this->extemplate->set_extemplate('default');
             $user_id		= $this->uri->segment(3);
             $new_email_key	= $this->uri->segment(4);
-            $content = "Circle Properties activation";
+            $content = "Ressphere activation";
             $title = "Activate my account ";
             $this->SEO_Tags($content);
             $this->set_title($title);
             $this->extemplate->add_css('css/bootstrap.min.css');
-            $this->extemplate->add_css('css/properties_base.css');
+            $this->extemplate->add_css('css/aroundyou_base.css');
             //$this->extemplate->add_css('css/base.css');
 
             // Load necessary js
@@ -335,11 +339,11 @@
 			$member["user_id"] = $user_id;
 			$member["new_email_key"] = $new_email_key;
         
-			$val_return = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:activate_user", json_encode($member));
+			$val_return = aroundyou_utils__DataServer__Service::SendReceive_Service_Request("CB_Member:activate_user", json_encode($member));
 			$result = json_decode($val_return, TRUE);
 			$result = $result["data"]["result"];
             if ($result) {		// success
-                    GeneralFunc::CB_Receive_Service_Request("CB_Member:begin_logout");
+                    aroundyou_utils__DataServer__Service::Receive_Service_Request("CB_Member:begin_logout");
                     $activate_content["msg"] = "<B>Congratulation</B> your account is activate, please proceed to login";
             } else {
                 $activate_content["msg"] = "<B>Sorry</B> we fail to activate your account.";
@@ -348,7 +352,7 @@
             {
                 $activate_content["Logo"] = $this->logo;
             }
-            $this->extemplate->write_view('contents', '_usercontrols/cb_user_registration', $activate_content, TRUE);
+            $this->extemplate->write_view('contents', '_usercontrols/aroundyou_user_registration', $activate_content, TRUE);
             $this->extemplate->render();
         }
 
@@ -356,17 +360,17 @@
         {
             if($this->_is_login())
             {
-               $this->_print($this->_get_user_id());
+               aroundyou_utils__GeneralFunc__Basic::echo_js_html($this->_get_user_id());
             }
             else
             {
-                $this->_print(-1);
+                aroundyou_utils__GeneralFunc__Basic::echo_js_html(-1);
             }
         }
         public function create_captcha()
         {
             $type = $this->_get_posted_value('type');
-            $this->_print($this->_create_captcha($type));
+            aroundyou_utils__GeneralFunc__Basic::echo_js_html($this->_create_captcha($type));
         }
         
         public function resend_activation_email()
@@ -376,7 +380,7 @@
             if($mail)
             {
                 $email["address"] = $mail;
-                $val_return = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:change_email",
+                $val_return = aroundyou_utils__DataServer__Service::SendReceive_Service_Request("CB_Member:change_email",
                     json_encode($email));
                 $data = json_decode($val_return, TRUE);
 				$data = $data["data"]["result"];
@@ -393,7 +397,7 @@
                 }
                 
             }
-            $this->_print($msg);
+            aroundyou_utils__GeneralFunc__Basic::echo_js_html($msg);
         }
         
         public function begin_password()
@@ -409,7 +413,7 @@
             if($success)
             {
                 $email["address"] = $mail;
-                $val_return = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:forgot_password",
+                $val_return = aroundyou_utils__DataServer__Service::SendReceive_Service_Request("CB_Member:forgot_password",
                     json_encode($email));
                 $data = json_decode($val_return, TRUE);
 				$data = $data["data"]["result"];
@@ -429,7 +433,7 @@
                 
             }
             $data["msg"] = $msg;
-            $this->_print(json_encode($data));
+            aroundyou_utils__GeneralFunc__Basic::echo_js_html(json_encode($data));
             
         }
          #/cb_user_registration/forgotpassword/
@@ -451,7 +455,7 @@
            $CI->session->set_userdata("forgotpassword", $data);
            #$this->session->set_userdata("new_pass_key", $new_email_key);
            
-           $content = "Circle Properties password retrieval";
+           $content = "Ressphere password retrieval";
             $title = "Reset my account password";
             $this->SEO_Tags($content);
             $this->set_title($title);
@@ -464,8 +468,8 @@
                 $reset_content["Logo"] = $this->logo;
             }
             //$this->session->userdata("forgotpassword", $data);
-            $CI->extemplate->write_view('contents', '_usercontrols/cb_user_reset_password', $reset_content, TRUE);
-            $this->_print($CI->extemplate->render('', TRUE));
+            $CI->extemplate->write_view('contents', '_usercontrols/aroundyou_user_reset_password', $reset_content, TRUE);
+            aroundyou_utils__GeneralFunc__Basic::echo_js_html($CI->extemplate->render('', TRUE));
             //echo $new_email_key; 
             //$this->session->set_userdata("forgotpassword", $data);
             
@@ -519,7 +523,7 @@
             if($success)
             {
                 
-                $val_return = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:reset_password", json_encode($data));
+                $val_return = aroundyou_utils__DataServer__Service::SendReceive_Service_Request("CB_Member:reset_password", json_encode($data));
                 $data = json_decode($val_return, TRUE);
                 $data = $data["data"]["result"];
                 if(!is_null($data))
@@ -544,12 +548,12 @@
                 
             }
             $data["msg"] = $msg;
-            $this->_print(json_encode($data));
+            aroundyou_utils__GeneralFunc__Basic::echo_js_html(json_encode($data));
             
         }
         public function get_wsdl_base_url()
         {
-           $this->_print($this->_get_wsdl_base_url());
+           aroundyou_utils__GeneralFunc__Basic::echo_js_html(DataServer__General::get_wsdl_base_url());
         }
         public function get_user_info()
         {
@@ -561,8 +565,9 @@
                  $user_info['user_id'] = $this->_get_user_id();
                  $user_info['username'] = $this->_get_username();
              }
-             $this->_print(json_encode($user_info));
+             aroundyou_utils__GeneralFunc__Basic::echo_js_html(json_encode($user_info));
         }
         
     }
+    
 ?>

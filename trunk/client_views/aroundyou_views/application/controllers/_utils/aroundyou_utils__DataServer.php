@@ -6,8 +6,8 @@
  */
 
 // Request necessary PHP ---- Start ----
-require_once 'GeneralFunc.php'; // Contain all the necassary General API
-require_once 'ServiceUtils.php'; // Contain all the necassary Service API
+require_once 'aroundyou_utils__GeneralFunc.php'; // Contain all the necassary General API
+require_once 'aroundyou_utils__ServiceUtils.php'; // Contain all the necassary Service API
 //
 // Request necessary PHP ---- End ----
 
@@ -16,12 +16,12 @@ require_once 'ServiceUtils.php'; // Contain all the necassary Service API
  * This class contain all API related to service calling
  * 
  * API list:
- *  - CB_Send_Service_Request
- *  - CB_Receive_Service_Request
- *  - CB_SendReceive_Service_Request
- *  - CB_Test_Gateway
+ *  - Send_Service_Request
+ *  - Receive_Service_Request
+ *  - SendReceive_Service_Request
+ *  - Test_Gateway
  */
-class DataServer__Service
+class aroundyou_utils__DataServer__Service
 {
     /*
      * For sending data
@@ -33,10 +33,10 @@ class DataServer__Service
      *              ["status"] Indicate the status of service run (Error, complete or etc). 
      *              ["status_information"] Message return for display purpose.
      */
-    static function CB_Send_Service_Request($service, $send_data)
+    static function Send_Service_Request($service, $send_data)
     {
         //$service_obj = new ServiceRequest;
-        $service_obj = new ServiceUtils__REST_ServiceRequest;
+        $service_obj = new aroundyou_utils__ServiceUtils__REST_ServiceRequest;
         $return_data = $service_obj->service_request($service,$send_data,"send");
         return $return_data;
     }
@@ -51,10 +51,10 @@ class DataServer__Service
      *              ["status_information"] Message return for display purpose. 
      *              ["data"] Output data from the service
      */
-    static function CB_Receive_Service_Request($service)
+    static function Receive_Service_Request($service)
     {
         //$service_obj = new ServiceRequest;
-        $service_obj = new ServiceUtils__REST_ServiceRequest;
+        $service_obj = new aroundyou_utils__ServiceUtils__REST_ServiceRequest;
         $return_data = $service_obj->service_request($service, null,"receive");
         return $return_data;
     }
@@ -70,10 +70,10 @@ class DataServer__Service
      *              ["status_information"] Message return for display purpose. 
      *              ["data"] Output data from the service
      */
-    static function CB_SendReceive_Service_Request($service, $send_data)
+    static function SendReceive_Service_Request($service, $send_data)
     {
         //$service_obj = new ServiceRequest;
-        $service_obj = new ServiceUtils__REST_ServiceRequest;
+        $service_obj = new aroundyou_utils__ServiceUtils__REST_ServiceRequest;
         $return_data = $service_obj->service_request($service,$send_data,"sendreceive");
         return $return_data;
     }
@@ -87,12 +87,12 @@ class DataServer__Service
      *              ["status_information"] Message return for display purpose. 
      *              ["data"] Output data from the service
      */
-    static function CB_Test_Gateway()
+    static function Test_Gateway()
     {
         //$service_obj = new ServiceUtils__REST_ServiceRequest;
         //$return_data = $service_obj->test_gateway();
         
-        $service_obj = new ServiceUtils__REST_ServiceRequest;
+        $service_obj = new aroundyou_utils__ServiceUtils__REST_ServiceRequest;
         $return_data = $service_obj->service_request(null,"ss&bb","test");
         
         return $return_data;
@@ -110,7 +110,7 @@ class DataServer__Service
  *  - check_recaptcha
  * 
  */
-class DataServer__General
+class aroundyou_utils__DataServer__General
 {
     /*
      * Get Ressphere Web service url
@@ -119,7 +119,7 @@ class DataServer__General
      */
     static function get_wsdl_base_url()
     {
-        $val_return = DataServer__Service::CB_Receive_Service_Request("CB_Info:base_url");
+        $val_return = aroundyou_utils__DataServer__Service::Receive_Service_Request("CB_Info:base_url");
         $wsdl_base_url = json_decode($val_return, TRUE)["data"]["result"];
         
         return $wsdl_base_url;
@@ -136,7 +136,7 @@ class DataServer__General
         $filter_struct = array();
         $filter_struct["filter"]["country"] = $country; 
         $val_return_detail = 
-                DataServer__Service::CB_SendReceive_Service_Request("CB_Property:get_country_state",
+                aroundyou_utils__DataServer__Service::SendReceive_Service_Request("CB_Property:get_country_state",
                         json_encode($filter_struct));
         $val_return_detail_array = json_decode($val_return_detail, true);
 
@@ -152,14 +152,14 @@ class DataServer__General
      */
     static function get_states()
     {
-        $listing = GeneralFunc__Basic::get_posted_value("country_name");
+        $listing = aroundyou_utils__GeneralFunc__Basic::get_posted_value("country_name");
         $states = array();
         if($listing)
         {
             $country = json_decode($listing, TRUE);
-            DataServer__General::get_state_by_country($states, $country);
+            aroundyou_utils__DataServer__General::get_state_by_country($states, $country);
         }
-        GeneralFunc__Basic::echo_js_html($states);
+        aroundyou_utils__GeneralFunc__Basic::echo_js_html($states);
         
     }
     
@@ -176,7 +176,7 @@ class DataServer__General
         $captcha_code["challenge_field"] = $challenge_field;
         $captcha_code["response_field"] = $response_field;
 
-        $val_return_json = DataServer__Service::CB_SendReceive_Service_Request("CB_Member:check_recaptcha", json_encode($captcha_code));
+        $val_return_json = aroundyou_utils__DataServer__Service::SendReceive_Service_Request("CB_Member:check_recaptcha", json_encode($captcha_code));
         $val_return = json_decode($val_return_json, TRUE);
         
         return   $val_return["data"]["result"];
@@ -191,7 +191,7 @@ class DataServer__General
  *  - get_currency_type_string
  *  - currency_converter_to_any
  */
-class DataServer__Currency
+class aroundyou_utils__DataServer__Currency
 {
     /*
      * Obtain representation integer (enum) from curency short name
@@ -204,7 +204,7 @@ class DataServer__Currency
         $argument = json_encode(array(
                "currency"=>$current_currency
            ));
-        $val_return = DataServer__Service::CB_SendReceive_Service_Request("CB_Currency:get_currency_type_enum",
+        $val_return = aroundyou_utils__DataServer__Service::SendReceive_Service_Request("CB_Currency:get_currency_type_enum",
                 $argument);
         return json_decode($val_return, TRUE)['data']['result'];
     }
@@ -220,7 +220,7 @@ class DataServer__Currency
         $argument = json_encode(array(
                 "currency"=>$currency_enum
             ));
-        $val_return = DataServer__Service::CB_SendReceive_Service_Request("CB_Currency:get_currency_type_string",
+        $val_return = aroundyou_utils__DataServer__Service::SendReceive_Service_Request("CB_Currency:get_currency_type_string",
                 $argument);
         return json_decode($val_return, TRUE)['data']['result'];
     }
@@ -241,7 +241,7 @@ class DataServer__Currency
                 "from"=>$from,
                 "to"=>$to
             ));
-        $val_return = DataServer__Service::CB_SendReceive_Service_Request("CB_Currency:currency_converter_to_any",
+        $val_return = aroundyou_utils__DataServer__Service::SendReceive_Service_Request("CB_Currency:currency_converter_to_any",
                 $argument);
         return json_decode($val_return, TRUE)['data']['result'];
     }

@@ -10,7 +10,7 @@
             
             foreach ($footer_link as $menu => $link) {
                 if($menu === "Sitemap") {
-                    echo "<li class=\"hide\">";
+                    echo "<li class=\"cb_hide\">";
                 }
                 else
                 { 

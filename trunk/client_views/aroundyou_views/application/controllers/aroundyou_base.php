@@ -8,8 +8,10 @@
  * @author mykhor
  */
 
-require_once '_utils/GeneralFunc.php'; // Contain all the necassary API
-require_once '_utils/DataServer.php'; // Contain all API related to server
+// Request necessary PHP ---- Start ----
+require_once '_utils/aroundyou_utils__GeneralFunc.php'; // Contain all the necassary API
+require_once '_utils/aroundyou_utils__DataServer.php'; // Contain all API related to server
+// Request necessary PHP ---- End ----
 
 /*
  * Base class for Around You Service
@@ -19,6 +21,7 @@ class aroundyou_base extends CI_Controller {
     // ****** Settings list ***** Start ****
     protected $allow_build_header = true; // Decide header need to print out or not
     protected $allow_build_footer = true; // Devide footer need to print out or not
+    protected $allow_build_popup = true; // Devide popup need to print out or not
     
     protected $wsdl_url = NULL; //added wsdl url as protected attribute for child class to access ressphere.com
     
@@ -54,7 +57,7 @@ class aroundyou_base extends CI_Controller {
         $this->session->set_userdata('client_base_url', base_url());
         
         // Pre-record wsdl base url
-        $this->wsdl_url = DataServer__General::get_wsdl_base_url();
+        $this->wsdl_url = aroundyou_utils__DataServer__General::get_wsdl_base_url();
         $this->session->set_userdata('wsdl_base_url', $this->wsdl_url);
     }
     
@@ -65,7 +68,7 @@ class aroundyou_base extends CI_Controller {
     protected function index()
     {
         $this->preload_js_css();    // Load all necessary js and css
-        $this->load_prefix_page();  // Load all prefix (header/footer)
+        $this->load_prefix_page();  // Load all prefix (header/footer/popup)
     }
     
     /*
@@ -93,9 +96,9 @@ class aroundyou_base extends CI_Controller {
         $this->extemplate->add_js( $this->wsdl_url . 'js/_utils/jquery.makeclass.min.js', 'import', FALSE, FALSE); // Basic Jquery
         $this->extemplate->add_js( $this->wsdl_url . 'js/jquery.cookie.min.js', 'import', FALSE, FALSE); // Jquery cookies support
         $this->extemplate->add_js( $this->wsdl_url . 'js/bootstrap.min.js', 'import', FALSE, FALSE); // Handle basic UI layout and featues
-        $this->extemplate->add_js($this->wsdl_url .  'js/typeahead.min.js', 'import', FALSE, FALSE); // Provide string auto completed features (https://twitter.github.io/typeahead.js/examples/)
-        $this->extemplate->add_js($this->wsdl_url . 'js/angular.min.js', 'import', FALSE, FALSE); // Provide angular capability for fast UI support (https://angularjs.org/)
-        //$this->extemplate->add_js($this->wsdl_url . 'js/angular-elif.js', 'import', FALSE, FALSE);
+        $this->extemplate->add_js( $this->wsdl_url . 'js/typeahead.min.js', 'import', FALSE, FALSE); // Provide string auto completed features (https://twitter.github.io/typeahead.js/examples/)
+        $this->extemplate->add_js( $this->wsdl_url . 'js/angular.min.js', 'import', FALSE, FALSE); // Provide angular capability for fast UI support (https://angularjs.org/)
+        //$this->extemplate->add_js( $this->wsdl_url . 'js/angular-elif.js', 'import', FALSE, FALSE);
         
         $this->extemplate->add_js( $this->wsdl_url . 'js/base.js', 'import', FALSE, FALSE); // Ressphere base JS
         
@@ -126,6 +129,7 @@ class aroundyou_base extends CI_Controller {
      * Load the prefix layout for all page, which include
      *    - Header
      *    - Footer
+     *    - Pop up
      */
     private function load_prefix_page()
     {
@@ -138,6 +142,10 @@ class aroundyou_base extends CI_Controller {
         if($this->allow_build_footer)
         {
             $this->build_footer();
+        }
+        if($this->allow_build_popup)
+        {
+            $this->build_popup();
         }
     }
     
@@ -192,6 +200,14 @@ class aroundyou_base extends CI_Controller {
         $this->extemplate->write_view('footer', '_usercontrols/aroundyou_footer', $footer_content, TRUE);
     }
     
+    /*
+     * Construct the pop up
+     */
+    private function build_popup()
+    {
+        $popup_content = array ();
+        $this->extemplate->write_view('pop_up_content', '_usercontrols/aroundyou_pop_up_content', $popup_content, TRUE);
+    }
     
     /*
      * Set SEO / Meta data for google search
@@ -309,7 +325,7 @@ class aroundyou_base extends CI_Controller {
     public function get_current_action()
     {
          $user_action =  $this->session->userdata('action');
-         GeneralFunc__Basic::echo_js_html($user_action);
+         aroundyou_utils__GeneralFunc__Basic::echo_js_html($user_action);
     } 
     
     /*
@@ -375,7 +391,7 @@ class aroundyou_base extends CI_Controller {
         }
         else
         {
-              GeneralFunc__Basic::dump_error_log($this->email->print_debugger());
+              aroundyou_utils__GeneralFunc__Basic::dump_error_log($this->email->print_debugger());
               return FALSE;
         }
     }
@@ -400,7 +416,7 @@ class aroundyou_base extends CI_Controller {
             $this->extemplate->add_css($this->wsdl_url . 'css/404.css', 'link', FALSE, FALSE);
             
             //cb_change_profile
-            $this->extemplate->write_view('content', '_usercontrols/cb_404_page',array(
+            $this->extemplate->write_view('content', '_usercontrols/aroundyou_404_page',array(
                 'reason'=>$error,
                 'img404'=>$this->wsdl_url.'images/404img.svg',
                 'homepage'=>base_url(),
@@ -428,12 +444,12 @@ class aroundyou_base extends CI_Controller {
             $this->extemplate->add_js($this->wsdl_url . 'js/bootstrap.min.js', 'import', FALSE, FALSE);
             $this->extemplate->add_js($this->wsdl_url . 'js/jquery.easing.min.js', 'import', FALSE, FALSE);
             $this->extemplate->add_js($this->wsdl_url . "js/jstorage.min.js", "import", FALSE, FALSE);
-             $this->extemplate->add_js($this->wsdl_url . 'js/page-403.js', 'import', FALSE, FALSE);
+            $this->extemplate->add_js($this->wsdl_url . 'js/page-403.js', 'import', FALSE, FALSE);
             $this->extemplate->add_css($this->wsdl_url . 'css/bootstrap.min.css', 'link', FALSE, FALSE);
             $this->extemplate->add_css($this->wsdl_url . 'css/404.css', 'link', FALSE, FALSE);
             
             //cb_change_profile
-            $this->extemplate->write_view('content', '_usercontrols/cb_403_page',array(
+            $this->extemplate->write_view('content', '_usercontrols/aroundyou_403_page',array(
                 'reason'=>$error,
                 'img403'=>$this->wsdl_url.'images/403img.svg',
                 'homepage'=>base_url(),

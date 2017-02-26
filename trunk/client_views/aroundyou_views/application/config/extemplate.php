@@ -1,7 +1,7 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 $extemplate['active_extemplate'] = 'default';
-$extemplate['default']['extemplate'] = 'aroundyou_home';
+$extemplate['default']['extemplate'] = 'aroundyou_base_template';
 $extemplate['default']['regions'] = array(
    'title',
    'header',
@@ -18,7 +18,8 @@ $extemplate['default']['regions'] = array(
    'loginView',
    'registerView',
    'logoutView',
-   'forgotpassView'
+   'forgotpassView',
+   'pop_up_content'
     
 );
 $extemplate['default']['parser'] = 'parser';
@@ -42,7 +43,8 @@ $extemplate['old_default']['regions'] = array(
    'loginView',
    'registerView',
    'logoutView',
-   'forgotpassView'
+   'forgotpassView',
+   'pop_up_content'
     
 );
 $extemplate['old_default']['parser'] = 'parser';

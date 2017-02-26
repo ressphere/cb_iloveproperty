@@ -9,7 +9,7 @@
 /*
  * REST Gateway for backend server connection
  */
-class ServiceUtils__REST_ServiceRequest extends CI_Controller
+class aroundyou_utils__ServiceUtils__REST_ServiceRequest extends CI_Controller
 {  
     // REST API End point
     private $api_url = "http://localhost/cb_iloveproperty/trunk/circle_property/RestAPI/";
@@ -121,7 +121,7 @@ class ServiceUtils__REST_ServiceRequest extends CI_Controller
 /*
  * SOAP Gateway, old gateway. Please don't use this 
  */
-class ServiceUtils__ServiceRequest extends CI_Controller 
+class aroundyou_utils__ServiceUtils__ServiceRequest extends CI_Controller 
 {
     private $client;
        
@@ -136,7 +136,7 @@ class ServiceUtils__ServiceRequest extends CI_Controller
                      'soap_version'=> SOAP_1_2,
                      'encoding'=> 'UTF-8'
                  ));
-         $AuthHeader = new ServiceUtils__AuthHeader();
+         $AuthHeader = new aroundyou_utils__ServiceUtils__AuthHeader();
          $AuthHeader->username = 'root';
 
          $AuthHeader->password = hash('md5','1234abcd*');
@@ -203,7 +203,7 @@ class ServiceUtils__ServiceRequest extends CI_Controller
 /*
  * Tmp class to hold information
  */
-class ServiceUtils__AuthHeader
+class aroundyou_utils__ServiceUtils__AuthHeader
 {
     public $username;
     public $password;
