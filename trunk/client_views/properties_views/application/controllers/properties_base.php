@@ -619,24 +619,6 @@ class properties_base extends CI_Controller {
                 return "[Property Enquiry]";
         }
     }
-    
-    protected function _send_sms($type,$phone, &$data)
-    {
-        //TODO: directly call rest api here
-         $sms_param = array();
-         $this->load->library('email');
-         //$msg = "";
-         $msg = $this->load->view("_email/".$type."-sms", $data, TRUE);
-         $sms_param["destination"] = $phone;
-         $sms_param["message"] = $msg; 
-        //$val_return = GeneralFunc::CB_Receive_Service_Request("CB_Info:base_url");
-        $val_return_detail = 
-                GeneralFunc::CB_SendReceive_Service_Request("CB_Sms:send_sms",
-                        json_encode($sms_param));
-        $val_return = json_decode($val_return_detail, true);
-        return   $val_return["data"]["result"];
-    }
-    
     protected function _send_email($type, $email, &$data)
         {
                 //$config['website_name'] = 'ressphere.com';

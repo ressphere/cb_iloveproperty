@@ -44,7 +44,6 @@ CREATE TRIGGER ins_listing_subscription AFTER INSERT ON listing_subscription
         CALL Prop_Listing_Limit_Controller(
           New.user_id,
           NEW.number_of_listing,
-          NEW.number_of_sms,
           NewListingCount,
           Done);
     END $$
@@ -58,16 +57,12 @@ CREATE TRIGGER del_listing_subscription AFTER DELETE ON listing_subscription
         DECLARE Done INTEGER DEFAULT 0;
         DECLARE Number_Of_Deleted_Listing INTEGER DEFAULT 0;
         DECLARE NewListingCount INTEGER DEFAULT 0;
-        DECLARE NewSmsCount INTEGER DEFAULT 0;
 
         SET Number_Of_Deleted_Listing = -OLD.number_of_listing;
-        SET Number_Of_Deleted_Sms = -OLD.number_of_sms;
         CALL Prop_Listing_Limit_Controller(
           OLD.user_id,
           Number_Of_Deleted_Listing,
-          Number_Of_Deleted_Sms,
           NewListingCount,
-          NewSmsCount,
           Done);
         IF Done = 0 THEN
              CALL Deactivate_Listing_By_Count(OLD.user_id, NewListingCount);
@@ -83,16 +78,12 @@ CREATE TRIGGER upd_listing_subscription AFTER UPDATE ON listing_subscription
         DECLARE Done INTEGER DEFAULT 0;
         DECLARE Number_Of_Remained_Listing INTEGER DEFAULT 0;
         DECLARE NewListingCount INTEGER DEFAULT 0;
-        DECLARE NewSmsCount INTEGER DEFAULT 0;
 
         SET Number_Of_Remained_Listing = NEW.number_of_listing - OLD.number_of_listing;
-        SET Number_Of_Remained_Sms = NEW.number_of_sms - OLD.number_of_sms;
         CALL Prop_Listing_Limit_Controller(
           New.user_id,
           Number_Of_Remained_Listing,
-          Number_Of_Remained_Sms,
           NewListingCount,
-          NewSmsCount,
           Done);
         IF Done = 0 THEN
              CALL Deactivate_Listing_By_Count(OLD.user_id, NewListingCount);
@@ -106,31 +97,20 @@ DROP PROCEDURE IF EXISTS `iloveproperties_db`.`Prop_Listing_Limit_Controller` $$
 CREATE PROCEDURE `iloveproperties_db`.`Prop_Listing_Limit_Controller` (
     IN User_Id INT,
     IN Subscribed_Limit INT,
-    IN Sms_Limit INT,
     OUT NewListingCount INT,
-    OUT NewSmsCount INT,
     OUT Done INT)
 BEGIN
   DECLARE OldListingCount INTEGER DEFAULT 3;
-  DECLARE OldSmsCount INTEGER DEFAULT 0;
   DECLARE EXIT HANDLER FOR NOT FOUND SET Done = -1;
   SET Done = 0;
 
   SELECT `users`.`prop_listing_limit` INTO OldListingCount FROM `users` WHERE `users`.`id` = User_Id;
-  SELECT `users`.`prop_sms_limit` INTO OldSmsCount FROM `users` WHERE `users`.`id` = User_Id;
   SET NewListingCount = OldListingCount + Subscribed_Limit;
-  SET NewSmsCount = OldSmsCount + Sms_Limit;
   IF  NewListingCount >= 3 THEN
     UPDATE `users` SET `users`.`prop_listing_limit` = NewListingCount WHERE `users`.`id` = User_Id;
   ELSE
     SET NewListingCount = 3;
     UPDATE `users` SET `users`.`prop_listing_limit` = NewListingCount WHERE `users`.`id` = User_Id;
-
-  IF  NewSmsCount > 0 THEN
-    UPDATE `users` SET `users`.`prop_sms_limit` = NewSmsCount WHERE `users`.`id` = User_Id;
-  ELSE
-    SET NewSmsCount = 0;
-    UPDATE `users` SET `users`.`prop_sms_limit` = NewSmsCount WHERE `users`.`id` = User_Id;  
   END IF;
 END $$
 DELIMITER ;

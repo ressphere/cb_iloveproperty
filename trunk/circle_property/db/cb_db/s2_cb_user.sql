@@ -94,7 +94,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   `agent`   TINYINT(1) NOT NULL DEFAULT '0',
   `country_id` int COLLATE utf8_bin NOT NULL DEFAULT '1',
   `prop_listing_limit` int COLLATE utf8_bin DEFAULT '3',
-  `prop_sms_limit` int COLLATE utf8_bin DEFAULT '0',
   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`country_id`) REFERENCES country(`id`)
@@ -205,36 +204,9 @@ CREATE TABLE IF NOT EXISTS `listing_subscription` (
   `id` int COLLATE utf8_bin AUTO_INCREMENT,
   `user_id` int COLLATE utf8_bin NOT NULL,
   `number_of_listing` int COLLATE utf8_bin,
-  `number_of_sms` int COLLATE utf8_bin,
   `created_time` datetime NOT NULL,
   `duration` int NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user_id`) REFERENCES users(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- --------------------------------------------------------
-
--- --------------------------------------------------------
--- --------------------------------------------------------
---
--- Table structure Whatsapp Info
---
-CREATE TABLE IF NOT EXISTS `whatsapp` (
-  `id` int COLLATE utf8_bin AUTO_INCREMENT,
-  `username` varchar(100) COLLATE utf8_bin NOT NULL,
-  `access_code` int COLLATE utf8_bin,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- --------------------------------------------------------
-
--- --------------------------------------------------------
--- --------------------------------------------------------
---
--- Table structure Whatsapp Info
---
-CREATE TABLE IF NOT EXISTS `isms` (
-  `id` int COLLATE utf8_bin AUTO_INCREMENT,
-  `username` varchar(100) COLLATE utf8_bin NOT NULL,
-  `password` varchar(100) COLLATE utf8_bin,
-  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- --------------------------------------------------------
