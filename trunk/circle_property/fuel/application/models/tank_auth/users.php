@@ -98,7 +98,7 @@ class Users extends CI_Model
 	 * @param	int
 	 * @return	int
 	 */
-	function get_user_prop_listing_limit($user_id)
+	function get_user_prop_listing_limit($user_id, $sms_count)
 	{
 		$this->db->where('id', $user_id);
 
@@ -108,6 +108,33 @@ class Users extends CI_Model
                     return $query->row()->prop_listing_limit;
                 else
                     return NULL;
+	}
+        
+        function set_user_property_sms_limit($user_id, $count)
+	{
+		$this->db->where('id', $user_id);
+
+		$query = $this->db->get($this->table_name);
+                
+		if ($query->num_rows() == 1)
+                {
+                    $sms_limit = $this->get_user_property_sms_limit($user_id);
+                    if($sms_limit > 0)
+                    {
+                        if($sms_limit - $count >= 0)
+                        {
+                            $this->db->set('prop_sms_limit', ($sms_limit - $count));
+                            $this->db->where('id', $user_id);
+                            $this->db->update($this->table_name);
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+                else
+                {
+                    return false;
+                }
 	}
         
         function get_user_property_sms_limit($user_id)

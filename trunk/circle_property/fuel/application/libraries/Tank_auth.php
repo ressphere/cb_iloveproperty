@@ -200,6 +200,11 @@ class Tank_auth
             return $this->ci->users->get_user_property_sms_limit($user_id);
         }
         
+        function set_user_property_sms_limit($user_id)
+        {
+            return $this->ci->users->set_user_property_sms_limit($user_id, 1);
+        }
+        
 	/**
 	 * Create new user on the site and return some data about it:
 	 * user_id, username, password, email, new_email_key (if any).

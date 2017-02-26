@@ -110,7 +110,10 @@ class properties_details extends properties_base {
       }
       else 
       {
-          $this->_send_sms($type,$owner_phone, $data);
+          if($this->set_user_property_sms_limit() === True )
+          {
+            $this->_send_sms($type,$owner_phone, $data);
+          }
       }
      
    }
