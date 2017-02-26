@@ -12,7 +12,6 @@
              $msg = "";
              $success = FALSE;
              $is_login = $this->_is_login();
-             $is_activated = $this->_is_login(FALSE);
              
              #start register to push to database
              if ($is_login) 
