@@ -57,6 +57,7 @@ CREATE TRIGGER del_listing_subscription AFTER DELETE ON listing_subscription
     BEGIN
         DECLARE Done INTEGER DEFAULT 0;
         DECLARE Number_Of_Deleted_Listing INTEGER DEFAULT 0;
+        DECLARE Number_Of_Deleted_Sms INTEGER DEFAULT 0;
         DECLARE NewListingCount INTEGER DEFAULT 0;
         DECLARE NewSmsCount INTEGER DEFAULT 0;
 
@@ -82,6 +83,7 @@ CREATE TRIGGER upd_listing_subscription AFTER UPDATE ON listing_subscription
     BEGIN
         DECLARE Done INTEGER DEFAULT 0;
         DECLARE Number_Of_Remained_Listing INTEGER DEFAULT 0;
+        DECLARE Number_Of_Remained_Sms INTEGER DEFAULT 0; 
         DECLARE NewListingCount INTEGER DEFAULT 0;
         DECLARE NewSmsCount INTEGER DEFAULT 0;
 
@@ -101,9 +103,8 @@ CREATE TRIGGER upd_listing_subscription AFTER UPDATE ON listing_subscription
 delimiter ;
 
 DELIMITER $$
-
 DROP PROCEDURE IF EXISTS `iloveproperties_db`.`Prop_Listing_Limit_Controller` $$
-CREATE PROCEDURE `iloveproperties_db`.`Prop_Listing_Limit_Controller` (
+CREATE DEFINER=`ressykir`@`localhost` PROCEDURE `iloveproperties_db`.`Prop_Listing_Limit_Controller` (
     IN User_Id INT,
     IN Subscribed_Limit INT,
     IN Sms_Limit INT,
@@ -125,7 +126,7 @@ BEGIN
   ELSE
     SET NewListingCount = 3;
     UPDATE `users` SET `users`.`prop_listing_limit` = NewListingCount WHERE `users`.`id` = User_Id;
-
+  END IF;
   IF  NewSmsCount > 0 THEN
     UPDATE `users` SET `users`.`prop_sms_limit` = NewSmsCount WHERE `users`.`id` = User_Id;
   ELSE
