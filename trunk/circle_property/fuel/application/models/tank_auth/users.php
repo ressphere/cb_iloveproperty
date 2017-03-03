@@ -77,28 +77,13 @@ class Users extends CI_Model
 		return NULL;
 	}
 
-	/**
-	 * Get user record by email
-	 *
-	 * @param	string
-	 * @return	object
-	 */
-	function get_user_by_email($email)
-	{
-		$this->db->where('LOWER(email)=', strtolower($email));
-
-		$query = $this->db->get($this->table_name);
-		if ($query->num_rows() == 1) return $query->row();
-		return NULL;
-	}
-
         /**
 	 * Get user property listing limit
 	 *
 	 * @param	int
 	 * @return	int
 	 */
-	function get_user_prop_listing_limit($user_id, $sms_count)
+	function get_user_prop_listing_limit($user_id)
 	{
 		$this->db->where('id', $user_id);
 

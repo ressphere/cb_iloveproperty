@@ -73,21 +73,6 @@ class Users extends CI_Model
 	}
 
 	/**
-	 * Get user record by email
-	 *
-	 * @param	string
-	 * @return	object
-	 */
-	function get_user_by_email($email)
-	{
-		$this->db->where('LOWER(email)=', strtolower($email));
-
-		$query = $this->db->get($this->table_name);
-		if ($query->num_rows() == 1) return $query->row();
-		return NULL;
-	}
-
-	/**
 	 * Check if username available for registering
 	 *
 	 * @param	string
@@ -422,6 +407,18 @@ class Users extends CI_Model
 	{
 		$this->db->where('user_id', $user_id);
 		$this->db->delete($this->profile_table_name);
+	}
+        
+        public function get_user_property_sms_limit($user_id)
+	{
+		$this->db->where('id', $user_id);
+
+		$query = $this->db->get($this->table_name);
+                
+		if ($query->num_rows() == 1) 
+                    return $query->row()->prop_sms_limit;
+                else
+                    return NULL;
 	}
 }
 

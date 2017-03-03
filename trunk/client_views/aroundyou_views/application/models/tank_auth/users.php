@@ -71,22 +71,7 @@ class Users extends CI_Model
 		if ($query->num_rows() == 1) return $query->row();
 		return NULL;
 	}
-
-	/**
-	 * Get user record by email
-	 *
-	 * @param	string
-	 * @return	object
-	 */
-	function get_user_by_email($email)
-	{
-		$this->db->where('LOWER(email)=', strtolower($email));
-
-		$query = $this->db->get($this->table_name);
-		if ($query->num_rows() == 1) return $query->row();
-		return NULL;
-	}
-
+        
 	/**
 	 * Check if username available for registering
 	 *

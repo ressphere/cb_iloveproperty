@@ -716,6 +716,28 @@ class Tank_auth
         {
             return $this->ci->users->is_userbanned($user_id);
         }
+        
+        /**
+	 * Get user record by email
+	 *
+	 * @param	string
+	 * @return	object
+	 */
+	public function get_userid_by_email($email)
+	{
+            if(($user = $this->ci->users->get_user_by_email($email)) != null)
+            {
+                return $user->id;
+            }
+            return NULL;
+            
+	}
+        
+        function get_user_property_sms_limit($user_id)
+	{
+		return $this->ci->users->get_user_property_sms_limit($user_id);
+	}
+
 }
 
 /* End of file Tank_auth.php */

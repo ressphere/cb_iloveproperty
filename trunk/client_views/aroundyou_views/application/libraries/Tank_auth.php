@@ -653,6 +653,22 @@ class Tank_auth
 					$this->ci->config->item('login_attempt_expire', 'tank_auth'));
 		}
 	}
+        
+         /**
+	 * Get user record by email
+	 *
+	 * @param	string
+	 * @return	object
+	 */
+	public function get_userid_by_email($email)
+	{
+            if(($user = $this->ci->users->get_user_by_email($email)) != null)
+            {
+                return $user->id;
+            }
+            return NULL;
+            
+	}
 }
 
 /* End of file Tank_auth.php */
