@@ -905,6 +905,7 @@ class base extends CI_Controller {
          $all_data = $this->session->all_userdata();
          var_dump($all_data);
      }
+     
      private function get_country_phone_code()
      {
          return json_decode(

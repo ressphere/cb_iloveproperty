@@ -667,7 +667,7 @@ class Tank_auth
 	 */
 	public function get_userid_by_email($email)
 	{
-            if(($user = $this->ci->users->get_user_by_email($email)) != null)
+            if(($user = $this->ci->users->get_user_by_login($email)) != null)
             {
                 return $user->id;
             }
