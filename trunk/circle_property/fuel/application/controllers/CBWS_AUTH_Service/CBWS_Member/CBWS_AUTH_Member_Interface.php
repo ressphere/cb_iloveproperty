@@ -171,13 +171,13 @@ class CBWS_AUTH_Member_Interface{
             case "get_user_property_sms_limit":
                 $owner_email = json_decode($request_command["send_data"], TRUE);
                 $user_id = $CB_Member_Obj->get_user_id_by_email($owner_email);
-                $return_data["result"] = $CB_Member_Obj->get_user_property_sms_limit($user_id);
+                $return_data["result"] = $CB_Member_Obj->get_user_property_sms_limit($user_id, 0);
                 $info = "Info: get related user's properties sms limit";
                 break;
-            case "update_sms_limit":
+            case "deduct_property_sms_limit":
                 $owner_email = json_decode($request_command["send_data"], TRUE);
                 $user_id = $CB_Member_Obj->get_user_id_by_email($owner_email);
-                $return_data["result"] = $CB_Member_Obj->set_user_property_sms_limit($user_id);
+                $return_data["result"] = $CB_Member_Obj->deduct_property_sms_limit($user_id);
                 $info = "Info: set related user's properties sms limit";
                 break;
             case "check_is_user_banned":
