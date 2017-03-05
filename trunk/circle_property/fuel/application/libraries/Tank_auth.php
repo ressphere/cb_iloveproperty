@@ -5,13 +5,6 @@ require_once('phpass-0.1/PasswordHash.php');
 define('STATUS_ACTIVATED', '1');
 define('STATUS_NOT_ACTIVATED', '0');
 
-abstract class ServiceType
-{
-    const Properties = 0;
-    // etc.
-}
-
-
 /**
  * Tank_auth
  *
@@ -198,7 +191,7 @@ class Tank_auth
             return $this->ci->users->get_user_prop_listing_limit($user_id);
         }
         
-        function deduct_property_sms_limit($user_id)
+        function set_user_property_sms_limit($user_id)
         {
             return $this->ci->users->set_user_property_sms_limit($user_id, 1);
         }
@@ -740,16 +733,9 @@ class Tank_auth
             
 	}
         
-        function get_user_sms_limit($user_id, $service)
+        function get_user_property_sms_limit($user_id)
 	{
-            switch($service)
-            {
-                case serviceType::Properties:
-                    return $this->ci->users->get_user_property_sms_limit($user_id);
-                default:
-                    return 0;
-            }
-		
+		return $this->ci->users->get_user_property_sms_limit($user_id);
 	}
 
 }
