@@ -40,6 +40,7 @@
 
 
 $route['default_controller'] = 'cb_home';
+$route['p/(:any)'] = 'cb_home/p/$1';
 $route['404_override'] = 'page404';
 
 /*	

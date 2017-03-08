@@ -12,6 +12,7 @@
              $msg = "";
              $success = FALSE;
              $is_login = $this->_is_login();
+             $is_activated = $this->_is_login(FALSE);
              
              #start register to push to database
              if ($is_login) 
@@ -76,7 +77,7 @@
                  else
                  {
                      //Perform registration
-                     $phone = "($area)$phone";
+                     $phone = $this->_getCorrectFormatPhone("($area)$phone", $country);
                      $Members_Info["username"] = $use_username ? $email : ''; 
                      $Members_Info["email"] = $email;
                      $Members_Info["password"] = $password;
@@ -565,4 +566,4 @@
         }
         
     }
-?>
+

@@ -4,6 +4,7 @@ require_once 'CBWS_Property/CBWS_AUTH_Property_Interface.php';
 require_once 'CBWS_Member/CBWS_AUTH_Member_Interface.php';
 require_once 'CBWS_Currency/CBWS_AUTH_Currency_Interface.php';
 require_once 'CBWS_ressphere_home/CBWS_AUTH_Ressphere_Home_Interface.php';
+require_once 'CBWS_sms/CBWS_AUTH_Sms_Interface.php';
 require_once 'CBWS_Info_Interface.php';
 
 class CBWS_AUTH_Service_Interface {
@@ -55,6 +56,10 @@ class CBWS_AUTH_Service_Interface {
                 $cb_info = new CBWS_AUTH_Currency_Interface();
                 $data_receive = $cb_info->Service_AUTH_Request($request_command);
                 break;
+            case "CB_Sms":		
+                 $cb_info = new CBWS_AUTH_Sms_Interface();		
+                 $data_receive = $cb_info->Service_AUTH_Request($request_command);		
+                 break;
             // No Group found for AUTH Service
             default:
                 $data_receive["status"] = "Error";

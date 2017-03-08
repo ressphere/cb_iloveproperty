@@ -104,7 +104,7 @@ delimiter ;
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS `iloveproperties_db`.`Prop_Listing_Limit_Controller` $$
-CREATE DEFINER=`ressykir`@`localhost` PROCEDURE `iloveproperties_db`.`Prop_Listing_Limit_Controller` (
+CREATE PROCEDURE `iloveproperties_db`.`Prop_Listing_Limit_Controller` (
     IN User_Id INT,
     IN Subscribed_Limit INT,
     IN Sms_Limit INT,
