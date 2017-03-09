@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-    require_once 'properties_base.php';
+    require_once 'base.php';
     require_once '_utils/GeneralFunc.php';
-    class cb_user_registration extends properties_base
+    class cb_user_registration extends base
     {
         
         ####### This function will load the login page######################################
@@ -12,7 +12,7 @@
              $msg = "";
              $success = FALSE;
              $is_login = $this->_is_login();
-             $is_activated = $this->_is_login(FALSE);
+             //$is_activated = $this->_is_login(FALSE);
              
              #start register to push to database
              if ($is_login) 
@@ -23,29 +23,30 @@
              else 
              {
                  # Get all of the parameters
-                 
+                 $CI = & get_instance();
+                 $CI->load->helper('url');
+                 $CI->load->library('session');
+                 $CI->load->config('tank_auth', TRUE);
+                 $display_name = $this->_get_posted_value('display_name');
                  $email = $this->_get_posted_value('email');
                  $password = $this->_get_posted_value('password');
                  $repassword = $this->_get_posted_value('repassword');
                  $country = $this->_get_posted_value('country');
                  $area = $this->_get_posted_value('area');
                  $phone = $this->_get_posted_value('phone');
-                 //$phone = 'fake_' . uniqid();
+                
                  $term_condition = $this->_get_posted_value('term_condition');
                  $cap = $this->_get_posted_value('captcha');
-                 /*$email = "jhtcmy2k@hotmail.com";
-                 $password = "1234abcd*";
-                 $repassword = "1234abcd*";
-                 $country = "MALAYSIA";
-                 $area = 012;
-                 $phone = 2829999;
-                 //$term_condition = $this->_get_posted_value('term_condition');
-                 //$cap = $this->_get_posted_value('captcha');*/
+				 $challenge = $this->_get_posted_value('challenge');
                  
                  $use_username = $this->config->item('use_username');
                  $email_activation = $this->config->item('email_activation');
                  
-                 if(is_null($email) || !$this->_validate_email($email))
+                 if(is_null($display_name) || $display_name === "")
+                 {
+                     $msg = "<span class='error'> Display name cannot be empty.</span>";
+                 }
+                 elseif(is_null($email) || !$this->_validate_email($email))
                  {
                      $msg = "<span class='error'> Email is not a valid format.</span>";
                      
@@ -57,6 +58,10 @@
                  elseif((is_null($password) || is_null($repassword)) || strlen($password) <= 0)
                  {
                      $msg = "<span class='error'>Password cannot be empty</span>";
+                 }
+                 elseif(strlen($password) < 6 || strlen($password) > 12)
+                 {
+                     $msg = "<span class='error'>Password length must between 6 to 12 characters </span>";
                  }
                  elseif(is_null($area) || !is_numeric($area))
                  {
@@ -70,55 +75,54 @@
                  {
                      $msg = "<span class='error'>Please understand and agree to the terms and conditions</span>";
                  }
-                 elseif(is_null($cap) || !$this->_check_captcha($cap, 'register'))
+                 elseif(is_null($cap) || is_null($challenge) || $this->_check_recaptcha(
+                         $this->config->item('website_name', 'tank_auth'),
+                         $cap, $challenge) === FALSE)
                  {
                      $msg = "<span class='error'> Captcha image is not match, please retype</span>";
+                     //$msg =  $this->config->item('website_name');
                  }
                  else
                  {
                      //Perform registration
                      $phone = $this->_getCorrectFormatPhone("($area)$phone", $country);
                      $Members_Info["username"] = $use_username ? $email : ''; 
+                     $Members_Info["display_name"] = $display_name;
                      $Members_Info["email"] = $email;
                      $Members_Info["password"] = $password;
-                     $Members_Info["phone"] = $phone; 
+                     $Members_Info["phone"] = $phone;
+                     $Members_Info["country"] = $country;
                      $Members_Info["email_activation"] = $this->config->item('email_activation');
                      $val_return = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:create_member",  json_encode($Members_Info));
       
-                     //Expected output
+                    
                      $return_data = json_decode($val_return, TRUE);
-                    //echo !is_null($return_data["data"]["result"]) && !key_exists("error", $return_data["data"]["result"]);
                      if (!is_null($return_data["data"]["result"]) && !array_key_exists("error", $return_data["data"]["result"])) 
                         {
                             $data = $return_data["data"]["result"];
-                            $data['site_name'] = $this->config->item('website_name');
+                            $data['site_name'] =  $this->config->item('website_name');
 
                            if ($email_activation) {									// send "activate" email
 				$data['activation_period'] = $this->config->item('email_activation_expire') / 3600;
 				$this->_send_email('activate', $data['email'], $data);
-
-				//unset($data['password']); // Clear password (just for any case)
-
-				//$this->_show_message($this->lang->line('auth_message_registration_completed_1'));
-
                             } else {
 				if ($this->config->item('email_account_details')) {	// send "welcome" email
                                         $this->_send_email('welcome', $data['email'], $data);
 				}
-				//unset($data['password']); // Clear password (just for any case)
-
-				//$this->_show_message($this->lang->line('auth_message_registration_completed_2').' '.anchor('/auth/login/', 'Login'));
                             }
                            $success = TRUE;
                            
                         }
                         else 
                         {
-                            
                             $errors = $return_data["data"]["result"]["error"];
                             if (isset($errors['phone'])) 
                             {
                                 $msg = "<span class='error'>" . $phone . " is in used. Please try another phone</span>";
+                            }
+                            elseif (isset($errors['displayname'])) 
+                            {
+                                $msg = "<span class='error'> Reserved keyword or non-alphabetic/numberic character is found in " . $display_name . " Please try another name</span>";
                             }
                             elseif (isset($errors['username'])) 
                             {
@@ -151,14 +155,15 @@
              }
              if ($success === FALSE)
              {
-                $captcha_html = $this->_create_captcha('register');
+                $captcha_html = $this->_create_recaptcha();
                 $data["captcha_html"] = $captcha_html;
                 $data["msg"] = $msg;
                 $this->_print(json_encode($data));
              }
              else
              {
-                 $data["captcha_html"] = $this->_create_captcha('register');
+                 $captcha_html = $this->_create_recaptcha();
+                 $data["captcha_html"] = $captcha_html;
                  $data["msg"] = "Success";
                  $this->_print(json_encode($data));
              }
@@ -174,7 +179,7 @@
             $country = $this->_get_posted_value("country");
             if(!is_null($country))
             {
-                $this->_print(json_encode($this->_get_country_code($country)));
+                $this->_print(json_encode($this->_get_state_codes($country)));
             }
             else
             {
@@ -208,14 +213,17 @@
                      $cap_success = true;
                      $msg = "Success";
                      $cap = $this->_get_posted_value('captcha');
+                     $challenge = $this->_get_posted_value('challenge');
                      $login_parameters["login"] = $login;
-                     $is_login_exceeded = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:is_max_login_attempts_exceeded",
+                     $is_login_exceeded_json = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:is_max_login_attempts_exceeded",
                         json_encode($login_parameters));
-                     $is_login_exceeded = json_decode($is_login_exceeded, TRUE);
-					 $is_login_exceeded = $is_login_exceeded["data"]["result"];
+                     $is_login_exceeded_data = json_decode($is_login_exceeded_json, TRUE);
+		     $is_login_exceeded = $is_login_exceeded_data["data"]["result"];
                      if ($is_login_exceeded) {
+                          //$recaptcha_html = $this->_create_recaptcha();
                           
-                          if(is_null($cap) || !$this->_check_captcha ($cap, 'login'))
+                          if(is_null($cap) || is_null($challenge) || !$this->_check_recaptcha ($this->config->item('website_name', 'tank_auth'),
+                                  $cap, $challenge))
                           {
                                 
                                 $cap_success = false;
@@ -228,10 +236,10 @@
                      $login_parameters["login_by_email"] = $data['login_by_email'];
                      if($cap_success)
                      {
-                        $val_return = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:login", 
+                        $val_return_json = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:login", 
                              json_encode($login_parameters));
-                        $val_return = json_decode($val_return, TRUE);
-						$val_return = $val_return["data"]["result"];
+                        $val_return_data = json_decode($val_return_json, TRUE);
+			$val_return = $val_return_data["data"]["result"];
                      }
                     if ($cap_success === FALSE || (!is_null($val_return) && count($val_return) > 0 && $val_return[0] === FALSE)) 
                      {	
@@ -263,6 +271,7 @@
                         else {
                             $msg = "<span class='error'>Fail to login, please try again</span>";
                         }
+                        //$this->_print('exceeded_login');
                         $this->_print($this->require_login_captcha($login, $msg));
                      }
                      else
@@ -270,13 +279,19 @@
                          $user_id = $val_return[1];
                          $username = $val_return[2];
                          $status = $val_return[3];
+                         $displayname = $val_return[4];
                          $this->session->set_userdata(array(
 								'user_id'	=> $user_id,
 								'username'	=> $username,
 								'status'	=> $status?TRUE:FALSE,
+                                                                'displayname'   => $displayname
 						));
+                         //error_log("cb_user_registration - begin login \n", 3, "C:\log\log.txt");
+                         //error_log("cb_user_registration - userid". $user_id ."\n", 3, "C:\log\log.txt");
+                         $this->session->set_userdata('secure','1');
+                         
                          $this->_print($msg);
-                         //echo var_dump($this->session->all_userdata());
+                         
                      }
                     
                     
@@ -309,17 +324,11 @@
             $user_id		= $this->uri->segment(3);
             $new_email_key	= $this->uri->segment(4);
             $content = "Circle Properties activation";
-            $title = "Activate my account ";
+            $title = "Activate my account";
             $this->SEO_Tags($content);
             $this->set_title($title);
-            $this->extemplate->add_css('css/bootstrap.min.css');
-            $this->extemplate->add_css('css/properties_base.css');
-            //$this->extemplate->add_css('css/base.css');
-
-            // Load necessary js
-            $this->extemplate->add_js('js/jquery.min.js');
-            $this->extemplate->add_js('js/bootstrap.min.js');
-            $this->extemplate->add_js('js/_utils/jquery.makeclass.min.js');
+            
+            
 
             // Load wsdl base.js as the login related stuft is at there
             $this->wsdl = $this->session->userdata('wsdl_base_url');
@@ -329,9 +338,14 @@
                 $this->session->set_userdata('wsdl_base_url', $this->wsdl);
             }
             $this->extemplate->add_css($this->wsdl . 'css/base.css', 'link', FALSE, FALSE);
-            $this->extemplate->add_js( $this->wsdl . 'js/base.js', 'import', FALSE, FALSE);
- 
-
+            $this->extemplate->add_css($this->wsdl . 'css/bootstrap.min.css', 'link', FALSE, FALSE);
+            $this->extemplate->add_js($this->wsdl .'js/jquery.min.js', 'import', FALSE, FALSE);
+            $this->extemplate->add_js($this->wsdl .'js/_utils/jquery.makeclass.min.js', 'import', FALSE, FALSE);
+            $this->extemplate->add_js($this->wsdl . 'js/bootstrap-mit.min.js' , 'import', FALSE, FALSE);
+            $this->extemplate->add_js($this->wsdl . 'js/base.js', 'import', FALSE, FALSE);
+            $this->extemplate->add_js($this->wsdl . 'js/cb_user_registration.js', 'import', FALSE, FALSE);
+                 
+           
             // Activate user
 			$member["user_id"] = $user_id;
 			$member["new_email_key"] = $new_email_key;
@@ -352,7 +366,13 @@
             $this->extemplate->write_view('contents', '_usercontrols/cb_user_registration', $activate_content, TRUE);
             $this->extemplate->render();
         }
-
+        public function logout()
+        {
+            do{
+                $this->_begin_logout();
+            } while($this->_is_login());
+            $this->_print("<B>Successfully Logout</B>. Thank you.");
+        }
         public function isLogin()
         {
             if($this->_is_login())
@@ -381,7 +401,7 @@
                     json_encode($email));
                 $data = json_decode($val_return, TRUE);
 				$data = $data["data"]["result"];
-                $data['site_name'] = $this->config->item('website_name');
+                $data['site_name'] =  $this->config->item('website_name');
                 $data['activation_period'] = $this->config->item('email_activation_expire') / 3600;
                 $mail_status = $this->_send_email('activate', $data['email'], $data);
                 if($mail_status)
@@ -416,7 +436,7 @@
 				$data = $data["data"]["result"];
                 if(!is_null($data) && !isset($data['errors']))
                 {
-                    $data['site_name'] = $this->config->item('website_name');
+                    $data['site_name'] =  $this->config->item('website_name');
 
                     // Send email with password activation link
                     $this->_send_email('forgot_password', $data['email'], $data);
@@ -424,7 +444,14 @@
                     $msg = "Success";
                 }
                 else {
-                    $msg = "<span class='error'>Your ".$mail ." is not registered in our system.</span>";
+					if(is_null($data))
+					{
+						$msg = "<span class='error'>internal error data is null</span>";
+					}
+					else
+					{
+						$msg = "<span class='error'>Your email is not registered in our system.</span>";
+					}
                     $success = FALSE;
                 }
                 
@@ -433,6 +460,91 @@
             $this->_print(json_encode($data));
             
         }
+        
+        public function change_password()
+        {
+           $CI = & get_instance();
+           $CI->load->helper('url');
+           $CI->load->library('session');
+           $CI->load->library('extemplate');
+           
+            $msg = "";
+            $success = TRUE;
+            $data = NULL;
+            $change_pass_obj = NULL;
+            $current_pass = $this->_get_posted_value('current_password');
+            $pass = $this->_get_posted_value('password');
+            $confirmed_pass = $this->_get_posted_value('confirmed_password');
+            if( empty($pass))
+            {
+                $msg = "<span class='error'>ERROR:Password cannot be empty</span>";
+                $success = FALSE;
+            }
+            elseif ( empty($current_pass)) 
+            {
+                $msg = "<span class='error'>ERROR:Current password cannot be empty</span>";
+                $success = FALSE;
+            }
+            elseif ( empty($confirmed_pass)) 
+            {
+                $msg = "<span class='error'>ERROR:Confirmed password cannot be empty</span>";
+                $success = FALSE;
+            }
+            elseif ($confirmed_pass !== $pass)
+            {
+                $msg = "<span class='error'>ERROR:Password does not match with confirmed password</span>";
+                $success = FALSE;
+            }
+            
+            if($success)
+            {
+                $change_pass_obj["new_password"] = $pass;
+                $change_pass_obj["old_password"] = $current_pass;
+               
+                if(!$change_pass_obj && (!isset($change_pass_obj["old_password"]) || !isset( $change_pass_obj["new_password"])))
+                {
+                    $msg = var_dump($change_pass_obj);//$data['new_password'];
+                    $success = FALSE;
+                }
+                else
+                {
+                    $data['old_password'] = $change_pass_obj["old_password"];
+                    $data['new_password'] = $change_pass_obj["new_password"];
+                }
+            }
+            if($success)
+            {
+                $data['user_id'] = $this->session->userdata('user_id');
+                $val_return = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:change_password", json_encode($data));
+                $data = json_decode($val_return, TRUE);
+                $data = $data["data"]["result"];
+                if(!is_null($data))
+                {
+                    $data['site_name'] = $CI->config->item('website_name');
+                    if(isset($data["error"]))
+                    {;
+                        $success = FALSE;
+                        $msg = "<span class='error'>ERROR:The existing password is NOT correct!!!</span>";
+                        #$msg = "<span class='error'>" . var_dump($forgot_pass_obj) . "</span>";
+                    }
+                    else
+                    {;
+                        $success = TRUE;
+                        $msg = "SUCCESS:You have successfully changed your password.";
+                    }
+                }
+                else {
+                    $msg = "<span class='error'>Your password cannot be reset, please check with the admin.</span>";
+                    $success = FALSE;
+                }
+                
+            }
+            $data["msg"] = $msg;
+            $data["status"] = $success;
+            $this->_print(json_encode($data));
+            
+        }
+        
          #/cb_user_registration/forgotpassword/
         public function forgotpassword()
         {
@@ -457,7 +569,22 @@
             $this->SEO_Tags($content);
             $this->set_title($title);
             
-            $CI->extemplate->add_js('js/cb_new_reset_password.js');
+            $this->wsdl = $this->session->userdata('wsdl_base_url');
+            if($this->wsdl === FALSE)
+            {
+                $this->wsdl = $this->_get_wsdl_base_url();
+                $this->session->set_userdata('wsdl_base_url', $this->wsdl);
+            }
+            $CI->extemplate->add_css($this->wsdl . 'css/base.css', 'link', FALSE, FALSE);
+            $CI->extemplate->add_css($this->wsdl . 'css/bootstrap.min.css', 'link', FALSE, FALSE);
+            $CI->extemplate->add_css($this->wsdl . 'css/forgot_password.css', 'link', FALSE, FALSE);
+            $CI->extemplate->add_js($this->wsdl .'js/jquery.min.js', 'import', FALSE, FALSE);
+            $CI->extemplate->add_js($this->wsdl .'js/_utils/jquery.makeclass.min.js', 'import', FALSE, FALSE);
+            $CI->extemplate->add_js($this->wsdl . 'js/bootstrap-mit.min.js' , 'import', FALSE, FALSE);
+            $CI->extemplate->add_js($this->wsdl . 'js/base.js', 'import', FALSE, FALSE);
+            $CI->extemplate->add_js($this->wsdl . 'js/cb_user_registration.js', 'import', FALSE, FALSE);
+            $CI->extemplate->add_js($this->wsdl . 'js/cb_new_reset_password.js', 'import', FALSE, FALSE);
+            
             $reset_content["Password"] = "Enter new password";
             $reset_content["ConfirmedPassword"] = "Confirm new password";
              if(!is_null($this->logo))
@@ -484,12 +611,12 @@
             $forgot_pass_obj = NULL;
             $pass = $this->_get_posted_value('password');
             $confirmed_pass = $this->_get_posted_value('confirmed_password');
-            if(is_null($pass))
+            if( empty($pass))
             {
                 $msg = "<span class='error'>Password cannot be empty</span>";
                 $success = FALSE;
             }
-            elseif (is_null($confirmed_pass)) 
+            elseif ( empty($confirmed_pass)) 
             {
                 $msg = "<span class='error'>Confirmed password cannot be empty</span>";
                 $success = FALSE;
@@ -550,7 +677,7 @@
         }
         public function get_wsdl_base_url()
         {
-           $this->_print($this->_get_wsdl_base_url());
+            $this->_print($this->_get_wsdl_base_url());
         }
         public function get_user_info()
         {
@@ -566,3 +693,4 @@
         }
         
     }
+?>
