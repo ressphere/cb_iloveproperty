@@ -176,10 +176,6 @@ class cb_home extends base {
        
        
        $this->extemplate->add_js('js/jquery.easing.min.js');
-//       $this->extemplate->add_js('js/_exscrolling_nav/classie.js');
-//       $this->extemplate->add_js('js/_exscrolling_nav/cbpAnimatedHeader.min.js');
-//       $this->extemplate->add_js('js/_exscrolling_nav/jqBootstrapValidation.js');
-        
        $this->extemplate->add_js('js/cb_home.js');
       
        $this->extemplate->add_css('css/home.css');
