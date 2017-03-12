@@ -51,14 +51,5 @@
                 </li>
             </ul>
         </div>
-        <div class="row col-md-12" id="aroundyou_header_nav_bar" style="margin-left: 0px; margin-right: 0px">
-            <ul class="nav navbar-nav navbar-right cb_string_type" id="aroundyou_header_nav_menu">
-                    <li><a class="cb_cursor_pointer" id="tmp_a" target = "_top" style="padding: 10px 29px;">tmp_a</a></li>
-                    <li><a class="cb_cursor_pointer" id="tmp_b" target = "_top" style="padding: 10px 29px;" >tmp_b</a></li>
-                    <li><a class="cb_cursor_pointer" id="tmp_c" target = "_top" style="padding: 10px 29px;">tmp_c</a></li>
-                    <li><a class="cb_cursor_pointer" id="tmp_d" target = "_top" style="padding: 10px 29px;">tmp_d</a></li>
-                
-            </ul>
-        </div>
     </div>
 </div>

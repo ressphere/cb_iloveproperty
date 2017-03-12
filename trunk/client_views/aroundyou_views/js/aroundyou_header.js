@@ -20,9 +20,6 @@ aroundyou_header_agm.controller("aroundyou_header__ng__CONTROLLER", function($sc
         {
             $scope.aroundyou_base_obj.setup_auth_ui();
             $scope.aroundyou_base_obj.preload_login();
-            $scope.aroundyou_base_obj.removeObserver(get_updated_category);
-            $scope.aroundyou_base_obj.addObserver(get_updated_category);
-            $scope.aroundyou_base_obj.update_category();
         }
     );
     // ------ UI Feature --- End ----------------

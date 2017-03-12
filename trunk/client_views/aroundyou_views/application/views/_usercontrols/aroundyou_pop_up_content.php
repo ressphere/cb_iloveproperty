@@ -14,7 +14,7 @@
                     <span aria-hidden="true">×</span>
                     <span class="sr-only">Close</span>
                 </button>
-                <img class="logo" src="images/ressphere-white.png" alt="">
+                <img class="logo" src="images/aroundyou-ressphere-white.png" alt="">
             </div>
             <div class="modal-body">
                 <div id="general_info_content"></div>
