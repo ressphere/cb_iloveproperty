@@ -12,6 +12,23 @@ class properties_details extends properties_base {
         $this->load->library("session");
    }
    
+   protected function _send_sms($type,$phone, &$data)
+    {
+        //TODO: directly call rest api here
+         $sms_param = array();
+         $this->load->library('email');
+         //$msg = "";
+         $msg = $this->load->view("_email/".$type."-txt", $data, TRUE);
+         $sms_param["destination"] = $phone; 
+         $sms_param["message"] = $msg; 
+        //$val_return = GeneralFunc::CB_Receive_Service_Request("CB_Info:base_url");
+        $val_return_detail = 
+                GeneralFunc::CB_SendReceive_Service_Request("CB_Sms:send_sms",
+                        json_encode($sms_param));
+        $val_return = json_decode($val_return_detail, true);
+        return   $val_return["data"]["result"];
+    }
+    
    public function index()
    {
        if (!array_key_exists("reference", $_GET))
@@ -92,7 +109,7 @@ class properties_details extends properties_base {
 
        return $result;
    }
-   private function begin_send_user_contact($owner_email, $display_name, $phone, $msg, $ref_id, &$fail_reason)
+   private function begin_send_user_contact($owner_email, $owner_phone, $display_name, $phone, $msg, $ref_id, &$fail_reason)
    {
       $type = "send_prop_request";
       $data['name'] = $display_name;
@@ -118,6 +135,7 @@ class properties_details extends properties_base {
    public function send_user_contact()
    {
        $owner_email = $this->session->userdata('owner_email');
+       $owner_phone = $this->session->userdata('owner_phone');
        $ref_id = $this->session->userdata('ref_tag');
        $returned_data = array("status"=>0, "reason"=>"");
        $success_msg = "Your enquiry is sent to the owner<BR> Thank you for using the service.";
@@ -137,7 +155,7 @@ class properties_details extends properties_base {
 
            if($this->validate_user_input($display_name, $phone, $msg, $cap, $challenge, $fail_reason))
            {
-                $this->begin_send_user_contact($owner_email, $display_name, $phone, $msg, $ref_id, $fail_reason);
+                $this->begin_send_user_contact($owner_email, $owner_phone, $display_name, $phone, $msg, $ref_id, $fail_reason);
            }
            else
            {
@@ -264,4 +282,4 @@ class properties_details extends properties_base {
    
    
 }
-?>
+
