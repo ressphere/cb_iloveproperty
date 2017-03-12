@@ -22,6 +22,7 @@ class properties_home extends properties_base {
        // Preload js and CSS script that not cover by base
        $this->page_js_css();
        
+       
        // Page content
        
        $this->extemplate->write_view('contents', '_usercontrols/cb_properties_category_doughnut',array('width'=>500, 'height'=>500) ,TRUE);
@@ -41,6 +42,7 @@ class properties_home extends properties_base {
        $this->extemplate->add_js( $this->wsdl . 'js/Chart.min.js', 'import', FALSE, FALSE);
        //Enable for special handling using js for properties home page
        $this->extemplate->add_js('js/property_main_page.js');
+       $this->extemplate->add_css(base_url() . 'css/property_main_page.css', 'link', FALSE, FALSE);
        
    }
    public function check_userdata()

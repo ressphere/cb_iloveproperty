@@ -25,6 +25,7 @@ class users_model extends Base_module_model {
             banned,
             ban_reason,
             prop_listing_limit,
+            prop_sms_limit,
             agent');
         
     }
@@ -45,6 +46,7 @@ class users_model extends Base_module_model {
         $fields['modified']['type']='hidden';
         $fields['email']['type']='hidden';
         $fields['prop_listing_limit']['type']='hidden';
+        $fields['prop_sms_limit']['type']='hidden';
         
         $fields['displayname']['required']=TRUE;
         $fields['phone']['required']=TRUE;

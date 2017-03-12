@@ -31,6 +31,8 @@ $(document).ready(
         );
         waitForFinalEvent(function() {
             objHome.set_footer_position();
+           
+
         }, 100, objHome.generateUUID());
         
   

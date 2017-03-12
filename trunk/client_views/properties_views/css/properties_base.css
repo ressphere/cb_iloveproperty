@@ -113,7 +113,7 @@ html, body {
 #property_header_nav_bar
 {
     background-color: white;
-    display: block!important;
+    display: block;
     padding-bottom: 0;
     overflow: visible!important;
     border-bottom: solid #DDD 1px;

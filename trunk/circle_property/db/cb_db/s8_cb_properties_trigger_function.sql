@@ -41,11 +41,13 @@ CREATE TRIGGER ins_listing_subscription AFTER INSERT ON listing_subscription
     BEGIN
         DECLARE Done INTEGER DEFAULT 0;
         DECLARE NewListingCount INTEGER DEFAULT 0;
+        DECLARE NewSmsCount INTEGER DEFAULT 0;
         CALL Prop_Listing_Limit_Controller(
           New.user_id,
           NEW.number_of_listing,
           NEW.number_of_sms,
           NewListingCount,
+          NewSmsCount,
           Done);
     END $$
 delimiter ;
