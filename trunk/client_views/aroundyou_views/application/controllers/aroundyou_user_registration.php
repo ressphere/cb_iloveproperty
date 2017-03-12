@@ -2,6 +2,7 @@
     
     // Request necessary PHP ---- Start ----
     require_once 'aroundyou_base.php';
+    require_once '_utils/aroundyou_utils__GeneralFunc.php';
     require_once '_utils/aroundyou_utils__DataServer.php';
     // Request necessary PHP ---- End ----
     
@@ -553,7 +554,7 @@
         }
         public function get_wsdl_base_url()
         {
-           aroundyou_utils__GeneralFunc__Basic::echo_js_html(DataServer__General::get_wsdl_base_url());
+           aroundyou_utils__GeneralFunc__Basic::echo_js_html(aroundyou_utils__DataServer__General::get_wsdl_base_url());
         }
         public function get_user_info()
         {
