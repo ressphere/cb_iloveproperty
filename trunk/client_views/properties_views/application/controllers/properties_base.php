@@ -816,7 +816,7 @@ class properties_base extends CI_Controller {
         return $adequate_sms_count;
     }
      
-   protected function get_user_number_of_available_sms($owner_email)
+   protected function get_user_number_of_available_property_sms($owner_email)
    {
        $sms_limit = 0;
        if($owner_email)
