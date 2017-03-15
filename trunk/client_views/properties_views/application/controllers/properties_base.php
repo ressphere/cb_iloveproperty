@@ -804,24 +804,20 @@ class properties_base extends CI_Controller {
             return $output;
     }
     
-    protected function set_user_property_sms_limit()
+    protected function set_user_property_sms_limit($owner_email)
     {
        $adequate_sms_count = False;
-       $owner_email = $this->session->userdata('owner_email');
-
        if($owner_email)
         {
-           $sms_limit_json = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:set_user_property_sms_limit",
+           $sms_limit_json = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:update_sms_limit",
                 json_encode($owner_email));
            $adequate_sms_count = json_decode($sms_limit_json, TRUE)["data"]["result"];
         }
         return $adequate_sms_count;
     }
      
-   protected function get_user_number_of_available_sms()
+   protected function get_user_number_of_available_sms($owner_email)
    {
-       //get_user_property_sms_limit
-       $owner_email = $this->session->userdata('owner_email');
        $sms_limit = 0;
        if($owner_email)
         {
