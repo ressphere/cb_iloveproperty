@@ -185,6 +185,7 @@ class properties_details extends properties_base {
            $val_return["data"]["activate"] === "1")
         {
             $this->session->set_userdata('owner_email', $val_return["data"]["email"]);
+            $this->session->set_userdata('owner_phone', $val_return["data"]["phone"]);
             $this->session->set_userdata('ref_tag', $ref_tag);
             $this->property_info_list = $val_return["data"];
         }
