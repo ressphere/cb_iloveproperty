@@ -10,7 +10,7 @@
      {		
          if($this->sms_obj->getBalance() > 0)		
          {		
-             return $this->sms_obj->send($destination, $message, $type);		
+             return $this->sms_obj->BeginSendSms($destination, $message, $type);		
          }		
          return false;		
      }		

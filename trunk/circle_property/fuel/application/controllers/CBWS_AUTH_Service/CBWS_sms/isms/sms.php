@@ -22,7 +22,7 @@ class isms
         return floatval($result);
     }
     
-    public function send($destination, $message, $type=2)
+    public function BeginSendSms($destination, $message, $type=2)
     {
       $html_message = html_entity_decode($message, ENT_QUOTES, 'utf-8'); 
       $encoded_message = urlencode($html_message);
