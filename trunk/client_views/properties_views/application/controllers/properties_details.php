@@ -19,7 +19,7 @@ class properties_details extends properties_base {
          $this->load->library('email');
          //$msg = "";
          $msg = $this->load->view("_email/".$type."-sms", $data, TRUE);
-         $sms_param["destination"] = $phone; 
+         $sms_param["destination"] = $this->is_phone_contains_plus($phone); 
          $sms_param["message"] = $msg; 
         //$val_return = GeneralFunc::CB_Receive_Service_Request("CB_Info:base_url");
         $val_return_detail = 
