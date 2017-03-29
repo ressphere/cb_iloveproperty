@@ -18,6 +18,7 @@ class properties_details extends properties_base {
          $sms_param = array();
          $this->load->library('email');
          //$msg = "";
+         $data["phone"] = $this->is_phone_contains_plus($data["phone"]);
          $msg = $this->load->view("_email/".$type."-sms", $data, TRUE);
          $sms_param["destination"] = $this->is_phone_contains_plus($phone); 
          $sms_param["message"] = $msg; 

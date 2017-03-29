@@ -1,8 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class isms
 {
-    private $username="ressphere2017";
-    private $password="1234abcd*";
+    //private $username="ressphere2017";
+    //private $password="1234abcd*";
+    private $username="cornelius";
+    private $password="123qwe";
+
     private function ismscURL($link){
       $http = curl_init($link);
       if (FALSE === $http)
