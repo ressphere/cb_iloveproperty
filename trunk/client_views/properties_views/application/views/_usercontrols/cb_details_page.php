@@ -112,7 +112,13 @@
                             </div>
                             <div class="fb col-md-4  col-sm-4 col-sm-4 column">
                                 <div class="fb-share-button" data-href="{{current_url}}" data-layout="button_count"></div>
-                            </div><br><br>
+                            </div>
+                            <div class="telegram col-md-4  col-sm-4 col-sm-4 column">
+                                <br>
+                                    <div><a href='https://telegram.me/share/url?url=' onclick='window.open(&apos;https://telegram.me/share/url?url==&apos;+encodeURIComponent(location.href)+&apos;&amp;bodytext=&amp;tags=&amp;text=&apos;+encodeURIComponent(document.title));return false;' rel='nofollow' style='text-decoration:none;' title='Share on Telegram'><img src='images/telegram.jpg' style='height:19px; width:auto'/></a></div>
+                                <br>
+                            </div>
+                            <br><br>
                         </div>
                     </div><br>
                     

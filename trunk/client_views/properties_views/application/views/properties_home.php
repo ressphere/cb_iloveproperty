@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');?>
 <html lang="en">
 <head>
@@ -188,7 +187,8 @@
         </center>
     </div>
 	<!-- Print js through $this->extemplate->add_js() function -->
-  <?php echo $_scripts; ?>        
+  <?php echo $_scripts; ?>
+ 
 </body>
 
 </html>
