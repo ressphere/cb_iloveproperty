@@ -447,6 +447,7 @@ ng_map_profile.controller('previewPage', function($scope, $controller, ngGPlaces
                      $scope.my_position = objHome.getCurrentPosition();
                      $scope.$apply();
                 }
+                LineIt.loadButton();
             }   
         );
             
