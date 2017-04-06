@@ -113,18 +113,26 @@
                             <div class="fb col-md-4  col-sm-4 col-sm-4 column">
                                 <div class="fb-share-button" data-href="{{current_url}}" data-layout="button_count"></div>
                             </div>
-                            <div class="telegram col-md-4  col-sm-4 col-sm-4 column">
-                                <br>
-                                    <div><a href='https://telegram.me/share/url?url=' onclick='window.open(&apos;https://telegram.me/share/url?url==&apos;+encodeURIComponent(location.href)+&apos;&amp;bodytext=&amp;tags=&amp;text=&apos;+encodeURIComponent(document.title));return false;' rel='nofollow' style='text-decoration:none;' title='Share on Telegram'><img src='images/telegram.jpg' style='height:23px; width:auto'/></a></div>
-                                <br>
+                           
+                            
+                             <div class="whatsapp col-md-4  col-sm-4 col-sm-4 column">
+       
+                                    <a href="whatsapp://send?text={{current_url}}" data-action="share/whatsapp/share">
+                                        <img src='images/whatsapp.jpg' style='height:25px; width:auto'/>
+                                    </a>
+      
                             </div>
-                            <div class="line col-md-4  col-sm-4 col-sm-4 column">
-                                <br>
+                             <div class="line col-md-4  col-sm-4 col-sm-4 column">
+                         
+
                                     <div class="line-it-button" data-lang="en" data-type="share-a" data-url="{{current_url}}" style="display: none;"></div>
                                     <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
-                                <br>
+             
+                            </div>      
+                             <div class="telegram col-md-4  col-sm-4 col-sm-4 column">
+                                    <div><a href='https://telegram.me/share/url?url=' onclick='window.open(&apos;https://telegram.me/share/url?url==&apos;+encodeURIComponent(location.href)+&apos;&amp;bodytext=&amp;tags=&amp;text=&apos;+encodeURIComponent(document.title));return false;' rel='nofollow' style='text-decoration:none;' title='Share on Telegram'><img src='images/telegram.jpg' style='height:23px; width:auto'/></a></div>
                             </div>
-                            
+                                                 
                             <br><br>
                         </div>
                     </div><br>

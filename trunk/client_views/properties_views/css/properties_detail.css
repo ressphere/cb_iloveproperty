@@ -224,13 +224,11 @@
     min-height: 300px
 }
 
-@media (max-width: 990px) {
-    .g-plus, .twitter, .fb, .telegram, .line {
-        margin-bottom: 20px;
-    }
-    .contact_div {
-        margin-bottom: 20px;
-    }
+.g-plus, .twitter, .fb, .telegram, .line, .whatsapp {
+    margin-bottom: 20px;
+}
+.contact_div {
+    margin-bottom: 20px;
 }
 
 #frameMap {
