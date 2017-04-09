@@ -188,7 +188,7 @@
 }
 
 @media (max-width: 990px) {
-    .g-plus, .twitter, .fb {
+    .g-plus, .twitter, .fb, .telegram, .line, .whatsapp {
         margin-bottom: 20px;
     }
     .contact_div {
