@@ -116,9 +116,9 @@
                            
                             
                              <div class="whatsapp col-md-4  col-sm-4 col-sm-4 column">
-                                    <a href="whatsapp://send" data-text="Take a look at this awesome deal" data-href="{{current_url}}">
+                                 <a href="whatsapp://send?text=Let's check out this good deal" data-action="share/whatsapp/share">
                                         <img src='images/whatsapp.jpg' style='height:25px; width:auto'/>
-                                    </a>      
+                                 </a>      
                              </div>
                              <div class="line col-md-4  col-sm-4 col-sm-4 column">
                     
