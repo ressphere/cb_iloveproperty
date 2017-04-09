@@ -110,7 +110,7 @@
                                 <div class="fb-share-button preview-none-click" data-href="{{current_url}}" data-layout="button_count"></div>
                             </div>
                              <div class="whatsapp col-md-4  col-sm-4 col-sm-4 column">
-                                 <a href="whatsapp://send?text=Let's check out this good deal" data-action="share/whatsapp/share">
+                                 <a href="whatsapp://send?text=Let's check out this good deal: {{current_url}} " data-action="share/whatsapp/share">
                                         <img src='images/whatsapp.jpg' style='height:25px; width:auto'/>
                                  </a>      
                              </div>
