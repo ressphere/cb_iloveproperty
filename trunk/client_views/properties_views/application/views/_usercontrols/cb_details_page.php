@@ -116,7 +116,7 @@
                            
                             
                              <div class="whatsapp col-md-4  col-sm-4 col-sm-4 column">
-                                 <a href="whatsapp://send?text=Let's check out this good deal" data-action="share/whatsapp/share">
+                                 <a href="whatsapp://send?text=Let's check out this good deal!!!" data-action="share/whatsapp/share">
                                         <img src='images/whatsapp.jpg' style='height:25px; width:auto'/>
                                  </a>      
                              </div>
