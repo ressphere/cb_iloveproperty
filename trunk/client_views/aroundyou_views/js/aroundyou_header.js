@@ -18,6 +18,7 @@ aroundyou_header_agm.controller("aroundyou_header__ng__CONTROLLER", function($sc
     angular.element(document).ready(
         function()
         {
+            
             $scope.aroundyou_base_obj.setup_auth_ui();
             $scope.aroundyou_base_obj.preload_login();
         }

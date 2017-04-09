@@ -6,7 +6,7 @@
     require_once '_utils/aroundyou_utils__DataServer.php';
     // Request necessary PHP ---- End ----
     
-    class aroundyou_user_registration extends aroundyou_base
+    class cb_user_registration extends aroundyou_base
     {
         
         ####### This function will load the login page######################################
@@ -82,6 +82,8 @@
                  {
                      //Perform registration
                      $phone = "($area)$phone";
+                     // MY: need to support this as display is wron, CM doen't port over to here, need copy from base to general
+                     //$phone = $this->_getCorrectFormatPhone("($area)$phone", $country);
                      $Members_Info["username"] = $use_username ? $email : ''; 
                      $Members_Info["email"] = $email;
                      $Members_Info["password"] = $password;
@@ -353,7 +355,7 @@
             {
                 $activate_content["Logo"] = $this->logo;
             }
-            $this->extemplate->write_view('contents', '_usercontrols/aroundyou_user_registration', $activate_content, TRUE);
+            $this->extemplate->write_view('contents', '_usercontrols/cb_user_registration', $activate_content, TRUE);
             $this->extemplate->render();
         }
 

@@ -34,16 +34,7 @@ var get_aroundyou_base = function() {
             Extends: get_base(),
             Initialize: function( private ){       
                 this.parent.Initialize();
-                private.enter_form = "index.php/aroundyou_user_registration/loginView";
-                private.exit_form = "index.php/aroundyou_user_registration/logoutView";
-                private.login = "index.php/aroundyou_user_registration/beginLogin";
-                private.register_form = "index.php/aroundyou_user_registration/registerView";
-                private.logout = "index.php/aroundyou_user_registration/logout";
-                private.login_check = "index.php/aroundyou_user_registration/isLogin";
-                private.get_user_info = "index.php/aroundyou_user_registration/get_user_info";
-                private.reload_captcha = "index.php/aroundyou_user_registration/create_captcha";
-                private.forgot_password = "index.php/aroundyou_user_registration/forgotpassView";
-                private.wsdl_path = "index.php/aroundyou_user_registration/get_wsdl_base_url";
+                
                 
             },
             Private:{
