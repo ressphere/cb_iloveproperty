@@ -100,7 +100,7 @@ class aroundyou_base extends CI_Controller {
         $this->extemplate->add_js( $this->wsdl_url . 'js/angular.min.js', 'import', FALSE, FALSE); // Provide angular capability for fast UI support (https://angularjs.org/)
         //$this->extemplate->add_js( $this->wsdl_url . 'js/angular-elif.js', 'import', FALSE, FALSE);
         
-        $this->extemplate->add_js( $this->wsdl_url . 'js/base.js', 'import', FALSE, FALSE); // Ressphere base JS
+        
         
         //$this->extemplate->add_js('https://www.google.com/recaptcha/api.js', 'import', FALSE, FALSE);
         $this->extemplate->add_js('http://www.google.com/recaptcha/api/js/recaptcha_ajax.js', 'import', FALSE, FALSE); // Support captcha to avoid script/spam/hack
@@ -114,7 +114,7 @@ class aroundyou_base extends CI_Controller {
         
         $this->extemplate->add_js($this->wsdl_url . 'js/_utils/angular-sanitize.min.js', 'import', FALSE, FALSE); // Angular hack prevent JS (https://docs.angularjs.org/api/ngSanitize)
         $this->extemplate->add_js($this->wsdl_url . 'js/_ckeditor/ckeditor.min.js', 'import', FALSE, FALSE); // Editor for comment/formatting string (http://ckeditor.com/)
-        
+        $this->extemplate->add_js( $this->wsdl_url . 'js/base.js', 'import', TRUE, FALSE); // Ressphere base JS
         $this->extemplate->add_js('js/aroundyou_base.js'); // Around You Service special base JS
         $this->extemplate->add_js('js/aroundyou_header.js'); // Around You Service header JS
         
@@ -402,7 +402,7 @@ class aroundyou_base extends CI_Controller {
     {
             $title = "404 Page Not Found";
             
-            $this->extemplate->set_extemplate('page404_home');
+            $this->extemplate->set_extemplate('aroundyou_404_page');
             #$this->SEO_Tags($content);
             //$this->extemplate->write('title', $title);
             $this->extemplate->add_js($this->wsdl_url . 'js/jquery.min.js', 'import', FALSE, FALSE);
@@ -433,7 +433,7 @@ class aroundyou_base extends CI_Controller {
     {
             $title = "403 Forbidden";
             
-            $this->extemplate->set_extemplate('page403_home');
+            $this->extemplate->set_extemplate('aroundyou_403_page');
             #$this->SEO_Tags($content);
             $this->extemplate->write('title', $title);
             $this->extemplate->add_js($this->wsdl_url . 'js/jquery.min.js', 'import', FALSE, FALSE);

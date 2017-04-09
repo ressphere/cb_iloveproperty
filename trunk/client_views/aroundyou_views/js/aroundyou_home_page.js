@@ -14,11 +14,11 @@ var aroundyou_home_agm = angular.module("aroundyou_home__ng__APP",['uiGmapgoogle
 
 aroundyou_home_agm.controller("aroundyou_home__ng__CONTROLLER", function($scope){
     // ------ Variable declare and initialize section --- Start ----------------
-    $scope.aroundyou_base_obj = AroundYou_base__base_Object.getInstance();
+    //$scope.aroundyou_base_obj = AroundYou_base__base_Object.getInstance();
     
     // Field use variable
-    $scope.base_url = $scope.aroundyou_base_obj.getBaseUrl();
-    $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
+    //$scope.base_url = $scope.aroundyou_base_obj.getBaseUrl();
+    //$scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
     
     // ------ Variable declare and initialize section --- End ----------------
     

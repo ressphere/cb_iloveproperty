@@ -421,7 +421,7 @@ class CI_exTemplate {
             $js = '<script type="text/javascript" src="'. $filepath .'"';
             if ($defer)
             {
-               $js .= ' defer="defer"';
+               $js .= ' defer';
             }
             $js .= "></script>";
             break;

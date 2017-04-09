@@ -72,7 +72,7 @@
 
         <!-- This forming the popup -->
         <?php echo $pop_up_content;?>
-        
+      
     </body>
 
 </html>

@@ -51,5 +51,23 @@ $extemplate['old_default']['parser'] = 'parser';
 $extemplate['old_default']['parser_method'] = 'parse';
 $extemplate['old_default']['parse_template'] = TRUE;
 
+$extemplate['aroundyou_404_page']['extemplate'] = 'page404_home';
+$extemplate['aroundyou_404_page']['regions'] = array(
+'title',
+'content'
+);
+$extemplate['aroundyou_404_page']['parser'] = 'parser';
+$extemplate['aroundyou_404_page']['parser_method'] = 'parse';
+$extemplate['aroundyou_404_page']['parse_template'] = TRUE;
+
+$extemplate['aroundyou_403_page']['extemplate'] = 'page404_home';
+$extemplate['aroundyou_403_page']['regions'] = array(
+'title',
+'content'
+);
+$extemplate['aroundyou_403_page']['parser'] = 'parser';
+$extemplate['aroundyou_403_page']['parser_method'] = 'parse';
+$extemplate['aroundyou_403_page']['parse_template'] = TRUE;
+
 $config = array();
 ?>
