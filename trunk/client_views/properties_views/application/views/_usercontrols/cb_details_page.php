@@ -116,14 +116,12 @@
                            
                             
                              <div class="whatsapp col-md-4  col-sm-4 col-sm-4 column">
-       
-                                    <a href="whatsapp://send?text={{current_url}}" data-action="share/whatsapp/share">
+                                    <a href="whatsapp://send" data-text="Take a look at this awesome deal" data-href="{{current_url}}">
                                         <img src='images/whatsapp.jpg' style='height:25px; width:auto'/>
-                                    </a>
-      
-                            </div>
+                                    </a>      
+                             </div>
                              <div class="line col-md-4  col-sm-4 col-sm-4 column">
-                         
+                    
 
                                     <div class="line-it-button" data-lang="en" data-type="share-a" data-url="{{current_url}}" style="display: none;"></div>
                                     <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
