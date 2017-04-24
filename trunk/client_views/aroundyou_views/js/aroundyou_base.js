@@ -51,8 +51,8 @@ var get_aroundyou_base = function() {
  * Following are the common apps for aroundyou
  */
 
-var aroundyou_base_apps = angular.module("aroundyou_base_apps",['ngAutocomplete', 'ngGPlaces', 'google-maps'.ns(),'ngSanitize']);
-
+var aroundyou_base_apps = angular.module("aroundyou_base_apps",['uiGmapgoogle-maps']);
+/*
 aroundyou_base_apps.controller('google_maps', function($scope, $http, ngGPlacesAPI) {
         // <editor-fold desc="Google place autocomplete angular settings"  defaultstate="collapsed">
         $scope.google_maps = {
@@ -126,3 +126,4 @@ aroundyou_base_apps.controller('google_maps', function($scope, $http, ngGPlacesA
         // </editor-fold>
         // </editor-fold>
 });
+*/

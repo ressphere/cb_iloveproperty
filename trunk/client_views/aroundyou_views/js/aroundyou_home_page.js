@@ -13,26 +13,59 @@ ng_map_profile.config(function(ngGPlacesAPIProvider, $compileProvider) {
         });
 });*/
 // </editor-fold>
-  
+
 // ================== Angular Implementation ====== Start ==============
+
+/* 
+ *  This directive is use to adjust width of the content
+ */
+aroundyou_base_apps.directive('resize', function ($window) {
+    return function (scope, element) {
+        var w = angular.element($window);
+        scope.getWindowDimensions = function () {
+            return {
+                'h': w.height(),
+                'w': w.width()
+            };
+        };
+        scope.$watch(scope.getWindowDimensions, function (newValue, oldValue) {
+            scope.style = function () {
+                return {
+                    'height': (newValue.h - (57 + 40)) + 'px',
+                    'width': (newValue.w - 100) + 'px'
+                };
+            };
+
+        }, true);
+
+        w.bind('resize', function () {
+            scope.$apply();
+        });
+    }
+})
+
+/*
+ *  Follwing are the controller contain all the main function
+ */
 aroundyou_base_apps.controller('aroundyou_home__ng__CONTROLLER', function(
         $scope)
 {
     // ------ Variable declare and initialize section --- Start ----------------
-    /*
     $scope.aroundyou_base_obj = AroundYou_base__base_Object.getInstance();
-    alert("Dsfs");
     // Field use variable
     $scope.base_url = $scope.aroundyou_base_obj.getBaseUrl();
-    */
+    $scope.map = { center: { latitude: 5.416665, longitude: 100.3166654 }, zoom: 15 };  
     
+    
+     
     // ------ Variable declare and initialize section --- End ----------------
     
     // ------ UI Feature --- Start ----------------
     angular.element(document).ready(
         function()
         {
-            alert("hihi");
+            //$('.aroundyou_google_map_div').css({ height: $(window).innerHeight() });
+            
             // initialize google map
             //initialize_google_map(100, 20);
         }

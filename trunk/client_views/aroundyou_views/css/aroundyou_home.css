@@ -14,7 +14,14 @@
     width: 200px;
 }
 
+/*
+.angular-google-map-container { height: 400px; }
+*/
+
 .angular-google-map-container {
-    height: 100%;
-    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 16px;
+    left: 15px;
 }

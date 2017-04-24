@@ -115,7 +115,7 @@ class aroundyou_base extends CI_Controller {
         $this->extemplate->add_js( $this->wsdl_url . 'js/base.js', 'import', TRUE, FALSE); // Ressphere base JS
         
         // For google map and auto complete
-        $this->extemplate->add_js('https://maps.googleapis.com/maps/api/js?key=AIzaSyAVInaFearxQZLCCYJ05slOyCDyAnKKox8', 'import', FALSE, FALSE); // Google map API
+        $this->extemplate->add_js('https://maps.googleapis.com/maps/api/js?key=AIzaSyAW8rCEHK9y0-D16J2IsErCQ9rjUyuj1Cc', 'import', FALSE, FALSE); // Google map API. API key is under gmail account "Ressphere"
         $this->extemplate->add_js($this->wsdl_url . 'js/angular-google-maps.min.js', 'import', FALSE, FALSE); // Angular wrap around google map  (https://angular-ui.github.io/angular-google-maps)
         $this->extemplate->add_js($this->wsdl_url . 'js/ngAutocomplete.js', 'import', FALSE, FALSE); // Angular string auto complete
         $this->extemplate->add_js($this->wsdl_url . 'js/angularjs-google-places.js', 'import', FALSE, FALSE); // Angular auto complete on google map place
