@@ -406,7 +406,7 @@ class CI_exTemplate {
       $js = NULL;
       
       $this->CI->load->helper('url');
-      
+      $version = $this->CI->config->item('version');
       switch ($type)
       {
          case 'import':
@@ -418,7 +418,7 @@ class CI_exTemplate {
             {
                 $filepath = $script;
             }
-            $js = '<script type="text/javascript" src="'. $filepath .'"';
+            $js = '<script type="text/javascript" src="'. $filepath . "?".$version.'"';
             if ($defer)
             {
                $js .= ' defer="defer"';
@@ -472,6 +472,7 @@ class CI_exTemplate {
       $css = NULL;
       
       $this->CI->load->helper('url');
+      $version = $this->CI->config->item('version');
       if ($use_base)
       {
         $filepath = base_url() . $style;
@@ -485,7 +486,7 @@ class CI_exTemplate {
       {
          case 'link':
             
-            $css = '<link type="text/css" rel="stylesheet" href="'. $filepath .'"';
+            $css = '<link type="text/css" rel="stylesheet" href="'. $filepath . "?".$version.'"';
             if ($media)
             {
                $css .= ' media="'. $media .'"';

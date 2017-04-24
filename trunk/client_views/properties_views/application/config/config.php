@@ -376,6 +376,10 @@ $config['webservice'] = 'localhost';
 $config['website_name'] = 'ressphere.com';
 $config['webmaster_email'] = 'admin@ressphere.com';
 
+/****************************************
+ * Versioning require for CSS and js
+ ****************************************/
+$config['version'] = 1000;
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
