@@ -373,5 +373,10 @@ $config['rewrite_short_tags'] = TRUE;
 $config['proxy_ips'] = '';
 $config['webservice'] = 'localhost';
 
+/****************************************
+ * Versioning require for CSS and js
+ ****************************************/
+$config['version'] = 1000;
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */
