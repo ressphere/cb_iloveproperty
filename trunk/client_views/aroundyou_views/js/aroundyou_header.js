@@ -3,9 +3,7 @@
  ******************************************************************************/
 
 // ================== Angular Implementation ====== Start ==============
-var aroundyou_header_agm = angular.module("aroundyou_header__ng__APP",[]);
-
-aroundyou_header_agm.controller("aroundyou_header__ng__CONTROLLER", function($scope){
+aroundyou_base_apps.controller("aroundyou_header__ng__CONTROLLER", function($scope){
     // ------ Variable declare and initialize section --- Start ----------------
     $scope.aroundyou_base_obj = AroundYou_base__base_Object.getInstance();
     
@@ -18,7 +16,6 @@ aroundyou_header_agm.controller("aroundyou_header__ng__CONTROLLER", function($sc
     angular.element(document).ready(
         function()
         {
-            
             $scope.aroundyou_base_obj.setup_auth_ui();
             $scope.aroundyou_base_obj.preload_login();
         }

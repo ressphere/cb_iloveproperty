@@ -1,5 +1,5 @@
 
-<div ng-app="aroundyou_header__ng__APP" ng-controller="aroundyou_header__ng__CONTROLLER">
+<div ng-controller="aroundyou_header__ng__CONTROLLER">
     <div class="navbar-header col-sm-12" style="height:55px; padding: 5px 15px 5px 15px">
 
         <!-- circle properties logo-->

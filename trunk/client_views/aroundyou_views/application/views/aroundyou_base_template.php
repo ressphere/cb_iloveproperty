@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');?>
-<html lang="en">
+<html lang="en" ng-app="aroundyou_base_apps" >
 
 <!-- -------------------------------------------------------
     This is the base template structure, which the content should build from

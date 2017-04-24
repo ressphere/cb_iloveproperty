@@ -43,7 +43,7 @@ class aroundyou_home extends aroundyou_base
         $this->page_js_css();
 
         // Page content
-        //$this->extemplate->write_view('contents', '_usercontrols/aroundyou_home',array('width'=>500, 'height'=>500) ,TRUE);
+        $this->extemplate->write_view('contents', '_usercontrols/aroundyou_home',array('width'=>500, 'height'=>500) ,TRUE);
         /*$this->extemplate->write_view('features', '_usercontrols/cb_aroundyou_mainb_features', array('feature_list'=>$this->_get_features()), TRUE);
          */
 
@@ -57,19 +57,12 @@ class aroundyou_home extends aroundyou_base
     private function page_js_css()
     {   
         // Load necessary CSS from local site  -- Start
-        //$this->extemplate->add_css('css/aroundyou_home.css'); // Base CSS in local
+        $this->extemplate->add_css('css/aroundyou_home.css'); // Base CSS in local
         
         // Load necessary CSS from local site  -- End
-        
-        // For google map and auto complete
-        /*$this->extemplate->add_js('https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false', 'import', FALSE, FALSE); // Google map API
-        $this->extemplate->add_js($this->wsdl_url . 'js/angular-google-maps.min.js', 'import', FALSE, FALSE); // Angular wrap around google map  (https://angular-ui.github.io/angular-google-maps)
-        $this->extemplate->add_js($this->wsdl_url . 'js/ngAutocomplete.js', 'import', FALSE, FALSE); // Angular string auto complete
-        $this->extemplate->add_js($this->wsdl_url . 'js/angularjs-google-places.js', 'import', FALSE, FALSE); // Angular auto complete on google map place
-        $this->extemplate->add_js($this->wsdl_url . 'js/google_map.js', 'import', FALSE, FALSE);
-        */
+
         //Enable for special handling using js for aroundyou home page
-        //$this->extemplate->add_js('js/aroundyou_home_page.js');
+        $this->extemplate->add_js('js/aroundyou_home_page.js');
     }
     public function check_userdata()
     {
