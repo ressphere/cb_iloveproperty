@@ -375,7 +375,7 @@ $config['proxy_ips'] = '';
 /****************************************
  * Versioning require for CSS and js
  ****************************************/
-$config['version'] = 1000;
+$config['version'] = 1002;
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
