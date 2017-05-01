@@ -29,20 +29,23 @@ aroundyou_base_apps.directive('resize', function ($window) {
             };
         };
         scope.$watch(scope.getWindowDimensions, function (newValue, oldValue) {
-            scope.style = function () {
+            scope.style_aroundyou_google_map = function () {
                 return {
                     'height': (newValue.h - (57 + 40)) + 'px',
-                    'width': (newValue.w - 100) + 'px'
                 };
             };
-
+            scope.style_aroundyou_sidetab = function () {
+                return {
+                    'height': (newValue.h - (57 + 40)) + 'px',
+                };
+            };
         }, true);
-
+        
         w.bind('resize', function () {
             scope.$apply();
         });
-    }
-})
+    };
+});
 
 /*
  *  Follwing are the controller contain all the main function
@@ -115,6 +118,12 @@ aroundyou_base_apps.controller('aroundyou_home__ng__CONTROLLER', function(
     // ------ Google map Feature --- End ----------------
     
     // ------ Angular API --- Start ----------------
+    // To handle sidebar toogling
+    $scope.aroundyou_sidebar_toggle = function(){
+        $(".aroundyou_sidetab_div").toggleClass("toggled");
+        $(".aroundyou_toogle_sidebar_btn_div").toggleClass("toggled");
+    };
+    
     // ------ Angular API --- End ----------------
 });
 // ================== Angular Implementation ====== End ================

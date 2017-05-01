@@ -6,22 +6,93 @@
         Purpose of the stylesheet follows.
 */
 
+/****************************************************
+   Golbal variable
+*******************************************************/
+:root {
+    --aroundyou-sidetab-width: 280px;
+}
+
 /*****************************************************
    Google map related
 *******************************************************/
-#map_canvas {
-    height: 200px;
-    width: 200px;
-}
-
-/*
-.angular-google-map-container { height: 400px; }
-*/
-
 .angular-google-map-container {
     position: absolute;
     top: 0;
     bottom: 0;
     right: 16px;
     left: 15px;
+}
+
+/*****************************************************
+   Side tab related effect and wrapper
+*******************************************************/
+
+.aroundyou_toogle_sidebar_btn_div {
+    position: absolute; 
+    top: 0; 
+    right: 16px; 
+    z-index: 30;
+}
+
+#aroundyou_sidebar_btn {
+    width: 64px;
+    height: 64px;
+    background: transparent url("../images/aroundyou_expend_side_tab_btn.png") no-repeat center center;
+}
+
+.aroundyou_toogle_sidebar_btn_div.toggled {
+    visibility: hidden;
+}
+
+.aroundyou_sidetab_div {
+    visibility: hidden;
+}
+
+.aroundyou_sidetab_div.toggled {
+    position: absolute; 
+    top: 0; 
+    background: white;
+    z-index: 20;
+    visibility: visible;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    right: 0;
+    width: var(--aroundyou-sidetab-width);
+}
+
+/*****************************************************
+   Side tab top button group
+*******************************************************/
+.aroundyou_sidetab_top_btn{
+    height: 64px;
+    border-color: white;
+    width: calc(var(--aroundyou-sidetab-width)/4); 
+}
+
+#aroundyou_sidetab_top_collapse_btn {
+    background: transparent url("../images/aroundyou_collapse_side_tab_btn.png") no-repeat center center;
+}
+
+#aroundyou_sidetab_top_search_btn {
+    background: transparent url("../images/aroundyou_search_btn.png") no-repeat center center;
+}
+#aroundyou_sidetab_top_search_btn.highlight {
+    background: transparent url("../images/aroundyou_search_highlight_btn.png") no-repeat center center;
+}
+
+#aroundyou_sidetab_top_result_btn {
+    background: transparent url("../images/aroundyou_search_result_btn.png") no-repeat center center;
+}
+#aroundyou_sidetab_top_result_btn.highlight {
+    background: transparent url("../images/aroundyou_search_result_highlight_btn.png") no-repeat center center;
+}
+
+#aroundyou_sidetab_top_event_btn {
+    background: transparent url("../images/aroundyou_event_btn.png") no-repeat center center;
+}
+#aroundyou_sidetab_top_event_btn.highlight {
+    background: transparent url("../images/aroundyou_event_highlight_btn.png") no-repeat center center;
 }
