@@ -41,15 +41,7 @@
     background: transparent url("../images/aroundyou_expend_side_tab_btn.png") no-repeat center center;
 }
 
-.aroundyou_toogle_sidebar_btn_div.toggled {
-    visibility: hidden;
-}
-
 .aroundyou_sidetab_div {
-    visibility: hidden;
-}
-
-.aroundyou_sidetab_div.toggled {
     position: absolute; 
     top: 0; 
     background: white;
@@ -95,4 +87,16 @@
 }
 #aroundyou_sidetab_top_event_btn.highlight {
     background: transparent url("../images/aroundyou_event_highlight_btn.png") no-repeat center center;
+}
+
+/*****************************************************
+   Side tab content group -- generic
+*******************************************************/
+.aroundyou_sidetab_scrollable_div {
+    width: var(--aroundyou-sidetab-width);
+    overflow: hidden;
+}
+.aroundyou_sidetab_scrollable {
+    width: var(--aroundyou-sidetab-width);
+    overflow-y: scroll; 
 }

@@ -29,14 +29,21 @@ aroundyou_base_apps.directive('resize', function ($window) {
             };
         };
         scope.$watch(scope.getWindowDimensions, function (newValue, oldValue) {
+            // Google map 
             scope.style_aroundyou_google_map = function () {
                 return {
                     'height': (newValue.h - (57 + 40)) + 'px',
                 };
             };
+            // side tab hight
             scope.style_aroundyou_sidetab = function () {
                 return {
                     'height': (newValue.h - (57 + 40)) + 'px',
+                };
+            };
+            scope.style_aroundyou_sidetab_scrollable = function () {
+                return {
+                    'height': (newValue.h - (57 + 40 + 64)) + 'px',
                 };
             };
         }, true);
@@ -59,7 +66,9 @@ aroundyou_base_apps.controller('aroundyou_home__ng__CONTROLLER', function(
     $scope.base_url = $scope.aroundyou_base_obj.getBaseUrl();
     $scope.map = { center: { latitude: 5.416665, longitude: 100.3166654 }, zoom: 15 };  
     
-    
+    $scope.aroundyou_sidetab_show_search = true;
+    $scope.aroundyou_sidetab_show_result = false;
+    $scope.aroundyou_sidetab_show_event = false;
      
     // ------ Variable declare and initialize section --- End ----------------
     
@@ -120,8 +129,38 @@ aroundyou_base_apps.controller('aroundyou_home__ng__CONTROLLER', function(
     // ------ Angular API --- Start ----------------
     // To handle sidebar toogling
     $scope.aroundyou_sidebar_toggle = function(){
-        $(".aroundyou_sidetab_div").toggleClass("toggled");
-        $(".aroundyou_toogle_sidebar_btn_div").toggleClass("toggled");
+        $(".aroundyou_sidetab_div").toggleClass("ng-hide");
+        $(".aroundyou_toogle_sidebar_btn_div").toggleClass("ng-hide");
+    };
+    
+    $scope.aroundyou_sidebar_search_btn = function(){
+        $("#aroundyou_sidetab_top_search_btn").addClass("highlight");
+        $("#aroundyou_sidetab_top_result_btn").removeClass("highlight");
+        $("#aroundyou_sidetab_top_event_btn").removeClass("highlight");
+        
+        $(".aroundyou_sidetab_content_search_div").removeClass("ng-hide");
+        $(".aroundyou_sidetab_content_result_div").addClass("ng-hide");
+        $(".aroundyou_sidetab_content_event_div").addClass("ng-hide");
+    };
+    
+    $scope.aroundyou_sidebar_result_btn = function(){
+        $("#aroundyou_sidetab_top_search_btn").removeClass("highlight");
+        $("#aroundyou_sidetab_top_result_btn").addClass("highlight");
+        $("#aroundyou_sidetab_top_event_btn").removeClass("highlight");
+        
+        $(".aroundyou_sidetab_content_search_div").addClass("ng-hide");
+        $(".aroundyou_sidetab_content_result_div").removeClass("ng-hide");
+        $(".aroundyou_sidetab_content_event_div").addClass("ng-hide");
+    };
+    
+    $scope.aroundyou_sidebar_event_btn = function(){
+        $("#aroundyou_sidetab_top_search_btn").removeClass("highlight");
+        $("#aroundyou_sidetab_top_result_btn").removeClass("highlight");
+        $("#aroundyou_sidetab_top_event_btn").addClass("highlight");
+        
+        $(".aroundyou_sidetab_content_search_div").addClass("ng-hide");
+        $(".aroundyou_sidetab_content_result_div").addClass("ng-hide");
+        $(".aroundyou_sidetab_content_event_div").removeClass("ng-hide");
     };
     
     // ------ Angular API --- End ----------------
