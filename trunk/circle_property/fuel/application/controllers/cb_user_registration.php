@@ -400,17 +400,20 @@
                 $val_return = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:change_email",
                     json_encode($email));
                 $data = json_decode($val_return, TRUE);
-				$data = $data["data"]["result"];
-                $data['site_name'] =  $this->config->item('website_name');
-                $data['activation_period'] = $this->config->item('email_activation_expire') / 3600;
-                $mail_status = $this->_send_email('activate', $data['email'], $data);
-                if($mail_status)
+                if(!is_null($data))
                 {
-                    $msg = "Activation email is sent to " . $mail . "<BR> Please check your <B>inbox</B> and <B>junk mail</B> to activate your account.";
-                }
-                else
-                {
-                    $msg = "Activation email fail to send to " . $mail;
+                    $data = $data["data"]["result"];
+                    $data['site_name'] =  $this->config->item('website_name');
+                    $data['activation_period'] = $this->config->item('email_activation_expire') / 3600;
+                    $mail_status = $this->_send_email('activate', $data['email'], $data);
+                    if($mail_status)
+                    {
+                        $msg = "Activation email is sent to " . $mail . "<BR> Please check your <B>inbox</B> and <B>junk mail</B> to activate your account.";
+                    }
+                    else
+                    {
+                        $msg = "Activation email fail to send to " . $mail;
+                    }
                 }
                 
             }

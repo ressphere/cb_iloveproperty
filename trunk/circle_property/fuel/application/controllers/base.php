@@ -1994,7 +1994,7 @@ class base extends CI_Controller {
                 $phone_number = json_decode($val_return, TRUE);
                 $country = json_decode($val_return_country, TRUE)["data"]["result"];
                 $country_short_name = NULL;
-                $country_code = "";
+                //$country_code = "";
                 
                 foreach ($this->countries as $key => $value)
                 {
@@ -2005,20 +2005,20 @@ class base extends CI_Controller {
                     }
                 }
                 
-                $country_codes = $this->get_country_phone_code()['countries']['country'];
+                //$country_codes = $this->get_country_phone_code()['countries']['country'];
                 
-                foreach($country_codes as $country_dict)
-                {
-                    if (strtolower($country_dict["-code"]) === strtolower($country_short_name))
-                    {
-                        $country_code = $country_dict["-phoneCode"];
-                    }
-                }
+//                foreach($country_codes as $country_dict)
+//                {
+//                    if (strtolower($country_dict["-code"]) === strtolower($country_short_name))
+//                    {
+//                        $country_code = $country_dict["-phoneCode"];
+//                    }
+//                }
                 $real_phone_number_1 = str_replace("(", "", $phone_number["data"]["result"]);
                 $real_phone_number = str_replace(")", "", $real_phone_number_1);
-                
+
                 $user_info["displayname"] = $this->session->userdata('displayname');
-                $user_info["phone"] = sprintf("%s%s",$country_code, $real_phone_number);
+                $user_info["phone"] = $real_phone_number;
                 $user_info["username"] = $this->session->userdata('username');
 		$user_info["user_id"] = $user_id;
                 $user_info["country"] = $country;
