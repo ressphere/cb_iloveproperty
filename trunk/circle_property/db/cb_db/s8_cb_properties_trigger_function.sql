@@ -126,7 +126,7 @@ BEGIN
   IF  NewListingCount >= 3 THEN
     UPDATE `users` SET `users`.`prop_listing_limit` = NewListingCount WHERE `users`.`id` = User_Id;
   ELSE
-    SET NewListingCount = 3;
+    SET NewListingCount = 1;
     UPDATE `users` SET `users`.`prop_listing_limit` = NewListingCount WHERE `users`.`id` = User_Id;
   END IF;
   IF  NewSmsCount > 0 THEN
