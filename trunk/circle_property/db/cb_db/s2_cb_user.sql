@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `agent`   TINYINT(1) NOT NULL DEFAULT '0',
   `country_id` int COLLATE utf8_bin NOT NULL DEFAULT '1',
-  `prop_listing_limit` int COLLATE utf8_bin DEFAULT '3',
+  `prop_listing_limit` int COLLATE utf8_bin DEFAULT '1',
   `prop_sms_limit` int COLLATE utf8_bin DEFAULT '0',
   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
