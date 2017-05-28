@@ -69,7 +69,49 @@ aroundyou_base_apps.controller('aroundyou_home__ng__CONTROLLER', function(
     $scope.aroundyou_sidetab_show_search = true;
     $scope.aroundyou_sidetab_show_result = false;
     $scope.aroundyou_sidetab_show_event = false;
-     
+    
+    $scope.aroundyou_sidetab_distance_value = 25;
+    $scope.aroundyou_sidetab_distance_min = 5;
+    $scope.aroundyou_sidetab_distance_max = 50;
+    
+    /*
+    $scope.aroundyou_sidetab_state_area = [
+      {state:"Penang", area:["Bayan Lepas", "Teluk Kumba", "Pekaka"]},
+      {state:"Johor", area:["J1", "J2", "J3"]}
+    ];*/
+    
+    $scope.aroundyou_sidetab_state_area =[{
+                            "state": "Penang",
+                            "area_list": [
+                                "Bayan Lepas",
+                                "Teluk Kumba",
+                                "Pekaka"
+                            ]
+                        },{
+                            "state": "Johor",
+                            "area_list": [
+                                "J1",
+                                "J2",
+                                "J3"
+                            ]
+                        }];
+    
+    $scope.aroundyou_sidetab_group_categories =[{
+                            "group": "Restaurant",
+                            "categories_list": [
+                                "Asian Cuisine",
+                                "western Cuisine",
+                                "Fusion Cuisine"
+                            ]
+                        },{
+                            "group": "Car",
+                            "categories_list": [
+                                "Petrol Station",
+                                "Car Wash",
+                                "Car Part shop"
+                            ]
+                        }];
+                    
     // ------ Variable declare and initialize section --- End ----------------
     
     // ------ UI Feature --- Start ----------------

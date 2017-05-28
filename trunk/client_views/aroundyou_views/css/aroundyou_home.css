@@ -93,10 +93,50 @@
    Side tab content group -- generic
 *******************************************************/
 .aroundyou_sidetab_scrollable_div {
-    width: var(--aroundyou-sidetab-width);
     overflow: hidden;
-}
-.aroundyou_sidetab_scrollable {
     width: var(--aroundyou-sidetab-width);
-    overflow-y: scroll; 
 }
+
+.aroundyou_sidetab_scrollable {
+    overflow-y: scroll; 
+    width: var(--aroundyou-sidetab-width);
+}
+
+.aroundyou_sidetab_text{
+    font-size: 10pt;
+    font-family: 'Century Gothic';
+}
+
+/*****************************************************
+   Side tab content group -- search content
+*******************************************************/
+.aroundyou_sidetab_search_wrapper_div {
+    margin-top: 20px;
+    margin-left: 5px;
+    width: calc(100% - 10px);
+}
+
+#aroundyou_sidetab_slider {
+    margin-left: 5px;
+    width: calc(100% - 10px);
+}
+
+.aroundyou_sidetab_space {
+     margin-top:20px;
+}
+
+.aroundyou_sidetab_search_dropbox {
+    margin-left: 5px;
+    width: calc(100% - 10px);
+}
+
+#aroundyou_sidetab_search_btn {
+    margin-left: 5px;
+    width: calc(100% - 10px);
+    height: 30px;
+    margin-top:20px;
+    border-color: transparent;
+    background: transparent url("../images/aroundyou_sidetab_search_btn.png") no-repeat center center;
+}
+
+
