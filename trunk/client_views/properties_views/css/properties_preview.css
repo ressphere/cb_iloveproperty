@@ -128,6 +128,10 @@
     height: 100%
 }
 
+.g-plus, .twitter, .fb, .telegram, .line, .whatsapp {
+    margin-bottom: 20px;
+}
+
  body{
    background-color: #F2F3F7
  }
