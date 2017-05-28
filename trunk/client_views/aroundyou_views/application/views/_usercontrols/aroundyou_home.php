@@ -27,11 +27,13 @@
             <div class="aroundyou_sidetab_scrollable aroundyou_sidetab_content_search_div" ng-style="style_aroundyou_sidetab_scrollable()" resize>
                 <div class="aroundyou_sidetab_search_wrapper_div">
 
+                        <!-- search tab -- Distance-->
                         <p class="text-left col-md-8 aroundyou_sidetab_text">Cover Distance KM</p>
                         <p class="text-right col-md-4 aroundyou_sidetab_text">{{aroundyou_sidetab_distance_value}} KM</P>
 
                         <input id="aroundyou_sidetab_slider" class="col-md-12" type="range" name="aroundyou_sidetab_distance" ng-model="aroundyou_sidetab_distance_value" min="{{aroundyou_sidetab_distance_min}}"  max="{{aroundyou_sidetab_distance_max}}"> 
                         
+                        <!-- search tab -- state_area-->
                         <p class="text-left col-md-12 aroundyou_sidetab_text aroundyou_sidetab_space">Fast Travel State and Area</p>
                         
                         <select class="aroundyou_sidetab_search_dropbox aroundyou_sidetab_text">
@@ -39,7 +41,8 @@
                                 <option ng-repeat='area in state_area.area_list' value='{{area}}'>{{area}}</option>
                             </optgroup>
                         </select>
-                                                
+                        
+                        <!-- search tab -- Categories-->
                         <p class="text-left col-md-12 aroundyou_sidetab_text aroundyou_sidetab_space">category</p>
                         
                         <select class="aroundyou_sidetab_search_dropbox aroundyou_sidetab_text">
@@ -48,6 +51,7 @@
                             </optgroup>
                         </select>
                         
+                        <!-- search tab -- Search Button-->
                         <button type="button"  class="btn btn-primary" id="aroundyou_sidetab_search_btn" ng-click="aroundyou_sidetab_search_event_btn()"></button>   
                 </div>
             </div>
