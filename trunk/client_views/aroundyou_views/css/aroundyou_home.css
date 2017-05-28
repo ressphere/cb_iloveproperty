@@ -39,6 +39,7 @@
     width: 64px;
     height: 64px;
     background: transparent url("../images/aroundyou_expend_side_tab_btn.png") no-repeat center center;
+    background-size: cover;
 }
 
 .aroundyou_sidetab_div {
@@ -62,31 +63,38 @@
     height: 64px;
     border-color: white;
     width: calc(var(--aroundyou-sidetab-width)/4); 
-}
+}   
 
 #aroundyou_sidetab_top_collapse_btn {
     background: transparent url("../images/aroundyou_collapse_side_tab_btn.png") no-repeat center center;
+    background-size: cover;
 }
 
 #aroundyou_sidetab_top_search_btn {
     background: transparent url("../images/aroundyou_search_btn.png") no-repeat center center;
+    background-size: cover;
 }
 #aroundyou_sidetab_top_search_btn.highlight {
     background: transparent url("../images/aroundyou_search_highlight_btn.png") no-repeat center center;
+    background-size: cover;
 }
 
 #aroundyou_sidetab_top_result_btn {
     background: transparent url("../images/aroundyou_search_result_btn.png") no-repeat center center;
+    background-size: cover;
 }
 #aroundyou_sidetab_top_result_btn.highlight {
     background: transparent url("../images/aroundyou_search_result_highlight_btn.png") no-repeat center center;
+    background-size: cover;
 }
 
 #aroundyou_sidetab_top_event_btn {
     background: transparent url("../images/aroundyou_event_btn.png") no-repeat center center;
+    background-size: cover;
 }
 #aroundyou_sidetab_top_event_btn.highlight {
     background: transparent url("../images/aroundyou_event_highlight_btn.png") no-repeat center center;
+    background-size: cover;
 }
 
 /*****************************************************
@@ -137,6 +145,7 @@
     margin-top:20px;
     border-color: transparent;
     background: transparent url("../images/aroundyou_sidetab_search_btn.png") no-repeat center center;
+    background-size:cover;
 }
 
 
