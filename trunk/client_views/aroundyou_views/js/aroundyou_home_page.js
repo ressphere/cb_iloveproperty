@@ -17,7 +17,8 @@ ng_map_profile.config(function(ngGPlacesAPIProvider, $compileProvider) {
 // ================== Angular Implementation ====== Start ==============
 
 /* 
- *  This directive is use to adjust width of the content
+ *  This directive is use to adjust width of the google map and sidetab width 
+ *    and hight to match the browser 
  */
 aroundyou_base_apps.directive('resize', function ($window) {
     return function (scope, element) {
@@ -54,6 +55,7 @@ aroundyou_base_apps.directive('resize', function ($window) {
     };
 });
 
+
 /*
  *  Follwing are the controller contain all the main function
  */
@@ -66,36 +68,34 @@ aroundyou_base_apps.controller('aroundyou_home__ng__CONTROLLER', function(
     $scope.base_url = $scope.aroundyou_base_obj.getBaseUrl();
     $scope.map = { center: { latitude: 5.416665, longitude: 100.3166654 }, zoom: 15 };  
     
+    // Initial value for sidetab button
     $scope.aroundyou_sidetab_show_search = true;
     $scope.aroundyou_sidetab_show_result = false;
     $scope.aroundyou_sidetab_show_event = false;
     
+    // Initial and default value for sidetab search distance 
     $scope.aroundyou_sidetab_distance_value = 25;
     $scope.aroundyou_sidetab_distance_min = 5;
     $scope.aroundyou_sidetab_distance_max = 50;
     
-    /*
-    $scope.aroundyou_sidetab_state_area = [
-      {state:"Penang", area:["Bayan Lepas", "Teluk Kumba", "Pekaka"]},
-      {state:"Johor", area:["J1", "J2", "J3"]}
-    ];*/
-    
+    // Holder for search state and area, @todo - need to move this to backend
     $scope.aroundyou_sidetab_state_area =[{
                             "state": "Penang",
                             "area_list": [
-                                "Bayan Lepas",
-                                "Teluk Kumba",
-                                "Pekaka"
+                                {name:"George Town", location:"k:5.416665::b:100.3166654"},
+                                {name:"Gelugor", location:"k:5.3569197::b:100.2860428"},
+                                {name:"Batu Maung", location:"k:5.2751849::b:100.2496362,14"},
                             ]
                         },{
                             "state": "Johor",
                             "area_list": [
-                                "J1",
-                                "J2",
-                                "J3"
+                                {name:"Kluang", location:"k:2.0246141::b:103.2360842"},
+                                {name:"Kulai", location:"k:1.6507705::b:103.5484342"},
+                                {name:"Sukdai", location:"k:1.5388621::b:103.6188152"},
                             ]
                         }];
     
+    // Holder for search categories, @todo - need to move this to backend
     $scope.aroundyou_sidetab_group_categories =[{
                             "group": "Restaurant",
                             "categories_list": [
@@ -118,54 +118,13 @@ aroundyou_base_apps.controller('aroundyou_home__ng__CONTROLLER', function(
     angular.element(document).ready(
         function()
         {
-            //$('.aroundyou_google_map_div').css({ height: $(window).innerHeight() });
             
-            // initialize google map
-            //initialize_google_map(100, 20);
         }
     );
     // ------ UI Feature --- End ----------------
     
     // ------ Google map Feature --- Start ----------------
-    /*
-    $controller('google_maps', {$scope: $scope, ngGPlacesAPI: ngGPlacesAPI, flowFactory: flowFactory});
-    $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
     
-    $scope.get_ngGPlacesAPI = function()
-    {
-          return ngGPlacesAPI;
-    };
-    
-    var initialize_google_map = function(lat, lng) {
-        if (Object.keys($scope.googleMap).length > 0)
-        {
-            var EnlargeControlDiv = document.createElement('div');
-            var map = $scope.googleMap.getGMap();
-
-            GoogleMapControl(EnlargeControlDiv, $scope, ngGPlacesAPI);
-
-            EnlargeControlDiv.index = 1;
-            map.controls[google.maps.ControlPosition.TOP_RIGHT].push(EnlargeControlDiv);
-            //Disable marker to be draggable
-            var markers = $scope.googleMarker.getGMarkers();
-            for (var i = 0; i < markers.length; i++)
-            {
-                markers[i].draggable = false;
-                markers[i].setPosition(
-                        {
-                            lat: lat,
-                            lng: lng
-                        });
-            }
-            $scope.map.center.latitude = lat;
-            $scope.marker.coords.latitude = lat;
-            $scope.map.center.longitude = lng;
-            $scope.marker.coords.longitude = lng;
-
-
-        }
-    };
-    */
     // ------ Google map Feature --- End ----------------
     
     // ------ Angular API --- Start ----------------
@@ -175,35 +134,35 @@ aroundyou_base_apps.controller('aroundyou_home__ng__CONTROLLER', function(
         $(".aroundyou_toogle_sidebar_btn_div").toggleClass("ng-hide");
     };
     
-    $scope.aroundyou_sidebar_search_btn = function(){
-        $("#aroundyou_sidetab_top_search_btn").addClass("highlight");
+    // To handle sidebar top button toogling
+    $scope.aroundyou_sidebar_top_btn = function(btn_type){
+        
+        // Reset everything
+        $("#aroundyou_sidetab_top_search_btn").removeClass("highlight");
         $("#aroundyou_sidetab_top_result_btn").removeClass("highlight");
         $("#aroundyou_sidetab_top_event_btn").removeClass("highlight");
         
-        $(".aroundyou_sidetab_content_search_div").removeClass("ng-hide");
-        $(".aroundyou_sidetab_content_result_div").addClass("ng-hide");
-        $(".aroundyou_sidetab_content_event_div").addClass("ng-hide");
-    };
-    
-    $scope.aroundyou_sidebar_result_btn = function(){
-        $("#aroundyou_sidetab_top_search_btn").removeClass("highlight");
-        $("#aroundyou_sidetab_top_result_btn").addClass("highlight");
-        $("#aroundyou_sidetab_top_event_btn").removeClass("highlight");
-        
-        $(".aroundyou_sidetab_content_search_div").addClass("ng-hide");
-        $(".aroundyou_sidetab_content_result_div").removeClass("ng-hide");
-        $(".aroundyou_sidetab_content_event_div").addClass("ng-hide");
-    };
-    
-    $scope.aroundyou_sidebar_event_btn = function(){
-        $("#aroundyou_sidetab_top_search_btn").removeClass("highlight");
-        $("#aroundyou_sidetab_top_result_btn").removeClass("highlight");
-        $("#aroundyou_sidetab_top_event_btn").addClass("highlight");
-        
         $(".aroundyou_sidetab_content_search_div").addClass("ng-hide");
         $(".aroundyou_sidetab_content_result_div").addClass("ng-hide");
-        $(".aroundyou_sidetab_content_event_div").removeClass("ng-hide");
-    };
+        $(".aroundyou_sidetab_content_event_div").addClass("ng-hide");
+        
+        // Group enable per specified type of btn click
+        if (btn_type === "search")
+        {
+            $("#aroundyou_sidetab_top_search_btn").addClass("highlight");
+            $(".aroundyou_sidetab_content_search_div").removeClass("ng-hide");
+        }
+        else if (btn_type === "result")
+        {
+            $("#aroundyou_sidetab_top_result_btn").addClass("highlight");
+            $(".aroundyou_sidetab_content_result_div").removeClass("ng-hide");
+        }
+        else if (btn_type === "event")
+        {
+            $("#aroundyou_sidetab_top_event_btn").addClass("highlight");
+            $(".aroundyou_sidetab_content_event_div").removeClass("ng-hide");
+        }
+    }; 
     
     // ------ Angular API --- End ----------------
 });

@@ -16,9 +16,9 @@
         <!-- This handle side tab top button -->
         <div class="btn-group aroundyou_sidetab_top_btn_div">
             <button type="button"  class="btn btn-primary aroundyou_sidetab_top_btn" id="aroundyou_sidetab_top_collapse_btn" ng-click="aroundyou_sidebar_toggle()"></button>
-            <button type="button"  class="btn btn-primary aroundyou_sidetab_top_btn highlight" id="aroundyou_sidetab_top_search_btn" ng-click="aroundyou_sidebar_search_btn()"></button>
-            <button type="button"  class="btn btn-primary aroundyou_sidetab_top_btn" id="aroundyou_sidetab_top_result_btn" ng-click="aroundyou_sidebar_result_btn()"></button>
-            <button type="button"  class="btn btn-primary aroundyou_sidetab_top_btn" id="aroundyou_sidetab_top_event_btn" ng-click="aroundyou_sidebar_event_btn()"></button>   
+            <button type="button"  class="btn btn-primary aroundyou_sidetab_top_btn highlight" id="aroundyou_sidetab_top_search_btn" ng-click="aroundyou_sidebar_top_btn('search')"></button>
+            <button type="button"  class="btn btn-primary aroundyou_sidetab_top_btn" id="aroundyou_sidetab_top_result_btn" ng-click="aroundyou_sidebar_top_btn('result')"></button>
+            <button type="button"  class="btn btn-primary aroundyou_sidetab_top_btn" id="aroundyou_sidetab_top_event_btn" ng-click="aroundyou_sidebar_top_btn('event')"></button>   
         </div>
  
         
@@ -38,7 +38,7 @@
                         
                         <select class="aroundyou_sidetab_search_dropbox aroundyou_sidetab_text">
                             <optgroup ng-repeat='state_area in aroundyou_sidetab_state_area' label="{{state_area.state}}">
-                                <option ng-repeat='area in state_area.area_list' value='{{area}}'>{{area}}</option>
+                                <option ng-repeat='area_info in state_area.area_list' value='{{area_info.location}}'>{{area_info.name}}</option>
                             </optgroup>
                         </select>
                         
