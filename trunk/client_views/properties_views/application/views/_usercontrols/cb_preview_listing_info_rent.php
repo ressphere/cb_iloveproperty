@@ -85,7 +85,7 @@
                             
                         </div>
                     </div><br/>
-                    <div class="social_media_div gothic_font row">
+                    <div class="social_media_div rent gothic_font row">
                         <div class="row title">
                             <span class="gothic_bold_font">Social Media</span>
                             
@@ -144,6 +144,7 @@
                                     <span id="{{detail.id}}">{{detail.value}}</span>
                                 </div><br><br>
                             </div>
+                            <br><br><br>
                         </div>
                         <div class="col-md-6 column gothic_font">
                             <div class="row" ng-repeat="detail in property_information.details[1]">
@@ -157,7 +158,6 @@
                                 </div><br><br>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
 	</div><br>

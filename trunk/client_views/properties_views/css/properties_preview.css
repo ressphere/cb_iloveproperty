@@ -206,4 +206,57 @@
 }
 /*#E1D2BF*/
 
+@media only screen and (min-width: 992px) {
+    .social_media_div.sell {
+        padding-top: 234px;
+    }
+    .social_media_div.rent {
+        padding-top: 0px
+    }
+}
+
+@media only screen and (min-width: 512px)
+{
+    .borderless>tbody>tr>td, .borderless>tbody>th{
+        font-size: 12px
+    }
+    .borderless>tbody>tr>td>input{
+        font-size: 12px
+    }
+}
+
+.purchase_price_input
+{
+    margin-right: 100px
+}
+
+.loan_total_input
+{
+    margin-right: 130px
+}
+
+.loan_percentage_input
+{
+    margin-right: 32px
+}
+
+.loan_loaned_total_input
+{
+    margin-right: 104px
+}
+
+.interest_rate_input
+{
+    margin-right: 90px
+}
+
+.loan_period_input
+{
+    margin-right: 65px
+}
+
+.monthly_installment_input
+{
+    margin-right: 70px
+}
 
