@@ -253,3 +253,9 @@
     cursor: default;
 }
 
+@media (min-width: 992px) {
+    .social_media_div {
+        padding-top: 97px;
+    }
+}
+
