@@ -266,6 +266,12 @@
     }
 }
 
+@media only screen and (max-width: 992px) {
+    .social_media_div {
+        margin-bottom: 1.2em
+    }
+}
+
 @media only screen and (min-width: 512px)
 {
     .borderless>tbody>tr>td, .borderless>tbody>th{

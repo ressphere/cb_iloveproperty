@@ -130,11 +130,8 @@
                              <div class="telegram col-md-4  col-sm-4 col-sm-4 column">
                                     <div><a href='https://telegram.me/share/url?url=' onclick='window.open(&apos;https://telegram.me/share/url?url==&apos;+encodeURIComponent(location.href)+&apos;&amp;bodytext=&amp;tags=&amp;text=&apos;+encodeURIComponent(document.title));return false;' rel='nofollow' style='text-decoration:none;' title='Share on Telegram'><img src='images/telegram.jpg' style='height:23px; width:auto'/></a></div>
                             </div>
-                                                 
-                            <br><br>
                         </div>
-                    </div><br>
-                    
+                    </div>
 		</div>
 		<div class="col-md-6 column gothic_font">
                     <div class="row title">
@@ -195,7 +192,7 @@
                     </div>
                       
                 </div>
-	</div><br><br>        
+	</div><br>
         
        <div class="row clearfix">
                 <div class="col-md-12 column gothic_font">
@@ -225,15 +222,15 @@
                         </div>
                     </div>
 		</div>
-        </div><br><br>
+        </div><br>
 	<div class="row clearfix">
                <div class="col-md-12 column gothic_font">
-                   <br><div class="row title">
+                    <div class="row title">
                         <span class="gothic_bold_font">Remark</span>         
                     </div>
                     <div class="row information" id='remark'>
                         <br><span ng-bind-html="property_information.Remark"/></div>
-		</div><br>
+		</div>
         </div><br>
         <div class="row clearfix">
 		<div class="sell col-md-12 column gothic_font">
@@ -288,7 +285,7 @@
                         </div>
                     </div>
 		</div>
-	</div><br>
+        </div><br>
         <div id="nearest_place" class="row clearfix">
                 <div class="col-md-12 column gothic_font">
                     <div class="row title">
@@ -542,5 +539,5 @@ I am interested in your property.&#13;&#10;Please contact me if the listed prope
                 </div>
             </center>
         </div>
-       </div><br/><br/>
+       </div><br/>
 </div>
