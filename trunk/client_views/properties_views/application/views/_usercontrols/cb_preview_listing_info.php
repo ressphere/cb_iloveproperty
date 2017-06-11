@@ -33,7 +33,7 @@
 				</div><br><br>
 			</div>
 		</div>
-	</div><br>
+        </div><br>
 	<div class="row clearfix">
 		<div class="col-md-6 column">
                     <div class="contact_div gothic_font row">
@@ -124,7 +124,7 @@
                             </div>
                             <br><br>
                         </div>
-                    </div><br>
+                    </div>
                     
 		</div>
 		<div class="col-md-6 column gothic_font">
@@ -179,7 +179,7 @@
                     </div>
                       
                 </div>
-	</div><br><br>        
+	</div><br>
         
        <div class="row clearfix">
                 <div class="col-md-12 column gothic_font">
@@ -209,15 +209,15 @@
                         </div>
                     </div>
 		</div>
-        </div><br><br>
+        </div><br>
 	<div class="row clearfix">
                <div class="col-md-12 column gothic_font">
-                   <br><div class="row title">
+                    <div class="row title">
                         <span class="gothic_bold_font">Remark</span>         
                     </div>
                     <div class="row information" id='remark'>
                         <br><span ng-bind-html="property_information.Remark"/></div>
-		</div><br>
+		</div>
             </div><br>
         <div class="row clearfix">
 		<div class="col-md-12 column gothic_font">
