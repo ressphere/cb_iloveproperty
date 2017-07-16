@@ -33,6 +33,9 @@
             <span>Upload Photo</span>
         </div>
         <br>
+        <div>
+            <span class='error' ng-bind="uploadImageError"/>
+        </div>
         <div id="ng-app"
             flow-prevent-drop="" flow-drag-enter="dropClass=&#39;drag-over&#39;" 
             flow-name="uploader.flow"

@@ -11,7 +11,7 @@ ng_map_profile.config(function(ngGPlacesAPIProvider){
 
 ng_map_profile.controller('uploadProfile', function($injector, $scope, $controller, ngGPlacesAPI, flowFactory, $http, $sce) {
         $controller('listing_prefix', {$scope: $scope});
-
+        $scope.uploadImageError = "";
         if(typeof ngGPlacesAPI !== 'undefined')
         {
                 $controller('google_maps', {$scope: $scope, ngGPlacesAPI:ngGPlacesAPI, flowFactory: flowFactory});
@@ -1825,7 +1825,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
             });
             flowFactory.flow.on('uploadStart', function () {
                     $scope.disable_button = 1;
-                    $scope.photo_upload_status = "Processing..."; 
+                    $scope.photo_upload_status = "Processing...";
                 });
             flowFactory.flow.on('fileAdded', function (file, event) {
                 if(file.size > 5000000)
@@ -1844,9 +1844,14 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 if (file.error === true)
                 {
                     console.log(file.error_msg);
+                    $scope.uploadImageError = file.error_msg;
                     file.done = true;
                     file.flowObj.preventEvent(event);
                     return false;
+                }
+                else
+                {
+                    $scope.uploadImageError = "";
                 }
                 
             });

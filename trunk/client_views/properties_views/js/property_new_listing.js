@@ -18,7 +18,7 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
         {
                 $controller('google_maps', {$scope: $scope, flowFactory: flowFactory});
         }
-
+        $scope.uploadImageError = "";
         $controller('facilities', {$scope: $scope});
         // <editor-fold desc="configure photo uploader"  defaultstate="collapsed">
         $scope.message = 'uploader';
@@ -1538,9 +1538,14 @@ ng_map_profile.controller('uploadProfile', function($injector, $scope, $controll
                 if (file.error === true)
                 {
                     console.log(file.error_msg);
+                    $scope.uploadImageError = file.error_msg;
                     file.done = true;
                     file.flowObj.preventEvent(event);
                     return false;
+                }
+                 else
+                {
+                    $scope.uploadImageError = "";
                 }
                 
             });
