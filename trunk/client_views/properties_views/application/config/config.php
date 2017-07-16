@@ -379,7 +379,7 @@ $config['webmaster_email'] = 'admin@ressphere.com';
 /****************************************
  * Versioning require for CSS and js
  ****************************************/
-$config['version'] = 1002;
+$config['version'] = 1004;
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

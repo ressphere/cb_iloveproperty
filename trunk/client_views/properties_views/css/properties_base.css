@@ -339,4 +339,9 @@ select:disabled {
     }
 }
 
+.upload_properties .error
+{
+    color: red
+}
+
 /****End migrate from home css**/

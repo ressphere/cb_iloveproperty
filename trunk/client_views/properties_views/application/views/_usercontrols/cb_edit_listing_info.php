@@ -33,6 +33,11 @@
             <span>Upload Photo</span>
         </div>
         <br>
+        <div>
+            <span class='error' ng-bind="uploadImageError"/>
+        </div>
+        
+     
         <div ng-model="reload_photo"> 
             <div ng-show="reload_photo" 
                 id="ng-app"
