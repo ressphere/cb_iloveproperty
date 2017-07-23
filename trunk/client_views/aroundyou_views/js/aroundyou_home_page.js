@@ -3,7 +3,12 @@
  ******************************************************************************/
 // <editor-fold desc="set google nearby place radius and type(special for property)"  defaultstate="collapsed">
 /*
-ng_map_profile.config(function(ngGPlacesAPIProvider, $compileProvider) {
+aroundyou_base_apps.config(function(ngGPlacesAPIProvider, $compileProvider) {
+    
+});
+*/
+/*
+aroundyou_base_apps.config(function(ngGPlacesAPIProvider, $compileProvider) {
             $compileProvider.aHrefSanitizationWhitelist(/^\s*(geo|https?|ftp|mailto|chrome-extension):/);
             ngGPlacesAPIProvider.setDefaults({
                 radius: 1000,
@@ -59,14 +64,12 @@ aroundyou_base_apps.directive('resize', function ($window) {
 /*
  *  Follwing are the controller contain all the main function
  */
-aroundyou_base_apps.controller('aroundyou_home__ng__CONTROLLER', function(
-        $scope)
+aroundyou_base_apps.controller('aroundyou_home__ng__CONTROLLER', function($scope, uiGmapGoogleMapApi)
 {
     // ------ Variable declare and initialize section --- Start ----------------
     $scope.aroundyou_base_obj = AroundYou_base__base_Object.getInstance();
     // Field use variable
     $scope.base_url = $scope.aroundyou_base_obj.getBaseUrl();
-    $scope.map = { center: { latitude: 5.416665, longitude: 100.3166654 }, zoom: 15 };  
     
     // Initial value for sidetab button
     $scope.aroundyou_sidetab_show_search = true;
@@ -74,17 +77,74 @@ aroundyou_base_apps.controller('aroundyou_home__ng__CONTROLLER', function(
     $scope.aroundyou_sidetab_show_event = false;
     
     // Initial and default value for sidetab search distance 
-    $scope.aroundyou_sidetab_distance_value = 25;
-    $scope.aroundyou_sidetab_distance_min = 5;
-    $scope.aroundyou_sidetab_distance_max = 50;
+    $scope.aroundyou_sidetab_distance_value = 500;
+    $scope.aroundyou_sidetab_distance_min = 100;
+    $scope.aroundyou_sidetab_distance_max = 1000;
     
-    // Holder for search state and area, @todo - need to move this to backend
+    // Center coordinate point
+    $scope.g_center_latitude = 5.416665;
+    $scope.g_center_longitude = 100.3166654;
+    
+    // Google Map related default. 
+    $scope.map = { center: { latitude: $scope.g_center_latitude, longitude: $scope.g_center_longitude }, zoom: 16 }; 
+    $scope.aroundyou_sidetab_search_dropbox_map_value = "k:5.416665::b:100.3166654"; // George Town value
+    $scope.aroundyou_google_map_center_marker = {idkey: "center_marker", coords: {latitude: $scope.g_center_latitude, longitude: $scope.g_center_longitude}, icon: $scope.base_url+'/images/aroundyou_marker_current_point.png'};
+    
+    // Contain search result. @todo - need to move this to backend
+    $scope.aroundyou_search_result_markers = [
+     {id: 1, title: 'm1', 
+         latitude: $scope.aroundyou_base_obj.latitude_longitude_converter($scope.g_center_latitude, 500, "latitude", "up"), 
+         longitude:$scope.g_center_longitude, 
+         icon: $scope.base_url+'/images/aroundyou_marker_result_point.png'},
+     {id: 2, title: 'm2', 
+         latitude: $scope.aroundyou_base_obj.latitude_longitude_converter($scope.g_center_latitude, 500, "latitude", "down"), 
+         longitude:$scope.g_center_longitude, 
+         icon: $scope.base_url+'/images/aroundyou_marker_result_point.png'},
+     {id: 3, title: 'm3', 
+         latitude: $scope.g_center_latitude, 
+         longitude: $scope.aroundyou_base_obj.latitude_longitude_converter($scope.g_center_longitude, 500, "longitude", "left"), 
+         icon: $scope.base_url+'/images/aroundyou_marker_result_point.png'},
+     {id: 4, title: 'm4', 
+         latitude: $scope.g_center_latitude, 
+         longitude:$scope.aroundyou_base_obj.latitude_longitude_converter($scope.g_center_longitude, 500, "longitude", "right"),  
+         icon: $scope.base_url+'/images/aroundyou_marker_result_point.png'},
+     {id: 5, title: 'm5', 
+         latitude: $scope.aroundyou_base_obj.latitude_longitude_converter($scope.g_center_latitude, 1000, "latitude", "up"), 
+         longitude:$scope.g_center_longitude, 
+         icon: $scope.base_url+'/images/aroundyou_marker_result_point.png'},
+     {id: 6, title: 'm6', 
+         latitude: $scope.aroundyou_base_obj.latitude_longitude_converter($scope.g_center_latitude, 1000, "latitude", "down"), 
+         longitude:$scope.g_center_longitude, 
+         icon: $scope.base_url+'/images/aroundyou_marker_result_point.png'},
+     {id: 7, title: 'm7', 
+         latitude: $scope.g_center_latitude, 
+         longitude: $scope.aroundyou_base_obj.latitude_longitude_converter($scope.g_center_longitude, 1000, "longitude", "left"), 
+         icon: $scope.base_url+'/images/aroundyou_marker_result_point.png'},
+     {id: 8, title: 'm8', 
+         latitude: $scope.g_center_latitude, 
+         longitude:$scope.aroundyou_base_obj.latitude_longitude_converter($scope.g_center_longitude, 1000, "longitude", "right"),  
+         icon: $scope.base_url+'/images/aroundyou_marker_result_point.png'}
+    ];
+    
+    $scope.aroundyou_google_search_rectangle ={
+        sw: {
+            latitude: $scope.aroundyou_base_obj.latitude_longitude_converter($scope.g_center_latitude, 500, "latitude", "up"),
+            longitude: $scope.aroundyou_base_obj.latitude_longitude_converter($scope.g_center_longitude, 500, "longitude", "left")
+        },
+        ne: {
+            latitude: $scope.aroundyou_base_obj.latitude_longitude_converter($scope.g_center_latitude, 500, "latitude", "down"),
+            longitude: $scope.aroundyou_base_obj.latitude_longitude_converter($scope.g_center_longitude, 500, "longitude", "right")
+        } 
+    };
+    
+    
+    // Holder for search state and area, k is latitude, b is longitude, @todo - need to move this to backend
     $scope.aroundyou_sidetab_state_area =[{
                             "state": "Penang",
                             "area_list": [
                                 {name:"George Town", location:"k:5.416665::b:100.3166654"},
                                 {name:"Gelugor", location:"k:5.3569197::b:100.2860428"},
-                                {name:"Batu Maung", location:"k:5.2751849::b:100.2496362,14"},
+                                {name:"Batu Maung", location:"k:5.2859622::b:100.2813038"},
                             ]
                         },{
                             "state": "Johor",
@@ -124,7 +184,28 @@ aroundyou_base_apps.controller('aroundyou_home__ng__CONTROLLER', function(
     // ------ UI Feature --- End ----------------
     
     // ------ Google map Feature --- Start ----------------
+    // Update google map according to selected location
+    $scope.aroundyou_sidetab_dropbox_map = function(map_location) {
+        // Decode that location string, e.g. k:5.2751849::b:100.2496362,14
+        var location = map_location.split("::");
+        var k_latitude = location[0].split(":")[1];
+        var b_longitude = location[1].split(":")[1];
+        //console.log("k_latitude is "+k_latitude+" b_longitude is "+b_longitude);
+        
+        // Update map accordingly
+        $scope.map = { center: { latitude: k_latitude, longitude: b_longitude }, zoom: 15 };
+        
+        // Update center search marker
+        $scope.aroundyou_google_map_center_marker.coords = {latitude: k_latitude, longitude: b_longitude};
     
+    };
+    
+    // @todo - link up the marker
+    // @todo - update search marker and square box, 
+    // @todo - fix the scroll initial location of bullete wrong issue
+    // 
+    // @todo - remove reference code, which this can be use to change or read the center of the map
+    //    $scope.map = { center: { latitude: 6.416665, longitude: 102.3166654 }, zoom: 15 };  
     // ------ Google map Feature --- End ----------------
     
     // ------ Angular API --- Start ----------------
@@ -163,6 +244,7 @@ aroundyou_base_apps.controller('aroundyou_home__ng__CONTROLLER', function(
             $(".aroundyou_sidetab_content_event_div").removeClass("ng-hide");
         }
     }; 
+    
     
     // ------ Angular API --- End ----------------
 });

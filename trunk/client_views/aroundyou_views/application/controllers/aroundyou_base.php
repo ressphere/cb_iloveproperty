@@ -117,9 +117,10 @@ class aroundyou_base extends CI_Controller {
         // For google map and auto complete
         $this->extemplate->add_js('https://maps.googleapis.com/maps/api/js?key=AIzaSyAW8rCEHK9y0-D16J2IsErCQ9rjUyuj1Cc', 'import', FALSE, FALSE); // Google map API. API key is under gmail account "Ressphere"
         $this->extemplate->add_js($this->wsdl_url . 'js/angular-google-maps.min.js', 'import', FALSE, FALSE); // Angular wrap around google map  (https://angular-ui.github.io/angular-google-maps)
+        //$this->extemplate->add_js('js/angular-google-maps.js'); // Angular wrap around google map  (https://angular-ui.github.io/angular-google-maps)
         $this->extemplate->add_js($this->wsdl_url . 'js/ngAutocomplete.js', 'import', FALSE, FALSE); // Angular string auto complete
         $this->extemplate->add_js($this->wsdl_url . 'js/angularjs-google-places.js', 'import', FALSE, FALSE); // Angular auto complete on google map place
-        $this->extemplate->add_js($this->wsdl_url . 'js/google_map.js', 'import', FALSE, FALSE);
+        //$this->extemplate->add_js($this->wsdl_url . 'js/google_map.js', 'import', FALSE, FALSE);
         
         $this->extemplate->add_js('js/aroundyou_base.js'); // Around You Service special base JS
         $this->extemplate->add_js('js/aroundyou_header.js'); // Around You Service header JS

@@ -57,14 +57,14 @@ class aroundyou_home extends aroundyou_base
     private function page_js_css()
     {   
         // Load necessary CSS from local site  -- Start
-        $this->extemplate->add_css('css/rzslider.css'); // For inpt slider, https://github.com/angular-slider/angularjs-slider
-        $this->extemplate->add_css('css/rzslider.scss'); // For inpt slider, https://github.com/angular-slider/angularjs-slider
+        //$this->extemplate->add_css('css/rzslider.css'); // For inpt slider, https://github.com/angular-slider/angularjs-slider
+        //$this->extemplate->add_css('css/rzslider.scss'); // For inpt slider, https://github.com/angular-slider/angularjs-slider
         $this->extemplate->add_css('css/aroundyou_home.css'); // Base CSS in local
         
         // Load necessary CSS from local site  -- End
 
         //Enable for special handling using js for aroundyou home page
-        $this->extemplate->add_js('js/rzslider.js'); // For inpt slider, https://github.com/angular-slider/angularjs-slider
+        //$this->extemplate->add_js('js/rzslider.js'); // For inpt slider, https://github.com/angular-slider/angularjs-slider
         $this->extemplate->add_js('js/aroundyou_home_page.js');
     }
     public function check_userdata()
