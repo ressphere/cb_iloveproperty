@@ -3,7 +3,7 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li ng-repeat="service in services">
-                    <a class="page-scroll" href="#{{service.id}}">{{service.name}}</a>
+                    <a id="profile_sidebar_content" class="page-scroll" href="#{{service.id}}">{{service.name}}</a>
                 </li>
             </ul>
         </div>
@@ -96,5 +96,10 @@
                 </div>
             </center>
 </div>
+<!-- Following space is meant to align the profile content with the sidebar-->
+<br>
+<br>
+<br>
+<br>
         <!-- /#page-content-wrapper -->
 <!--        </div>-->

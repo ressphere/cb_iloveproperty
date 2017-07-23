@@ -33,7 +33,7 @@
 				</div><br><br>
 			</div>
 		</div>
-	</div><br>
+        </div><br>
 	<div class="row clearfix">
 		<div class="col-md-6 column">
                     <div class="contact_div gothic_font row">
@@ -85,7 +85,7 @@
                             
                         </div>
                     </div><br/>
-                    <div class="social_media_div gothic_font row">
+                    <div class="social_media_div sell gothic_font row">
                         <div class="row title">
                             <span class="gothic_bold_font">Social Media</span>
                             
@@ -124,7 +124,7 @@
                             </div>
                             <br><br>
                         </div>
-                    </div><br>
+                    </div>
                     
 		</div>
 		<div class="col-md-6 column gothic_font">
@@ -179,7 +179,7 @@
                     </div>
                       
                 </div>
-	</div><br><br>        
+	</div><br>
         
        <div class="row clearfix">
                 <div class="col-md-12 column gothic_font">
@@ -209,15 +209,15 @@
                         </div>
                     </div>
 		</div>
-        </div><br><br>
+        </div><br>
 	<div class="row clearfix">
                <div class="col-md-12 column gothic_font">
-                   <br><div class="row title">
+                    <div class="row title">
                         <span class="gothic_bold_font">Remark</span>         
                     </div>
                     <div class="row information" id='remark'>
                         <br><span ng-bind-html="property_information.Remark"/></div>
-		</div><br>
+		</div>
             </div><br>
         <div class="row clearfix">
 		<div class="col-md-12 column gothic_font">
@@ -229,32 +229,42 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <br><span class="gothic_bold_font">Purchase Price:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="gothic_font" id="price" ng-bind='property_information.Price' value="{{accounting.format(property_information.Price)}}" disabled><br><br>
-                                        <span class="gothic_bold_font">Loan Total:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="gothic_font" id="loan" ng-bind ='property_information.Total_loan' value="{{accounting.format(property_information.Total_loan)}}" disabled><br>
+                                        <br>
+                                        <span class="purchase_price_input gothic_bold_font">Purchase Price:</span>
+                                        <input type="text" class="gothic_font" id="price" ng-bind='property_information.Converted_Price' value="{{accounting.format(property_information.Converted_Price)}}" disabled><br><br>
+                                        <span class="loan_total_input gothic_bold_font">Loan Total:</span>
+                                        <input type="text" class="gothic_font" id="loan" ng-bind ='property_information.Total_loan' value="{{accounting.format(property_information.Total_loan)}}" disabled><br>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <br>
-                                        <input class="gothic_font" type="radio" name="loan_calc_type" value="loan_percentage" ng-model ="loan_measurement_type"> loan in percentage(%) &nbsp;&nbsp;&nbsp;&nbsp; <input ng-disabled="loan_measurement_type != 'loan_percentage'" id="txtPercentage" class="currencyOnly gothic_font" ng-model="property_information.percentage_value" value='{{property_information.percentage_value}}'><br><br>
-                                        <input class="gothic_font" type="radio" name="loan_calc_type" value="loan_total" ng-model="loan_measurement_type"> loan in total &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input ng-disabled="loan_measurement_type != 'loan_total'" ng-model="property_information.Total_loan" value='{{property_information.total_loan_value}}' id="txtLoanTotal" class="currencyOnly gothic_font"><br>
+                                        <input gothic_font" type="radio" name="loan_calc_type" value="loan_percentage" ng-model ="loan_measurement_type"> <span class="loan_percentage_input">loan in percentage(%)</span>
+                                        <input ng-disabled="loan_measurement_type != 'loan_percentage'" id="txtPercentage" class="currencyOnly gothic_font" ng-model="property_information.percentage_value" value='{{property_information.percentage_value}}'><br><br>
+                                        <input class="gothic_font" type="radio" name="loan_calc_type" value="loan_total" ng-model="loan_measurement_type"> <span class="loan_loaned_total_input">loan in total</span>
+                                        <input ng-disabled="loan_measurement_type != 'loan_total'" ng-model="property_information.Total_loan" value='{{property_information.total_loan_value}}' id="txtLoanTotal" class="currencyOnly gothic_font"><br>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <br><span class="gothic_bold_font currencyOnly">interest rate (%):</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="currencyOnly gothic_font" id="txtInterest" ng-model='property_information.interest_rate'><br>
-       
+                                        <br>
+                                        <span class="interest_rate_input gothic_bold_font currencyOnly">interest rate (%):</span>
+                                        <input type="text" class="currencyOnly gothic_font" id="txtInterest" ng-model='property_information.interest_rate'><br>
                                     </div>
                                 </div>
                                  <div class="row">
                                     <div class="col-md-12">
-                                        <br><span class="gothic_bold_font currencyOnly">loan period (years):</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="numericOnly gothic_font" id="txtLoanPeriod" ng-model='property_information.years'><br>
+                                        <br><span class="loan_period_input gothic_bold_font currencyOnly">loan period (years):</span>
+                                        <input type="text" class="numericOnly gothic_font" id="txtLoanPeriod" ng-model='property_information.years'><br>
        
                                     </div>
                                 </div>
-                                    <div class="row">
+                                <div class="row">
                                     <div class="col-md-12">
-                                        <br><span class="gothic_bold_font">Monthly installment:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span ng-bind='property_information.installment'>{{property_information.installment}}</span></span><br><br>
+                                        <br>
+                                        <span class="monthly_installment_input gothic_bold_font">Monthly installment</span>
+                                        <input type="text" class="gothic_font" id="price" ng-bind='property_information.installment' value="{{accounting.format(property_information.installment)}}" disabled><br><br>
+                                        
        
                                     </div>
                                 </div>

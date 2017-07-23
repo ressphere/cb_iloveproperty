@@ -368,3 +368,9 @@ input:disabled {
 {
     .unfixed_content {padding-top: 57px}
 }
+
+
+.borderless>tbody>tr>td, .borderless>tbody>th{
+    border: none;
+    border-top: 0px solid #ddd;
+}

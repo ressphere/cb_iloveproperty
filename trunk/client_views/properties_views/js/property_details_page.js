@@ -326,13 +326,17 @@ ng_map_profile.controller('previewPage', function($scope, $controller, ngGPlaces
              
                 $scope.get_property_type_string = function(type)
                 {
+                   var myEl = angular.element( document.querySelector( '.social_media_div' ) );
                    switch(type)
                    {
                        case "sell":
+                           myEl.addClass('sell');
                            return "Property For Sell";
-                       case "rent":
+                       case "rent":                           
+                           myEl.addClass('rent');
                            return "Property For Lease";
                        case "room":
+                           myEl.addClass('room');
                            return "Room To Let";
                        default:
                            return false;
@@ -447,7 +451,6 @@ ng_map_profile.controller('previewPage', function($scope, $controller, ngGPlaces
                      $scope.my_position = objHome.getCurrentPosition();
                      $scope.$apply();
                 }
-                LineIt.loadButton();
             }   
         );
             

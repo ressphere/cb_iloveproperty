@@ -33,7 +33,7 @@
 				</div><br><br>
 			</div>
 		</div>
-	</div><br>
+        </div><br>
 	<div class="row clearfix">
 		<div class="col-md-6 column">
                     <div class="contact_div gothic_font row">
@@ -84,8 +84,8 @@
                             </div>
                             
                         </div>
-                    </div><br/>
-                    <div class="social_media_div gothic_font row">
+                    </div>
+                    <div class="social_media_div rent gothic_font row">
                         <div class="row title">
                             <span class="gothic_bold_font">Social Media</span>
                             
@@ -124,9 +124,8 @@
                              <div class="telegram col-md-4  col-sm-4 col-sm-4 column">
                                     <div><a href='https://telegram.me/share/url?url=' onclick='window.open(&apos;https://telegram.me/share/url?url==&apos;+encodeURIComponent(location.href)+&apos;&amp;bodytext=&amp;tags=&amp;text=&apos;+encodeURIComponent(document.title));return false;' rel='nofollow' style='text-decoration:none;' title='Share on Telegram'><img src='images/telegram.jpg' style='height:23px; width:auto'/></a></div>
                             </div>
-                            <br><br>
                         </div>
-                    </div><br>    
+                    </div>    
 		</div>
 		<div class="col-md-6 column gothic_font">
                     <div class="row title">
@@ -144,6 +143,7 @@
                                     <span id="{{detail.id}}">{{detail.value}}</span>
                                 </div><br><br>
                             </div>
+                            <br><br><br>
                         </div>
                         <div class="col-md-6 column gothic_font">
                             <div class="row" ng-repeat="detail in property_information.details[1]">
@@ -157,7 +157,6 @@
                                 </div><br><br>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
 	</div><br>
@@ -180,7 +179,7 @@
                     </div>
                       
                 </div>
-	</div><br><br>        
+	</div><br>
         
        <div class="row clearfix">
                 <div class="col-md-12 column gothic_font">
@@ -210,10 +209,10 @@
                         </div>
                     </div>
 		</div>
-        </div><br><br>
+        </div><br>
 	<div class="row clearfix">
                <div class="col-md-12 column gothic_font">
-                   <br><div class="row title">
+                   <div class="row title">
                         <span class="gothic_bold_font">Remark</span>         
                     </div>
                     <div class="row information" id='remark'>
