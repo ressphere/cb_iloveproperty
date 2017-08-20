@@ -20,7 +20,7 @@
                     $label = $contacts[0];
                     $placeholder = $contacts[1];
                     $input_type = $contacts[2];
-                    echo '<div class="form-group">';
+                    echo '<div class="form-group" style="margin-right:0px; margin-left:0px;">';
                     //echo '<label for="contact_us_input_'.$i.'" class="col-sm-2 control-label">'.$label.'</label>';
                     
                     if ($input_type !== 'textarea')
