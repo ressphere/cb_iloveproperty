@@ -225,12 +225,16 @@ html, body {
     width: 100%
 }
 
-.upload_properties input, .form-control, textarea, select {
+.form-control, textarea, select {
     color: #666;
     font-family: 'Century Gothic';
     font-size: 10pt
-    
-    
+}
+
+.upload_properties input{
+    color: #383838;
+    font-family: 'Century Gothic';
+    font-size: 10pt
 }
 
 .upload_properties span {
