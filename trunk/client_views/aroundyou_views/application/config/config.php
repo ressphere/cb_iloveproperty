@@ -376,7 +376,7 @@ $config['webservice'] = 'localhost';
 /****************************************
  * Versioning require for CSS and js
  ****************************************/
-$config['version'] = 1004;
+$config['version'] = 1005;
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
