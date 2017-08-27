@@ -95,6 +95,26 @@ class Users extends CI_Model
                     return NULL;
 	}
         
+        function set_prop_subscription_on_sms_count($user_id, $count)
+        {
+                $table_name = "listing_subscription";
+            	$this->db->where('user_id', $user_id);
+                $this->db->order_by('created_time','ASC');
+		$query = $this->db->get($table_name);
+                $rows = $query->result();
+	        
+                foreach($rows as $row) {
+                    
+                    if($row->number_of_sms >= $count)
+                    {
+                        $this->db->set('number_of_sms', ($row->number_of_sms - $count));
+                        $this->db->where('id', $row->id);
+                        $this->db->update($table_name);
+                        break;
+                    }
+                }
+        }
+        
         function set_user_property_sms_limit($user_id, $count)
 	{
 		$this->db->where('id', $user_id);
@@ -111,6 +131,7 @@ class Users extends CI_Model
                             $this->db->set('prop_sms_limit', ($sms_limit - $count));
                             $this->db->where('id', $user_id);
                             $this->db->update($this->table_name);
+                            $this->set_prop_subscription_on_sms_count($user_id, $count);
                             return true;
                         }
                     }
