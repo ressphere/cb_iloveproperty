@@ -155,7 +155,7 @@ searchrst_information.controller("FilterSearchHighLightCtrl", function($scope, $
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
           }).then(function successCallback(response) {
                   var converted_price = response.data;
-                  $scope.search[$i].converted_price = converted_price;
+                  $scope.search[$i].converted_price = $to + " " +converted_price;
                   if($scope.search[$i].disableTagButton['visibility'] === 'hidden')
                   {
                         $scope.search[$i].disableTagButton = {'visibility': 'visible'};
@@ -586,7 +586,7 @@ searchrst_information.controller("FilterSearchHighLightCtrl", function($scope, $
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
           }).then(function successCallback(response) {
                //setup_details_info(measurement_id, accounting.toFixed(response.data, 5) , $scope);
-               $scope.search[measurement_index].converted_size = accounting.toFixed(response.data, 5);
+               $scope.search[measurement_index].converted_size = to + " " + accounting.toFixed(response.data, 5);
                
                $scope.property_information.selected_measurement_type = to;
                

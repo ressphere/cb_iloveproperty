@@ -3,8 +3,8 @@ class isms
 {
     //private $username="ressphere2017";
     //private $password="1234abcd*";
-    private $username="cornelius";
-    private $password="123qwe";
+    private $username="ressphere";
+    private $password="1234abcd*";
 
     private function ismscURL($link){
       $http = curl_init($link);
