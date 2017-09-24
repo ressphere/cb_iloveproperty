@@ -56,4 +56,9 @@ $config['modules']['listing_subscription'] = array('sanitize_images' => FALSE);
 //$config['modules']['property_info'] = array('sanitize_images' => FALSE);
 //$config['modules']['property_package'] = array('sanitize_images' => FALSE);
 //$config['modules']['property_member_transaction'] = array('sanitize_images' => FALSE);
+
+// Aroundyou modules
+$config['modules']['aroundyou_users'] = array('sanitize_images' => FALSE);
+
+
 /*********************** /OVERWRITES ************************************/
