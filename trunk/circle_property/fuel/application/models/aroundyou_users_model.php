@@ -95,8 +95,13 @@ class aroundyou_users_model extends cb_base_module_model {
         $fields = parent::form_fields($values, $related);
         
         // Hide from page display
-        $fields['aroundyou_users__modified']['displayonly'] = True;
-        
+        $fields['aroundyou_users__modified'] = array(
+            'type' => 'datetime|timestamp',
+            //'region' => 'Asia/Kuala_Lumpur',
+            'displayonly' => True,
+            
+            );
+
         // Prepare for user id selection
         foreach($fields['users_id']['options'] as $option)
         {
@@ -124,7 +129,16 @@ class aroundyou_users_model extends cb_base_module_model {
         return $fields;
     }
     
-    
+    /*
+     * This will be call before update the data
+     *  ->To resolve the form can't update the modified date issue
+     */
+    function on_before_post($values)
+    {
+        $_POST['aroundyou_users__modified'] = datetime_now();
+        return $values;
+    }
+
     /**
     * Overwrites the parent option_list method
     *   -> To handle id ambigous when table join

@@ -159,10 +159,13 @@ CREATE TABLE IF NOT EXISTS `aroundyou_link_company_product` (
 --
 -- Table structure for table `aroundyou_link_user_company`
 --
-CREATE TABLE IF NOT EXISTS `aroundyou_link_company_product` (
+CREATE TABLE IF NOT EXISTS `aroundyou_link_user_company` (
     `id` int COLLATE utf8_bin AUTO_INCREMENT,
     `aroundyou_users_id` int NOT NULL,
     `aroundyou_company_id` int NOT NULL,
+    `aroundyou_link_user_company__activated` tinyint(1) NOT NULL DEFAULT '1',
+    `aroundyou_link_user_company__activate_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `aroundyou_link_user_company__modified_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`aroundyou_users_id`) REFERENCES aroundyou_users(`id`),
     FOREIGN KEY (`aroundyou_company_id`) REFERENCES aroundyou_company(`id`)
