@@ -68,7 +68,8 @@ class CBWS_Interface extends CI_Controller {
             
             // Supported service group (case sensetive)
             "CB_Payment_Paypal" => TRUE,
-            "CB_Property" => TRUE
+            "CB_Property" => TRUE,
+            "CB_AroundYou" => TRUE
         );
         
         return $service_gorup;

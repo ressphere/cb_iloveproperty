@@ -6,7 +6,7 @@ require_once('_utils/cb_base_module_model.php');
 class aroundyou_users_model extends cb_base_module_model {
     // ------------ Setup Function ---------------------------------------------
     public $model_name = "aroundyou_users";
-    public $model_code = "MA_U";
+    public $model_code = "MAYou_U";
     
     /*
      * Constructor 
@@ -28,17 +28,9 @@ class aroundyou_users_model extends cb_base_module_model {
      */
     public function column_list()
     {
-        $column_list = array (
-            /*
-            array("name" => "aroundyou_users__activated", "must_have" => false, "is_id" => false),
-            array("name" => "aroundyou_users__banned", "must_have" => false, "is_id" => false),
-            array("name" => "aroundyou_users__ban_reason", "must_have" => false, "is_id" => false),
-            array("name" => "aroundyou_users__company_count_limit", "must_have" => false, "is_id" => false),
-            
-            // Storing id
-            array("name" => "users_id", "must_have" => true, "is_id" => true),
-            */
-        );
+        $this->set_error($this->model_code."-CL-0", 
+                "Internal error, please contact admin", 
+                "Using fuel model to resolve ".$this->model_name." and not this old way");
         
         return $column_list;
     }
@@ -53,9 +45,9 @@ class aroundyou_users_model extends cb_base_module_model {
     //  therefore, calling it own file "aroundyou_users_model"
     
     public $foreign_keys  = array(
-                                    //'users_id' => array(FUEL_FOLDER => 'users_model', 'where' => array('users.id' => 'aroundyou_users.user_id') )
-                                    'users_id' => 'users_model'
-                                    );
+                //'users_id' => array(FUEL_FOLDER => 'users_model', 'where' => array('users.id' => 'aroundyou_users.user_id') )
+                'users_id' => 'users_model'
+                );
     
     /*
      * This API will impact all the query statement for this model
@@ -124,6 +116,12 @@ class aroundyou_users_model extends cb_base_module_model {
         $fields['aroundyou_users__banned'] = array(
             'type' => 'select',
             'options' => array(0 => 'Not Banned', 1 => 'Is Banned')
+            );
+        
+        // Band reason form handle
+        $fields['aroundyou_users__ban_reason'] = array(
+            'type' => 'wysiwyg', 
+            'editor' => 'wysiwyg'
             );
         
         return $fields;

@@ -59,6 +59,6 @@ $config['modules']['listing_subscription'] = array('sanitize_images' => FALSE);
 
 // Aroundyou modules
 $config['modules']['aroundyou_users'] = array('sanitize_images' => FALSE);
-
+$config['modules']['aroundyou_company'] = array('sanitize_images' => FALSE);
 
 /*********************** /OVERWRITES ************************************/

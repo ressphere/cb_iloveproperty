@@ -8,8 +8,6 @@
 --      aroundyou_company
 --      aroundyou_users
 --      aroundyou_link_company_benefit
---      aroundyou_link_company_product
---      aroundyou_link_user_company
 
 -- --------------------------------------------------------
 --
@@ -65,7 +63,9 @@ CREATE TABLE IF NOT EXISTS `aroundyou_product` (
     `aroundyou_product__info` varchar(200) COLLATE utf8_bin,
     `aroundyou_product__price` int unsigned,
     `aroundyou_product__currency_code` varchar(100) COLLATE utf8_bin,
-    PRIMARY KEY (`id`)
+    `aroundyou_company_id` int NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`aroundyou_company_id`) REFERENCES aroundyou_company(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- --------------------------------------------------------
 
@@ -103,7 +103,12 @@ CREATE TABLE IF NOT EXISTS `aroundyou_company` (
     `aroundyou_company__product_count_limit` int default 1,
     `aroundyou_map_location_id` int NOT NULL,
     `aroundyou_company__modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `aroundyou_users_id` int NOT NULL,
+    `aroundyou_company__activated` tinyint(1) NOT NULL DEFAULT '1',
+    `aroundyou_company__activate_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `aroundyou_company__duration` int,
     PRIMARY KEY (`id`),
+    FOREIGN KEY (`aroundyou_users_id`) REFERENCES aroundyou_users(`id`),
     FOREIGN KEY (`aroundyou_company_type_id`) REFERENCES aroundyou_company_type(`id`),
     FOREIGN KEY (`aroundyou_operation_period_id`) REFERENCES aroundyou_operation_period(`id`),
     FOREIGN KEY (`aroundyou_map_location_id`) REFERENCES aroundyou_map_location(`id`)
@@ -138,36 +143,5 @@ CREATE TABLE IF NOT EXISTS `aroundyou_link_company_benefit` (
     PRIMARY KEY (`id`),
     FOREIGN KEY (`aroundyou_company_id`) REFERENCES aroundyou_company(`id`),
     FOREIGN KEY (`aroundyou_benefit_id`) REFERENCES aroundyou_benefit(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- --------------------------------------------------------
-
--- --------------------------------------------------------
---
--- Table structure for table `aroundyou_link_company_product`
---
-CREATE TABLE IF NOT EXISTS `aroundyou_link_company_product` (
-    `id` int COLLATE utf8_bin AUTO_INCREMENT,
-    `aroundyou_company_id` int NOT NULL,
-    `aroundyou_product_id` int NOT NULL,
-    PRIMARY KEY (`id`),
-    FOREIGN KEY (`aroundyou_company_id`) REFERENCES aroundyou_company(`id`),
-    FOREIGN KEY (`aroundyou_product_id`) REFERENCES aroundyou_product(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- --------------------------------------------------------
-
--- --------------------------------------------------------
---
--- Table structure for table `aroundyou_link_user_company`
---
-CREATE TABLE IF NOT EXISTS `aroundyou_link_user_company` (
-    `id` int COLLATE utf8_bin AUTO_INCREMENT,
-    `aroundyou_users_id` int NOT NULL,
-    `aroundyou_company_id` int NOT NULL,
-    `aroundyou_link_user_company__activated` tinyint(1) NOT NULL DEFAULT '1',
-    `aroundyou_link_user_company__activate_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `aroundyou_link_user_company__modified_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (`id`),
-    FOREIGN KEY (`aroundyou_users_id`) REFERENCES aroundyou_users(`id`),
-    FOREIGN KEY (`aroundyou_company_id`) REFERENCES aroundyou_company(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- --------------------------------------------------------

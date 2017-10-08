@@ -35,7 +35,6 @@ class aroundyou_utils__DataServer__Service
      */
     static function Send_Service_Request($service, $send_data)
     {
-        //$service_obj = new ServiceRequest;
         $service_obj = new aroundyou_utils__ServiceUtils__REST_ServiceRequest;
         $return_data = $service_obj->service_request($service,$send_data,"send");
         return $return_data;
@@ -53,7 +52,6 @@ class aroundyou_utils__DataServer__Service
      */
     static function Receive_Service_Request($service)
     {
-        //$service_obj = new ServiceRequest;
         $service_obj = new aroundyou_utils__ServiceUtils__REST_ServiceRequest;
         $return_data = $service_obj->service_request($service, null,"receive");
         return $return_data;
@@ -72,7 +70,6 @@ class aroundyou_utils__DataServer__Service
      */
     static function SendReceive_Service_Request($service, $send_data)
     {
-        //$service_obj = new ServiceRequest;
         $service_obj = new aroundyou_utils__ServiceUtils__REST_ServiceRequest;
         $return_data = $service_obj->service_request($service,$send_data,"sendreceive");
         return $return_data;
@@ -89,11 +86,8 @@ class aroundyou_utils__DataServer__Service
      */
     static function Test_Gateway()
     {
-        //$service_obj = new ServiceUtils__REST_ServiceRequest;
-        //$return_data = $service_obj->test_gateway();
-        
         $service_obj = new aroundyou_utils__ServiceUtils__REST_ServiceRequest;
-        $return_data = $service_obj->service_request(null,"ss&bb","test");
+        $return_data = $service_obj->service_request("CB_AroundYou:test_service","Test AroundYou gateway !!","sendreceive");
         
         return $return_data;
 
