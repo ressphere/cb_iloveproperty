@@ -28,11 +28,36 @@ class aroundyou_users_model extends cb_base_module_model {
      */
     public function column_list()
     {
-        $this->set_error($this->model_code."-CL-0", 
-                "Internal error, please contact admin", 
-                "Using fuel model to resolve ".$this->model_name." and not this old way");
+        $column_list = array (
+            array("name" => "aroundyou_users__activated", "must_have" => false, "is_id" => false),    // Must handle in libraries, set false due to edit requirement 
+            array("name" => "aroundyou_users__banned", "must_have" => false, "is_id" => false),  
+            array("name" => "aroundyou_users__ban_reason", "must_have" => false, "is_id" => false), 
+            array("name" => "aroundyou_users__company_count_limit", "must_have" => false, "is_id" => false),   
+            array("name" => "users_id", "must_have" => false, "is_id" => true),    
+            array("name" => "aroundyou_users__modified", "must_have" => true, "is_id" => false),    
+            
+        );
         
         return $column_list;
+    }
+    
+    /*
+     * Overlay API
+     * Contain relationship between data name, related model and column
+     *  1. table        - table that require to refer
+     *  2. editable     - Should insert data if not found or not
+     *  3. id_column      - Column name for current table
+     *  4. data_column  - data and reference column in the model
+     * 
+     * @return Array List of model and data relationship
+     */
+    public function model_id_list()
+    {
+        $model_id_list = array (
+            // user_id is uing raw data, so this list is empty           
+        );
+        
+        return $model_id_list;
     }
     
     //--------------------- Generic Function -----------------------------------
@@ -136,41 +161,7 @@ class aroundyou_users_model extends cb_base_module_model {
         $_POST['aroundyou_users__modified'] = datetime_now();
         return $values;
     }
-
-    /**
-    * Overwrites the parent option_list method
-    *   -> To handle id ambigous when table join
-    *
-    * @access	public
-    * @param	string	the name of the field to be used as the key (optional)
-    * @param	string	the name of the filed to be used as the value (optional)
-    * @param	mixed	the where condition to apply (optional)
-    * @param	mixed	the order in which to return the results (optional)
-    * @return	array 	
-    */	
-  /* public function options_list($key = 'id', $val = 'name', $where = array(), $order = TRUE)
-   {
-        //$this->db->join('users', 'aroundyou_users.users_id = users.id', "LEFT");
-
-        if (empty($key)) $key = 'id';
-        if (empty($val)) $val = 'name';
-
-        // needed to prevent ambiguity
-        if (strpos($key, '.') === FALSE)
-        {
-                $key = 'aroundyou_users.'.$key;
-        }
-
-        // needed to prevent ambiguity
-        if (strpos($val, '.') === FALSE)
-        {
-                $val = 'aroundyou_users.'.$val;
-        }
-
-        $options = parent::options_list($key, $val, $where, $order);
-        return $options;
-   }
-    */
+    
 }
 
 class aroundyou_users_record_model extends Base_module_record

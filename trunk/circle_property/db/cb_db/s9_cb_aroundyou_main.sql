@@ -101,6 +101,7 @@ CREATE TABLE IF NOT EXISTS `aroundyou_company` (
     `aroundyou_company__detail_head_pic` varchar(300) COLLATE utf8_bin,
     `aroundyou_company__about_us_intro` varchar(1000) COLLATE utf8_bin,
     `aroundyou_company__product_count_limit` int default 20,
+    `aroundyou_company__benefit_count_limit` int default 5,
     `aroundyou_map_location_id` int NOT NULL,
     `aroundyou_company__modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     `aroundyou_users_id` int NOT NULL,

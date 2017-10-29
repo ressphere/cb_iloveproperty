@@ -9,7 +9,7 @@ require_once 'CBWS_Service_Base.php';
 class CB_AroundYOu extends CBWS_Service_Base{
     //--------------------- Global Variable ----------------------
     // Library that interact with dedicated database
-    private $properties_library_name = "aroundyou_lib";
+    private $company_library_name = "aroundyou_lib";
     
     // Error handler
     public $service_name = "cb_aroundyou";
@@ -39,6 +39,15 @@ class CB_AroundYOu extends CBWS_Service_Base{
     {
         $service_list = array(
             "test_service"  => TRUE,
+            
+            // Company user related
+            "create_company_user" => TRUE,
+            "get_full_company_user_data" => TRUE,
+            
+            // Company info related
+            
+            // Fast track
+            "fast_clean_data" => TRUE,
         );
         return $service_list;
     }
@@ -57,7 +66,52 @@ class CB_AroundYOu extends CBWS_Service_Base{
         // Format:
         //   True = Accepted key
         //   False = Disabled key
-        $accept_key = array(           
+        $accept_key = array(     
+            // Comapny Product
+            // Company benefit
+            
+            // Common info
+            "common__user_id" => TRUE,
+            "common__company_user_id" => TRUE,
+            "common__company_id" => TRUE,
+            
+            // Company information
+            "info__logo" => TRUE,
+            "info__phone" => TRUE,
+            "info__fax" => TRUE,
+            "info__email" => TRUE,
+            "info__about_us" => TRUE,
+            "info__head_pic" => TRUE,
+            
+            // Operation period
+            "operation__period" => TRUE,
+            "operation__time_start" => TRUE,
+            "operation__time_end"  => TRUE,
+            "operation__auto" => TRUE,
+            "operation__manual_date_start" => TRUE,
+            
+            // Company type
+            "company_type__main"  => TRUE,
+            "company_type__sub"  => TRUE,
+            
+            // Location
+            "location__country"  => TRUE,
+            "location__state"  => TRUE,
+            "location__area"  => TRUE,
+            "location__post_code"  => TRUE,
+            "location__map"  => TRUE,
+            "location__street"  => TRUE,
+            "location__property_name"  => TRUE,
+            
+            // admin changable info
+            "admin_user__activated" => TRUE,
+            "admin_user__banned" => TRUE,
+            "admin_user__banned_reason" => TRUE,
+            "admin_user__company_count_limit" => TRUE,
+            "admin_company__product_count_limit" => TRUE,
+            "admin_company__activated" => TRUE,
+            "admin_company__activated_date" => TRUE,
+            "admin_company__activated_duration" => TRUE
         );
         
         return $accept_key;
@@ -91,7 +145,108 @@ class CB_AroundYOu extends CBWS_Service_Base{
         
     }
     
+    
     //--------------------- Service Function ----------------------
+    /*
+     * To create user for company
+     */
+    public function create_company_user($input_data_array)
+    {
+        // Filter away the unwanted key
+        $user_info = $this->data_key_init($input_data_array, true);
+        
+        // Build libraries info array data
+        $library_data = array(
+            'library' => $this->company_library_name,
+            'function' => "aroundyou_lib__company_user_add_edit",
+            'data' => json_encode($user_info)
+        );
+        
+        // Call libraries to create user
+        $insert_return = $this->invoke_library_function($library_data);
+        if($this->is_error){return 0;} // function invoke_library_function will help to handle if error 
+        
+        // Result handle
+        $return_info = array(
+            "common__company_user_id" => $insert_return['data']['common__company_user_id']
+        );
+        
+        $this->set_data("Info: Complete CB_AroundYou:create_user Service",$return_info);
+        
+    }
+    
+    /*
+     * To obtain all user data related to company
+     */
+    public function get_full_company_user_data($input_data_array)
+    {
+        // Filter away the unwanted key
+        $user_info = $this->data_key_init($input_data_array, true);
+        
+        // Build libraries info array data
+        $library_data = array(
+            'library' => $this->company_library_name,
+            'function' => "aroundyou_lib__get_company_user_data",
+            'data' => json_encode($user_info)
+        );
+        
+        // Call libraries to create user
+        $insert_return = $this->invoke_library_function($library_data);
+        if($this->is_error){return 0;} // function invoke_library_function will help to handle if error 
+        
+        // Result handle
+        $return_info = $insert_return["data"];
+        
+        $this->set_data("Info: Complete CB_AroundYou:get_full_company_user_data Service",$return_info);
+        
+    }
+    
+    /*
+     * To clear off ALL company data which related to spcified id
+     */
+    public function fast_clean_data($input_data_array)
+    {
+        // @todo - push this to later as most of libraries not there and not tested
+        /*
+        // Filter away the unwanted key
+        $user_info = $this->data_key_init($input_data_array, true);
+        
+        // Get company user id and company id
+        $library_data = array(
+            'library' => $this->company_library_name,
+            'function' => "company_user_add_edit",
+            'data' => json_encode($user_info)
+        );
+        
+        
+        // *** Remove link data on aroundyou_link_company_benefit
+        
+        // *** Remove product data on aroundyou_product
+        
+        // *** Remove company info on aroundyou_company
+        
+        // *** Remove company user on aroundyou_users
+        
+        
+        $library_data = array(
+            'library' => $this->company_library_name,
+            'function' => "company_user_add_edit",
+            'data' => json_encode($user_info)
+        );
+        
+        // Call libraries to create user
+        $insert_return = $this->invoke_library_function($library_data);
+        if($this->is_error){return 0;} // function invoke_library_function will help to handle if error 
+        
+        // Result handle
+        $return_info = array(
+            "common__company_user_id" => $insert_return['data']['common__company_user_id']
+        );
+        
+        $this->set_data("Info: Complete CB_AroundYou:create_user Service",$return_info);
+        
+        */
+    }
     
     //--------------------- Internal Function ----------------------
     
