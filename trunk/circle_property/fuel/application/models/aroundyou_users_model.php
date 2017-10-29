@@ -102,7 +102,7 @@ class aroundyou_users_model extends cb_base_module_model {
         $fields['users_id'] = array(
             'type' => 'select', 
             'options' => $users, 
-            'model' => 'users_model',
+            'model' => 'users',
             'require' => True
             );
        

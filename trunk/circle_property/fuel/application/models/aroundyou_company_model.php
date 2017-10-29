@@ -50,8 +50,7 @@ class aroundyou_company_model extends cb_base_module_model {
         'aroundyou_map_location_id' => 'aroundyou_map_location_model',
         'aroundyou_users_id' => 'aroundyou_users_model',
         );
-    
-    
+
     /*
      * This is to display the fuel admin summary page for "Aroundyou Users"
      */
@@ -81,58 +80,54 @@ class aroundyou_company_model extends cb_base_module_model {
     {
         $fields = parent::form_fields($values, $related);
         
-        // Prepare for company type
-        $company_type = array();
-        foreach($fields['aroundyou_company_type_id']['options'] as $option)
-        {
-            $company_type[$option['id']] = $option['aroundyou_company_type__main_category']."::".$option['aroundyou_company_type__sub_category'];
-        }
-        $fields['aroundyou_company_type_id'] = array(
-            'type' => 'select', 
-            'options' => $company_type, 
-            'model' => 'aroundyou_company_type_model',
-            'require' => True
+        // Email handle
+        $fields['aroundyou_company__email'] = array(
+            'type' => 'email', 
             );
         
-        /*
+        
+        // Prepare for user id selection
+        $CI =& get_instance();
+        $related_aroundyou_users_model = $this->load_related_model('aroundyou_users_model');
+        $related_users_model = $this->load_related_model('users_model');
+        
+        $users = array();
+        foreach($fields['aroundyou_users_id']['options'] as $key => $option)
+        {
+            $aroundyou_user_info = $CI->$related_aroundyou_users_model->find_all(array("id" => $key), "","","","array");
+            $user_info =  $CI->$related_users_model->find_all(array("id" => $aroundyou_user_info[0]["users_id"]), "","","","array");
+            $users[$key] = $user_info[0]["username"];
+        }
+        
+        $fields['aroundyou_users_id'] = array(
+            'name' => "User Reigster Company",
+            'type' => 'select', 
+            'options' => $users, 
+            //'model' => 'aroundyou_users_model',
+            'require' => true,
+        );
+        
+        // Operation with auto
+        $fields['aroundyou_company__operation_auto'] = array(
+            'type' => 'select',
+            'options' => array(0 => 'Not Activated', 1 => 'Activated'),
+            'require' => true
+        );
+        
         // Hide from page display
-        $fields['aroundyou_users__modified'] = array(
+        $fields['aroundyou_company__modified'] = array(
             'type' => 'datetime|timestamp',
-            //'region' => 'Asia/Kuala_Lumpur',
             'displayonly' => True,
             
             );
-
-        // Prepare for user id selection
-        foreach($fields['users_id']['options'] as $option)
-        {
-            $users[$option['id']] = $option['username'];
-        }
-        $fields['users_id'] = array(
-            'type' => 'select', 
-            'options' => $users, 
-            'model' => 'users_model',
-            'require' => True
-            );
-       
-        // Activation form handle
-        $fields['aroundyou_users__activated'] = array(
-            'type' => 'select',
-            'options' => array(0 => 'Not Activated', 1 => 'Activated')
-            );
         
-        // Band form handle
-        $fields['aroundyou_users__banned'] = array(
+        // Activated or not
+        $fields['aroundyou_company__activated'] = array(
             'type' => 'select',
-            'options' => array(0 => 'Not Banned', 1 => 'Is Banned')
-            );
+            'options' => array(0 => 'Not Activated', 1 => 'Activated'),
+            'require' => true
+        );
         
-        // Band reason form handle
-        $fields['aroundyou_users__ban_reason'] = array(
-            'type' => 'wysiwyg', 
-            'editor' => 'wysiwyg'
-            );
-        */
         return $fields;
     }
     

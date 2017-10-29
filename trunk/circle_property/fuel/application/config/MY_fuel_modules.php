@@ -61,4 +61,14 @@ $config['modules']['listing_subscription'] = array('sanitize_images' => FALSE);
 $config['modules']['aroundyou_users'] = array('sanitize_images' => FALSE);
 $config['modules']['aroundyou_company'] = array('sanitize_images' => FALSE);
 
+// Aroundyou modules - hidden and require to form the add option
+$config['modules']['aroundyou_company_type'] = array('sanitize_images' => FALSE, 'hidden' => TRUE);
+$config['modules']['aroundyou_operation_period'] = array('sanitize_images' => FALSE, 'hidden' => TRUE);
+$config['modules']['aroundyou_map_location'] = array('sanitize_images' => FALSE, 'hidden' => TRUE);
+$config['modules']['location'] = array('sanitize_images' => FALSE, 'hidden' => TRUE);
+$config['modules']['area'] = array('sanitize_images' => FALSE, 'hidden' => TRUE);
+$config['modules']['state_country'] = array('sanitize_images' => FALSE, 'hidden' => TRUE);
+$config['modules']['state'] = array('sanitize_images' => FALSE, 'hidden' => TRUE);
+$config['modules']['country'] = array('sanitize_images' => FALSE, 'hidden' => TRUE);
+
 /*********************** /OVERWRITES ************************************/
