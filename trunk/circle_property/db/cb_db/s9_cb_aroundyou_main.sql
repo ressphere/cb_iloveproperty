@@ -54,23 +54,6 @@ CREATE TABLE IF NOT EXISTS `aroundyou_company_type` (
 
 -- --------------------------------------------------------
 --
--- Table structure for table `aroundyou_product`
---
-CREATE TABLE IF NOT EXISTS `aroundyou_product` (
-    `id` int COLLATE utf8_bin AUTO_INCREMENT,
-    `aroundyou_product__img` varchar(300) COLLATE utf8_bin,
-    `aroundyou_product__title` varchar(50) COLLATE utf8_bin,
-    `aroundyou_product__info` varchar(200) COLLATE utf8_bin,
-    `aroundyou_product__price` int unsigned,
-    `aroundyou_product__currency_code` varchar(100) COLLATE utf8_bin,
-    `aroundyou_company_id` int NOT NULL,
-    PRIMARY KEY (`id`),
-    FOREIGN KEY (`aroundyou_company_id`) REFERENCES aroundyou_company(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- --------------------------------------------------------
-
--- --------------------------------------------------------
---
 -- Table structure for table `aroundyou_operation_period`
 --
 CREATE TABLE IF NOT EXISTS `aroundyou_operation_period` (
@@ -79,6 +62,23 @@ CREATE TABLE IF NOT EXISTS `aroundyou_operation_period` (
     `aroundyou_operation_period__type` varchar(25) COLLATE utf8_bin,
     `aroundyou_operation_period__one_time` tinyint(1),
     PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- --------------------------------------------------------
+
+-- --------------------------------------------------------
+--
+-- Table structure for table `aroundyou_users`
+--
+CREATE TABLE IF NOT EXISTS `aroundyou_users` (
+    `id` int COLLATE utf8_bin AUTO_INCREMENT,
+    `aroundyou_users__activated` tinyint(1) NOT NULL DEFAULT '1',
+    `aroundyou_users__banned` tinyint(1) NOT NULL DEFAULT '0',
+    `aroundyou_users__ban_reason` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `aroundyou_users__company_count_limit` int NOT NULL DEFAULT '1',
+    `users_id` int NOT NULL,
+    `aroundyou_users__modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`users_id`) REFERENCES users(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- --------------------------------------------------------
 
@@ -117,18 +117,18 @@ CREATE TABLE IF NOT EXISTS `aroundyou_company` (
 
 -- --------------------------------------------------------
 --
--- Table structure for table `aroundyou_users`
+-- Table structure for table `aroundyou_product`
 --
-CREATE TABLE IF NOT EXISTS `aroundyou_users` (
+CREATE TABLE IF NOT EXISTS `aroundyou_product` (
     `id` int COLLATE utf8_bin AUTO_INCREMENT,
-    `aroundyou_users__activated` tinyint(1) NOT NULL DEFAULT '1',
-    `aroundyou_users__banned` tinyint(1) NOT NULL DEFAULT '0',
-    `aroundyou_users__ban_reason` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-    `aroundyou_users__company_count_limit` int NOT NULL DEFAULT '1',
-    `users_id` int NOT NULL,
-    `aroundyou_users__modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `aroundyou_product__img` varchar(300) COLLATE utf8_bin,
+    `aroundyou_product__title` varchar(50) COLLATE utf8_bin,
+    `aroundyou_product__info` varchar(200) COLLATE utf8_bin,
+    `aroundyou_product__price` int unsigned,
+    `aroundyou_product__currency_code` varchar(100) COLLATE utf8_bin,
+    `aroundyou_company_id` int NOT NULL,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`users_id`) REFERENCES users(`id`)
+    FOREIGN KEY (`aroundyou_company_id`) REFERENCES aroundyou_company(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- --------------------------------------------------------
 
