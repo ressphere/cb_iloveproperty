@@ -35,6 +35,7 @@ class aroundyou_users_model extends cb_base_module_model {
             array("name" => "aroundyou_users__company_count_limit", "must_have" => false, "is_id" => false),   
             array("name" => "users_id", "must_have" => false, "is_id" => true),    
             array("name" => "aroundyou_users__modified", "must_have" => true, "is_id" => false),    
+            array("name" => "users_id", "must_have" => true, "is_id" => true),    
             
         );
         

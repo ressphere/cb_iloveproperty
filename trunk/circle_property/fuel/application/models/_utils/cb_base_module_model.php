@@ -544,11 +544,20 @@ class cb_base_module_model extends Base_module_model {
              $this->db->join($join_info["table"],$join_info["id_mapping"],$join_info["direction"]);
         }
         
+        // Workaround for properties_listing
         if ($this->model_name == "properties_listing" && $is_distinct == false)
         {
             // Must have id for most of the process
             $this->db->select('properties_listing.id', FALSE);
             $this->db->select('properties_listing.user_id', FALSE);
+        }
+        
+        // Workaround for aroundyou_users_model
+        if ($this->model_name == "aroundyou_users" && $is_distinct == false)
+        {
+            // Must have id for most of the process
+            $this->db->select('aroundyou_users.id', FALSE);
+            $this->db->select('aroundyou_users.users_id', FALSE);
         }
         
         if($is_distinct == true)

@@ -46,6 +46,7 @@ class aroundyou_unittest extends CI_Controller
     */
    private function _unittest__complete_flow()
    {
+        //************************************************
         // **** To test on company user creation ****
         $company_user_service_obj = new aroundyou_utils__DataServer__Service();
         
@@ -54,7 +55,7 @@ class aroundyou_unittest extends CI_Controller
         );
         
         $company_user_id_return = $company_user_service_obj->SendReceive_Service_Request(
-                    "CB_AroundYou:create_company_user", 
+                    "CB_AroundYou:create_modi_company_user", 
                     $user_id_data
                 );
         $company_user_id_array = json_decode($company_user_id_return, TRUE);
@@ -63,13 +64,17 @@ class aroundyou_unittest extends CI_Controller
         $note = "Return:<br>".$company_user_id_return."<br>";
         $this->unit->run("Pass", $company_user_id_result, "Test CB_AroundYou Company User Creation", $note);  
         
+        
+        //************************************************
         // Exit unit test if fail to create company
         if ($company_user_id_result == "Fail"){ return 0; }
         
+        //************************************************
         // data extraction for later use
         $company_user_id = $company_user_id_array["data"]["common__company_user_id"];
         
         
+        //************************************************
         // **** Test user or admin retrieve company user information ****
         $company_user_info_return = $company_user_service_obj->SendReceive_Service_Request(
                     "CB_AroundYou:get_full_company_user_data", 
@@ -82,35 +87,72 @@ class aroundyou_unittest extends CI_Controller
         $this->unit->run("Pass", $company_user_info_result, "Test CB_AroundYou Company User information retrieved", $note);  
         
         
+        //************************************************
         // **** Test user change activation ****
+        $company_user_activation_info_return_2 = $company_user_service_obj->Send_Service_Request(
+        //$company_user_service_obj->Send_Service_Request(
+                    "CB_AroundYou:create_modi_company_user", 
+                    array(
+                        "common__company_user_id" => $company_user_id,
+                        "common__company_user_activated" => 0
+                    )
+                );
+        $company_user_activation_info_return = $company_user_service_obj->SendReceive_Service_Request(
+                    "CB_AroundYou:get_full_company_user_data", 
+                    array(
+                        "common__company_user_id" => $company_user_id
+                    )
+                );
+        $company_user_activation_return_array = json_decode($company_user_activation_info_return, TRUE);
+        $company_user_activation_result = 
+                ($company_user_activation_return_array["status"] === "Complete" && 
+                    array_key_exists("aroundyou_users__activated", $company_user_activation_return_array["data"]) &&
+                    $company_user_activation_return_array["data"]["aroundyou_users__activated"] == 0)? "Pass" : "Fail";
+        $note = "Return Change Activation:<br>".$company_user_activation_info_return_2."<br>";
+        $note = $note."Return Retrieved Activation:<br>".$company_user_activation_info_return."<br>";
+        $this->unit->run("Pass", $company_user_activation_result, "Test CB_AroundYou Company User information retrieved", $note);  
         
         
-        
+        //************************************************
         // **** Test admin change user company count limit ****
         
         
-        
+        //************************************************
         // **** Test admin change user banned and reason ****
         
         
         
-        
+        //************************************************
         // **** Test user create company ****
-
+        
+        //************************************************
         // **** Test user edit company info ****
+        
+        //************************************************
         // **** Test user edit company operation info ****
+        
+        //************************************************
         // **** Test user add/edit/remove benefit ****
+        
+        //************************************************
         // **** Test user edit/remove benefit ****
+        
+        //************************************************
         // **** Test user edit company activated  ****
 
-
+        //************************************************
         // **** Test admin change company product count limit ****
+        
+        //************************************************
         // **** Test admin change company benefit count limit ****
+        
+        //************************************************
         // **** Test admin change company activate date and duration ****
-
+        
+        //************************************************
         // **** Test company removal ****
 
-        
+        //************************************************
         // **** Test comany user removal ****
    }
    

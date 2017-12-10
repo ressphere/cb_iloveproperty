@@ -41,7 +41,7 @@ class CB_AroundYOu extends CBWS_Service_Base{
             "test_service"  => TRUE,
             
             // Company user related
-            "create_company_user" => TRUE,
+            "create_modi_company_user" => TRUE,
             "get_full_company_user_data" => TRUE,
             
             // Company info related
@@ -74,6 +74,7 @@ class CB_AroundYOu extends CBWS_Service_Base{
             "common__user_id" => TRUE,
             "common__company_user_id" => TRUE,
             "common__company_id" => TRUE,
+            "common__company_user_activated" => TRUE,
             
             // Company information
             "info__logo" => TRUE,
@@ -104,7 +105,6 @@ class CB_AroundYOu extends CBWS_Service_Base{
             "location__property_name"  => TRUE,
             
             // admin changable info
-            "admin_user__activated" => TRUE,
             "admin_user__banned" => TRUE,
             "admin_user__banned_reason" => TRUE,
             "admin_user__company_count_limit" => TRUE,
@@ -150,7 +150,7 @@ class CB_AroundYOu extends CBWS_Service_Base{
     /*
      * To create user for company
      */
-    public function create_company_user($input_data_array)
+    public function create_modi_company_user($input_data_array)
     {
         // Filter away the unwanted key
         $user_info = $this->data_key_init($input_data_array, true);
@@ -200,6 +200,7 @@ class CB_AroundYOu extends CBWS_Service_Base{
         $this->set_data("Info: Complete CB_AroundYou:get_full_company_user_data Service",$return_info);
         
     }
+    
     
     /*
      * To clear off ALL company data which related to spcified id

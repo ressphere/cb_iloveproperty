@@ -46,16 +46,43 @@ class aroundyou_lib extends cb_base_libraries
         $input_data_array = $this->data_value_convertor($input_data_raw, $this->aroundyou_lib__company_data_convert(), TRUE); 
         
         // Extract input information
-        $user_id = $this->array_value_extract($input_data_array, "common__user_id");
+        $user_id = $this->array_value_extract($input_data_array, "common__user_id", TRUE);
         $company_user_id = $this->array_value_extract($input_data_array, "common__company_user_id", TRUE);
         
+        if($user_id == NULL && $company_user_id == NULL)
+        {
+            $this->set_error( "LAYou-CUAE-1",
+                    "Fail to process data, please contact admin",
+                    "Missing common__user_id and common__company_user_id, must have one of those ".json_encode($input_data_json)
+                    );
+        }
+        
         if($this->is_error){return 0;}  // User id is a must
+        
+        // Preload aroundyou user model as extraction might need it also
+        $this->CI->load->model('aroundyou_users_model');
         
         // Prepare information
         $company_user_search_condition = array();
         if ($company_user_id !== NULL)
         {
-            // @todo - require support edit info, which extract and modified
+            // Specified is edit not add new by condition
+            $company_user_search_condition["id"] = $company_user_id;
+                    
+            // Retrieved base data before modified
+            $retrieved_aroundyou_users_model = new $this->CI->aroundyou_users_model;
+            $retrieved_aroundyou_users_model->query_detail_data_setup();
+            $company_user_info = $retrieved_aroundyou_users_model->find_one(array("id" => $company_user_id),"","array");
+
+            // Replace value if modified
+            if (array_key_exists("common__company_user_activated"   , $input_data_array)) { $company_user_info["aroundyou_users__activated"]             = $input_data_array["common__company_user_activated"]; }
+            if (array_key_exists("admin_user__banned"               , $input_data_array)) { $company_user_info["aroundyou_users__banned"]                = $input_data_array["admin_user__banned"]; }
+            if (array_key_exists("admin_user__banned_reason"        , $input_data_array)) { $company_user_info["aroundyou_users__banned_reason"]         = $input_data_array["admin_user__banned_reason"]; }
+            if (array_key_exists("admin_user__company_count_limit"  , $input_data_array)) { $company_user_info["aroundyou_users__company_count_limit"]   = $input_data_array["admin_user__company_count_limit"]; }
+            if (array_key_exists("common__user_id"                  , $input_data_array)) { $company_user_info["users_id"]                               = $user_id; }
+            
+            // Update modified data time
+            $company_user_info["aroundyou_users__modified"] = date('Y-m-d H:i:s', time());
         }
         else
         {
@@ -66,8 +93,7 @@ class aroundyou_lib extends cb_base_libraries
             $company_user_info["aroundyou_users__modified"] = date('Y-m-d H:i:s', time());
         }
         
-        // Load aroundyou user model and insert data
-        $this->CI->load->model('aroundyou_users_model');
+        // Process the insert database part
         $aroundyou_users_model = new $this->CI->aroundyou_users_model;
         $aroundyou_users_model->insert_data(json_encode($company_user_info),$company_user_search_condition);
         $this->validate_return_data($aroundyou_users_model);
