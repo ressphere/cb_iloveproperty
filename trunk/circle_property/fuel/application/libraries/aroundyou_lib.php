@@ -46,8 +46,8 @@ class aroundyou_lib extends cb_base_libraries
         $input_data_array = $this->data_value_convertor($input_data_raw, $this->aroundyou_lib__company_data_convert(), TRUE); 
         
         // Extract input information
-        $user_id = $this->array_value_extract($input_data_array, "common__user_id", TRUE);
-        $company_user_id = $this->array_value_extract($input_data_array, "common__company_user_id", TRUE);
+        $user_id = $this->array_value_extract($input_data_array, "users_id", TRUE);
+        $company_user_id = $this->array_value_extract($input_data_array, "aroundyou_users_id", TRUE);
         
         if($user_id == NULL && $company_user_id == NULL)
         {
@@ -75,11 +75,11 @@ class aroundyou_lib extends cb_base_libraries
             $company_user_info = $retrieved_aroundyou_users_model->find_one(array("id" => $company_user_id),"","array");
 
             // Replace value if modified
-            if (array_key_exists("common__company_user_activated"   , $input_data_array)) { $company_user_info["aroundyou_users__activated"]             = $input_data_array["common__company_user_activated"]; }
-            if (array_key_exists("admin_user__banned"               , $input_data_array)) { $company_user_info["aroundyou_users__banned"]                = $input_data_array["admin_user__banned"]; }
-            if (array_key_exists("admin_user__banned_reason"        , $input_data_array)) { $company_user_info["aroundyou_users__banned_reason"]         = $input_data_array["admin_user__banned_reason"]; }
-            if (array_key_exists("admin_user__company_count_limit"  , $input_data_array)) { $company_user_info["aroundyou_users__company_count_limit"]   = $input_data_array["admin_user__company_count_limit"]; }
-            if (array_key_exists("common__user_id"                  , $input_data_array)) { $company_user_info["users_id"]                               = $user_id; }
+            if (array_key_exists("aroundyou_users__activated"   , $input_data_array)) { $company_user_info["aroundyou_users__activated"]             = $input_data_array["aroundyou_users__activated"]; }
+            if (array_key_exists("aroundyou_users__banned"               , $input_data_array)) { $company_user_info["aroundyou_users__banned"]                = $input_data_array["aroundyou_users__banned"]; }
+            if (array_key_exists("aroundyou_users__ban_reason"        , $input_data_array)) { $company_user_info["aroundyou_users__ban_reason"]         = $input_data_array["aroundyou_users__ban_reason"]; }
+            if (array_key_exists("aroundyou_users__company_count_limit"  , $input_data_array)) { $company_user_info["aroundyou_users__company_count_limit"]   = $input_data_array["aroundyou_users__company_count_limit"]; }
+            if (array_key_exists("users_id"                  , $input_data_array)) { $company_user_info["users_id"]                               = $user_id; }
             
             // Update modified data time
             $company_user_info["aroundyou_users__modified"] = date('Y-m-d H:i:s', time());
@@ -105,7 +105,7 @@ class aroundyou_lib extends cb_base_libraries
         $return_company_user_id = $aroundyou_users_model_return["data"]["id"];
         
         // Handle output data
-        $return_data["common__company_user_id"] = $return_company_user_id;
+        $return_data["aroundyou_users_id"] = $return_company_user_id;
         
         $this->set_data("Complete company user creation", $return_data);
         
@@ -128,7 +128,7 @@ class aroundyou_lib extends cb_base_libraries
         $input_data_array = $this->data_value_convertor($input_data_raw, $this->aroundyou_lib__company_data_convert(), TRUE); 
         
         // Extract input information
-        $company_user_id = $this->array_value_extract($input_data_array, "common__company_user_id");
+        $company_user_id = $this->array_value_extract($input_data_array, "aroundyou_users_id");
         if($this->is_error){return 0;}  // User id is a must
         
         // Load aroundyou user model and insert data

@@ -414,6 +414,46 @@ class CBWS_Service_Base {
     }
     
     /*
+     * API to convert the data hash key naming from UI to model and vise versa
+     * 
+     * @Param Array That contain data for name change
+     * @Param Bool To determine the key of data is change from (TRUE) UI->model or (FALSE) model->UI
+     * 
+     * @Return Array converted data
+     */
+    public function CBWS_Service_Base__data_value_convertor($data_array, $is_view)
+    {
+        // Call setting API from the caller class
+        $array_key_change = $this->data_key_v_and_m();
+        
+        // Change base on direction
+        if($is_view)
+        {
+            foreach ($array_key_change as $view_key => $model_key)
+            {
+                if($data_array !== NULL && array_key_exists($view_key, $data_array))
+                {
+                    $data_array[$model_key] = $data_array[$view_key];
+                    unset($data_array[$view_key]);
+                }
+            }
+        }
+        else
+        {
+            foreach ($array_key_change as $view_key => $model_key)
+            {
+                if(array_key_exists($model_key, $data_array))
+                {
+                    $data_array[$view_key] = $data_array[$model_key];
+                    unset($data_array[$model_key]);
+                }
+            }
+        }
+        
+        return $data_array;
+    }
+    
+    /*
      * API to detect and extract array value, error if not found
      * 
      * @param Array That will use for key check

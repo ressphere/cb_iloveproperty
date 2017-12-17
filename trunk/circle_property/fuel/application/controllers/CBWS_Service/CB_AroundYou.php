@@ -71,47 +71,57 @@ class CB_AroundYOu extends CBWS_Service_Base{
             // Company benefit
             
             // Common info
-            "common__user_id" => TRUE,
-            "common__company_user_id" => TRUE,
-            "common__company_id" => TRUE,
-            "common__company_user_activated" => TRUE,
-            
-            // Company information
-            "info__logo" => TRUE,
-            "info__phone" => TRUE,
-            "info__fax" => TRUE,
-            "info__email" => TRUE,
-            "info__about_us" => TRUE,
-            "info__head_pic" => TRUE,
-            
-            // Operation period
-            "operation__period" => TRUE,
-            "operation__time_start" => TRUE,
-            "operation__time_end"  => TRUE,
-            "operation__auto" => TRUE,
-            "operation__manual_date_start" => TRUE,
-            
-            // Company type
-            "company_type__main"  => TRUE,
-            "company_type__sub"  => TRUE,
-            
-            // Location
-            "location__country"  => TRUE,
-            "location__state"  => TRUE,
-            "location__area"  => TRUE,
-            "location__post_code"  => TRUE,
-            "location__map"  => TRUE,
-            "location__street"  => TRUE,
-            "location__property_name"  => TRUE,
+            "users_id" => TRUE,
+            "aroundyou_users_id" => TRUE,
+            "aroundyou_company_id" => TRUE,
+            "aroundyou_users__activated" => TRUE,
+            //"aroundyou_users__modified" => TRUE,
+            //"aroundyou_company__modified" => TRUE,
             
             // admin changable info
-            "admin_user__banned" => TRUE,
-            "admin_user__banned_reason" => TRUE,
-            "admin_user__company_count_limit" => TRUE,
-            "admin_company__product_count_limit" => TRUE,
-            "admin_company__activated" => TRUE,
-            "admin_company__activated_date" => TRUE,
-            "admin_company__activated_duration" => TRUE
+            "aroundyou_users__banned" => TRUE,
+            "aroundyou_users__ban_reason" => TRUE,
+            "aroundyou_users__company_count_limit" => TRUE,
+            "aroundyou_company__product_count_limit" => TRUE,
+            "aroundyou_company__benefit_count_limit" => TRUE,
+            "aroundyou_company__activated" => TRUE,
+            "aroundyou_company__activate_date" => TRUE,
+            "aroundyou_company__duration" => TRUE,
+            
+            // Company information
+            "aroundyou_company__logo" => TRUE,
+            "aroundyou_company__phone" => TRUE,
+            "aroundyou_company__fax" => TRUE,
+            "aroundyou_company__email" => TRUE,
+            "aroundyou_company__about_us_intro" => TRUE,
+            "aroundyou_company__detail_head_pic" => TRUE,
+            
+            // Operation period
+            "aroundyou_operation_period__display" => TRUE,
+            "aroundyou_operation_period__type" => TRUE,
+            "aroundyou_operation_period__one_time" => TRUE,
+            "aroundyou_company__operation_time_start" => TRUE,
+            "aroundyou_company__operation_time_end"  => TRUE,
+            "aroundyou_company__operation_auto" => TRUE,
+            "aroundyou_company__operation_manual_date_start" => TRUE,
+            
+            // Company type
+            "aroundyou_company_type__main_category"  => TRUE,
+            "aroundyou_company_type__sub_category"  => TRUE,
+            
+            // Company product and benefit
+            "aroundyou_company_product__list" => TRUE,
+            "aroundyou_company_benefit__list" => TRUE,
+            
+            // Location
+            "location__company_country"  => TRUE,
+            "location__company_state"  => TRUE,
+            "location__company_area"  => TRUE,
+            "location__company_post_code"  => TRUE,
+            "location__company_map"  => TRUE,
+            "location__company_street"  => TRUE,
+            "location__company_property_name"  => TRUE
+            
         );
         
         return $accept_key;
@@ -129,6 +139,58 @@ class CB_AroundYOu extends CBWS_Service_Base{
         // Format: 
         //    "view_key_name" => "model_key_name"
         $array_key_change = array(
+            // Common info
+            "common__user_id" => "users_id",
+            "common__company_user_id" => "aroundyou_users_id",
+            "common__company_id" => "aroundyou_company_id",
+            "common__company_user_activated" => "aroundyou_users__activated",
+            "common__users_modification" => "aroundyou_users__modified",
+            "common__company_modification" => "aroundyou_company__modified",
+            
+            // admin changable info
+            "admin_user__banned" => "aroundyou_users__banned",
+            "admin_user__ban_reason" => "aroundyou_users__ban_reason",
+            "admin_user__company_count_limit" => "aroundyou_users__company_count_limit",
+            "admin_company__product_count_limit" => "aroundyou_company__product_count_limit",
+            "admin_company__benefit_count_limit" => "aroundyou_company__benefit_count_limit",
+            "admin_company__activated" => "aroundyou_company__activated",
+            "admin_company__activated_date" => "aroundyou_company__activate_date",
+            "admin_company__activated_duration" => "aroundyou_company__duration",
+            
+            // Company information
+            "info__company_logo" => "aroundyou_company__logo",
+            "info__company_phone" => "aroundyou_company__phone",
+            "info__company_fax" => "aroundyou_company__fax",
+            "info__company_email" => "aroundyou_company__email",
+            "info__company_about_us" => "aroundyou_company__about_us_intro",
+            "info__company_head_pic" => "aroundyou_company__detail_head_pic",
+            
+            // Operation period
+            "operation__period_display" => "aroundyou_operation_period__display",
+            "operation__period_type" => "aroundyou_operation_period__type",
+            "operation__period_one_time" => "aroundyou_operation_period__one_time",
+            "operation__time_start" => "aroundyou_company__operation_time_start",
+            "operation__time_end"  => "aroundyou_company__operation_time_end",
+            "operation__auto" => "aroundyou_company__operation_auto",
+            "operation__manual_date_start" => "aroundyou_company__operation_manual_date_start",
+            
+            // Company type
+            "company_type__main"  => "aroundyou_company_type__main_category",
+            "company_type__sub"  => "aroundyou_company_type__sub_category",
+            
+            // Company product and benefit
+            //"aroundyou_company_product__list" => TRUE,
+            //"aroundyou_company_benefit__list" => TRUE,
+            
+            // Location
+            //"location__company_country"  => "country",
+            //"location__company_state"  => "state",
+            //"location__company_area"  => "area",
+            //"location__company_post_code"  => "post_code",
+            //"location__company_map"  => "map_location",
+            //"location__company_street"  => "street",
+            //"location__company_property_name"  => "property_name"
+            
         );
         
         return $array_key_change;
@@ -154,7 +216,7 @@ class CB_AroundYOu extends CBWS_Service_Base{
     {
         // Filter away the unwanted key
         $user_info = $this->data_key_init($input_data_array, true);
-        
+
         // Build libraries info array data
         $library_data = array(
             'library' => $this->company_library_name,
@@ -168,10 +230,20 @@ class CB_AroundYOu extends CBWS_Service_Base{
         
         // Result handle
         $return_info = array(
-            "common__company_user_id" => $insert_return['data']['common__company_user_id']
+            "common__company_user_id" => $insert_return['data']['aroundyou_users_id']
         );
         
         $this->set_data("Info: Complete CB_AroundYou:create_user Service",$return_info);
+        
+        // file dump -- for testing purpose -- Start --
+        /*
+        $current = "\n------------------------------\n";
+        $current .= "CB_AroundYou  -- create_modi_company_user\n";
+        $current .= "data type is : ".gettype($input_data_array)."\n";
+        $current .= "initial data is : ".json_encode($input_data_array)."\n";
+        $current .= "filter data is : ".json_encode($user_info);
+        error_log($current, 3, "D:/webdev/resphere_test_dump.txt");   
+        // file dump -- for testing purpose -- End --*/
         
     }
     
@@ -196,8 +268,9 @@ class CB_AroundYOu extends CBWS_Service_Base{
         
         // Result handle
         $return_info = $insert_return["data"];
+        $return_info_changed = $this->CBWS_Service_Base__data_value_convertor($return_info, false);
         
-        $this->set_data("Info: Complete CB_AroundYou:get_full_company_user_data Service",$return_info);
+        $this->set_data("Info: Complete CB_AroundYou:get_full_company_user_data Service",$return_info_changed);
         
     }
     
