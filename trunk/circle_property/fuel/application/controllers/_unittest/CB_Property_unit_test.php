@@ -2,6 +2,9 @@
 require_once dirname(dirname(__FILE__)).'/CBWS_Service/CB_Property.php';
 require_once 'unit_test_main.php';
 
+// To invoke the unit test, please try following link
+//   http://localhost/cb_iloveproperty/trunk/circle_property/_unittest/CB_Property_unit_test/test_list
+
 class CB_Property_unit_test extends unit_test_main
 {
     function __construct() {
