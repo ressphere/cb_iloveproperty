@@ -55,7 +55,7 @@ class base extends CI_Controller {
         
         $this->extemplate->add_css('css/bootstrap.min.css');
         $this->extemplate->add_css('css/animate.min.css');
-        $this->extemplate->add_css('css/base.css');
+        //$this->extemplate->add_css('css/base.css');
         $this->extemplate->add_js('js/jquery.min.js');
         $this->extemplate->add_js('js/bootstrap-mit.min.js');
         $this->extemplate->add_js('js/typeahead.min.js');
