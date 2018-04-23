@@ -163,29 +163,47 @@ class aroundyou_unittest extends CI_Controller
             "info__company_head_pic" => "http://tmp_head_pic_addr",
             "operation__period_type" => "1_2_3_4_5_6",
             "operation__auto" => TRUE,
+            "company_type__main" => "Restaurant",
+            "company_type__sub" => "Chinese Restaurant",
+            "info__company_product_list" => array(
+                array(
+                    "image" => "http://tmp_product_link_1",
+                    "title" => "Product 1",
+                    "info" => "This is info for product 1",
+                    "price" => 1000,
+                    "currency_code" => "MYR"
+                ),
+                array(
+                    "image" => "http://tmp_product_link_2",
+                    "title" => "Product 2",
+                    "info" => "This is info for product 2",
+                    "price" => 2000,
+                    "currency_code" => "MYR"
+                ),
+            ),
+            "info__company_benefit_list" => array(
+                array(
+                    "image" => "http://tmp_benefit_link_1",
+                    "title" => "Benefit 1",
+                    "info" => "This is info for benefit 1",
+                    "start_date" => "2017-11-27",
+                    "end_date" => "2017-12-03",
+                    "type" => "Discount"
+                )
+            ),
+            "location__company_country" => "Malaysia",
+            "location__company_state" => "Pulau Pinang",
+            "location__company_area" => "Gelugor",
+            "location__company_post_code" => "11700",
+            "location__company_map" => array(
+                "k" => 3.1403075200382 ,
+                "B" => 101.68664550781
+            ),
+            "location__company_street" => "Jalan Batu Uban",
+            "location__company_property_name" => "N-park Condominium Jalan Batu Uban Gelugor Penang Malaysia"
         );
         
-        /*
-            
-
-            // Company type
-            "company_type__main"  => "aroundyou_company_type__main_category",
-            "company_type__sub"  => "aroundyou_company_type__sub_category",
-            
-            // Company product and benefit
-            //"aroundyou_company_product__list" => TRUE,
-            //"aroundyou_company_benefit__list" => TRUE,
-            
-            // Location
-            //"location__company_country"  => "country",
-            //"location__company_state"  => "state",
-            //"location__company_area"  => "area",
-            //"location__company_post_code"  => "post_code",
-            //"location__company_map"  => "map_location",
-            //"location__company_street"  => "street",
-            //"location__company_property_name"  => "property_name"
-         */
-        
+        //@todo - add caller to web service when support ready
         
         //************************************************
         // **** Test user edit company info ****
@@ -223,6 +241,9 @@ class aroundyou_unittest extends CI_Controller
         // **** Test admin change company activate date and duration ****
         
         
+        //************************************************
+        // **** Test on area search result and summary return
+        //    Need to activate back the user and company for result hit
         
         
         //************************************************

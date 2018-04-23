@@ -45,6 +45,10 @@ class CB_AroundYOu extends CBWS_Service_Base{
             "get_full_company_user_data" => TRUE,
             
             // Company info related
+            "create_modi_company_info" => TRUE,
+            "get_full_company_info_data" => TRUE,
+            
+            // Search related
             
             // Fast track
             "fast_clean_data" => TRUE,
@@ -110,8 +114,8 @@ class CB_AroundYOu extends CBWS_Service_Base{
             "aroundyou_company_type__sub_category"  => TRUE,
             
             // Company product and benefit
-            "aroundyou_company_product__list" => TRUE,
-            "aroundyou_company_benefit__list" => TRUE,
+            "info__company_product_list" => TRUE,
+            "info__company_benefit_list" => TRUE,
             
             // Location
             "location__company_country"  => TRUE,
@@ -179,8 +183,8 @@ class CB_AroundYOu extends CBWS_Service_Base{
             "company_type__sub"  => "aroundyou_company_type__sub_category",
             
             // Company product and benefit
-            //"aroundyou_company_product__list" => TRUE,
-            //"aroundyou_company_benefit__list" => TRUE,
+            //"info__company_product_list" => TRUE,
+            //"info__company_benefit_list" => TRUE,
             
             // Location
             //"location__company_country"  => "country",
@@ -210,7 +214,7 @@ class CB_AroundYOu extends CBWS_Service_Base{
     
     //--------------------- Service Function ----------------------
     /*
-     * To create user for company
+     * To create user for company user
      */
     public function create_modi_company_user($input_data_array)
     {
@@ -274,6 +278,74 @@ class CB_AroundYOu extends CBWS_Service_Base{
         
     }
     
+    /*
+     * To create user for company info
+     */
+    public function create_modi_company_info($input_data_array)
+    {
+        // Filter away the unwanted key
+        $user_info = $this->data_key_init($input_data_array, true);
+        
+        // @todo - add support to invoke libraries when support complete
+        
+        /*
+        // Build libraries info array data
+        $library_data = array(
+            'library' => $this->company_library_name,
+            'function' => "aroundyou_lib__company_user_add_edit",
+            'data' => json_encode($user_info)
+        );
+        
+        // Call libraries to create user
+        $insert_return = $this->invoke_library_function($library_data);
+        if($this->is_error){return 0;} // function invoke_library_function will help to handle if error 
+        
+        // Result handle
+        $return_info = array(
+            "common__company_user_id" => $insert_return['data']['aroundyou_users_id']
+        );
+        
+        $this->set_data("Info: Complete CB_AroundYou:create_user Service",$return_info);
+        
+        // file dump -- for testing purpose -- Start --
+        /*
+        $current = "\n------------------------------\n";
+        $current .= "CB_AroundYou  -- create_modi_company_user\n";
+        $current .= "data type is : ".gettype($input_data_array)."\n";
+        $current .= "initial data is : ".json_encode($input_data_array)."\n";
+        $current .= "filter data is : ".json_encode($user_info);
+        error_log($current, 3, "D:/webdev/resphere_test_dump.txt");   
+        // file dump -- for testing purpose -- End --*/
+        
+    }
+    
+    /*
+     * To obtain all user data related to company
+     */
+    public function get_full_company_info_data($input_data_array)
+    {
+        /*
+        // Filter away the unwanted key
+        $user_info = $this->data_key_init($input_data_array, true);
+        
+        // Build libraries info array data
+        $library_data = array(
+            'library' => $this->company_library_name,
+            'function' => "aroundyou_lib__get_company_user_data",
+            'data' => json_encode($user_info)
+        );
+        
+        // Call libraries to create user
+        $insert_return = $this->invoke_library_function($library_data);
+        if($this->is_error){return 0;} // function invoke_library_function will help to handle if error 
+        
+        // Result handle
+        $return_info = $insert_return["data"];
+        $return_info_changed = $this->CBWS_Service_Base__data_value_convertor($return_info, false);
+        
+        $this->set_data("Info: Complete CB_AroundYou:get_full_company_user_data Service",$return_info_changed);
+        */
+    }
     
     /*
      * To clear off ALL company data which related to spcified id
