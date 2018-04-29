@@ -73,9 +73,13 @@ class cb_home extends base {
         {
             $msg = "<span class='error'>Please provide us your name.</span>";
         }
-        elseif (is_null($email) || $email == "" || !$this->_validate_email($email)) 
+        elseif (is_null($email) || $email == "") 
         {
             $msg = "<span class='error'>Please provide us your email.</span>";
+        }
+        elseif (!$this->_validate_email($email)) 
+        {
+            $msg = "<span class='error'>Please provide us a valid email.</span>";
         }
         elseif(is_null($comment) || $comment == "")
         {
@@ -174,15 +178,37 @@ class cb_home extends base {
        $this->SEO_Tags($content);
        $this->set_title($title);
        
-       
        $this->extemplate->add_js('js/jquery.easing.min.js');
+       $this->extemplate->add_js('js/bootstrap.min.js');
+       $this->extemplate->add_js('js/SmoothScroll.js');
+       $this->extemplate->add_js('js/jquery.scrollTo.min.js');
+       $this->extemplate->add_js('js/jquery.localScroll.min.js');
+       $this->extemplate->add_js('js/jquery.viewport.mini.js');
+       $this->extemplate->add_js('js/jquery.countTo.js');
+       $this->extemplate->add_js('js/jquery.appear.js');
+       $this->extemplate->add_js('js/jquery.sticky.js');
+       $this->extemplate->add_js('js/jquery.parallax-1.1.3.js');
+       $this->extemplate->add_js('js/jquery.fitvids.js');
+       $this->extemplate->add_js('js/animations.min.js');
+       $this->extemplate->add_js('js/owl.carousel.min.js');
+       $this->extemplate->add_js('js/isotope.pkgd.min.js');
+       $this->extemplate->add_js('js/imagesloaded.pkgd.min.js');
+       $this->extemplate->add_js('js/jquery.magnific-popup.min.js');
+       $this->extemplate->add_js('js/all.js');
+       $this->extemplate->add_js('js/jstorage.min.js');
+       $this->extemplate->add_js('js/jquery.makeclass.min.js');
        $this->extemplate->add_js('js/cb_home.js');
       
-       $this->extemplate->add_css('css/home.css');
-       $this->extemplate->add_css('css/about_us.css');
-       $this->extemplate->add_css('css/contact_us.css');
-       //$this->extemplate->add_css('css/demo.css');
-       //$this->extemplate->add_css('css/flexslider.css');
+       $this->extemplate->add_css('css/style.css');
+       $this->extemplate->add_css('css/style-responsive.css');
+       $this->extemplate->add_css('css/animate.css');
+       $this->extemplate->add_css('css/animations.min.css');
+       $this->extemplate->add_css('css/vertical-rhythm.min.css');
+       $this->extemplate->add_css('css/owl.carousel.css');
+       $this->extemplate->add_css('css/yellow.css');
+       $this->extemplate->add_css('css/bootstrap.min.css');
+       $this->extemplate->add_css('css/magnific-popup.css');
+       $this->extemplate->add_css('css/font-awesome.min.css');
        
        $this->extemplate->write_view('contents', '_usercontrols/cb_services',array('feature_list'=>$this->_get_features()) ,TRUE);
        
