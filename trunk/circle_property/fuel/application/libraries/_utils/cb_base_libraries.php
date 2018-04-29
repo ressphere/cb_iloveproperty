@@ -30,6 +30,9 @@ class cb_base_libraries extends CI_Controller{
     public $library_name = "none_and_is_error";
     public $library_code = "LBE-NON";
     
+    // Service invoke flag
+    public $library_service_invoke_flag = FALSE;
+    
     //--------------------- Setup Function -------------------------------------
     /*
      * Constructor 
@@ -48,6 +51,87 @@ class cb_base_libraries extends CI_Controller{
         //$this->config->load("MY_config");
     }
 
+    //---------- Service invoke, for direct flow in ----------------------------
+    /*
+     * This API handle the invoke of service within the library, main entries
+     *    1. Check if the service exist
+     *       a. Error if service not found
+     *       b. Error if service need auth but no auth
+     *    2. Invoke service
+     * 
+     * @Param String request_command["service"] Contain choosed service that need to execute, prefix is <Service Group name>:<service name>
+     * @Param Array request_command["send_data"] Input data for service to process
+     * @Param Bool request_command["AUTH"] Indicate have authorization or not
+     * 
+     */
+    public function library_direct_service_invoke($request_command)
+    {
+        
+         // Check through the service list
+        $service_name = $this->_library_search_service($request_command["service"], $request_command["AUTH"]);
+        
+        if($this->library_service_invoke_flag === TRUE)
+        {
+            // Invoke Service function
+            $this->$service_name($request_command["send_data"]);
+        }
+        
+    }
+    
+    /*
+     * Contain list of serivce supported with auth - default empty
+     * Service list content mean
+     *     - True = Require AUTH
+     *     - FALSE = Not require AUTH
+     * 
+     * @Return Array list of auth servie
+     */
+    private function library_service_list()
+    {
+        $service_list = array(
+            //"test_service"  => TRUE,
+        );
+        return $service_list;
+    }
+            
+    /*
+     * Search service list to see is the service supported
+     * 
+     * @Param String Full Service name
+     */
+    private function _library_search_service($service_command, $AUTH)
+    {
+        // Retrieve service group, split to [0] is Service group and [1] is service name
+        $service = explode(":",$service_command);
+        $extract_service = $service[1];
+        $service_list = $this->library_service_list();
+        
+        // Check list to see any hit avaliable
+        if(array_key_exists($extract_service, $service_list))
+        {
+            // Got hit, hurray...
+            $require_auth = $service_list[$extract_service];
+            
+            // Check AUTH requirement
+            if ($require_auth === TRUE && $AUTH === FALSE)
+            {
+                // Error if no AUTH provided
+                $this->set_error(
+                        "CBL-".$this->library_code."-SC-1", 
+                        "Require authentication for $service_command",
+                        "Hit AUTH service for $service_command but no AUTH detected for ".$this->service_name);
+            }
+            else
+            {
+                $this->library_service_invoke_flag = TRUE;
+            }
+            
+            // Pass AUTH check or no AUTH required
+            return $extract_service;
+        }
+        
+        return "";
+    }
     
     //---------- Error and Return Data Handler Function ------------------------
     

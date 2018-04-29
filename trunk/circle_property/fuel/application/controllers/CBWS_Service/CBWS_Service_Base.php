@@ -28,6 +28,8 @@ class CBWS_Service_Base {
     // Library name for database query and error message
     public $service_name = "none_and_is_error";
     public $service_code = "CSB-NON";
+    public $library_name = "none_and_is_error";
+    
     
     //--------------------- Setup Function ----------------------
     public function __construct()
@@ -178,9 +180,10 @@ class CBWS_Service_Base {
     /*
      * Main entry for service, which include
      *    1. Check if the service exist
-     *       a. Error if service not found
-     *       b. Error if service need auth but no auth
-     *    2. Invoke service
+     *       a. Will invoke libraries service to see it exist or not
+     *       b. Error if service not found
+     *       c. Error if service need auth but no auth
+     *    2. Invoke service if is not libraries and found in service list
      * 
      * @Param String request_command["service"] Contain choosed service that need to execute, prefix is <Service Group name>:<service name>
      * @Param Array request_command["send_data"] Input data for service to process
@@ -193,15 +196,51 @@ class CBWS_Service_Base {
      */
     public function invoke_service($request_command)
     {
-        // Check through the service list
-        $service_name = $this->_search_service($request_command["service"], $request_command["AUTH"]);
-        
-        if($this->is_error !== TRUE)
+        // This capture libraries service invoke success or not
+        $library_service_invoke_flag = FALSE;
+    
+        // This is a gateway that allow service place at libraries, thus invoke it
+        // Please take note that through this gateway, all data key checking and conversion must 
+        //  done in libraries
+        if ($this->library_name !== "none_and_is_error")
         {
-            // Invoke Service function
-            $this->$service_name($request_command["send_data"]);
+            
+            $library_obj = $this->CI->load->library($this->library_name);
+            $library_obj->library_direct_service_invoke($request_command);
+            
+            $library_service_invoke_flag = $library_obj->library_service_invoke_flag;
+            
+            // Copy over result if sucessfully invoke service
+            if ($library_service_invoke_flag === TRUE)
+            {
+                // Handle pass condition
+                if($library_obj->is_error === FALSE)
+                {
+                    $this->status_information = $library_obj->status_information;
+                    $this->return_data = $library_obj->return_data;
+                }
+                else
+                {
+                    $this->set_error($library_obj->error_code,
+                            $library_obj->usr_error_msg,
+                            $library_obj->dev_error_msg);
+                }
+            }
         }
-          
+        
+        // Invoke old flow if service not found in libraries
+        if ($library_service_invoke_flag === FALSE)
+        {
+            // Check through the service list
+            $service_name = $this->_search_service($request_command["service"], $request_command["AUTH"]);
+
+            if($this->is_error !== TRUE)
+            {
+                // Invoke Service function
+                $this->$service_name($request_command["send_data"]);
+            }
+        }
+        
         // Return complete data
         return $this->get_return_data_set();
     }
@@ -570,8 +609,6 @@ class CBWS_Service_Base {
         
         return "";
     }
-
-    
     
 }
 

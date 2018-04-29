@@ -9,7 +9,7 @@ require_once 'CBWS_Service_Base.php';
 class CB_AroundYOu extends CBWS_Service_Base{
     //--------------------- Global Variable ----------------------
     // Library that interact with dedicated database
-    private $company_library_name = "aroundyou_lib";
+    public $library_name = "aroundyou_lib";
     
     // Error handler
     public $service_name = "cb_aroundyou";
@@ -223,7 +223,7 @@ class CB_AroundYOu extends CBWS_Service_Base{
 
         // Build libraries info array data
         $library_data = array(
-            'library' => $this->company_library_name,
+            'library' => $this->library_name,
             'function' => "aroundyou_lib__company_user_add_edit",
             'data' => json_encode($user_info)
         );
@@ -261,7 +261,7 @@ class CB_AroundYOu extends CBWS_Service_Base{
         
         // Build libraries info array data
         $library_data = array(
-            'library' => $this->company_library_name,
+            'library' => $this->library_name,
             'function' => "aroundyou_lib__get_company_user_data",
             'data' => json_encode($user_info)
         );
@@ -291,7 +291,7 @@ class CB_AroundYOu extends CBWS_Service_Base{
         /*
         // Build libraries info array data
         $library_data = array(
-            'library' => $this->company_library_name,
+            'library' => $this->library_name,
             'function' => "aroundyou_lib__company_user_add_edit",
             'data' => json_encode($user_info)
         );
@@ -330,7 +330,7 @@ class CB_AroundYOu extends CBWS_Service_Base{
         
         // Build libraries info array data
         $library_data = array(
-            'library' => $this->company_library_name,
+            'library' => $this->library_name,
             'function' => "aroundyou_lib__get_company_user_data",
             'data' => json_encode($user_info)
         );
@@ -359,7 +359,7 @@ class CB_AroundYOu extends CBWS_Service_Base{
         
         // Get company user id and company id
         $library_data = array(
-            'library' => $this->company_library_name,
+            'library' => $this->library_name,
             'function' => "company_user_add_edit",
             'data' => json_encode($user_info)
         );
@@ -375,7 +375,7 @@ class CB_AroundYOu extends CBWS_Service_Base{
         
         
         $library_data = array(
-            'library' => $this->company_library_name,
+            'library' => $this->library_name,
             'function' => "company_user_add_edit",
             'data' => json_encode($user_info)
         );
