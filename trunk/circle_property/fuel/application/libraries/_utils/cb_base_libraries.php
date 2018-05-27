@@ -16,15 +16,15 @@ class cb_base_libraries extends CI_Controller{
  //--------------------- Global Variable ----------------------
     // Error message
     public $is_error = FALSE;
-    private $dev_error_msg = "";
-    private $usr_error_msg = "";
-    private $error_code = "";
+    public $dev_error_msg = "";
+    public $usr_error_msg = "";
+    public $error_code = "";
     
     // For unit test purpose
-    private $status_information = "Info: Constructor invoke only";
+    public $status_information = "Info: Constructor invoke only";
 
     // Return data
-    private $return_data = "";
+    public $return_data = "";
     
     // Library name for database query and error message
     public $library_name = "none_and_is_error";
@@ -68,12 +68,12 @@ class cb_base_libraries extends CI_Controller{
     {
         
          // Check through the service list
-        $service_name = $this->_library_search_service($request_command["service"], $request_command["AUTH"]);
+        $library_name = $this->_library_search_service($request_command["service"], $request_command["AUTH"]);
         
         if($this->library_service_invoke_flag === TRUE)
         {
             // Invoke Service function
-            $this->$service_name($request_command["send_data"]);
+            $this->$library_name($request_command["send_data"]);
         }
         
     }
@@ -86,7 +86,7 @@ class cb_base_libraries extends CI_Controller{
      * 
      * @Return Array list of auth servie
      */
-    private function library_service_list()
+    public function library_service_list()
     {
         $service_list = array(
             //"test_service"  => TRUE,
@@ -109,6 +109,7 @@ class cb_base_libraries extends CI_Controller{
         // Check list to see any hit avaliable
         if(array_key_exists($extract_service, $service_list))
         {
+            
             // Got hit, hurray...
             $require_auth = $service_list[$extract_service];
             
@@ -119,7 +120,7 @@ class cb_base_libraries extends CI_Controller{
                 $this->set_error(
                         "CBL-".$this->library_code."-SC-1", 
                         "Require authentication for $service_command",
-                        "Hit AUTH service for $service_command but no AUTH detected for ".$this->service_name);
+                        "Hit AUTH service for $service_command but no AUTH detected for ".$this->library_name);
             }
             else
             {
@@ -264,6 +265,37 @@ class cb_base_libraries extends CI_Controller{
     }
     
     /*
+     * API to convert single scale data converter
+     */
+    public function library_data_m_v_convert($data_array,$array_key_change,$is_view)
+    {
+        // Change base on direction
+        if($is_view)
+        {
+            foreach ($array_key_change as $view_key => $model_key)
+            {
+                if($data_array !== NULL && array_key_exists($view_key, $data_array))
+                {
+                    $data_array[$model_key] = $data_array[$view_key];
+                    unset($data_array[$view_key]);
+                }
+            }
+        }
+        else
+        {
+            foreach ($array_key_change as $view_key => $model_key)
+            {
+                if(array_key_exists($model_key, $data_array))
+                {
+                    $data_array[$view_key] = $data_array[$model_key];
+                    unset($data_array[$model_key]);
+                }
+            }
+        }
+        return $data_array;
+    }
+    
+    /*
      * API to detect and extract array value, error if not found
      * 
      * @param Array That will use for key check
@@ -300,6 +332,112 @@ class cb_base_libraries extends CI_Controller{
         return NULL;
     }
     
+    /*
+     * Retain dedicated key information only
+     * 
+     * @Param Array Input data that will be filter
+     * 
+     * @Return Array Filtered data
+     */
+    private function _library_filter_data($data_array)
+    {
+        // Coutner for how many data being set
+        $set_data_cout = 0;
+
+        // Call setting API from the caller class
+        $accepted_key_array = $this->library_accepted_key();
+        
+        // Loop through the initialize data list
+        foreach ($accepted_key_array as $view_key => $key_enable)
+        {
+            if($key_enable)
+            {
+               if(array_key_exists($view_key,$data_array))
+                {
+                    $filtered_data[$view_key] = $data_array[$view_key];
+                    $set_data_cout = $set_data_cout +1;
+                } 
+            }
+        }
+        
+        if($set_data_cout == 0)
+        {
+            $this->set_error("LBE-".$this->library_code."-FD-1",
+                            "For further information, please contact Admin",
+                            "No match key found for input data in _data_key_init for".$this->library_name);
+            return NULL;
+        }
+        
+        return $filtered_data;
+    }
+    
+    /*
+     * To handle data array, which perform: (follow sequence)
+     *    1. Take allow dedicated key and prevent data polution
+     *    2. Key conversion from view to model and vise versa if any
+     * 
+     * @Param Array Data array that pass from view/model to model/view
+     * @Param Boolen To determine the direction of conversion, True mean View to Mode
+     * 
+     * @Return Array Proccessed data with corresponding key
+     */
+    protected function library_data_key_init($data_array, $is_view)
+    {
+        //Check type and convert to array
+        if (is_string($data_array))
+        {
+            $data_array = json_decode($data_array, TRUE);
+        }
+        elseif (is_object($data_array))
+        {
+            $data_array = (array)$data_array;
+        }
+        
+        // Confirm the data_array is array 
+        if($data_array === NULL)
+        {
+            $this->set_error("LBE-".$this->library_code."-DKI-1",
+                            "For further information, please contact Admin",
+                            "data array pass to _data_key_init is NULL for ".$this->library_name);
+            return NULL;
+        }
+        elseif(!is_array($data_array))
+        {
+            $this->set_error("LBE-".$this->library_code."-DKI-2",
+                            "For further information, please contact Admin",
+                            "data array pass to _data_key_init not an array for ".$this->library_name);
+            return NULL;
+        }
+        
+        
+        // To convert key name from UI to model name
+        $data_array = $this->library_data_m_v_convert($data_array,$this->library_data_key_v_and_m(),TRUE);
+        
+        // Remove redundant key after change name
+        $data_array = $this->_library_filter_data($data_array);
+        
+        
+        // Remove NULL data
+        foreach ($data_array as $key => $value)
+        {
+            if($value === NULL)
+            {
+                unset($data_array[$key]);
+            }
+            elseif(is_string($value) && $value === "")
+            {
+                unset($data_array[$key]);
+            }
+        }
+        if($data_array === NULL)
+        {
+            $this->set_error("LBE-".$this->library_code."-DKI-3",
+                            "For further information, please contact Admin",
+                            "The result of _data_key_init is fully filtered for ".$this->library_name).". As input is ".json_encode($data_array);
+        }
+        
+        return $data_array;
+    }
     //--------------------- Internal Function ----------------------------------
     
 }

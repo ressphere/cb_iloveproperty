@@ -41,17 +41,17 @@ class CB_AroundYOu extends CBWS_Service_Base{
             "test_service"  => TRUE,
             
             // Company user related
-            "create_modi_company_user" => TRUE,
-            "get_full_company_user_data" => TRUE,
+            //"create_modi_company_user" => TRUE,
+            //"get_full_company_user_data" => TRUE,
             
             // Company info related
-            "create_modi_company_info" => TRUE,
-            "get_full_company_info_data" => TRUE,
+            //"create_modi_company_info" => TRUE,
+            //"get_full_company_info_data" => TRUE,
             
             // Search related
             
             // Fast track
-            "fast_clean_data" => TRUE,
+            //"fast_clean_data" => TRUE,
         );
         return $service_list;
     }

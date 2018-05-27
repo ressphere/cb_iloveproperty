@@ -57,7 +57,7 @@ class aroundyou_unittest extends CI_Controller
         );
         
         $company_user_id_return = $company_user_service_obj->SendReceive_Service_Request(
-                    "CB_AroundYou:create_modi_company_user", 
+                    "CB_AroundYou:aroundyou_lib__company_user_add_edit", 
                     $user_id_data
                 );
         $company_user_id_array = json_decode($company_user_id_return, TRUE);
@@ -79,7 +79,7 @@ class aroundyou_unittest extends CI_Controller
         //************************************************
         // **** Test user or admin retrieve company user information ****
         $company_user_info_return = $company_user_service_obj->SendReceive_Service_Request(
-                    "CB_AroundYou:get_full_company_user_data", 
+                    "CB_AroundYou:aroundyou_lib__get_company_user_data", 
                     array("common__company_user_id" => $company_user_id)
                 );
         $company_user_info_return_array = json_decode($company_user_info_return, TRUE);
@@ -96,7 +96,7 @@ class aroundyou_unittest extends CI_Controller
         
         // Change activation information 
         $company_user_activation_info_return = $company_user_service_obj->Send_Service_Request(
-                    "CB_AroundYou:create_modi_company_user", 
+                    "CB_AroundYou:aroundyou_lib__company_user_add_edit", 
                     array(
                         "common__company_user_id" => $company_user_id,
                         "common__company_user_activated" => 0
@@ -104,7 +104,7 @@ class aroundyou_unittest extends CI_Controller
                 );
         // Change company count limit
         $company_user_count_info_return = $company_user_service_obj->Send_Service_Request(
-                    "CB_AroundYou:create_modi_company_user", 
+                    "CB_AroundYou:aroundyou_lib__company_user_add_edit", 
                     array(
                         "common__company_user_id" => $company_user_id,
                         "admin_user__company_count_limit" => 20
@@ -112,7 +112,7 @@ class aroundyou_unittest extends CI_Controller
                 );
         // Change banned info
         $company_user_banned_info_return = $company_user_service_obj->Send_Service_Request(
-                    "CB_AroundYou:create_modi_company_user", 
+                    "CB_AroundYou:aroundyou_lib__company_user_add_edit", 
                     array(
                         "common__company_user_id" => $company_user_id,
                         "admin_user__ban_reason" => "test out the banned changes",
@@ -122,7 +122,7 @@ class aroundyou_unittest extends CI_Controller
         
         // Return the detail for checking purpose
         $company_user_changed_info_return = $company_user_service_obj->SendReceive_Service_Request(
-                    "CB_AroundYou:get_full_company_user_data", 
+                    "CB_AroundYou:aroundyou_lib__get_company_user_data", 
                     array(
                         "common__company_user_id" => $company_user_id
                     )

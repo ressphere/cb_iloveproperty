@@ -24,14 +24,178 @@ class aroundyou_lib extends cb_base_libraries
     }
     
     /*
-     * This provide the convert data set to base
+     * Contain list of serivce supported with auth
+     * Service list content mean
+     *     - True = Require AUTH
+     *     - FALSE = Not require AUTH
+     * 
+     * @Return Array list of auth servie
      */
-    private function aroundyou_lib__company_data_convert()
+    public function library_service_list()
     {
-        $convert_data = array(
+        $service_list = array(
+            //"test_service"  => TRUE,
+            
+            // Company user related
+            "aroundyou_lib__company_user_add_edit" => TRUE,
+            
+            
+            // Company info related
+            "aroundyou_lib__get_company_user_data" => TRUE,
+            "aroundyou_lib__company_info_add_edit" => TRUE,
+            //"create_modi_company_info" => TRUE,
+            //"get_full_company_info_data" => TRUE,
+            
+            // Search related
+            
+            // Fast track
+            //"fast_clean_data" => TRUE,
+        );
+        return $service_list;
+    }
+    
+    /**
+     * Contain all accepted View key 
+     *  Using view key is due to view key unlikely to change
+     * 
+     * @return Array List of the supported data
+     */
+    public function library_accepted_key()
+    {
+        // @todo - enchance to become input must_have check 
+        
+        // Contain all the accepted key
+        // Format:
+        //   True = Accepted key
+        //   False = Disabled key
+        $accept_key = array(     
+            // Comapny Product
+            // Company benefit
+            
+            // Common info
+            "users_id" => TRUE,
+            "aroundyou_users_id" => TRUE,
+            "aroundyou_company_id" => TRUE,
+            "aroundyou_users__activated" => TRUE,
+            //"aroundyou_users__modified" => TRUE,
+            //"aroundyou_company__modified" => TRUE,
+            
+            // admin changable info
+            "aroundyou_users__banned" => TRUE,
+            "aroundyou_users__ban_reason" => TRUE,
+            "aroundyou_users__company_count_limit" => TRUE,
+            "aroundyou_company__product_count_limit" => TRUE,
+            "aroundyou_company__benefit_count_limit" => TRUE,
+            "aroundyou_company__activated" => TRUE,
+            "aroundyou_company__activate_date" => TRUE,
+            "aroundyou_company__duration" => TRUE,
+            
+            // Company information
+            "aroundyou_company__logo" => TRUE,
+            "aroundyou_company__phone" => TRUE,
+            "aroundyou_company__fax" => TRUE,
+            "aroundyou_company__email" => TRUE,
+            "aroundyou_company__about_us_intro" => TRUE,
+            "aroundyou_company__detail_head_pic" => TRUE,
+            
+            // Operation period
+            "aroundyou_operation_period__display" => TRUE,
+            "aroundyou_operation_period__type" => TRUE,
+            "aroundyou_operation_period__one_time" => TRUE,
+            "aroundyou_company__operation_time_start" => TRUE,
+            "aroundyou_company__operation_time_end"  => TRUE,
+            "aroundyou_company__operation_auto" => TRUE,
+            "aroundyou_company__operation_manual_date_start" => TRUE,
+            
+            // Company type
+            "aroundyou_company_type__main_category"  => TRUE,
+            "aroundyou_company_type__sub_category"  => TRUE,
+            
+            // Company product and benefit
+            "info__company_product_list" => TRUE,
+            "info__company_benefit_list" => TRUE,
+            
+            // Location
+            "location__company_country"  => TRUE,
+            "location__company_state"  => TRUE,
+            "location__company_area"  => TRUE,
+            "location__company_post_code"  => TRUE,
+            "location__company_map"  => TRUE,
+            "location__company_street"  => TRUE,
+            "location__company_property_name"  => TRUE
+            
         );
         
-        return $convert_data;
+        return $accept_key;
+    }
+    
+    /*
+     * Setting function which contain all name change for data key value
+     * Array key for view to model or vise versa
+     * 
+     * @Return Array That contain view and model keys
+     */
+    public function library_data_key_v_and_m()
+    {
+        // This array store all the keys need to be change from view to model
+        // Format: 
+        //    "view_key_name" => "model_key_name"
+        $array_key_change = array(
+            // Common info
+            "common__user_id" => "users_id",
+            "common__company_user_id" => "aroundyou_users_id",
+            "common__company_id" => "aroundyou_company_id",
+            "common__company_user_activated" => "aroundyou_users__activated",
+            "common__users_modification" => "aroundyou_users__modified",
+            "common__company_modification" => "aroundyou_company__modified",
+            
+            // admin changable info
+            "admin_user__banned" => "aroundyou_users__banned",
+            "admin_user__ban_reason" => "aroundyou_users__ban_reason",
+            "admin_user__company_count_limit" => "aroundyou_users__company_count_limit",
+            "admin_company__product_count_limit" => "aroundyou_company__product_count_limit",
+            "admin_company__benefit_count_limit" => "aroundyou_company__benefit_count_limit",
+            "admin_company__activated" => "aroundyou_company__activated",
+            "admin_company__activated_date" => "aroundyou_company__activate_date",
+            "admin_company__activated_duration" => "aroundyou_company__duration",
+            
+            // Company information
+            "info__company_logo" => "aroundyou_company__logo",
+            "info__company_phone" => "aroundyou_company__phone",
+            "info__company_fax" => "aroundyou_company__fax",
+            "info__company_email" => "aroundyou_company__email",
+            "info__company_about_us" => "aroundyou_company__about_us_intro",
+            "info__company_head_pic" => "aroundyou_company__detail_head_pic",
+            
+            // Operation period
+            "operation__period_display" => "aroundyou_operation_period__display",
+            "operation__period_type" => "aroundyou_operation_period__type",
+            "operation__period_one_time" => "aroundyou_operation_period__one_time",
+            "operation__time_start" => "aroundyou_company__operation_time_start",
+            "operation__time_end"  => "aroundyou_company__operation_time_end",
+            "operation__auto" => "aroundyou_company__operation_auto",
+            "operation__manual_date_start" => "aroundyou_company__operation_manual_date_start",
+            
+            // Company type
+            "company_type__main"  => "aroundyou_company_type__main_category",
+            "company_type__sub"  => "aroundyou_company_type__sub_category",
+            
+            // Company product and benefit
+            //"info__company_product_list" => TRUE,
+            //"info__company_benefit_list" => TRUE,
+            
+            // Location
+            //"location__company_country"  => "country",
+            //"location__company_state"  => "state",
+            //"location__company_area"  => "area",
+            //"location__company_post_code"  => "post_code",
+            //"location__company_map"  => "map_location",
+            //"location__company_street"  => "street",
+            //"location__company_property_name"  => "property_name"
+            
+        );
+        
+        return $array_key_change;
     }
     
     //--------------------- Generic Function -----------------------------------
@@ -54,8 +218,9 @@ class aroundyou_lib extends cb_base_libraries
     function aroundyou_lib__company_user_add_edit ($input_data_json)
     {
         // Change input data to model support data, overwrite
-        $input_data_raw = json_decode($input_data_json, TRUE);
-        $input_data_array = $this->data_value_convertor($input_data_raw, $this->aroundyou_lib__company_data_convert(), TRUE); 
+        //$input_data_raw = json_decode($input_data_json, TRUE);
+        //$input_data_array = $this->data_value_convertor($input_data_raw, $this->aroundyou_lib__company_data_convert(), TRUE); 
+        $input_data_array = $this->library_data_key_init($input_data_json, TRUE); 
         
         // Extract input information
         $user_id = $this->array_value_extract($input_data_array, "users_id", TRUE);
@@ -119,6 +284,7 @@ class aroundyou_lib extends cb_base_libraries
         // Handle output data
         $return_data["aroundyou_users_id"] = $return_company_user_id;
         
+        $return_data = $this->library_data_m_v_convert($return_data,$this->library_data_key_v_and_m(),FALSE);
         $this->set_data("Complete company user creation", $return_data);
         
         /*// file dump -- for testing purpose -- Start --
@@ -142,8 +308,9 @@ class aroundyou_lib extends cb_base_libraries
     public function aroundyou_lib__get_company_user_data ($input_data_json)
     {
         // Change input data to model support data, overwrite
-        $input_data_raw = json_decode($input_data_json, TRUE);
-        $input_data_array = $this->data_value_convertor($input_data_raw, $this->aroundyou_lib__company_data_convert(), TRUE); 
+        //$input_data_raw = json_decode($input_data_json, TRUE);
+        //$input_data_array = $this->data_value_convertor($input_data_raw, $this->aroundyou_lib__company_data_convert(), TRUE); 
+        $input_data_array = $this->library_data_key_init($input_data_json, TRUE); 
         
         // Extract input information
         $company_user_id = $this->array_value_extract($input_data_array, "aroundyou_users_id");
@@ -155,6 +322,7 @@ class aroundyou_lib extends cb_base_libraries
         $aroundyou_users_model->query_detail_data_setup();
         $company_user_return_array = $aroundyou_users_model->find_one(array("id" => $company_user_id),"","array");
         
+        $company_user_return_array = $this->library_data_m_v_convert($company_user_return_array,$this->library_data_key_v_and_m(),FALSE);
         $this->set_data("Complete company user info retrieved", $company_user_return_array);
     }
     
@@ -199,8 +367,9 @@ class aroundyou_lib extends cb_base_libraries
     function aroundyou_lib__company_info_add_edit ($input_data_json)
     {
         // Change input data to model support data, overwrite
-        $input_data_raw = json_decode($input_data_json, TRUE);
-        $input_data_array = $this->data_value_convertor($input_data_raw, $this->aroundyou_lib__company_data_convert(), TRUE); 
+        //$input_data_raw = json_decode($input_data_json, TRUE);
+        //$input_data_array = $this->data_value_convertor($input_data_raw, $this->aroundyou_lib__company_data_convert(), TRUE); 
+        $input_data_array = $this->library_data_key_init($input_data_json, TRUE); 
         
         // Extract input information
         $company_user_id = $this->array_value_extract($input_data_array, "aroundyou_users_id", TRUE);
