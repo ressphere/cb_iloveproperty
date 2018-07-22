@@ -3,7 +3,7 @@ define("DEACTIVATION_DURATION", 1);
 require_once('_utils/cb_base_libraries.php');
 
 /**
- * This libraries handle all data manipulation for porperties listing part
+ * This libraries handle all data manipulation for aroundyou <-- Heavy work
  *
  */
 class aroundyou_lib extends cb_base_libraries
@@ -43,7 +43,7 @@ class aroundyou_lib extends cb_base_libraries
             // Company info related
             "aroundyou_lib__get_company_user_data" => TRUE,
             "aroundyou_lib__company_info_add_edit" => TRUE,
-            //"create_modi_company_info" => TRUE,
+            "aroundyou_lib__create_modi_company_info" => TRUE,
             //"get_full_company_info_data" => TRUE,
             
             // Search related
@@ -364,85 +364,81 @@ class aroundyou_lib extends cb_base_libraries
      * 
      * @return String Company information id, aroundyou_company_id
      */
-    function aroundyou_lib__company_info_add_edit ($input_data_json)
+    function aroundyou_lib__create_modi_company_info ($input_data_json)
     {
         // Change input data to model support data, overwrite
         //$input_data_raw = json_decode($input_data_json, TRUE);
         //$input_data_array = $this->data_value_convertor($input_data_raw, $this->aroundyou_lib__company_data_convert(), TRUE); 
         $input_data_array = $this->library_data_key_init($input_data_json, TRUE); 
         
-        // Extract input information
-        $company_user_id = $this->array_value_extract($input_data_array, "aroundyou_users_id", TRUE);
-        $aroundyou_company_id = $this->array_value_extract($input_data_array, "aroundyou_company_id", TRUE);
-        
-        if($company_user_id == NULL && $aroundyou_company_id == NULL)
+        // ---- Initial data ---------------------------------------------------
+        // Check to determine is new or modified data
+        $aroundyou_company_id = $this->array_value_extract($input_data_array, "aroundyou_company_id", true);
+        $search_condition = array(); // Init it so that later won't screw
+        if($aroundyou_company_id !== NULL)
         {
-            $this->set_error( "LAYou-CIAE-1",
-                    "Fail to process data, please contact admin",
-                    "Missing aroundyou_users_id and aroundyou_company_id, must have one of those ".json_encode($input_data_json)
-                    );
+            $search_condition["aroundyou_company_id"] =$aroundyou_company_id;
         }
         
-        // @todo - need to continue the create and modified for company information
-        
-        /*
-        if($this->is_error){return 0;}  // User id is a must
-        
-        // Preload aroundyou user model as extraction might need it also
-        $this->CI->load->model('aroundyou_users_model');
-        
-        // Prepare information
-        $company_user_search_condition = array();
-        if ($company_user_id !== NULL)
+        // Provide current malaysia time for activate_time, edit_time and create_time
+        $current_time = time();
+        if($aroundyou_company_id === NULL)
         {
-            // Specified is edit not add new by condition
-            $company_user_search_condition["id"] = $company_user_id;
-                    
-            // Retrieved base data before modified
-            $retrieved_aroundyou_users_model = new $this->CI->aroundyou_users_model;
-            $retrieved_aroundyou_users_model->query_detail_data_setup();
-            $company_user_info = $retrieved_aroundyou_users_model->find_one(array("id" => $company_user_id),"","array");
-
-            // Replace value if modified
-            if (array_key_exists("aroundyou_users__activated"   , $input_data_array)) { $company_user_info["aroundyou_users__activated"]             = $input_data_array["aroundyou_users__activated"]; }
-            if (array_key_exists("aroundyou_users__banned"               , $input_data_array)) { $company_user_info["aroundyou_users__banned"]                = $input_data_array["aroundyou_users__banned"]; }
-            if (array_key_exists("aroundyou_users__ban_reason"        , $input_data_array)) { $company_user_info["aroundyou_users__ban_reason"]         = $input_data_array["aroundyou_users__ban_reason"]; }
-            if (array_key_exists("aroundyou_users__company_count_limit"  , $input_data_array)) { $company_user_info["aroundyou_users__company_count_limit"]   = $input_data_array["aroundyou_users__company_count_limit"]; }
-            if (array_key_exists("users_id"                  , $input_data_array)) { $company_user_info["users_id"]                               = $user_id; }
-            
-            // Update modified data time
-            $company_user_info["aroundyou_users__modified"] = date('Y-m-d H:i:s', time());
+            // Inject the default creation set of date time data
+            $input_data_array["aroundyou_company__activate_date"] = date('Y-m-d H:i:s', $current_time);
+            $input_data_array["aroundyou_company__duration"] = DEACTIVATION_DURATION; 
+            $input_data_array["aroundyou_company__activated"] = '1'; // Default to activate when insert
+            $input_data_array["aroundyou_company__modified"] = date('Y-m-d H:i:s', $current_time);
         }
         else
         {
-            // Prepare preset value
-            $company_user_info["aroundyou_users__activated"] = 1;
-            $company_user_info["aroundyou_users__company_count_limit"] = 1;
-            $company_user_info["users_id"] = $user_id;
-            $company_user_info["aroundyou_users__modified"] = date('Y-m-d H:i:s', time());
+            $input_data_array["aroundyou_company__modified"] = date('Y-m-d H:i:s', $current_time);
         }
         
-        // Process the insert database part
-        $aroundyou_users_model = new $this->CI->aroundyou_users_model;
-        $aroundyou_users_model->insert_data(json_encode($company_user_info),$company_user_search_condition);
-        $this->validate_return_data($aroundyou_users_model);
-        if($this->is_error){return 0;}
+        // Workaround for location__company_map as it should be string 
+        if(array_key_exists("location__company_map", $input_data_array))
+        {
+            // Special handle for map location or google ip
+            $input_data_array["location__company_map"] = json_encode($input_data_array["location__company_map"]);
+        }
         
+        // ---- Injection of data ----------------------------------------------
+        $this->CI->load->model('aroundyou_company_model'); 
+        $aroundyou_company_model = new $this->CI->aroundyou_company_model;
         
-        // Data retrieved and obtain id
-        $aroundyou_users_model_return = $aroundyou_users_model->get_return_data_set();
-        $return_company_user_id = $aroundyou_users_model_return["data"]["id"];
+
+        $aroundyou_company_model->insert_data(json_encode($input_data_array),$search_condition);
         
-        // Handle output data
-        $return_data["aroundyou_users_id"] = $return_company_user_id;
+        // validate data and set current error
+        $this->validate_return_data($aroundyou_company_model);
         
-        $this->set_data("Complete company user creation", $return_data);
-        
-        */
         /*// file dump -- for testing purpose -- Start --
         $current = "\n------------------------------\n";
-        $current .= "aroundyou_lib  -- create_company_user -- ori input\n";
-        $current .= json_encode($input_data)."\n";
+        $current .= "aroundyou_lib__create_modi_company_info -- first model incjection -- aroundyou_company_model\n";
+        $current .= json_encode($input_data_array)."\n";
+        $current .= json_encode($search_condition);
+        error_log($current, 3, "D:/webdev/resphere_output_dump.txt");
+        // file dump -- for testing purpose -- End --*/
+        
+        if($this->is_error) {return 0;}
+        
+        // Data retrieved
+        $company_data_return = $aroundyou_company_model->get_return_data_set();
+
+        // Obtain listing ID
+        $company_data_id = $company_data_return["data"]["id"];
+        
+        // ---- Handle company logo ----------------------------------------------
+        //@todo - need to includde photo handler - aroundyou_company__logo and aroundyou_company__detail_head_pic
+        
+        // Exit with corressponding value
+        $data_return["company_data_id"]= $company_data_id;
+        $this->set_data("Complete insert data", $data_return);
+        
+        // file dump -- for testing purpose -- Start --
+        $current = "\n------------------------------\n";
+        $current .= "aroundyou_lib__create_modi_company_info -- ori input\n";
+        $current .= json_encode($input_data_array)."\n";
         error_log($current, 3, "D:/webdev/resphere_output_dump.txt");
         // file dump -- for testing purpose -- End --*/
         

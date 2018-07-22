@@ -28,11 +28,43 @@ class aroundyou_map_location_model extends cb_base_module_model {
      */
     public function column_list()
     {
-        $this->set_error($this->model_code."-CL-0", 
-                "Internal error, please contact admin", 
-                "Using fuel model to resolve ".$this->model_name." and not this old way");
+        $column_list = array (
+            array("name" => "property_name", "must_have" => false, "is_id" => false),
+            array("name" => "street", "must_have" => false, "is_id" => false),
+            array("name" => "map_location", "must_have" => false, "is_id" => false),
+            array("name" => "location_id", "must_have" => false, "is_id" => true),
+        );
         
         return $column_list;
+    }
+    
+    /*
+     * Overlay API
+     * Contain relationship between data name, related model and column
+     *  1. table        - table that require to refer
+     *  2. editable     - Should insert data if not found or not
+     *  3. id_column      - Column name for current table
+     *  4. data_column  - data and reference column in the model
+     * 
+     * @return Array List of model and data relationship
+     */
+    public function model_id_list()
+    {
+        $model_id_list = array (
+            array(
+                "table" => "location", 
+                "editable" => true,
+                "id_column" => "location_id",
+                "data_column" => array(
+                    array("data" => "state", "column" => "state"),
+                    array("data" => "area", "column" => "area"),
+                    array("data" => "post_code", "column" => "post_code"),
+                    array("data" => "country", "column" => "country"),
+                ),
+            ),
+        );
+        
+        return $model_id_list;
     }
     
     //--------------------- Generic Function -----------------------------------

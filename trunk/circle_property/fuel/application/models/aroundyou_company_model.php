@@ -28,11 +28,86 @@ class aroundyou_company_model extends cb_base_module_model {
      */
     public function column_list()
     {
-        $this->set_error($this->model_code."-CL-0", 
-                "Internal error, please contact admin", 
-                "Using fuel model to resolve ".$this->model_name." and not this old way");
+        $column_list = array (
+            array("name" => "aroundyou_company__logo", "must_have" => false, "is_id" => false),
+            array("name" => "aroundyou_company__phone", "must_have" => false, "is_id" => false),
+            array("name" => "aroundyou_company__fax", "must_have" => false, "is_id" => false),
+            array("name" => "aroundyou_company__email", "must_have" => false, "is_id" => false),
+            array("name" => "aroundyou_company_type_id", "must_have" => true, "is_id" => true),
+            
+            array("name" => "aroundyou_operation_period_id", "must_have" => false, "is_id" => true),
+            array("name" => "aroundyou_company__operation_time_start", "must_have" => false, "is_id" => false),
+            array("name" => "aroundyou_company__operation_time_end", "must_have" => false, "is_id" => false),
+            array("name" => "aroundyou_company__operation_auto", "must_have" => false, "is_id" => false),
+            array("name" => "aroundyou_company__operation_manual_date_start", "must_have" => false, "is_id" => false),
+            
+            array("name" => "aroundyou_company__detail_head_pic", "must_have" => false, "is_id" => false),
+            array("name" => "aroundyou_company__about_us_intro", "must_have" => false, "is_id" => false),
+            
+            array("name" => "aroundyou_company__product_count_limit", "must_have" => false, "is_id" => false),
+            array("name" => "aroundyou_company__benefit_count_limit", "must_have" => false, "is_id" => false),
+            
+            array("name" => "aroundyou_map_location_id", "must_have" => false, "is_id" => true),
+            
+            array("name" => "aroundyou_users_id", "must_have" => false, "is_id" => true),
+            
+            array("name" => "aroundyou_company__activated", "must_have" => false, "is_id" => false),
+            array("name" => "aroundyou_company__activate_date", "must_have" => false, "is_id" => false),
+            array("name" => "aroundyou_company__duration", "must_have" => false, "is_id" => false), 
+        );
         
         return $column_list;
+    }
+    
+    /*
+     * Overlay API
+     * Contain relationship between data name, related model and column
+     *  1. table        - table that require to refer
+     *  2. editable     - Should insert data if not found or not
+     *  3. id_column      - Column name for current table
+     *  4. data_column  - data and reference column in the model
+     * 
+     * @return Array List of model and data relationship
+     */
+    public function model_id_list()
+    {
+        $model_id_list = array (
+            array(
+                "table" => "aroundyou_company_type", 
+                "editable" => true,
+                "id_column" => "aroundyou_company_type_id",
+                "data_column" => array(
+                    array("data" => "aroundyou_company_type__main_category", "column" => "aroundyou_company_type__main_category"),
+                    array("data" => "aroundyou_company_type__sub_category", "column" => "aroundyou_company_type__sub_category"),
+                ),
+            ),
+            array(
+                "table" => "aroundyou_operation_period", 
+                "editable" => true,
+                "id_column" => "aroundyou_operation_period_id",
+                "data_column" => array(
+                    array("data" => "aroundyou_operation_period__display", "column" => "aroundyou_operation_period__display"),
+                    array("data" => "aroundyou_operation_period__type", "column" => "aroundyou_operation_period__type"),
+                    array("data" => "aroundyou_operation_period__one_time", "column" => "aroundyou_operation_period__one_time"),
+                ),
+            ),
+            array(
+                "table" => "aroundyou_map_location", 
+                "editable" => true,
+                "id_column" => "aroundyou_map_location_id",
+                "data_column" => array(
+                    array("data" => "location__company_property_name", "column" => "property_name"),
+                    array("data" => "location__company_street", "column" => "street"),
+                    array("data" => "location__company_map", "column" => "map_location"),
+                    array("data" => "location__company_post_code", "column" => "post_code"),
+                    array("data" => "location__company_area", "column" => "area"),
+                    array("data" => "location__company_state", "column" => "state"),
+                    array("data" => "location__company_country", "column" => "country"),
+                ),
+            ),
+        );
+        
+        return $model_id_list;
     }
     
     //--------------------- Generic Function -----------------------------------

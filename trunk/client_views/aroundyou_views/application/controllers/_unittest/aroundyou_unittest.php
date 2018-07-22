@@ -68,7 +68,7 @@ class aroundyou_unittest extends CI_Controller
         $this->test_is_pass = ($company_user_id_result === "Pass") ? 1 : 0;
         
         //************************************************
-        // Exit unit test if fail to create company
+        // Exit unit test if fail to create company user informaton
         if ($company_user_id_result == "Fail"){ return 0; }
         
         //************************************************
@@ -151,6 +151,8 @@ class aroundyou_unittest extends CI_Controller
         
         //************************************************
         // **** Test user create company ****
+        //    ** Require - User id ($company_user_id)
+        //    ** Hadle initial company initial data
         //    ** Handle photo
         
         // Build base company information
@@ -162,7 +164,7 @@ class aroundyou_unittest extends CI_Controller
             "info__company_about_us" => "this is dummy about us",
             "info__company_head_pic" => "http://tmp_head_pic_addr",
             "operation__period_type" => "1_2_3_4_5_6",
-            "operation__auto" => TRUE,
+            "operation__auto" => 0,
             "company_type__main" => "Restaurant",
             "company_type__sub" => "Chinese Restaurant",
             "info__company_product_list" => array(
@@ -203,7 +205,31 @@ class aroundyou_unittest extends CI_Controller
             "location__company_property_name" => "N-park Condominium Jalan Batu Uban Gelugor Penang Malaysia"
         );
         
-        //@todo - add caller to web service when support ready
+        
+        // Pump in initial data
+        $company_company_info_return = $company_user_service_obj->SendReceive_Service_Request(
+                    "CB_AroundYou:aroundyou_lib__create_modi_company_info", 
+                    $company_base_info
+                );
+        
+        $company_company_info_return_array = json_decode($company_company_info_return, TRUE);
+        $company_info_result = 
+                ($company_company_info_return_array["status"] == "Complete" && array_key_exists("company_data_id", $company_company_info_return_array["data"]))? "Pass" : "Fail";
+        $note = "Return:<br>".$company_company_info_return."<br>";
+        $this->unit->run("Pass", $company_info_result, "Test CB_AroundYou Company information initial set", $note);  
+        $this->test_is_pass = ($company_info_result === "Pass") ? 1 : 0;
+        
+        //************************************************
+        // Exit unit test if fail to create company information
+        if ($company_info_result == "Fail"){ return 0; }
+        
+        //************************************************
+        // **** Extract company id for later use ****
+        $company_data_id = $company_company_info_return_array["data"]["company_data_id"];
+        
+        
+        
+        
         
         //************************************************
         // **** Test user edit company info ****
