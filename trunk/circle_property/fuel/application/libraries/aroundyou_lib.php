@@ -91,6 +91,8 @@ class aroundyou_lib extends cb_base_libraries
             "aroundyou_company__duration" => TRUE,
             
             // Company information
+            "info__company_ref_prefix" => TRUE,
+            "aroundyou_company__ref_tag" => TRUE,
             "aroundyou_company__logo" => TRUE,
             "aroundyou_company__phone" => TRUE,
             "aroundyou_company__fax" => TRUE,
@@ -160,6 +162,7 @@ class aroundyou_lib extends cb_base_libraries
             "admin_company__activated_duration" => "aroundyou_company__duration",
             
             // Company information
+            "info__company_ref_tag" => "aroundyou_company__ref_tag",
             "info__company_logo" => "aroundyou_company__logo",
             "info__company_phone" => "aroundyou_company__phone",
             "info__company_fax" => "aroundyou_company__fax",
@@ -180,11 +183,11 @@ class aroundyou_lib extends cb_base_libraries
             "company_type__main"  => "aroundyou_company_type__main_category",
             "company_type__sub"  => "aroundyou_company_type__sub_category",
             
-            // Company product and benefit
-            //"info__company_product_list" => TRUE,
-            //"info__company_benefit_list" => TRUE,
+            // Company product and benefit  -- No need this as the it will handle seperately
+            //"info__company_product_list" => [],
+            //"info__company_benefit_list" => [],
             
-            // Location
+            // Location -- No need this as we convert when link to corresponding table
             //"location__company_country"  => "country",
             //"location__company_state"  => "state",
             //"location__company_area"  => "area",
@@ -334,6 +337,8 @@ class aroundyou_lib extends cb_base_libraries
      *  Input field (all string input unless specified):
      *      aroundyou_users_id - int
      *      aroundyou_company_id - int
+     *      info__company_ref_prefix
+     *      aroundyou_company__ref_tag
      *      aroundyou_company__product_count_limit - int
      *      aroundyou_company__benefit_count_limit - int
      *      aroundyou_company__activated - 0/1
@@ -373,22 +378,63 @@ class aroundyou_lib extends cb_base_libraries
         
         // ---- Initial data ---------------------------------------------------
         // Check to determine is new or modified data
-        $aroundyou_company_id = $this->array_value_extract($input_data_array, "aroundyou_company_id", true);
+        $aroundyou_company__ref_tag = $this->array_value_extract($input_data_array, "aroundyou_company__ref_tag", true);
+        $info__company_ref_prefix = $this->array_value_extract($input_data_array, "info__company_ref_prefix", true);
+        
         $search_condition = array(); // Init it so that later won't screw
-        if($aroundyou_company_id !== NULL)
+        if($aroundyou_company__ref_tag !== NULL)
         {
-            $search_condition["aroundyou_company_id"] =$aroundyou_company_id;
+            $search_condition["aroundyou_company__ref_tag"] = $aroundyou_company__ref_tag;
+        }
+        else
+        {
+            // Must define ref tagprefix
+            if ($info__company_ref_prefix == NULL )
+            {
+                 $this->set_error(
+                            $this->library_code."-CMCI-1", 
+                            "Internal error, please contact admin", 
+                            "Require info__company_ref_prefix as there is no info__company_ref_tag within :- ".json_encode($input_data_array)." at ".$this->library_code);
+            }
         }
         
         // Provide current malaysia time for activate_time, edit_time and create_time
         $current_time = time();
-        if($aroundyou_company_id === NULL)
+        if($aroundyou_company__ref_tag === NULL)
         {
             // Inject the default creation set of date time data
             $input_data_array["aroundyou_company__activate_date"] = date('Y-m-d H:i:s', $current_time);
             $input_data_array["aroundyou_company__duration"] = DEACTIVATION_DURATION; 
             $input_data_array["aroundyou_company__activated"] = '1'; // Default to activate when insert
             $input_data_array["aroundyou_company__modified"] = date('Y-m-d H:i:s', $current_time);
+            
+            // Build ref tag
+            $this->CI->load->model('aroundyou_company_ref_model'); 
+            $aroundyou_company_ref_model = $this->CI->aroundyou_company_ref_model;
+            $ref_model_obj = $aroundyou_company_ref_model->find_one(array("prefix" => $info__company_ref_prefix));
+            
+            if(is_object($ref_model_obj))
+            {
+                // Prefix data retrieve
+                $ref_number = $ref_model_obj->number;
+                
+                // Build tag
+                $input_data_array["aroundyou_company__ref_tag"] = $info__company_ref_prefix."-".$ref_number;
+                unset($input_data_array["info__company_ref_prefix"]);
+                
+                // Update data
+                $ref_model_obj->number = $ref_number + 1;
+                $ref_tag_id = $ref_model_obj->save();   
+            }
+            else
+            {
+                $this->set_error(
+                            $this->library_code."-CMCI-2", 
+                            "Internal error, please contact admin", 
+                            "Fail to obtain aroundyou_company_ref_model object for category is ".json_encode($input_data_array)." at ".$this->library_code);
+            }
+            // --- Tag generate --- End ----
+            
         }
         else
         {
@@ -426,14 +472,18 @@ class aroundyou_lib extends cb_base_libraries
         $company_data_return = $aroundyou_company_model->get_return_data_set();
 
         // Obtain listing ID
-        $company_data_id = $company_data_return["data"]["id"];
+        $company_info_id = $company_data_return["data"]["id"];
         
         // ---- Handle company logo ----------------------------------------------
         //@todo - need to includde photo handler - aroundyou_company__logo and aroundyou_company__detail_head_pic
         
-        // Exit with corressponding value
-        $data_return["company_data_id"]= $company_data_id;
-        $this->set_data("Complete insert data", $data_return);
+        // ---- Exit with corressponding value ----------------------------------
+        // Provide ref tag when success
+        $company_info_return_array["id"] = $company_info_id;
+        $company_info_return_array["aroundyou_company__ref_tag"] = $input_data_array["aroundyou_company__ref_tag"];
+        
+        $company_info_return_array = $this->library_data_m_v_convert($company_info_return_array,$this->library_data_key_v_and_m(),FALSE);
+        $this->set_data("Complete insert data", $company_info_return_array);
         
         // file dump -- for testing purpose -- Start --
         $current = "\n------------------------------\n";

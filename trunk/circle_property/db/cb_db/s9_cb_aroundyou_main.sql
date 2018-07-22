@@ -88,6 +88,7 @@ CREATE TABLE IF NOT EXISTS `aroundyou_users` (
 --
 CREATE TABLE IF NOT EXISTS `aroundyou_company` (
     `id` int COLLATE utf8_bin AUTO_INCREMENT,
+    `aroundyou_company__ref_tag` varchar(100) COLLATE utf8_bin,
     `aroundyou_company__logo` varchar(300) COLLATE utf8_bin,
     `aroundyou_company__phone` varchar(200) COLLATE utf8_bin,
     `aroundyou_company__fax` varchar(200) COLLATE utf8_bin,
@@ -144,5 +145,18 @@ CREATE TABLE IF NOT EXISTS `aroundyou_link_company_benefit` (
     PRIMARY KEY (`id`),
     FOREIGN KEY (`aroundyou_company_id`) REFERENCES aroundyou_company(`id`),
     FOREIGN KEY (`aroundyou_benefit_id`) REFERENCES aroundyou_benefit(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- --------------------------------------------------------
+
+-- --------------------------------------------------------
+--
+-- Table structure for table `aroundyou_company_ref`
+--
+CREATE TABLE IF NOT EXISTS `aroundyou_company_ref` (
+    `id` int COLLATE utf8_bin AUTO_INCREMENT,
+    `prefix` varchar(100) COLLATE utf8_bin NOT NULL,
+    `description` varchar(100) COLLATE utf8_bin NOT NULL,
+    `number` int COLLATE utf8_bin NOT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- --------------------------------------------------------

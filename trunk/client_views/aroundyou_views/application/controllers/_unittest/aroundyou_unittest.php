@@ -158,6 +158,7 @@ class aroundyou_unittest extends CI_Controller
         // Build base company information
         $company_base_info = array(
             "common__company_user_id" => $company_user_id,
+            "info__company_ref_prefix" => "test-tag",
             "info__company_logo" => "http://tmp_logo_pic_addr",
             "info__company_phone" => "+604-12345696",
             "info__company_phone" => "+604987654332",
@@ -214,7 +215,7 @@ class aroundyou_unittest extends CI_Controller
         
         $company_company_info_return_array = json_decode($company_company_info_return, TRUE);
         $company_info_result = 
-                ($company_company_info_return_array["status"] == "Complete" && array_key_exists("company_data_id", $company_company_info_return_array["data"]))? "Pass" : "Fail";
+                ($company_company_info_return_array["status"] == "Complete" && array_key_exists("id", $company_company_info_return_array["data"]))? "Pass" : "Fail";
         $note = "Return:<br>".$company_company_info_return."<br>";
         $this->unit->run("Pass", $company_info_result, "Test CB_AroundYou Company information initial set", $note);  
         $this->test_is_pass = ($company_info_result === "Pass") ? 1 : 0;
@@ -225,28 +226,20 @@ class aroundyou_unittest extends CI_Controller
         
         //************************************************
         // **** Extract company id for later use ****
-        $company_data_id = $company_company_info_return_array["data"]["company_data_id"];
+        $company_ref_tag = $company_company_info_return_array["data"]["info__company_ref_tag"];
         
-        
+ 
+        //************************************************
+        // **** Test user/admin edit company info ****
         
         
         
         //************************************************
-        // **** Test user edit company info ****
+        // **** Test user add/edit/remove product ****
         
         //************************************************
-        // **** Test user edit company operation info ****
-       
-        /*
-         *             // Operation period
-            "operation__period_type" => "aroundyou_operation_period__type",
-            "operation__period_one_time" => "aroundyou_operation_period__one_time",
-            "operation__time_start" => "aroundyou_company__operation_time_start",
-            "operation__time_end"  => "aroundyou_company__operation_time_end",
-            "operation__auto" => "aroundyou_company__operation_auto",
-            "operation__manual_date_start" => "aroundyou_company__operation_manual_date_start",
-            
-         */
+        // **** Test user edit/remove product ****
+        
         
         //************************************************
         // **** Test user add/edit/remove benefit ****
@@ -254,22 +247,13 @@ class aroundyou_unittest extends CI_Controller
         //************************************************
         // **** Test user edit/remove benefit ****
         
-        //************************************************
-        // **** Test user edit company activated  ****
-
-        //************************************************
-        // **** Test admin change company product count limit ****
-        
-        //************************************************
-        // **** Test admin change company benefit count limit ****
-        
-        //************************************************
-        // **** Test admin change company activate date and duration ****
-        
         
         //************************************************
         // **** Test on area search result and summary return
         //    Need to activate back the user and company for result hit
+        
+        
+        
         
         
         //************************************************

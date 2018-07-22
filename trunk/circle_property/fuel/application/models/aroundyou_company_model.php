@@ -29,6 +29,7 @@ class aroundyou_company_model extends cb_base_module_model {
     public function column_list()
     {
         $column_list = array (
+            array("name" => "aroundyou_company__ref_tag", "must_have" => false, "is_id" => false),
             array("name" => "aroundyou_company__logo", "must_have" => false, "is_id" => false),
             array("name" => "aroundyou_company__phone", "must_have" => false, "is_id" => false),
             array("name" => "aroundyou_company__fax", "must_have" => false, "is_id" => false),
@@ -109,6 +110,7 @@ class aroundyou_company_model extends cb_base_module_model {
         
         return $model_id_list;
     }
+    
     
     //--------------------- Generic Function -----------------------------------
     
