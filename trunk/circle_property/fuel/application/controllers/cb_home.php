@@ -179,7 +179,6 @@ class cb_home extends base {
        $this->set_title($title);
        
        $this->extemplate->add_js('js/jquery.easing.min.js');
-       $this->extemplate->add_js('js/bootstrap.min.js');
        $this->extemplate->add_js('js/SmoothScroll.js');
        $this->extemplate->add_js('js/jquery.scrollTo.min.js');
        $this->extemplate->add_js('js/jquery.localScroll.min.js');
@@ -196,7 +195,7 @@ class cb_home extends base {
        $this->extemplate->add_js('js/jquery.magnific-popup.min.js');
        $this->extemplate->add_js('js/all.js');
        $this->extemplate->add_js('js/jstorage.min.js');
-       $this->extemplate->add_js('js/jquery.makeclass.min.js');
+       $this->extemplate->add_js('js/_utils/jquery.makeclass.min.js');
        $this->extemplate->add_js('js/cb_home.js');
       
        $this->extemplate->add_css('css/style.css');
@@ -206,7 +205,7 @@ class cb_home extends base {
        $this->extemplate->add_css('css/vertical-rhythm.min.css');
        $this->extemplate->add_css('css/owl.carousel.css');
        $this->extemplate->add_css('css/yellow.css');
-       $this->extemplate->add_css('css/bootstrap.min.css');
+     
        $this->extemplate->add_css('css/magnific-popup.css');
        $this->extemplate->add_css('css/font-awesome.min.css');
        
