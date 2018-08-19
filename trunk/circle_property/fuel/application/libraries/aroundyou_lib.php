@@ -476,7 +476,18 @@ class aroundyou_lib extends cb_base_libraries
         
         // ---- Handle company logo ----------------------------------------------
         //@todo - need to includde photo handler - aroundyou_company__logo and aroundyou_company__detail_head_pic
+              
         
+        // ---- Handle Product logo ---------------------------------------------
+        
+        
+        
+        // ---- Handle Benefit logo ---------------------------------------------
+        
+        
+
+        
+
         // ---- Exit with corressponding value ----------------------------------
         // Provide ref tag when success
         $company_info_return_array["id"] = $company_info_id;

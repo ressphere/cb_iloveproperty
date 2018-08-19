@@ -14,3 +14,5 @@ INSERT INTO `aroundyou_operation_period` (`aroundyou_operation_period__display`,
 
 -- To insert aroundyou_company_ref init data
 INSERT INTO `aroundyou_company_ref` (`prefix`, `description`,`number`) VALUES ("test-tag", "this is for test purpose", "0");
+INSERT INTO `aroundyou_company_ref` (`prefix`, `description`,`number`) VALUES ("product-tag", "this is for product tag purpose", "0");
+INSERT INTO `aroundyou_company_ref` (`prefix`, `description`,`number`) VALUES ("benefit-tag", "this is for benefit tag purpose", "0");

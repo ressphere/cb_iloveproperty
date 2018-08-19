@@ -231,8 +231,40 @@ class aroundyou_unittest extends CI_Controller
  
         //************************************************
         // **** Test user/admin edit company info ****
+        // Build base company information
+        $company_edit_info = array(
+            "common__company_user_id" => $company_user_id,
+            "info__company_ref_prefix" => "test-tag",
+            "info__company_logo" => "http://tmp_logo_pic_addr",
+            "info__company_phone" => "+604-12345696",
+            "info__company_phone" => "+604987654332",
+            "info__company_about_us" => "this is dummy about us",
+            "info__company_head_pic" => "http://tmp_head_pic_addr",
+            "operation__period_type" => "1_2_3_4_5_6",
+            "operation__auto" => 0,
+            "company_type__main" => "Restaurant",
+            "company_type__sub" => "Chinese Restaurant",
+            "info__company_product_list" => array(
+                array(
+                    "image" => "http://tmp_product_link_1",
+                    "title" => "Product 1",
+                    "info" => "This is info for product 1",
+                    "price" => 1000,
+                    "currency_code" => "MYR"
+                ),
+                array(
+                    "image" => "http://tmp_product_link_2",
+                    "title" => "Product 2",
+                    "info" => "This is info for product 2",
+                    "price" => 2000,
+                    "currency_code" => "MYR"
+                ),
+            ),
+        );
         
         
+        
+
         
         //************************************************
         // **** Test user add/edit/remove product ****
@@ -253,6 +285,8 @@ class aroundyou_unittest extends CI_Controller
         //    Need to activate back the user and company for result hit
         
         
+        //************************************************
+        // **** Test picture handle and process****
         
         
         

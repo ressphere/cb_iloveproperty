@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `aroundyou_map_location` (
 --
 CREATE TABLE IF NOT EXISTS `aroundyou_benefit` (
     `id` int COLLATE utf8_bin AUTO_INCREMENT,
+    `aroundyou_benefit__benefit_tag` varchar(100) COLLATE utf8_bin,
     `aroundyou_benefit__img` varchar(300) COLLATE utf8_bin,
     `aroundyou_benefit__title` varchar(100) COLLATE utf8_bin,
     `aroundyou_benefit__info` varchar(1000) COLLATE utf8_bin,
@@ -123,14 +124,27 @@ CREATE TABLE IF NOT EXISTS `aroundyou_company` (
 --
 CREATE TABLE IF NOT EXISTS `aroundyou_product` (
     `id` int COLLATE utf8_bin AUTO_INCREMENT,
+    `aroundyou_product__product_tag` varchar(100) COLLATE utf8_bin,
     `aroundyou_product__img` varchar(300) COLLATE utf8_bin,
     `aroundyou_product__title` varchar(50) COLLATE utf8_bin,
     `aroundyou_product__info` varchar(200) COLLATE utf8_bin,
     `aroundyou_product__price` int unsigned,
     `aroundyou_product__currency_code` varchar(100) COLLATE utf8_bin,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- --------------------------------------------------------
+
+-- --------------------------------------------------------
+--
+-- Table structure for table `aroundyou_link_company_product`
+--
+CREATE TABLE IF NOT EXISTS `aroundyou_link_company_product` (
+    `id` int COLLATE utf8_bin AUTO_INCREMENT,
     `aroundyou_company_id` int NOT NULL,
+    `aroundyou_product_id` int NOT NULL,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`aroundyou_company_id`) REFERENCES aroundyou_company(`id`)
+    FOREIGN KEY (`aroundyou_company_id`) REFERENCES aroundyou_company(`id`),
+    FOREIGN KEY (`aroundyou_product_id`) REFERENCES aroundyou_product(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- --------------------------------------------------------
 
