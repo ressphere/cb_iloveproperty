@@ -542,7 +542,7 @@ var get_base = function() {
              */
             setup_auth_ui: function()
             {
-                    this.getLogin('#popup');
+                    this.getLogin('#popup_login');
                     this.getRegister('#register');
                     this.getLogout('#popup_logout');
                     this.getForgot('#forgot_password');
@@ -789,7 +789,7 @@ var get_base = function() {
                             $(logout_id).css('display','block');
                             $(login_id).css('display','none');
                             $(register_id).css('display','none');
-                            $('#popup').modal('hide');
+                            $('#popup_login').modal('hide');
                         }
                         else
                         {
@@ -1073,7 +1073,7 @@ $(window).load
         var activate_login = $.jStorage.get("init_login");
         if(activate_login === "1")
         {
-           $('#popup').modal('show');
+           $('#popup_login').modal('show');
            $.jStorage.deleteKey("init_login");
         }
         $('.system_logout_group').removeClass('active');

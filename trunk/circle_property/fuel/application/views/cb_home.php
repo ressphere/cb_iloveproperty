@@ -110,6 +110,7 @@
                         	<li><a href="#about">About us</a></li>                        	
 							<li><a href="#services">Services</a></li>
 							<li><a href="#contact">Contacts</a></li>
+							<li><a id="system_login" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#popup_login" href="#" >Sign In</a></li>
                         </ul>
                     </div>
                 
@@ -365,7 +366,7 @@ Its name is derived from “Resonance/Resolution” and “Sphere” which symbo
     <?php echo $_scripts; ?>
   
     <!-- Standard place for all popup -->
-    <div id="popup" tabindex="-1" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="popup_login" tabindex="-1" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <?php echo $login_view?>
     </div>
     <div id="register" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
