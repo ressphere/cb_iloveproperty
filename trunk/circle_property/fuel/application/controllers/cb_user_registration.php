@@ -36,9 +36,7 @@
                  $phone = $this->_get_posted_value('phone');
                 
                  $term_condition = $this->_get_posted_value('term_condition');
-                 $cap = $this->_get_posted_value('captcha');
-				 $challenge = $this->_get_posted_value('challenge');
-                 
+                 $cap = $this->_get_posted_value('captcha');                 
                  $use_username = $this->config->item('use_username');
                  $email_activation = $this->config->item('email_activation');
                  
@@ -75,11 +73,9 @@
                  {
                      $msg = "<span class='error'>Please understand and agree to the terms and conditions</span>";
                  }
-                 elseif(is_null($cap) || is_null($challenge) || $this->_check_recaptcha(
-                         $this->config->item('website_name', 'tank_auth'),
-                         $cap, $challenge) === FALSE)
+                 elseif(is_null($cap) || $this->_check_recaptcha($cap) === FALSE)
                  {
-                     $msg = "<span class='error'> Captcha image is not match, please retype</span>";
+                     $msg = "<span class='error'> Captcha checking fail, please retry</span>";
                      //$msg =  $this->config->item('website_name');
                  }
                  else
@@ -162,8 +158,6 @@
              }
              else
              {
-                 $captcha_html = $this->_create_recaptcha();
-                 $data["captcha_html"] = $captcha_html;
                  $data["msg"] = "Success";
                  $this->_print(json_encode($data));
              }

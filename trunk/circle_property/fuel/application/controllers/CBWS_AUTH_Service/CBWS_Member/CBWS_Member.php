@@ -142,30 +142,33 @@ class CBWS_Member {
 	 *
 	 * @return	bool
 	 */
-     public function check_recaptcha($remote_addr, $challenge_field, $response_field)
+     public function check_recaptcha($response_field)
      {
-		$this->CI->load->helper('recaptcha');
+         $post_data = http_build_query(
+            array(
+                'secret' => $this->CI->config->item('recaptcha_secret_key', 'tank_auth'),
+                'response' => $response_field
+            )
+        );
 
-//		$resp = recaptcha_check_answer($this->CI->config->item('recaptcha_private_key', 'tank_auth'),
-//				$_SERVER['REMOTE_ADDR'],
-//				$_POST['recaptcha_challenge_field'],
-//				$_POST['recaptcha_response_field']);
-                $remote_addr = gethostbyname($remote_addr);
-                $resp = recaptcha_check_answer($this->CI->config->item('recaptcha_private_key', 'tank_auth'),
-				$remote_addr,
-				$challenge_field, 
-                                $response_field);
-
+        $opts = array('http' =>
+            array(
+                'method'  => 'POST',
+                'header'  => 'Content-type: application/x-www-form-urlencoded',
+                'content' => $post_data
+            )
+        );
+        $context  = stream_context_create($opts);
+        $response = file_get_contents($this->CI->config->item('recaptcha_verify_link', 'tank_auth'), false, $context);
+        $result = json_decode($response);
+        if (!$result->success) {
+            //$msg = "--Client Response: ".$response_field."\n--Recaptcha Error: ".$result->error-codes."\n--Hostname: ".$result->hostname;
+            //error_log("invalid: \n". $msg, 3, "C:\log\log.txt");
+            return FALSE;
+        }
                 
-		if (!$resp->is_valid) {
-                    
-                    //$msg = $remote_addr . ":" . $challenge_field .":". $response_field.":".$this->CI->config->item('recaptcha_private_key', 'tank_auth');
-                   // error_log("invalid: \n". $resp->error, 3, "C:\log\log.txt");
-                    return FALSE;
-		}
-                
-		return TRUE;
-	}
+	return TRUE;
+    }
      public function validate_email($email)
      {
         return filter_var($email, FILTER_VALIDATE_EMAIL);

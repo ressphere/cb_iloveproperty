@@ -70,8 +70,10 @@
         <span class="register_phone-feedback input-group-addon glyphicon glyphicon-asterisk"></span>
     </div><br/>
     <center>
-	<div id='register_captcha_image'>
-	</div>
+
+        <div class="g-recaptcha" data-sitekey="6LfyyG0UAAAAAD8RC2kWvimr9yr50squ4wTB6Qg0"></div>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 	</center><br>
   
     <input id ="register_term_condition" type="checkbox" value="Term_Condition"> I have read and agree with the <a href="<?=$terms_conditions?>" target="_blank"><em>Terms & Conditions</em></a></input> 

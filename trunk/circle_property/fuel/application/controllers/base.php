@@ -719,13 +719,9 @@ class base extends CI_Controller {
         $captcha_data = html_entity_decode(html_entity_decode($val_return["data"]["result"]));
         return $captcha_data;
     }
-    protected function _check_recaptcha($website_name,$response_field, $challenge_field)
+    protected function _check_recaptcha($response_field)
     {
-        
-        $captcha_code["remote_addr"] = $website_name; 
-        $captcha_code["challenge_field"] = $challenge_field;
         $captcha_code["response_field"] = $response_field;
-
 
         $val_return = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:check_recaptcha", json_encode($captcha_code));
         $val_return = json_decode($val_return, TRUE);
