@@ -38,13 +38,11 @@ class aroundyou_lib extends cb_base_libraries
             
             // Company user related
             "aroundyou_lib__company_user_add_edit" => TRUE,
-            
+            "aroundyou_lib__get_company_user_data" => TRUE,            
             
             // Company info related
-            "aroundyou_lib__get_company_user_data" => TRUE,
-            "aroundyou_lib__company_info_add_edit" => TRUE,
             "aroundyou_lib__create_modi_company_info" => TRUE,
-            //"get_full_company_info_data" => TRUE,
+            "aroundyou_lib__get_company_info_data" => TRUE,
             
             // Search related
             
@@ -252,14 +250,8 @@ class aroundyou_lib extends cb_base_libraries
             // Retrieved base data before modified
             $retrieved_aroundyou_users_model = new $this->CI->aroundyou_users_model;
             $retrieved_aroundyou_users_model->query_detail_data_setup();
-            $company_user_info = $retrieved_aroundyou_users_model->find_one(array("id" => $company_user_id),"","array");
-
-            // Replace value if modified
-            if (array_key_exists("aroundyou_users__activated"   , $input_data_array)) { $company_user_info["aroundyou_users__activated"]             = $input_data_array["aroundyou_users__activated"]; }
-            if (array_key_exists("aroundyou_users__banned"               , $input_data_array)) { $company_user_info["aroundyou_users__banned"]                = $input_data_array["aroundyou_users__banned"]; }
-            if (array_key_exists("aroundyou_users__ban_reason"        , $input_data_array)) { $company_user_info["aroundyou_users__ban_reason"]         = $input_data_array["aroundyou_users__ban_reason"]; }
-            if (array_key_exists("aroundyou_users__company_count_limit"  , $input_data_array)) { $company_user_info["aroundyou_users__company_count_limit"]   = $input_data_array["aroundyou_users__company_count_limit"]; }
-            if (array_key_exists("users_id"                  , $input_data_array)) { $company_user_info["users_id"]                               = $user_id; }
+            
+            $company_user_info = $retrieved_aroundyou_users_model->model_input_array_prehadle($retrieved_aroundyou_users_model,array("id" => $company_user_id),$input_data_array);
             
             // Update modified data time
             $company_user_info["aroundyou_users__modified"] = date('Y-m-d H:i:s', time());
@@ -372,8 +364,6 @@ class aroundyou_lib extends cb_base_libraries
     function aroundyou_lib__create_modi_company_info ($input_data_json)
     {
         // Change input data to model support data, overwrite
-        //$input_data_raw = json_decode($input_data_json, TRUE);
-        //$input_data_array = $this->data_value_convertor($input_data_raw, $this->aroundyou_lib__company_data_convert(), TRUE); 
         $input_data_array = $this->library_data_key_init($input_data_json, TRUE); 
         
         // ---- Initial data ---------------------------------------------------
@@ -381,10 +371,15 @@ class aroundyou_lib extends cb_base_libraries
         $aroundyou_company__ref_tag = $this->array_value_extract($input_data_array, "aroundyou_company__ref_tag", true);
         $info__company_ref_prefix = $this->array_value_extract($input_data_array, "info__company_ref_prefix", true);
         
+        // Get model for usage
+        $this->CI->load->model('aroundyou_company_model'); 
+        $aroundyou_company_model = new $this->CI->aroundyou_company_model;
+        
         $search_condition = array(); // Init it so that later won't screw
         if($aroundyou_company__ref_tag !== NULL)
         {
             $search_condition["aroundyou_company__ref_tag"] = $aroundyou_company__ref_tag;
+            $input_data_array = $aroundyou_company_model->model_input_array_prehadle($aroundyou_company_model,$search_condition,$input_data_array);
         }
         else
         {
@@ -449,10 +444,6 @@ class aroundyou_lib extends cb_base_libraries
         }
         
         // ---- Injection of data ----------------------------------------------
-        $this->CI->load->model('aroundyou_company_model'); 
-        $aroundyou_company_model = new $this->CI->aroundyou_company_model;
-        
-
         $aroundyou_company_model->insert_data(json_encode($input_data_array),$search_condition);
         
         // validate data and set current error
@@ -477,16 +468,6 @@ class aroundyou_lib extends cb_base_libraries
         // ---- Handle company logo ----------------------------------------------
         //@todo - need to includde photo handler - aroundyou_company__logo and aroundyou_company__detail_head_pic
               
-        
-        // ---- Handle Product logo ---------------------------------------------
-        
-        
-        
-        // ---- Handle Benefit logo ---------------------------------------------
-        
-        
-
-        
 
         // ---- Exit with corressponding value ----------------------------------
         // Provide ref tag when success
@@ -496,13 +477,42 @@ class aroundyou_lib extends cb_base_libraries
         $company_info_return_array = $this->library_data_m_v_convert($company_info_return_array,$this->library_data_key_v_and_m(),FALSE);
         $this->set_data("Complete insert data", $company_info_return_array);
         
-        // file dump -- for testing purpose -- Start --
+        /*// file dump -- for testing purpose -- Start --
         $current = "\n------------------------------\n";
         $current .= "aroundyou_lib__create_modi_company_info -- ori input\n";
         $current .= json_encode($input_data_array)."\n";
         error_log($current, 3, "D:/webdev/resphere_output_dump.txt");
         // file dump -- for testing purpose -- End --*/
         
+    }
+    
+    
+    /*
+     * This is use to retrieve all data for company base on company reference tag
+     *  All data will be recorded and then retrieved through API get_return_data_set() 
+     * 
+     * @param String Json input that contain information that require to store/modified
+     *  Input field (all string input unless specified):
+     *      aroundyou_company__ref_tag - int
+     * 
+     */
+    public function aroundyou_lib__get_company_info_data ($input_data_json)
+    {
+        // Change input data to model support data, overwrite
+        $input_data_array = $this->library_data_key_init($input_data_json, TRUE); 
+        
+        // Extract input information
+        $company_reg_tag = $this->array_value_extract($input_data_array, "aroundyou_company__ref_tag");
+        if($this->is_error){return 0;}  // User id is a must
+        
+        // Load aroundyou user model and insert data
+        $this->CI->load->model('aroundyou_company_model');
+        $aroundyou_company_model = new $this->CI->aroundyou_company_model;
+        $aroundyou_company_model->query_detail_data_setup();
+        $company_info_return_array = $aroundyou_company_model->find_one(array("aroundyou_company__ref_tag" => $company_reg_tag),"","array");
+        
+        $company_info_return_array = $this->library_data_m_v_convert($company_info_return_array,$this->library_data_key_v_and_m(),FALSE);
+        $this->set_data("Complete company infomation retrieved", $company_info_return_array);
     }
     
     // ------------ Private Function -------------------------------------------

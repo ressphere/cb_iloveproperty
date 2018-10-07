@@ -30,6 +30,7 @@ class aroundyou_company_model extends cb_base_module_model {
     {
         $column_list = array (
             array("name" => "aroundyou_company__ref_tag", "must_have" => false, "is_id" => false),
+            
             array("name" => "aroundyou_company__logo", "must_have" => false, "is_id" => false),
             array("name" => "aroundyou_company__phone", "must_have" => false, "is_id" => false),
             array("name" => "aroundyou_company__fax", "must_have" => false, "is_id" => false),
@@ -55,6 +56,9 @@ class aroundyou_company_model extends cb_base_module_model {
             array("name" => "aroundyou_company__activated", "must_have" => false, "is_id" => false),
             array("name" => "aroundyou_company__activate_date", "must_have" => false, "is_id" => false),
             array("name" => "aroundyou_company__duration", "must_have" => false, "is_id" => false), 
+            
+            array("name" => "aroundyou_company__modified", "must_have" => false, "is_id" => false), 
+            
         );
         
         return $column_list;
