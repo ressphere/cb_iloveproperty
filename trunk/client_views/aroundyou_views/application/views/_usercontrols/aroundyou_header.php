@@ -34,7 +34,7 @@
             <!-- Display button when not login -->
             <li>
                 <div class="btn">
-                    <button class="btn" id="system_login_parent" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#popup" href="#">
+                    <button class="btn" id="system_login_parent" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#popup_login" href="#">
                         <a id="system_login">Sign In</a>
                     </button>
                 </div>

@@ -957,7 +957,7 @@ $(window).load(function(){
     
     (function($){
         "use strict";
-        $(window).hashchange(function(){
+        $(window).on('hashchange', function (e) {
             if ((location.hash.search("/works") == -1) && ($(".work-full").is(":visible"))) {
                 close_work();
                 //Hash change

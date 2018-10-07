@@ -10,7 +10,6 @@ function register_create_captcha()
                 callback: Recaptcha.focus_response_field
             }
          );
-    
    }
    catch(e)
    {
@@ -81,7 +80,7 @@ $('#register_country').on('change', function (e) {
 function reset_ui()
 {
     $('#register_username').val('');
-	$('#register_display_name').val('');
+    $('#register_display_name').val('');
     $('#register_password').val('');
     $('#register_confirmed_password').val('');
     $('#register_phone').val('');
@@ -120,13 +119,10 @@ function reset_status_feedback()
     $('.register_phone-feedback').addClass('glyphicon-asterisk');
 }
 $('#register').on('hidden.bs.modal', function () {
-            reset_ui();
-            Recaptcha.destroy();
-            
+            reset_ui();            
 });
 $('#register').on('show.bs.modal', function () {
             reset_ui();
-            register_create_captcha();
 });
  
  $(document).ready(
@@ -252,13 +248,9 @@ $('#register_sign_in').on('click',
             senddata = senddata + "&area="+ code;
             senddata = senddata + "&phone="+ $("#register_phone").val();
             senddata = senddata + "&term_condition="+ $("#register_term_condition").is(':checked');
-            senddata = senddata + "&captcha="+ Recaptcha.get_response();
-			//challenge
-	    senddata = senddata + "&challenge="+ Recaptcha.get_challenge();
+            senddata = senddata + "&captcha="+ grecaptcha.getResponse();
             senddata = senddata + "&display_name=" + $('#register_display_name').val();
-            //alert(Recaptcha.get_response());
             objBase.setLoading('#register_message');
-            //objBase.setLoading('#captcha_image');
             $('.register_cancel').prop('disabled', true);
             $('#register_sign_in').prop('disabled', true);
             $.ajax({
@@ -268,21 +260,27 @@ $('#register_sign_in').on('click',
 		timeout: 3000000,
                 success: function(html)
                 {
-                    var data = html;
+                    //for debug purpose only. Not for release!
+                    //console.log(html);
+                    
                     data = jQuery.parseJSON(html);
-                    //data[captcha_html] data["msg"]
                     $('#register_message').html(data["msg"]);
-                    //$('#register_captcha_image').html(data["captcha_html"]);
                     $('#register_password').val('');
                     $('#register_confirmed_password').val('');
-                    $('#register_captcha').val('');
-                    //alert(data["register_captcha_image"]);
                     if(data["msg"] === "Success")
                     {
+                        //reset_ui();
+                        $('#register_username').val('');
+                        $('#register_display_name').val('');
+                        $('#register_password').val('');
+                        $('#register_confirmed_password').val('');
+                        $('#register_phone').val('');
+                        $('#register_term_condition').removeAttr('checked');
+                        $('#register_message').html("");
+
+                        reset_status_feedback();
                         var activation_msg = "<B>Congratulation</B><BR>An activation email is sent to " + $("#register_username").val();
-                        reset_ui();
                         $('#register_message').html('');
-                        Recaptcha.reload();
                         $("#register").modal("hide");
                         $("#general_info_content").html(activation_msg);
                         $("#popup_general_info").modal("show");
@@ -298,10 +296,10 @@ $('#register_sign_in').on('click',
                         $('.register_password-feedback').removeClass('glyphicon-ok');
                         $('.register_password-feedback').removeClass('glyphicon-remove');
                         $('.register_password-feedback').addClass('glyphicon-asterisk');
-                        Recaptcha.reload();
                     }
                     $('.register_cancel').prop('disabled', false);
                     //$('#register_sign_in').prop('disabled', false);
+                    grecaptcha.reset();
                     enable_disable_button();
                 },
                 error:function (xhr, ajaxOptions, thrownError){

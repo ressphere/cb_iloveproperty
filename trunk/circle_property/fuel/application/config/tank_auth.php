@@ -128,8 +128,11 @@ $config['captcha_case_sensitive'] = FALSE;
 |--------------------------------------------------------------------------
 */
 $config['use_recaptcha'] = TRUE;
-$config['recaptcha_public_key'] = '6Le-mg0TAAAAAM_HWZc35jAtjRfsuAYTh9_J9CqL';
-$config['recaptcha_private_key'] = '6Le-mg0TAAAAACTnEintwZabGihWDrW-Ld9S8c20';
+//$config['recaptcha_public_key'] = '6Le-mg0TAAAAAM_HWZc35jAtjRfsuAYTh9_J9CqL';
+//$config['recaptcha_private_key'] = '6Le-mg0TAAAAACTnEintwZabGihWDrW-Ld9S8c20';
+$config['recaptcha_verify_link'] = 'https://www.google.com/recaptcha/api/siteverify';
+$config['recaptcha_site_key'] = '6LfyyG0UAAAAAD8RC2kWvimr9yr50squ4wTB6Qg0';
+$config['recaptcha_secret_key'] = '6LfyyG0UAAAAAMn1aiMyCFp-3t80A6-SW0280vMI';
 
 /*
 |--------------------------------------------------------------------------

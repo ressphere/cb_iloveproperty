@@ -74,7 +74,7 @@
     </div>
         <!-- Standard place for all popup -->
         <!-- Load it at back, as it is hidden at first, so is ok-->
-        <div id="popup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div id="popup_login" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         </div>
         <div id="register" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         </div>

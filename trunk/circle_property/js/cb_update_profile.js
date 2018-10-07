@@ -10,7 +10,7 @@ $(document).ready(
                     'backdrop':'static',
                     'show': true
                 });
-                $('#popup').modal('hide');
+                $('#popup_login').modal('hide');
        });
        $('.sidebar-nav > li > a').click(
           function()

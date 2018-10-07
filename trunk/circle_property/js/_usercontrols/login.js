@@ -39,14 +39,14 @@
                     'backdrop':'static',
                     'show': true
                 });
-                $('#popup').modal('hide');
+                $('#popup_login').modal('hide');
          });
          
-       $('#popup').on('show.bs.modal', function () {
+       $('#popup_login').on('show.bs.modal', function () {
             reset_ui();
             login_create_captcha();
         });
-        $('#popup').on('hidden.bs.modal', function () {
+        $('#popup_login').on('hidden.bs.modal', function () {
             reset_ui();
            
             
@@ -164,7 +164,7 @@
                                 $('#Password').val('');
                                 $('#after_login_menu').css('display','block');
                                 $('#system_login_parent').css('display','none');
-                                $('#popup').modal('hide');
+                                $('#popup_login').modal('hide');
                                 window.location.href = objBase.getBaseUrl();
                                 //window.location.href = current_base_path;
                                 
@@ -191,7 +191,7 @@
                     'backdrop':'static',
                     'show': true
                 });
-                $('#popup').modal('hide');
+                $('#popup_login').modal('hide');
        });
        
        $(document).ready(
