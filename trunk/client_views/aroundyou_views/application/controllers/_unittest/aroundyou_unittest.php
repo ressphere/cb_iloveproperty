@@ -168,32 +168,6 @@ class aroundyou_unittest extends CI_Controller
             "operation__auto" => 0,
             "company_type__main" => "Restaurant",
             "company_type__sub" => "Chinese Restaurant",
-            "info__company_product_list" => array(
-                array(
-                    "image" => "http://tmp_product_link_1",
-                    "title" => "Product 1",
-                    "info" => "This is info for product 1",
-                    "price" => 1000,
-                    "currency_code" => "MYR"
-                ),
-                array(
-                    "image" => "http://tmp_product_link_2",
-                    "title" => "Product 2",
-                    "info" => "This is info for product 2",
-                    "price" => 2000,
-                    "currency_code" => "MYR"
-                ),
-            ),
-            "info__company_benefit_list" => array(
-                array(
-                    "image" => "http://tmp_benefit_link_1",
-                    "title" => "Benefit 1",
-                    "info" => "This is info for benefit 1",
-                    "start_date" => "2017-11-27",
-                    "end_date" => "2017-12-03",
-                    "type" => "Discount"
-                )
-            ),
             "location__company_country" => "Malaysia",
             "location__company_state" => "Pulau Pinang",
             "location__company_area" => "Gelugor",
@@ -228,22 +202,78 @@ class aroundyou_unittest extends CI_Controller
         // **** Extract company id for later use ****
         $company_ref_tag = $company_company_info_return_array["data"]["info__company_ref_tag"];
         
+        
+        //************************************************
+        // **** Test user or admin retrieve company information ****
+        $company_info_return = $company_user_service_obj->SendReceive_Service_Request(
+                    "CB_AroundYou:aroundyou_lib__get_company_info_data", 
+                    array("info__company_ref_tag" => $company_ref_tag)
+                );
+        $company_info_return_array = json_decode($company_info_return, TRUE);
+        $company_info_result = 
+                ($company_info_return_array["status"] == "Complete" && array_key_exists("common__company_modification", $company_info_return_array["data"]))? "Pass" : "Fail";
+        $note = "Return:<br>".$company_info_return."<br>";
+        $this->unit->run("Pass", $company_info_result, "Test CB_AroundYou Company information retrieved", $note);  
+        $this->test_is_pass = ($company_info_result === "Pass") ? 1 : 0;
  
         //************************************************
         // **** Test user/admin edit company info ****
-        // Build base company information
-        $company_edit_info = array(
-            "common__company_user_id" => $company_user_id,
-            "info__company_ref_prefix" => "test-tag",
-            "info__company_logo" => "http://tmp_logo_pic_addr",
-            "info__company_phone" => "+604-12345696",
-            "info__company_phone" => "+604987654332",
-            "info__company_about_us" => "this is dummy about us",
-            "info__company_head_pic" => "http://tmp_head_pic_addr",
-            "operation__period_type" => "1_2_3_4_5_6",
-            "operation__auto" => 0,
-            "company_type__main" => "Restaurant",
-            "company_type__sub" => "Chinese Restaurant",
+        
+        // Change company information 
+        $company_info_edit_return = $company_user_service_obj->Send_Service_Request(
+                    "CB_AroundYou:aroundyou_lib__create_modi_company_info", 
+                    array(
+                        //"common__company_user_id" => $company_user_id,
+                        "info__company_ref_tag" => $company_ref_tag,
+                        /*"info__company_ref_prefix" => "test-tag",
+                        "info__company_logo" => "http://tmp_logo_pic_addr",
+                        "info__company_phone" => "+604-12345696",
+                        "info__company_phone" => "+604987654332",
+                         */
+                        "info__company_about_us" => "this is dummy about us 2",
+                        //"info__company_head_pic" => "http://tmp_head_pic_addr",
+                        "operation__period_type" => "1_2_3_4_5_7",
+                        /*"operation__auto" => 0,
+                        "company_type__main" => "Restaurant",
+                        "company_type__sub" => "Chinese Restaurant",
+                        "location__company_country" => "Malaysia",
+                        "location__company_state" => "Pulau Pinang",
+                        "location__company_area" => "Gelugor",
+                        "location__company_post_code" => "11700",
+                        "location__company_map" => array(
+                            "k" => 3.1403075200382 ,
+                            "B" => 101.68664550781
+                        ),
+                        "location__company_street" => "Jalan Batu Uban",
+                        "location__company_property_name" => "N-park Condominium Jalan Batu Uban Gelugor Penang Malaysia"
+                         */
+                    )
+                );
+        
+        // Return the detail for checking purpose
+        $company_info_edit_full_return = $company_user_service_obj->SendReceive_Service_Request(
+                    "CB_AroundYou:aroundyou_lib__get_company_info_data", 
+                    array("info__company_ref_tag" => $company_ref_tag)
+                );
+        
+        
+        $company_info_edit_return_array = json_decode($company_info_edit_return, TRUE);
+        $company_info_edit_full_return_array = json_decode($company_info_edit_full_return, TRUE);
+        $company_info_change_result = 
+                ($company_info_edit_return_array["status"] === "Complete" && 
+                 $company_info_edit_full_return_array["status"] === "Complete" && 
+                    array_key_exists("operation__period_type", $company_info_edit_full_return_array["data"]) && $company_info_edit_full_return_array["data"]["operation__period_type"] == "1_2_3_4_5_7"
+                )? "Pass" : "Fail";
+        $note = "Return company change:<br>   ".$company_info_edit_return."<br>";
+        $note = $note."Return full return:<br>   ".$company_info_edit_full_return."<br>";
+        $this->unit->run("Pass", $company_info_change_result, "Test CB_AroundYou Change company information", $note);  
+        $this->test_is_pass = ($company_info_change_result === "Pass") ? 1 : 0;
+        
+        
+        
+        //************************************************
+        // **** Test user add/edit/remove product ****
+        /*
             "info__company_product_list" => array(
                 array(
                     "image" => "http://tmp_product_link_1",
@@ -260,14 +290,17 @@ class aroundyou_unittest extends CI_Controller
                     "currency_code" => "MYR"
                 ),
             ),
-        );
-        
-        
-        
-
-        
-        //************************************************
-        // **** Test user add/edit/remove product ****
+            "info__company_benefit_list" => array(
+                array(
+                    "image" => "http://tmp_benefit_link_1",
+                    "title" => "Benefit 1",
+                    "info" => "This is info for benefit 1",
+                    "start_date" => "2017-11-27",
+                    "end_date" => "2017-12-03",
+                    "type" => "Discount"
+                )
+            ),
+         */
         
         //************************************************
         // **** Test user edit/remove product ****

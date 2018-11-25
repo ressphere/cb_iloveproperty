@@ -3,10 +3,10 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 require_once('_utils/cb_base_module_model.php');
 
-class aroundyou_product_model extends cb_base_module_model {
+class aroundyou_link_company_product_model extends cb_base_module_model {
     // ------------ Setup Function ---------------------------------------------
-    public $model_name = "aroundyou_product";
-    public $model_code = "MAYou_P";
+    public $model_name = "aroundyou_link_company_product";
+    public $model_code = "MAYou_LCB";
     
     /*
      * Constructor 
@@ -29,12 +29,8 @@ class aroundyou_product_model extends cb_base_module_model {
     public function column_list()
     {
         $column_list = array (
-            array("name" => "aroundyou_product__benefit_tag", "must_have" => false, "is_id" => false),
-            array("name" => "aroundyou_product__img", "must_have" => false, "is_id" => false),
-            array("name" => "aroundyou_product__title", "must_have" => false, "is_id" => false),
-            array("name" => "aroundyou_product__info", "must_have" => false, "is_id" => false),
-            array("name" => "aroundyou_product__price", "must_have" => false, "is_id" => false),
-            array("name" => "aroundyou_product__currency_code", "must_have" => false, "is_id" => false),
+            array("name" => "aroundyou_company_id", "must_have" => false, "is_id" => true),
+            array("name" => "aroundyou_product_id", "must_have" => false, "is_id" => true),
         );
         
         return $column_list;
@@ -48,15 +44,15 @@ class aroundyou_product_model extends cb_base_module_model {
     // -- Special handler --
     // To map the id with corresponding table, since all model is place in this file
     //  therefore, calling it own file "aroundyou_users_model"
-    
     public $foreign_keys  = array(
-        "aroundyou_company_id" => "aroundyou_company_model"
+        'aroundyou_company_id' => 'aroundyou_company_model',
+        'aroundyou_product_id' => 'aroundyou_product_model',
         );
     
     
 }
 
-class aroundyou_product_record_model extends Base_module_record
+class aroundyou_link_company_product_record_model extends Base_module_record
 {
 }
 

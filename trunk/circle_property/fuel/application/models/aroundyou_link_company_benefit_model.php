@@ -28,9 +28,10 @@ class aroundyou_link_company_benefit_model extends cb_base_module_model {
      */
     public function column_list()
     {
-        $this->set_error($this->model_code."-CL-0", 
-                "Internal error, please contact admin", 
-                "Using fuel model to resolve ".$this->model_name." and not this old way");
+        $column_list = array (
+            array("name" => "aroundyou_company_id", "must_have" => false, "is_id" => true),
+            array("name" => "aroundyou_benefit_id", "must_have" => false, "is_id" => true),
+        );
         
         return $column_list;
     }

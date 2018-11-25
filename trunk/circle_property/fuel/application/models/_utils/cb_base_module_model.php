@@ -584,7 +584,71 @@ class cb_base_module_model extends Base_module_model {
         }
     }
     
+    /*
+     * Handle the array for edit
+     *    1. Query back the original data from model
+     *    2. search and replace edit value
+     *    3. Remove the id
+     *    4. Special handle for aroundyou.location__company_map
+     * 
+     * @param Model Model to perform search
+     * @param Array Filter list for data query
+     * @param Array Value to be replace
+     * 
+     * @return Array Modified full model array data
+     */
+    public function model_input_array_prehadle($model_search, $filter_array, $replace_array)
+    {
+        $model_search->query_detail_data_setup();
+        $model_return_info_array = $model_search->find_one($filter_array,"","array");
+        
+        foreach ($model_return_info_array as $key => $value)
+        {
+            // Special handle aroundyou.location__company_map
+            if ($key == "location__company_map")
+            {
+                $model_return_info_array[$key] = json_decode($model_return_info_array[$key]);
+            }
+            
+            // This handle second level 
+            if (gettype($model_return_info_array[$key]) == "array")
+            {
+                foreach ($model_return_info_array[$key] as $key_sub => $value_sub)
+                {
+                    $model_return_info_array[$key] = $this->_replace_array_value($model_return_info_array[$key],$replace_array[$key],$key_sub);
+                }
+            }
+            else
+            {
+                $model_return_info_array = $this->_replace_array_value($model_return_info_array,$replace_array,$key);
+            }
+        }
+        
+        return $model_return_info_array;
+    }
+    
     //--------------------- Internal Function ----------------------------------
+    /*
+     * This to perfrom check and replace array, which also handle \" in key issue
+     */
+    private function _replace_array_value($ori_array, $replace_array, $key)
+    {
+        // Workaround for key that contain \", which will break the update
+        if (strpos($key, '"') !== false)
+        {
+            $key_tmp = $key;
+            $key = str_replace(array('"'), '',$key);
+            $ori_array[$key] = $ori_array[$key_tmp];
+        }
+        
+        if (array_key_exists($key, $replace_array)) 
+        { 
+            $ori_array[$key] = $replace_array[$key]; 
+        }
+        
+        return $ori_array;
+    }
+    
     /*
      * API to detect current list id, match with model_list info and convert the
      *    name to id. This include allow to invoke data store if allow to do so. 
