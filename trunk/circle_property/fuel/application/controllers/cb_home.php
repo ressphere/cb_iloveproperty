@@ -205,6 +205,7 @@ class cb_home extends base {
        $this->extemplate->add_css('css/vertical-rhythm.min.css');
        $this->extemplate->add_css('css/owl.carousel.css');
        $this->extemplate->add_css('css/yellow.css');
+       $this->extemplate->add_css('css/header_nav.css');
      
        $this->extemplate->add_css('css/magnific-popup.css');
        $this->extemplate->add_css('css/font-awesome.min.css');

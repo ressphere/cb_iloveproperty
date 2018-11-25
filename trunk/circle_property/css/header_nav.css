@@ -1,0 +1,11 @@
+#system_login {
+color: #aaa;
+font-family: 'Century Gothic Bold'
+}
+
+#post_login_menu{
+    display: none;
+    color: #aaa;
+    font-family: 'Century Gothic Bold';
+    text-align: left;
+}

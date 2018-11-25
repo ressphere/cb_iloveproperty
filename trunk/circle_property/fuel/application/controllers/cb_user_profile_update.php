@@ -134,7 +134,11 @@ Please browse my website for more of my listings.<br>This user-friendly website 
            $this->SEO_Tags($content);
            $this->set_title($title);
            //$this->load->module_model('home_category_model');
+           
+           //user_profile_detail
+           $this->extemplate->set_extemplate('profile');
            $this->extemplate->add_js('js/_usercontrols/change_password.js');
+           $this->extemplate->add_js('js/_usercontrols/logout.js');
            $this->extemplate->add_js('js/_scrolling_nav/scrolling-nav.js');
            $this->extemplate->add_js('js/cb_home.js');
            $this->extemplate->add_js('js/jquery.easing.min.js');
@@ -147,9 +151,9 @@ Please browse my website for more of my listings.<br>This user-friendly website 
            $this->extemplate->add_css('css/_scrolling_nav/scrolling-nav.css');
            $this->extemplate->add_css($wsdl . 'css/_switch-toggle/bootstrap-switch.css', 'link', FALSE, FALSE);
            $this->extemplate->add_css('css/user_profile.css');
-
+         
            //cb_change_profile
-           $this->extemplate->write_view('contents', '_usercontrols/cb_my_profile',array(
+           $this->extemplate->write_view('content', '_usercontrols/cb_my_profile',array(
                'general'=>$this->get_generic_data(),
                'tab_content_list'=> $tab_content_list
            ) ,TRUE);

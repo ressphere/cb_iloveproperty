@@ -108,9 +108,27 @@
                     	<ul class="clearlist scroll-nav local-scroll">
                     		<li class="active"><a href="#home">Home</a></li>
                         	<li><a href="#about">About us</a></li>                        	
-							<li><a href="#services">Services</a></li>
-							<li><a href="#contact">Contacts</a></li>
-							<li><a id="system_login" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#popup_login" href="#" >Sign In</a></li>
+                                <li><a href="#services">Services</a></li>
+                                <li><a href="#contact">Contacts</a></li>
+                                <li><a id="system_login" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#popup_login" href="#" >Sign In</a></li>
+                                <li class="nav-item dropdown" id="post_login_menu">
+                                    <div class="dropdown">
+                                        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent">
+                                            <span class="glyphicon glyphicon-th-large"></span>
+                                            <img src ="<?php echo $user_image?>"/>
+                                            <span id="username"><?php echo $username?></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" id="my_profile" target="_self" href="<?php echo $myprofileurl?>">
+                                                    My Profile</a>
+                                            </li>
+                                            <li role="presentation" class="system_logout_group">
+                                                    <a role="menuitem" tabindex="-1" id="system_logout" data-toggle="modal">Logout</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
                         </ul>
                     </div>
                 
@@ -368,6 +386,9 @@ Its name is derived from “Resonance/Resolution” and “Sphere” which symbo
     <!-- Standard place for all popup -->
     <div id="popup_login" tabindex="-1" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <?php echo $login_view?>
+    </div>
+    <div id="popup_after_login" tabindex="-1" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        
     </div>
     <div id="register" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <?php echo $register_view?>
