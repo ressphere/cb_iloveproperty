@@ -342,6 +342,14 @@ var convert_facilities_name = function($scope, facility)
     {
         return $scope.property_facility_3[facility];
     }
+    if(facility in $scope.property_facility_4)
+    {
+        return $scope.property_facility_4[facility];
+    }
+    if(facility in $scope.property_facility_5)
+    {
+        return $scope.property_facility_5[facility];
+    }
 };
 
 var set_facilities = function($scope, facilities)

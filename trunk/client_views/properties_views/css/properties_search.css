@@ -528,9 +528,7 @@ a{
         margin-left: 46px;
 }
 @media(min-width:768px) {
-    #sidebar-wrapper {
-            width: 300px;
-    }
+
 }
 
 .navbar-collapse {

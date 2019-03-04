@@ -148,7 +148,7 @@ body
 {
     background-color: white
 }
-#after_login_menu, #system_login_parent {
+#after_login_menu, #system_login_parent, #system_login_key{
     display: none
 }
 

@@ -49,21 +49,16 @@
     <div class="wrapper">
         <div id="main_content" class="row clearfix">
 			<div class="col-md-12 column">
-				<nav class="navbar navbar-default" role="navigation">
 					<?php echo $header?>
-				</nav>
-			
 			</div>
-                
 		</div>
         <div id="content-top" class="push row clearfix"></div>
-        <div class="unfixed_content content row clearfix">
+        <div class="unfixed_content content row clearfix" style="background-color: white; ">
             <div class="col-md-12 column">
 				<?php 
                          echo $contents;
                 ?>
             </div>
-        
 	</div>
         <div class="push row clearfix"></div>
          <div id="bottom_footer" class="content row clearfix">

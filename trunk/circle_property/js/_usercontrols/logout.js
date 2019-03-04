@@ -15,7 +15,7 @@ $('#system_logout').click(
  $('.logout_close').click(
             function(){
                 var objBase = $.makeclass(get_base());
-                objBase.is_login('#after_login_menu', '#system_login_parent');
+                objBase.is_login('#after_login_menu', '#system_login_parent', '#system_login_key');
                 $('#popup_logout').modal('hide');
         });
 $('#popup_logout').on('hidden.bs.modal', function () {

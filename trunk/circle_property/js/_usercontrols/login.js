@@ -166,6 +166,7 @@
                                 $('#system_login').css('display','none');
                                 $('#post_login_menu').css('display','block');
                                 $('#system_login_parent').css('display','none');
+                                $('#system_login_key').css('display','none');
                                 $('#popup_login').modal('hide');
                                 //window.location.href = objBase.getBaseUrl();
                                 //window.location.href = current_base_path;

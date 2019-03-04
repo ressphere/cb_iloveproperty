@@ -96,12 +96,14 @@ class properties_base extends CI_Controller {
         $this->session->set_userdata('wsdl_base_url', $this->wsdl);
         $this->extemplate->add_css($this->wsdl . 'css/animate.min.css', 'link', FALSE, FALSE);
         $this->extemplate->add_css($this->wsdl . 'css/bootstrap.min.css', 'link', FALSE, FALSE);
+        $this->extemplate->add_css($this->wsdl . 'css/bootstrap.css', 'link', FALSE, FALSE);
         //properties_sel_buy
         
         $this->extemplate->add_css($this->wsdl . 'css/base.css', 'link', FALSE, FALSE);
         $this->extemplate->add_css($this->wsdl . 'css/bootstrap.icon-large.min.css', 'link', FALSE, FALSE);
         $this->extemplate->add_css($this->wsdl . 'css/whhg.css', 'link', FALSE, FALSE);
         $this->extemplate->add_css('css/properties_base.css');
+        $this->extemplate->add_css('css/css_ver2/all.css');
         $this->extemplate->add_css($this->wsdl . 'css/fuelux.css', 'link', FALSE, FALSE);
         
         
@@ -122,7 +124,7 @@ class properties_base extends CI_Controller {
         
         $this->extemplate->add_js($this->wsdl . 'js/lodash.compat.min.js', 'import', FALSE, FALSE);
         $this->extemplate->add_js($this->wsdl . 'js/bluebird.min.js', 'import', FALSE, FALSE);
-        $this->extemplate->add_js('https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false', 'import', FALSE, FALSE);
+        $this->extemplate->add_js('https://maps.googleapis.com/maps/api/js?key=AIzaSyADmsQ1_SMmuIaKwd26EKuaEV0Q1s0yKhw&libraries=places&sensor=false', 'import', FALSE, FALSE); // Google map API. API key is under gmail account "Ressphere"
         $this->extemplate->add_js($this->wsdl . 'js/angular-google-maps.min.js', 'import', FALSE, FALSE);
         $this->extemplate->add_js($this->wsdl . 'js/ngAutocomplete.js', 'import', FALSE, FALSE);
         $this->extemplate->add_js($this->wsdl . 'js/angularjs-google-places.js', 'import', FALSE, FALSE);
@@ -173,6 +175,7 @@ class properties_base extends CI_Controller {
             
             'home_link' => base_url()."index.php",
             'logo'=> base_url()."images/ressphere_property_logo.png",
+            'logo_plus'=> base_url()."images/pluss.svg",
             'logo_desc' => "Ressphere Porperty",
   
             'help_icon_pic' => base_url()."images/ressphere_page_help.png",

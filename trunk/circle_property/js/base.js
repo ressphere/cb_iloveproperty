@@ -530,7 +530,7 @@ var get_base = function() {
              */
             preload_login: function(private)
             {
-                this.is_login('#after_login_menu', '#system_login_parent');
+                this.is_login('#after_login_menu', '#system_login_parent', '#system_login_key');
             },
             
             /*

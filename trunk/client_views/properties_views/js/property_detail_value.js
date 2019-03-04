@@ -5,29 +5,39 @@ ng_map_profile.controller("facilities", function($scope) {
                 "BBQ" : "Barbeque Area",
                 "PARKING" : "Parking",
                 "JOGGING" : "Jogging Track",
-                "PLAYGROUND":"Playground",
-                "TENNIS":"Tennis court",
-                "SQUASH":"Squash court"
+                "PLAYGROUND":"Playground"
             };
        // </editor-fold>
     // <editor-fold desc="property facility 2"  defaultstate="collapsed">
             $scope.property_facility_2 = 
             {
+                "TENNIS":"Tennis court",
+                "SQUASH":"Squash court",
                 "BusinessCenter" : "Bussiness Center",
-                "GYM":"Gymnasium",
+                "GYM":"Gymnasium"
+            };
+       // </editor-fold>
+    // <editor-fold desc="property facility 3"  defaultstate="collapsed">
+            $scope.property_facility_3 = 
+            {
                 "MINIMART":"Mini market",
                 "SALON":"Salon",
                 "SWIMMING":"Swimming Pool",
                 "SECURITY":"24 Hours Security"
             };
        // </editor-fold>
-    // <editor-fold desc="property facility 1"  defaultstate="collapsed">
-            $scope.property_facility_3 = 
+    // <editor-fold desc="property facility 4"  defaultstate="collapsed">
+            $scope.property_facility_4 = 
             {
                 "CLUB":"Club House",
                 "JACUZZI":"Jacuzzi",
                 "NURSERY":"Nursery",
-                "SAUNA":"Sauna",
+                "SAUNA":"Sauna"
+            };
+       // </editor-fold>
+    // <editor-fold desc="property facility 5"  defaultstate="collapsed">
+            $scope.property_facility_5 = 
+            {
                 "CAFE":"Cafeteria",
                 "LIBRARY":"Library"
             };
@@ -67,8 +77,8 @@ ng_map_profile.controller("listing_prefix", function($scope) {
             'id':'built_up',
             'category':'sell rent'
 
-        },
-        {
+        }],
+        [{
             'label': 'Land Area',
             'id':'land_area',
             'category':'sell rent'
@@ -80,8 +90,8 @@ ng_map_profile.controller("listing_prefix", function($scope) {
             'id':'measurement_type',
             'category':'sell rent'
 
-        }],
-        [{
+        },
+        {
             'label': 'Monthly Maintenance',
             'id':'monthly',
             'category':'sell'
@@ -98,8 +108,8 @@ ng_map_profile.controller("listing_prefix", function($scope) {
             'id':'land_title_type',
             'category':'sell'
 
-        },
-        {
+        }],
+        [{
             'label': 'Furnishing',
             'id':'furnishing',
             'category':'sell rent room'

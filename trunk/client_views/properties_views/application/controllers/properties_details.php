@@ -275,7 +275,7 @@ class properties_details extends properties_base {
        $this->extemplate->add_js('js/property_details_page.js');
        $this->extemplate->add_js('js/property_details_info.js');
        $this->extemplate->add_js('js/property_header.js');
-       $this->extemplate->add_css(base_url() . 'css/properties_detail.css', 'link', FALSE, FALSE);
+       $this->extemplate->add_css('css/properties_detail.css', 'link', FALSE, FALSE);
        
        
        

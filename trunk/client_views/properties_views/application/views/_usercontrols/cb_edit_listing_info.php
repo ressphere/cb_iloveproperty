@@ -397,6 +397,16 @@
                         <input type="checkbox" name="property_facility" value="{{property_facility_key}}">&nbsp;&nbsp;{{property_facility}}<br><br>
                         </label>
                     </div>
+                    <div class="col-md-4" ng-repeat="(property_facility_key, property_facility) in property_facility_4">
+                        <label class="property_facility gothic_font">
+                        <input type="checkbox" name="property_facility" value="{{property_facility_key}}">&nbsp;&nbsp;{{property_facility}}<br><br>
+                        </label>
+                    </div>
+                    <div class="col-md-4" ng-repeat="(property_facility_key, property_facility) in property_facility_5">
+                        <label class="property_facility gothic_font">
+                        <input type="checkbox" name="property_facility" value="{{property_facility_key}}">&nbsp;&nbsp;{{property_facility}}<br><br>
+                        </label>
+                    </div>
                 </div>
                 
             </div>

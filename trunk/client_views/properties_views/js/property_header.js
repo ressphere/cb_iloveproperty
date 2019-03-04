@@ -13,8 +13,12 @@ var get_updated_category = {
         {
            $('#'+id).css('color', 'black');
            $('#'+id).css('font-weight', 'bold');
+           $('#'+id).css('border-bottom', '3px solid #662D91');
         }
-        
+        else
+        {
+            $('#'+id).css('color', 'grey');
+        }
         
     };
   }

@@ -218,16 +218,21 @@ searchrst_information.controller("FilterSearchHighLightCtrl", function($scope, $
     };
     var sidebar_positioning = function()
     {
-        var toolbar_height = $(".navbar").height();
+        var toolbar_height = $(".navbar").height() + $("#property_header_nav_bar").height();
+        // For displaying new UI for properties details
+        var toolbar_height_2 = $(".navbar").height() + $("#property_header_nav_bar").height() + $("#page-content-wrapper").height();
         //var footer_height = $("#bottom_footer").height();
         var new_height = $(this).height() - toolbar_height;
+        var new_height_2 = $(this).height() - toolbar_height_2;
         $('#sidebar-wrapper, .sidebar_content').height(new_height);
+        $('#property-details-wrapper').height(new_height_2);
+        $('#property-details-wrapper').css('top', toolbar_height_2.toString() + "px");
         $('#sidebar-wrapper, .sidebar_content, .sidebar_toggle').css('top', toolbar_height.toString() + "px");
     };
     
     var search_result_positioning = function()
     {
-        var toolbar_height = $(".navbar").height();
+        var toolbar_height = $(".navbar").height() + $("#property_header_nav_bar").height();
         $('#page-content-wrapper').css('margin-top', toolbar_height.toString() + "px");
     };
     var waitForFinalEvent = (function () {

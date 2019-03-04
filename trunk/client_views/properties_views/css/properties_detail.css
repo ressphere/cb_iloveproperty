@@ -1,9 +1,198 @@
+/*Testing list*/
+.testing-list{
+    display: table;
+    width: 100%;
+}
+.col-md-6-table{
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.maintext{
+    font-size: 28px;
+    display: block;
+    padding-bottom: 10px;
+    font-weight: 500;
+}
+
+.subtext{
+    font-size: 16px;
+    display: block;
+    padding-bottom: 10px;
+    color: #808080;
+    font-weight: 500;
+}
+
+.utility{
+    float: left;
+    padding-right: 10px;
+}
+
+/*Details tabs content*/
+.tab-content-size{
+    padding: 40px 30px 20px;
+    border-radius: 0px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    margin: 0px 30px;
+}
+
+.tab-content-alert{
+    background-color: #f2f3f7;
+    border: none;
+}
+
+/*Details page map section*/
+.title-bar{
+    background-color: #ffffff;
+    padding: 10px 15px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.map-outline-style{
+    border: 1px solid #dddddd;
+    margin: 50px 30px 0px;
+}
+
+.navigatemap-btn{
+    background-color: #662D91;
+    color: #ffffff;
+    border: 1px solid #662D91;
+    border-radius: 50px;
+    cursor: pointer;
+    padding: 5px 30px;
+    float: right;
+    font-size: 14px;
+}
+
+.map-content{
+    padding: 0px 15px;
+}
+
+.map-tab-content-size{
+    border: 1px solid #dddddd !important;
+    margin: -1px 0px 30px !important;
+}
+
+/*Mortage Calculator*/
+.mortage-cal-outline-style{
+    padding: 0px 15px 10px;
+    border-radius: 0px;
+    background-color: #ffffff;
+}
+
+.description-bar{
+    background-color: #ffffff;
+    padding: 10px 15px;
+    font-size: 15px;
+}
+
+.calculator-text{
+    list-style: none;
+    column-count: 2;
+    column-gap: 20px;
+}
+
+/*contact */
+.contact-outline-style {
+    border: 1px solid #dddddd;
+    margin: 50px 30px 0px;
+    width: 45%;
+    float: left;
+}
+
+.contact-btn{
+    background-color: #662D91 !important;
+    color: #ffffff !important;
+    border: 1px solid #662D91 !important;
+    border-radius: 50px !important;
+    cursor: pointer;
+    padding: 5px 30px;
+    font-size: 14px;
+}
+
+/*Social Media*/
+.social-outline-style {
+    border: 1px solid #dddddd;
+    margin: 50px 30px 0px 0px;
+    width: 45%;
+    float: right;
+}
+
+/*Body CSS Start*/
+.container-padding{
+    padding: 25px 15px; 
+}
+
+.detail-tabs{
+    list-style: none;
+    margin: 0 !important;
+    display: table;
+    width: 100%;
+}
+
+.detail-tabs th {
+    display: table-cell;
+    padding: 0;
+    background-color: #662D91;
+    cursor: pointer;
+    margin: 0;
+}
+
+.detail-tabs li{
+    display: table-cell;
+    padding: 0;
+    cursor: pointer;
+    margin: 0;
+    width: 33.33333333333333333%;
+    text-align: center;
+    background-color: #662D91;
+    
+}
+
+.detail-map-tabs li {
+    width: 16.6666666666666666666666% !important;
+}
+
+.nav-tabs{
+    border: 0;
+}
+
+.nav-link.active{
+    border-radius: 0px;
+}
+
+.detail-tab-color{
+    color: #ffffff;
+    border-radius: 0px;
+}
+
+.detail-tab-color:hover{
+    color: grey;
+    border-radius: 0px;
+}
+
+@media(max-width: 767px){
+    .maintext{
+    font-size: 18px;
+    }
+    
+    .utility{
+    font-size: 13px;
+    padding-right: 2px;
+    }
+}
+
 .InsideContent {
-    color: #722f77
+    color: #808080;
 }
 
 .InsideContent img {
-    height: 18px
+    height: 18px;
+    color: #808080;
 }
 
 .row {
@@ -12,16 +201,16 @@
 }
 
 .PricePer {
-    color: green;
     font-family: "Century Gothic";
+    margin-top: auto;
 }
 
 .oceanblue {
     background-color: #f2f3f7;
     width: 100%;
 }
-#map_canvas, .map_canvas_group { height: 300px; max-width: 100% }
-.angular-google-map-container { height: 300px; max-width: 100% }
+#map_canvas, .map_canvas_group { height: 400px; max-width: 100% }
+.angular-google-map-container { height: 400px; max-width: 100% }
 #contact, #send_contact
 {
    font-family: 'Century Gothic Bold';
@@ -66,9 +255,6 @@
 
 .information {
     background-color: white;
-    border-left: solid 1px #D1D3D4;
-    border-right: solid 1px #D1D3D4;
-    border-bottom: solid 1px #D1D3D4;
     width: 100%;
     padding-left: 12px;
     color: black
@@ -180,7 +366,8 @@
 
 @media (max-width: 990px) {
     .text-align-left {
-        text-align: left
+        text-align: left;
+        display: inline-block;
     }
 }
 
@@ -191,10 +378,6 @@
 #main_content > div {
     padding-left: 0px;
     padding-right: 0px
-}
-
-.navbar {
-    margin-bottom: 20px;
 }
 
 #send_contact_comment {
@@ -269,6 +452,10 @@
 @media only screen and (max-width: 992px) {
     .social_media_div {
         margin-bottom: 1.2em
+    }
+    
+    .detail-map-tabs li {
+        width: 33.333333333333333333% !important;
     }
 }
 
