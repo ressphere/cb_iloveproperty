@@ -157,6 +157,15 @@ class aroundyou_utils__DataServer__General
         
     }
     
+    static function _check_recaptcha_v3($response_field)
+    {
+        $captcha_code["response_field"] = $response_field;
+
+        $val_return = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:check_recaptcha_v3", json_encode($captcha_code));
+        $val_return = json_decode($val_return, TRUE);
+        return   $val_return["data"]["result"];
+    }
+    
     /*
      * To perform checking on the recaptcha (filter bot/spam) input
      * 

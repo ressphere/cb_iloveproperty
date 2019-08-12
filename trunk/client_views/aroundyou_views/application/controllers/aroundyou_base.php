@@ -101,7 +101,7 @@ class aroundyou_base extends CI_Controller {
         //$this->extemplate->add_js( $this->wsdl_url . 'js/angular-elif.js', 'import', FALSE, FALSE);
         
         //$this->extemplate->add_js('https://www.google.com/recaptcha/api.js', 'import', FALSE, FALSE);
-        $this->extemplate->add_js('http://www.google.com/recaptcha/api/js/recaptcha_ajax.js', 'import', FALSE, FALSE); // Support captcha to avoid script/spam/hack
+        $this->extemplate->add_js('https://www.google.com/recaptcha/api.js?render=6LfBpbEUAAAAAP_5vfKjUXr1Nf3o_c5R_GwveSvM',  'import', FALSE, FALSE, FALSE);
         $this->extemplate->add_js($this->wsdl_url . 'js/lodash.compat.min.js', 'import', FALSE, FALSE); // Eaise the handler of array, object and etc (https://lodash.com/)
         $this->extemplate->add_js($this->wsdl_url . 'js/bluebird.min.js', 'import', FALSE, FALSE); // Error error handler/log, plus event (http://bluebirdjs.com/docs/features.html) 
         $this->extemplate->add_js($this->wsdl_url . 'js/jstorage.min.js', 'import', FALSE, FALSE); // To store data locally (http://www.jstorage.info/)

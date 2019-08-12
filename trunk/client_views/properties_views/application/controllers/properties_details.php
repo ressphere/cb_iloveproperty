@@ -79,6 +79,36 @@ class properties_details extends properties_base {
        //$this->SEO_Tags($title);
        
    }
+   
+   private function validate_user_input2($display_name, $phone, $msg, $token, &$fail_reason){
+       $result = FALSE;
+       if(is_null($display_name) || $display_name === "")
+       {
+           $fail_reason = "Display name cannot be empty.";
+       }
+       elseif(is_null($phone) || $phone === "")
+       {
+           $fail_reason = "Phone number cannot be empty.";
+       }
+       elseif(is_null($msg) || $msg === "")
+       {
+           $fail_reason = "Message cannot be empty.";
+       }
+       elseif(is_null($token) ||
+               $this->_check_recaptcha_v3($token) === FALSE)
+       {
+         
+         $fail_reason = "Captcha image is not match, please retype";
+         //$msg =  $this->config->item('website_name');
+       }
+       else
+       {
+           $result = TRUE;
+       }
+
+       return $result;
+   }
+   
    private function validate_user_input($display_name, $phone, $msg, $cap, $challenge, &$fail_reason)
    {
        $result = FALSE;
@@ -149,12 +179,12 @@ class properties_details extends properties_base {
            $display_name = $this->_get_posted_value('display_name');
            $phone = $this->_get_posted_value('phone');
            $msg = $this->_get_posted_value('msg');
-          
-           $cap = $this->_get_posted_value('captcha');
-           $challenge = $this->_get_posted_value('challenge');
+           $token = $this->_get_posted_value('token');
+//           $cap = $this->_get_posted_value('captcha');
+//           $challenge = $this->_get_posted_value('challenge');
            $fail_reason = "";
 
-           if($this->validate_user_input($display_name, $phone, $msg, $cap, $challenge, $fail_reason))
+           if($this->validate_user_input2($display_name, $phone, $msg, $token, $fail_reason))
            {
                 $this->begin_send_user_contact($owner_email, $owner_phone, $display_name, $phone, $msg, $ref_id, $fail_reason);
            }

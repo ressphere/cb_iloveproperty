@@ -34,9 +34,11 @@ $('#reset_retrieve').click(
                         url: url,
                         type: 'POST',
                         data: senddata,
-						timeout: 3000000,
+			timeout: 3000000,
                         success: function(html)
                         {
+                           console.log("HTML");
+                           console.log(html);  
                            var data = jQuery.parseJSON(html);
 						   
                            if(data['msg'] === "Success")

@@ -400,7 +400,7 @@ class CI_exTemplate {
     * @return  TRUE on success, FALSE otherwise
     */
    
-   function add_js($script, $type = 'import', $defer = FALSE, $use_base = TRUE)
+   function add_js($script, $type = 'import', $defer = FALSE, $use_base = TRUE, $include_version = TRUE)
    {
       $success = TRUE;
       $js = NULL;
@@ -418,7 +418,14 @@ class CI_exTemplate {
             {
                 $filepath = $script;
             }
-            $js = '<script type="text/javascript" src="'. $filepath . "?".$version.'"';
+            $js = '<script type="text/javascript" src="'. $filepath;
+            if($include_version){
+                $js = $js . "?".$version.'"';
+            }
+            else {
+                $js = $js .'"';
+            }
+           
             if ($defer)
             {
                $js .= ' defer="defer"';

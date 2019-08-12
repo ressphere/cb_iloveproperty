@@ -1,5 +1,6 @@
         var id = '#Message';
         var exceeded_login = false;
+        var captcha_token = "";
         function reset_ui()
         {
             $('#Username').val('');
@@ -7,32 +8,13 @@
             $(id).html('');
             
         }
-        Recaptcha.focus_response_field = function()
-        {
-            if(exceeded_login === false)
-            {
-                $('#login_captcha').css('display', 'none');
-            }
-            return false;
-        };
-        function login_create_captcha()
-        {
-            try
-            {
-                Recaptcha.destroy();
-            }
-            catch(e)
-            {
-
-            }
-            Recaptcha.create("6Le-mg0TAAAAAM_HWZc35jAtjRfsuAYTh9_J9CqL",
-                    "login_captcha",
-                    {
-                        theme: "white",
-                        callback: Recaptcha.focus_response_field
-                    }
-                 );
-        }
+        
+        grecaptcha.ready(function () {
+            grecaptcha.execute('6LfBpbEUAAAAAP_5vfKjUXr1Nf3o_c5R_GwveSvM', { action: 'homepage' }).then(function (token) {
+                  captcha_token = token;
+            });
+        });
+        
         $('#login_sign_up').click(function() {                
                 $('#register').modal({
                     'keyboard': false,
@@ -44,7 +26,6 @@
          
        $('#popup_login').on('show.bs.modal', function () {
             reset_ui();
-            login_create_captcha();
         });
         $('#popup_login').on('hidden.bs.modal', function () {
             reset_ui();
@@ -92,28 +73,11 @@
        $('#login_sign_in').click(function() {
                 var objBase = $.makeclass(get_base());
                 var base_path = objBase.getWsdlBaseUrl("index.php/cb_user_registration/get_wsdl_base_url");
-                //var current_base_path = objBase.getBaseUrl();
+                var token = "";
                 var senddata = "";
-                var response = null;
-                var challenge = null;
-                try
-                {
-                    var response = Recaptcha.get_response();
-                    var challenge = Recaptcha.get_challenge();
-                }
-                catch(e)
-                {
-                    
-                }
+                 
                 
-                if(response === null || challenge === null)
-                 {
-                     response = "";
-                     challenge = "";
-                 }
-                
-                senddata = "username=" + $('#Username').val() +"&password=" +  $('#Password').val() + "&captcha=" +  response;
-		senddata = senddata + "&challenge="+ challenge;
+                senddata = "username=" + $('#Username').val() +"&password=" +  $('#Password').val() + "&token=" +  captcha_token;
                 url = base_path + "index.php/cb_user_registration/beginLogin";
                     
                     objBase.setLoading(id);
@@ -128,7 +92,6 @@
 			timeout: 3000000,
                         success: function(html)
                         {
-                            Recaptcha.reload();
                             if(html.indexOf("Success") === -1)
                             {
                                 if(html.indexOf("exceeded_login") !== -1)
@@ -168,7 +131,7 @@
                                 $('#system_login_parent').css('display','none');
                                 $('#system_login_key').css('display','none');
                                 $('#popup_login').modal('hide');
-                                //window.location.href = objBase.getBaseUrl();
+                               window.location.href = objBase.getBaseUrl();
                                 //window.location.href = current_base_path;
                                 
                             }

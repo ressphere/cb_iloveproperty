@@ -1,5 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+define("SECRET_KEY", "6LfBpbEUAAAAAMBveQATnBMNo1xzPygLdG5jxDtb");
+define("SITE_KEY", "6LfBpbEUAAAAAP_5vfKjUXr1Nf3o_c5R_GwveSvM");
 class CBWS_Member {
     private $CI = NULL;
     function __construct() {
@@ -169,7 +170,21 @@ class CBWS_Member {
                 
 	return TRUE;
     }
-     public function validate_email($email)
+    
+    
+    
+    public function check_recaptcha_v3($token){
+     $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".SECRET_KEY."&response={$token}");  
+     $return = json_decode($response);
+//     $fp = fopen('C:\\logs\\resphere_logs.txt', 'w+');
+//     fwrite($fp, "reponse\n");
+//     fwrite($fp, $response);
+//     fclose($fp);
+     return ($return->success === TRUE && $return->score > 0.5);    
+    }
+
+
+    public function validate_email($email)
      {
         return filter_var($email, FILTER_VALIDATE_EMAIL);
      }

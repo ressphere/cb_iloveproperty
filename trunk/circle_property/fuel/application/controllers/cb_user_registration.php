@@ -206,23 +206,17 @@
                      $data['use_recaptcha'] = $this->config->item('use_recaptcha');
                      $cap_success = true;
                      $msg = "Success";
-                     $cap = $this->_get_posted_value('captcha');
-                     $challenge = $this->_get_posted_value('challenge');
+                     $token = $this->_get_posted_value('token');
+//                     $cap = $this->_get_posted_value('captcha');
+//                     $challenge = $this->_get_posted_value('challenge');
                      $login_parameters["login"] = $login;
-                     $is_login_exceeded_json = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:is_max_login_attempts_exceeded",
-                        json_encode($login_parameters));
-                     $is_login_exceeded_data = json_decode($is_login_exceeded_json, TRUE);
-		     $is_login_exceeded = $is_login_exceeded_data["data"]["result"];
-                     if ($is_login_exceeded) {
-                          //$recaptcha_html = $this->_create_recaptcha();
-                          
-                          if(is_null($cap) || is_null($challenge) || !$this->_check_recaptcha ($this->config->item('website_name', 'tank_auth'),
-                                  $cap, $challenge))
-                          {
-                                
-                                $cap_success = false;
-                          }
-                     }
+                     
+                    //$recaptcha_html = $this->_create_recaptcha();
+                    if(is_null($token) || !$this->_check_recaptcha_v3($token))
+                    {
+                        $cap_success = false;
+                    }
+                     
                      $login_parameters["login"] = $login;
                      $login_parameters["password"] = $password;
                      $login_parameters["remember"] = $remember;
@@ -235,7 +229,8 @@
                         $val_return_data = json_decode($val_return_json, TRUE);
 			$val_return = $val_return_data["data"]["result"];
                      }
-                    if ($cap_success === FALSE || (!is_null($val_return) && count($val_return) > 0 && $val_return[0] === FALSE)) 
+                    if ($cap_success === FALSE || 
+                            (!is_null($val_return) && count($val_return) > 0 && $val_return[0] === FALSE)) 
                      {	
                         $errors = $val_return[count($val_return) - 1];
                         //$errors = json_decode($returned_error, TRUE)["data"]["result"];
@@ -259,8 +254,8 @@
                             $data['show_captcha'] = FALSE;
                             $msg = "<span class='error'>Invalid username or password<span>";
                         }
-                        elseif($cap_success == false) {
-                            $msg = "<span class='error'> Invalid image text, please retype</span>";
+                        elseif($cap_success === false) {
+                            $msg = "<span class='error'> Invalid captcha access</span>";
                         }
                         else {
                             $msg = "<span class='error'>Fail to login, please try again</span>";

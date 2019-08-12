@@ -121,6 +121,11 @@ class CBWS_AUTH_Member_Interface{
                 $return_data["result"] = $CB_Member_Obj->check_recaptcha($captcha_code["response_field"]);
                 $info = "Info: check captcha";
                 break;
+            case "check_recaptcha_v3":
+                $captcha_code = json_decode($request_command["send_data"],TRUE);
+                $return_data["result"] = $CB_Member_Obj->check_recaptcha_v3($captcha_code["response_field"]);
+                $info = "Info: check captcha";
+                break;
             case "validate_email":
                 $mail = json_decode($request_command["send_data"],TRUE);
                 $return_data["result"] = $CB_Member_Obj->validate_email($mail["address"]);

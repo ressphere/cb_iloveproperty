@@ -93,7 +93,9 @@ class properties_base extends CI_Controller {
         // Load necessary CSS
         
         $this->wsdl = $this->_get_wsdl_base_url();
+        $this->extemplate->add_js('https://www.google.com/recaptcha/api.js?render=6LfBpbEUAAAAAP_5vfKjUXr1Nf3o_c5R_GwveSvM',  'import', FALSE, FALSE, FALSE);
         $this->session->set_userdata('wsdl_base_url', $this->wsdl);
+        
         $this->extemplate->add_css($this->wsdl . 'css/animate.min.css', 'link', FALSE, FALSE);
         $this->extemplate->add_css($this->wsdl . 'css/bootstrap.min.css', 'link', FALSE, FALSE);
         $this->extemplate->add_css($this->wsdl . 'css/bootstrap.css', 'link', FALSE, FALSE);
@@ -120,7 +122,7 @@ class properties_base extends CI_Controller {
         
        
         //$this->extemplate->add_js('https://www.google.com/recaptcha/api.js', 'import', FALSE, FALSE);
-	$this->extemplate->add_js('http://www.google.com/recaptcha/api/js/recaptcha_ajax.js', 'import', FALSE, FALSE);
+	
         
         $this->extemplate->add_js($this->wsdl . 'js/lodash.compat.min.js', 'import', FALSE, FALSE);
         $this->extemplate->add_js($this->wsdl . 'js/bluebird.min.js', 'import', FALSE, FALSE);
@@ -601,9 +603,15 @@ class properties_base extends CI_Controller {
         error_log($error_string ."\n", 3, $log_location);
     }
     
+    protected function _check_recaptcha_v3($response_field){
+        $captcha_code["response_field"] = $response_field;
+        $val_return = GeneralFunc::CB_SendReceive_Service_Request("CB_Member:check_recaptcha_v3", json_encode($captcha_code));
+        $val_return = json_decode($val_return, TRUE);
+        return   $val_return["data"]["result"];
+    }
+    
     protected function _check_recaptcha($website_name,$response_field, $challenge_field)
-    {
-        
+    {        
         $captcha_code["remote_addr"] = $website_name; 
         $captcha_code["challenge_field"] = $challenge_field;
         $captcha_code["response_field"] = $response_field;
