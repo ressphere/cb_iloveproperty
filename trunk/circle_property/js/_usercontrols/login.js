@@ -3,6 +3,7 @@
         var captcha_token = "";
         function reset_ui()
         {
+            
             $('#Username').val('');
             $('#Password').val('');
             $(id).html('');
@@ -12,6 +13,7 @@
         grecaptcha.ready(function () {
             grecaptcha.execute('6LfBpbEUAAAAAP_5vfKjUXr1Nf3o_c5R_GwveSvM', { action: 'homepage' }).then(function (token) {
                   captcha_token = token;
+                  console.log("captcha_token: "+token)
             });
         });
         
@@ -92,6 +94,14 @@
 			timeout: 3000000,
                         success: function(html)
                         {
+                            if(typeof grecaptcha !== 'undefined' && grecaptcha && grecaptcha.execute) { 
+                                grecaptcha.ready(function () {
+                                    grecaptcha.execute('6LfBpbEUAAAAAP_5vfKjUXr1Nf3o_c5R_GwveSvM', { action: 'homepage' }).then(function (token) {
+                                    captcha_token = token;
+                                    console.log("captcha_token: "+token)
+                                    });
+                                });
+                            }
                             if(html.indexOf("Success") === -1)
                             {
                                 if(html.indexOf("exceeded_login") !== -1)

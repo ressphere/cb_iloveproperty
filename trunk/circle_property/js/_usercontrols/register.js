@@ -10,14 +10,6 @@ function register_create_captcha()
                     callback: Recaptcha.focus_response_field
                 }
              );
-//      grecaptcha.ready(function () {
-//            grecaptcha.execute('6LfBpbEUAAAAAP_5vfKjUXr1Nf3o_c5R_GwveSvM', { action: 'homepage' }).then(function (token) {
-//                  console.log("my register key");
-//                  console.log(token);
-//                  captcha_token = token;
-//                  
-//            });
-//        });
    }
    catch(e)
    {
