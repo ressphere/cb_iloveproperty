@@ -10,13 +10,6 @@
             
         }
         
-        grecaptcha.ready(function () {
-            grecaptcha.execute('6LfBpbEUAAAAAP_5vfKjUXr1Nf3o_c5R_GwveSvM', { action: 'homepage' }).then(function (token) {
-                  captcha_token = token;
-                  console.log("captcha_token: "+token)
-            });
-        });
-        
         $('#login_sign_up').click(function() {                
                 $('#register').modal({
                     'keyboard': false,
@@ -98,7 +91,7 @@
                                 grecaptcha.ready(function () {
                                     grecaptcha.execute('6LfBpbEUAAAAAP_5vfKjUXr1Nf3o_c5R_GwveSvM', { action: 'homepage' }).then(function (token) {
                                     captcha_token = token;
-                                    console.log("captcha_token: "+token)
+                                   
                                     });
                                 });
                             }
